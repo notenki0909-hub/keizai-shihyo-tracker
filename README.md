@@ -4,9 +4,16 @@
 一覧で確認できる公開用 Web ツール。
 
 - **データ源**: [統計ダッシュボード（e-Stat）API](https://dashboard.e-stat.go.jp/)（**利用登録不要**）
-- **構成**: 静的サイト（Vite + Chart.js）＋ GitHub Actions による月次データ更新
+- **構成**: 静的サイト（Vite + Chart.js + chartjs-plugin-annotation）＋ GitHub Actions による
+  平日毎日のデータチェック
 - **蓄積レイヤーなし**: 毎回 API から全期間を取り直すため、速報値の改定にも自動追従。
   データの変更履歴は Git の差分で追える。
+- **判断の目安つき**: 各指標に「良いとされる状態／注意が必要な状態」の解説と、
+  目標値・分岐点（例：コアCPIの日銀目標2%、失業率2.5%、有効求人倍率1倍）を
+  グラフ上に基準線として表示。
+- **公表スケジュールに追随**: 各指標の公表機関・おおよその公表タイミングを表示。
+  正確な公表日は年によって数日前後するため、固定カレンダーを追う代わりに
+  平日毎日データをチェックし、変化があった時だけ自動コミット → 再公開する方式。
 
 ## 追跡している指標（11）
 
@@ -28,6 +35,16 @@
 新しい系列コードは同ディレクトリの探索用スクリプトか、
 `getIndicatorInfo?Lang=JP&SearchIndicatorWord=<キーワード>` で調べられる。
 
+各指標には以下のフィールドがあり、編集後は `npm run fetch` で `public/data/indicators.json`
+に反映してからコミットする：
+
+| フィールド | 内容 |
+|---|---|
+| `description` | 指標の説明（何を測るか・公表機関・意味合い） |
+| `judgment.summary` / `.goodWhen` / `.badWhen` / `.caveat` | 判断基準・良い状態/注意が必要な状態・読む上での注意点 |
+| `referenceLines` | グラフに重ねる目安ライン。`{ value, label, kind }` の配列（`kind` は `target`＝目標値・分岐、`neutral`＝プラマイの分岐点、`context`＝水準の目安の3種） |
+| `releaseSchedule` | 公表機関とおおよその公表タイミング（年により数日前後する目安） |
+
 > 消費者態度指数・日銀短観・景気ウォッチャー調査は統計ダッシュボードに未収録のため対象外。
 
 ## ローカル開発
@@ -47,7 +64,7 @@ npm run preview   # ビルド結果を確認
    **GitHub Actions** にする。
 3. [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) が
    - `push`（main）… ビルドして公開
-   - 毎月2日・16日／手動実行 … API からデータを取り直してコミット → 公開
+   - 平日毎日 15:30 JST／手動実行 … API からデータを取り直し、変化があればコミット → 公開
    を自動で行う。
 
 サブパス（`https://<user>.github.io/<repo>/`）配信に対応するため、

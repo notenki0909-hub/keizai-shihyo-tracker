@@ -1,5 +1,8 @@
 import "./style.css";
 import Chart from "chart.js/auto";
+import annotationPlugin from "chartjs-plugin-annotation";
+
+Chart.register(annotationPlugin);
 
 const DATA_URL = import.meta.env.BASE_URL + "data/indicators.json";
 const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利"];
@@ -62,8 +65,14 @@ function catColor(cat) {
   return getComputedStyle(document.documentElement).getPropertyValue(`--cat-${cat}`).trim() || "#2563eb";
 }
 
-/** インラインSVGスパークライン */
-function sparkline(points, color) {
+/** target/neutral/context の目安ラインの色 */
+function refColor(kind) {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(`--ref-${kind}`).trim();
+  return v || "#94a3b8";
+}
+
+/** インラインSVGスパークライン（目安ラインが範囲内にあれば1本重ねる） */
+function sparkline(points, color, referenceLines = []) {
   const W = 300;
   const H = 44;
   const pad = 3;
@@ -81,6 +90,15 @@ function sparkline(points, color) {
   const line = coords.map(([x, y], i) => `${i ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
   const area = `${line} L${coords.at(-1)[0].toFixed(1)} ${H} L${coords[0][0].toFixed(1)} ${H} Z`;
   const gid = "g" + Math.random().toString(36).slice(2, 8);
+
+  const ref = referenceLines.find((r) => r.value >= min && r.value <= max);
+  const refY = ref ? pad + (H - pad * 2) * (1 - (ref.value - min) / span) : null;
+  const refSvg =
+    refY == null
+      ? ""
+      : `<line x1="${pad}" y1="${refY.toFixed(1)}" x2="${W - pad}" y2="${refY.toFixed(1)}"
+           stroke="${refColor(ref.kind)}" stroke-width="1" stroke-dasharray="3 3" />`;
+
   return `
     <svg class="card__spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">
       <defs><linearGradient id="${gid}" x1="0" x2="0" y1="0" y2="1">
@@ -88,6 +106,7 @@ function sparkline(points, color) {
         <stop offset="1" stop-color="${color}" stop-opacity="0"/>
       </linearGradient></defs>
       <path d="${area}" fill="url(#${gid})"/>
+      ${refSvg}
       <path d="${line}" fill="none" stroke="${color}" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
     </svg>`;
 }
@@ -141,7 +160,7 @@ function renderGrid() {
           <span class="card__unit">${unit}</span>
           <span class="card__period">${s.latest.t}${s.latest.provisional ? "（速報）" : ""}</span>
         </div>
-        ${sparkline(ind.points, color)}
+        ${sparkline(ind.points, color, ind.referenceLines)}
         <div class="card__changes">
           <span>${prevLabel} <b class="${dPrev.cls}">${dPrev.text}</b></span>
           <span>前年比 <b class="${dYoy.cls}">${dYoy.text}</b></span>
@@ -211,6 +230,22 @@ function openDetail(id) {
     <div><span>データ数</span><b>${s.count}点</b></div>
     <div><span>季節調整</span><b>${ind.seasonalAdjustment}</b></div>`;
 
+  const j = ind.judgment;
+  document.getElementById("d-judgment").innerHTML = j
+    ? `
+    <h3>判断の目安</h3>
+    <p class="judgment__summary">${j.summary}</p>
+    <div class="judgment__grid">
+      <div class="judgment__good"><span>良いとされる状態</span><p>${j.goodWhen}</p></div>
+      <div class="judgment__bad"><span>注意が必要な状態</span><p>${j.badWhen}</p></div>
+    </div>
+    <p class="judgment__caveat">⚠️ ${j.caveat}</p>`
+    : "";
+
+  document.getElementById("d-release").innerHTML = ind.releaseSchedule
+    ? `📅 発表スケジュールの目安：${ind.releaseSchedule}`
+    : "";
+
   document.getElementById("d-ranges").innerHTML = RANGES.map(
     (r) => `<button class="range-btn" data-range="${r.key}" aria-pressed="${r.key === currentRange}">${r.label}</button>`
   ).join("");
@@ -246,6 +281,30 @@ function drawChart() {
   const css = getComputedStyle(document.documentElement);
   const grid = css.getPropertyValue("--border").trim();
   const tick = css.getPropertyValue("--text-faint").trim();
+  const labelText = css.getPropertyValue("--surface").trim();
+
+  const annotations = {};
+  (ind.referenceLines || []).forEach((rl, i) => {
+    const c = refColor(rl.kind);
+    annotations["ref" + i] = {
+      type: "line",
+      yMin: rl.value,
+      yMax: rl.value,
+      borderColor: c,
+      borderWidth: rl.kind === "target" ? 1.75 : 1.25,
+      borderDash: rl.kind === "context" ? [2, 3] : rl.kind === "neutral" ? [6, 4] : [],
+      label: {
+        display: true,
+        content: rl.label,
+        position: "start",
+        color: c,
+        backgroundColor: labelText,
+        font: { size: 10, weight: "600" },
+        padding: 4,
+        borderRadius: 4,
+      },
+    };
+  });
 
   if (chart) chart.destroy();
   chart = new Chart(document.getElementById("d-canvas"), {
@@ -292,6 +351,7 @@ function drawChart() {
       },
       plugins: {
         legend: { display: false },
+        annotation: { annotations },
         tooltip: {
           callbacks: {
             title: (items) => {

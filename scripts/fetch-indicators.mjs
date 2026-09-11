@@ -121,6 +121,9 @@ async function main() {
         seasonalAdjustment: ind.seasonalAdjustment,
         betterWhen: ind.betterWhen,
         description: ind.description,
+        judgment: ind.judgment,
+        referenceLines: ind.referenceLines ?? [],
+        releaseSchedule: ind.releaseSchedule,
         source: {
           provider: "統計ダッシュボード（e-Stat）",
           statName: ind.api.statName,
