@@ -1,0 +1,19 @@
+{
+  "name": "keizai-shihyo-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "日本の主要経済指標トラッカー（統計ダッシュボード/e-Stat・利用登録不要）",
+  "scripts": {
+    "fetch": "node scripts/fetch-indicators.mjs",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.6"
+  }
+}
