@@ -11,6 +11,7 @@ import { writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { INDICATORS } from "./indicators.config.mjs";
+import { fetchForeignInvestorFlow } from "./fetch-jpx-investor-type.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = resolve(__dirname, "../public/data");
@@ -109,7 +110,12 @@ async function main() {
   for (const ind of INDICATORS) {
     process.stdout.write(`- ${ind.id} ... `);
     try {
-      const points = await fetchSeries(ind);
+      const isJpx = ind.api.provider === "jpx-investor-type";
+      const points = isJpx ? await fetchForeignInvestorFlow() : await fetchSeries(ind);
+      const source = isJpx
+        ? { provider: "投資部門別売買状況（JPX）", statName: ind.api.statName, sourceUrl: ind.api.sourceUrl }
+        : { provider: "統計ダッシュボード（e-Stat）", statName: ind.api.statName, indicatorCode: ind.api.indicatorCode };
+
       out.push({
         id: ind.id,
         name: ind.name,
@@ -125,11 +131,7 @@ async function main() {
         referenceLines: ind.referenceLines ?? [],
         movingAverage: ind.movingAverage ?? null,
         releaseSchedule: ind.releaseSchedule,
-        source: {
-          provider: "統計ダッシュボード（e-Stat）",
-          statName: ind.api.statName,
-          indicatorCode: ind.api.indicatorCode,
-        },
+        source,
         summary: summarize(points, ind.frequency),
         // date は t（"2026-07" / "2026 Q2"）から復元できるため出力では省く
         points: points.map((p) => (p.provisional ? { t: p.t, value: p.value, provisional: true } : { t: p.t, value: p.value })),

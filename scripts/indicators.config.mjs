@@ -444,6 +444,41 @@ export const INDICATORS = [
     releaseSchedule: "取引時間中は常時更新。本ツールは月末値を採用。",
     api: { indicatorCode: "0702020590000090010", cycle: "1", rank: "2", sa: "1", statName: "日本取引所グループ統計月報" },
   },
+  {
+    id: "foreign_investor_flow",
+    name: "海外投資家 売買動向（東証プライム）",
+    shortName: "海外投資家動向",
+    category: "為替・市場",
+    unit: "億円",
+    unitLabel: "億円（月間・買い越し＋／売り越し－）",
+    frequency: "monthly",
+    seasonalAdjustment: "原数値",
+    betterWhen: "up",
+    description:
+      "東京証券取引所（JPX）が毎月公表する『投資部門別売買状況』のうち、東証プライム市場における" +
+      "海外投資家の株式売買代金（買い越し／売り越し）の月間集計。海外投資家は売買代金の6割超を占める" +
+      "最大の取引主体で、日本株相場全体の値動きに最も直接的な影響を与える主体とされる。",
+    judgment: {
+      summary:
+        "買い越し（プラス）が続くと株価の下支え・押し上げ要因、売り越し（マイナス）が続くと下押し要因になりやすい。" +
+        "海外投資家は市場の『スマートマネー』として注目されることが多い。",
+      goodWhen: "複数か月連続の買い越し（海外マネーが日本株に向かっている状態）。",
+      badWhen: "複数か月連続の大幅な売り越し、特に急激な売り越し転換（リスクオフのサインとされやすい）。",
+      caveat:
+        "月次の値は振れが大きく、先物・オプションを通じたヘッジ取引や大口の自社株TOB関連取引などで" +
+        "一時的に大きく振れることがある。東証プライム市場（2022年4月発足）のみが対象で、" +
+        "それ以前の『市場第一部』時代とは母集団が異なるため連続しない。",
+    },
+    referenceLines: [{ value: 0, label: "0＝買い越し・売り越しの分岐", kind: "neutral" }],
+    releaseSchedule:
+      "東京証券取引所（JPX）が翌月初旬（前月最終週の週間発表と同日、毎月第4営業日ごろ）15:30に月間データを公表。" +
+      "※JPXは2026年10月8日公表分からファイル形式を変更予定のため、本ツールの取得ロジックは将来的な追随が必要。",
+    api: {
+      provider: "jpx-investor-type",
+      statName: "投資部門別売買状況＜JPX＞",
+      sourceUrl: "https://www.jpx.co.jp/markets/statistics-equities/investor-type/00-01.html",
+    },
+  },
 ];
 
 export const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "為替・市場"];

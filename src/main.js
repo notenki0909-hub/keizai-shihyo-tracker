@@ -27,10 +27,14 @@ function parseT(t) {
   return NaN;
 }
 
-/** 単位ごとのスケール（表示単位・除数） */
-function unitScale(unit) {
+/** 単位ごとのスケール（表示単位・除数）。億円は値の大きさに応じて兆円へ切り替える */
+function unitScale(unit, v = 0) {
   if (unit === "百万円") return { unit: "兆円", div: 1e6, digits: 2 };
-  if (unit === "億円") return { unit: "兆円", div: 1e4, digits: 2 };
+  if (unit === "億円") {
+    return Math.abs(v) >= 10000
+      ? { unit: "兆円", div: 1e4, digits: 2 }
+      : { unit: "億円", div: 1, digits: 2 };
+  }
   if (unit === "%" || unit === "倍") return { unit, div: 1, digits: 2 };
   if (unit === "円") return { unit, div: 1, digits: 2 };
   return { unit, div: 1, digits: 1 };
@@ -38,7 +42,7 @@ function unitScale(unit) {
 
 /** 値と単位を読みやすい形に。戻り値 {num, unit} */
 function fmtValue(v, ind) {
-  const sc = unitScale(ind.unit);
+  const sc = unitScale(ind.unit, v);
   const n = v / sc.div;
   const opts =
     sc.unit === "%" || sc.unit === "倍"
@@ -55,7 +59,7 @@ function fmtDelta(d, ind) {
     const good = d > 0 === (ind.betterWhen === "up");
     cls = good ? "chg-pos" : "chg-neg";
   }
-  const sc = unitScale(ind.unit);
+  const sc = unitScale(ind.unit, d);
   const n = Math.abs(d) / sc.div;
   const num = n.toLocaleString("ja-JP", { maximumFractionDigits: sc.digits });
   const unit = sc.unit === "倍" ? "pt" : sc.unit === "%" ? "pt" : sc.unit;
@@ -260,9 +264,14 @@ function openDetail(id) {
     });
   });
 
+  const src = ind.source;
+  const srcCode = src.indicatorCode
+    ? `　系列コード <code>${src.indicatorCode}</code>`
+    : src.sourceUrl
+      ? `　<a href="${src.sourceUrl}" target="_blank" rel="noopener">公表元ページ</a>`
+      : "";
   document.getElementById("d-source").innerHTML =
-    `出典：統計ダッシュボード（e-Stat）／${ind.source.statName}　系列コード <code>${ind.source.indicatorCode}</code>　` +
-    `単位：${ind.unitLabel}`;
+    `出典：${src.provider}／${src.statName}${srcCode}　単位：${ind.unitLabel}`;
 
   document.getElementById("detail").showModal();
   drawChart();
