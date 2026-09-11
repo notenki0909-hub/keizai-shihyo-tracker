@@ -926,6 +926,31 @@ a {
   font-size: 0.78rem;
 }
 
+.detail__download {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 24px 0;
+  font-size: 0.78rem;
+  color: var(--text-faint);
+}
+
+.download-btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-dim);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 0.76rem;
+  cursor: pointer;
+}
+
+.download-btn:hover {
+  color: var(--text);
+  border-color: var(--text-faint);
+}
+
 @media (max-width: 560px) {
   .judgment__grid {
     grid-template-columns: 1fr;

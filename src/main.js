@@ -384,6 +384,45 @@ function renderCalendar() {
   });
 }
 
+/* ---------- data export ---------- */
+
+function downloadFile(filename, content, mime) {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function toCSV(ind) {
+  const rows = ind.points.map((p) => `${p.t},${p.value}`);
+  return ["date,value", ...rows].join("\n");
+}
+
+function exportCSV(ind) {
+  downloadFile(`${ind.id}.csv`, toCSV(ind), "text/csv;charset=utf-8");
+}
+
+function exportJSON(ind) {
+  const payload = {
+    id: ind.id,
+    name: ind.name,
+    shortName: ind.shortName,
+    category: ind.category,
+    unit: ind.unit,
+    unitLabel: ind.unitLabel,
+    frequency: ind.frequency,
+    seasonalAdjustment: ind.seasonalAdjustment,
+    source: ind.source,
+    points: ind.points,
+  };
+  downloadFile(`${ind.id}.json`, JSON.stringify(payload, null, 2), "application/json;charset=utf-8");
+}
+
 /* ---------- detail dialog ---------- */
 
 let chart = null;
@@ -669,6 +708,12 @@ async function init() {
     state.favoritesOnly = !state.favoritesOnly;
     e.currentTarget.setAttribute("aria-pressed", String(state.favoritesOnly));
     renderGrid();
+  });
+  document.getElementById("d-download-csv").addEventListener("click", () => {
+    if (currentInd) exportCSV(currentInd);
+  });
+  document.getElementById("d-download-json").addEventListener("click", () => {
+    if (currentInd) exportJSON(currentInd);
   });
 
   try {
