@@ -21,10 +21,14 @@
  *   - kind : "target"（目標・分岐となる基準値）/ "neutral"（プラマイの分岐点）/ "context"（水準の目安・絶対的な良否ではない）
  *
  * releaseSchedule: 公表機関・おおよその公表タイミング（年ごとに数日前後することがある目安）
+ *
+ * importance: 重要度（1〜5の★）。株価・日本経済全体への影響力を基準に評価。
+ *             → UI で★表示、CATEGORY_GUIDES の「まず見る／次に見る」選定の根拠にもなる
  */
 export const INDICATORS = [
   {
     id: "gdp_real_growth",
+    importance: 4,
     name: "実質GDP成長率",
     shortName: "実質GDP",
     category: "景気",
@@ -52,6 +56,7 @@ export const INDICATORS = [
   },
   {
     id: "coincident_ci",
+    importance: 2,
     name: "景気動向指数 CI一致指数",
     shortName: "CI一致指数",
     category: "景気",
@@ -76,6 +81,7 @@ export const INDICATORS = [
   },
   {
     id: "industrial_production",
+    importance: 3,
     name: "鉱工業生産指数",
     shortName: "鉱工業生産",
     category: "景気",
@@ -101,6 +107,7 @@ export const INDICATORS = [
   },
   {
     id: "machinery_orders",
+    importance: 3,
     name: "機械受注（船舶・電力除く民需）",
     shortName: "機械受注",
     category: "景気",
@@ -126,6 +133,7 @@ export const INDICATORS = [
   },
   {
     id: "cpi_core_yoy",
+    importance: 5,
     name: "コアCPI（生鮮食品除く総合）",
     shortName: "コアCPI",
     category: "物価",
@@ -154,6 +162,7 @@ export const INDICATORS = [
   },
   {
     id: "ppi_yoy",
+    importance: 3,
     name: "国内企業物価指数（PPI）",
     shortName: "企業物価指数",
     category: "物価",
@@ -181,6 +190,7 @@ export const INDICATORS = [
   },
   {
     id: "unemployment_rate",
+    importance: 2,
     name: "完全失業率",
     shortName: "失業率",
     category: "雇用・所得",
@@ -205,6 +215,7 @@ export const INDICATORS = [
   },
   {
     id: "jobs_to_applicants_ratio",
+    importance: 2,
     name: "有効求人倍率",
     shortName: "有効求人倍率",
     category: "雇用・所得",
@@ -228,6 +239,7 @@ export const INDICATORS = [
   },
   {
     id: "real_wage_index_yoy",
+    importance: 4,
     name: "実質賃金指数（現金給与総額）",
     shortName: "実質賃金",
     category: "雇用・所得",
@@ -252,6 +264,7 @@ export const INDICATORS = [
   },
   {
     id: "trade_balance",
+    importance: 3,
     name: "貿易収支",
     shortName: "貿易収支",
     category: "対外",
@@ -275,6 +288,7 @@ export const INDICATORS = [
   },
   {
     id: "current_account",
+    importance: 2,
     name: "経常収支",
     shortName: "経常収支",
     category: "対外",
@@ -300,6 +314,7 @@ export const INDICATORS = [
   },
   {
     id: "call_rate",
+    importance: 5,
     name: "無担保コールレート（政策金利）",
     shortName: "政策金利",
     category: "金利",
@@ -325,6 +340,7 @@ export const INDICATORS = [
   },
   {
     id: "jgb_10y_yield",
+    importance: 5,
     name: "新発10年国債利回り",
     shortName: "10年金利",
     category: "金利",
@@ -349,6 +365,7 @@ export const INDICATORS = [
   },
   {
     id: "monetary_base_yoy",
+    importance: 3,
     name: "マネタリーベース",
     shortName: "マネタリーベース",
     category: "金利",
@@ -373,6 +390,7 @@ export const INDICATORS = [
   },
   {
     id: "usdjpy",
+    importance: 5,
     name: "ドル円レート",
     shortName: "ドル円",
     category: "為替・市場",
@@ -403,6 +421,7 @@ export const INDICATORS = [
   },
   {
     id: "nikkei225",
+    importance: 5,
     name: "日経平均株価",
     shortName: "日経平均",
     category: "為替・市場",
@@ -434,6 +453,7 @@ export const INDICATORS = [
   },
   {
     id: "topix",
+    importance: 4,
     name: "TOPIX（東証株価指数）",
     shortName: "TOPIX",
     category: "為替・市場",
@@ -458,6 +478,7 @@ export const INDICATORS = [
   },
   {
     id: "foreign_investor_flow",
+    importance: 5,
     name: "海外投資家 売買動向（東証プライム）",
     shortName: "海外投資家動向",
     category: "為替・市場",
@@ -494,3 +515,77 @@ export const INDICATORS = [
 ];
 
 export const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "為替・市場"];
+
+/**
+ * カテゴリごとの「まず見る指標／次に見る指標（補完）」ガイド。
+ * id は INDICATORS の id と対応させる。
+ */
+export const CATEGORY_GUIDES = {
+  景気: {
+    first: {
+      id: "gdp_real_growth",
+      reason:
+        "経済活動の合計そのもので、景気の拡大・縮小を最も包括的に示す『結果』の指標。ただし四半期に1度、対象期間終了から約1.5か月後という遅いペースでしか発表されない。",
+    },
+    second: {
+      id: "coincident_ci",
+      reason:
+        "GDPは速報性に欠けるため、毎月発表される景気動向指数CI一致指数で補う。生産・雇用などの動きを毎月合成した指数で、次のGDP発表までの『空白期間』の景気動向を先取りして確認できる。",
+    },
+  },
+  物価: {
+    first: {
+      id: "cpi_core_yoy",
+      reason: "消費者が実際に直面する物価の動きを示し、日銀の金融政策判断（利上げ・利下げ）の主要な材料になる、最も注目度の高い物価指標。",
+    },
+    second: {
+      id: "ppi_yoy",
+      reason:
+        "CPIは消費者向け価格の指標で、企業間取引段階のコスト変動（PPI）が転嫁されて反映されるまでに数か月かかる。PPIを合わせて見ることで、これから消費者物価に波及しうる『先行きの価格圧力』を早めに察知できる。",
+    },
+  },
+  "雇用・所得": {
+    first: {
+      id: "unemployment_rate",
+      reason: "雇用情勢を測る最も基本的で認知度の高い指標。ただし景気の変化から少し遅れて動く『遅行指標』でもある。",
+    },
+    second: {
+      id: "real_wage_index_yoy",
+      reason:
+        "完全失業率や有効求人倍率は『雇用の量』（仕事があるかどうか）を示すが、暮らし向きに直結するのは『所得の質』。実質賃金指数を合わせて見ることで、物価上昇に賃金が追いついているか＝実質的な購買力まで確認できる。",
+    },
+  },
+  対外: {
+    first: {
+      id: "current_account",
+      reason: "貿易・サービス・海外投資からの所得まで含めた、対外的な『稼ぐ力』の総合指標。ニュースでも最初に報じられる包括的な数字。",
+    },
+    second: {
+      id: "trade_balance",
+      reason:
+        "経常収支は海外投資からの配当・利子（所得収支）に大きく左右され、それだけでは実体経済の『モノを売る力』が見えにくい。貿易収支を合わせて見ることで、稼ぎが輸出競争力によるものか、過去の対外投資の果実によるものかを切り分けられる。",
+    },
+  },
+  金利: {
+    first: {
+      id: "call_rate",
+      reason: "日銀が金融政策の誘導目標として運営する、実質的な政策金利。利上げ・利下げという金融政策そのものの動きを直接示す起点となる金利。",
+    },
+    second: {
+      id: "jgb_10y_yield",
+      reason:
+        "政策金利は『いま』の短期金利にすぎない。新発10年国債利回り（長期金利）を合わせて見ることで、市場が将来の利上げ・利下げや景気・物価見通しをどう織り込んでいるかという『将来予想』を補完できる。",
+    },
+  },
+  "為替・市場": {
+    first: {
+      id: "nikkei225",
+      reason: "日本株式市場全体の『いま』を示す、最も知名度の高い指数。まずはここで市場の値動きの大きさを把握する。",
+    },
+    second: {
+      id: "foreign_investor_flow",
+      reason:
+        "日経平均の動き（結果）だけでは『なぜ動いたか』が分からない。売買代金の6割超を占める海外投資家の買い越し・売り越し動向を合わせて見ることで、値動きの背景にある実際の資金フローを確認できる。",
+    },
+  },
+};

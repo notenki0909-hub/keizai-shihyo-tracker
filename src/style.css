@@ -175,6 +175,75 @@ a {
   outline-offset: 1px;
 }
 
+/* ---------- category guide ---------- */
+.category-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.category-guide__row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.category-guide__badge {
+  flex: none;
+  align-self: flex-start;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 3px 9px;
+  border-radius: 999px;
+  color: #fff;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+.category-guide__badge--first {
+  background: var(--accent);
+}
+
+.category-guide__badge--second {
+  background: var(--neutral);
+}
+
+.category-guide__body {
+  min-width: 0;
+}
+
+.category-guide__link {
+  display: inline;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 0 2px;
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 3px;
+}
+
+.category-guide__link:hover {
+  color: var(--accent);
+}
+
+.category-guide__body p {
+  margin: 2px 0 0;
+  color: var(--text-dim);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
 /* ---------- grid ---------- */
 .grid {
   display: grid;
@@ -209,6 +278,13 @@ a {
   outline-offset: 2px;
 }
 
+.card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .tag {
   align-self: flex-start;
   font-size: 0.72rem;
@@ -217,6 +293,19 @@ a {
   padding: 3px 9px;
   border-radius: 6px;
   color: #fff;
+}
+
+.stars {
+  color: var(--ref-target);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.detail__head .stars {
+  margin-left: 8px;
+  font-size: 0.85rem;
+  vertical-align: middle;
 }
 
 .card__name {

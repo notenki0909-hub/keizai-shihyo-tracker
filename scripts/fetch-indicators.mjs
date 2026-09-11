@@ -10,7 +10,7 @@
 import { writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
-import { INDICATORS } from "./indicators.config.mjs";
+import { INDICATORS, CATEGORY_GUIDES } from "./indicators.config.mjs";
 import { fetchForeignInvestorFlow } from "./fetch-jpx-investor-type.mjs";
 import { fetchUsdJpyDaily } from "./fetch-boj-fx-daily.mjs";
 import { fetchFredSeries } from "./fetch-fred-series.mjs";
@@ -155,6 +155,7 @@ async function main() {
         frequency: ind.frequency,
         seasonalAdjustment: ind.seasonalAdjustment,
         betterWhen: ind.betterWhen,
+        importance: ind.importance,
         description: ind.description,
         judgment: ind.judgment,
         referenceLines: ind.referenceLines ?? [],
@@ -184,6 +185,7 @@ async function main() {
     note: "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
     indicatorCount: out.length,
     failures,
+    categoryGuides: CATEGORY_GUIDES,
     indicators: out,
   };
 

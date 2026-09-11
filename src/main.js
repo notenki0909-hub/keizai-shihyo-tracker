@@ -72,6 +72,12 @@ function catColor(cat) {
   return getComputedStyle(document.documentElement).getPropertyValue(`--cat-${cat}`).trim() || "#2563eb";
 }
 
+/** 重要度（1〜5）を★☆の文字列に */
+function starsText(n) {
+  const filled = Math.max(0, Math.min(5, n | 0));
+  return "★".repeat(filled) + "☆".repeat(5 - filled);
+}
+
 /** target/neutral/context の目安ラインの色 */
 function refColor(kind) {
   const v = getComputedStyle(document.documentElement).getPropertyValue(`--ref-${kind}`).trim();
@@ -160,7 +166,10 @@ function renderGrid() {
       const prevLabel = ind.frequency === "quarterly" ? "前期比" : ind.frequency === "daily" ? "前日比" : "前月比";
       return `
       <button class="card" data-id="${ind.id}">
-        <span class="tag" style="background:${color}">${ind.category}</span>
+        <div class="card__top">
+          <span class="tag" style="background:${color}">${ind.category}</span>
+          <span class="stars" title="重要度 ${ind.importance}/5">${starsText(ind.importance)}</span>
+        </div>
         <h3 class="card__name">${ind.name}</h3>
         <div class="card__valrow">
           <span class="card__value">${num}</span>
@@ -195,7 +204,39 @@ function renderChips() {
       state.category = el.dataset.cat;
       renderChips();
       renderGrid();
+      renderCategoryGuide();
     });
+  });
+}
+
+/** 選択中カテゴリの「まず見る／次に見る」ガイドを表示 */
+function renderCategoryGuide() {
+  const el = document.getElementById("category-guide");
+  const guide = state.data && state.category !== "すべて" ? state.data.categoryGuides?.[state.category] : null;
+  if (!guide) {
+    el.hidden = true;
+    el.innerHTML = "";
+    return;
+  }
+
+  const findInd = (id) => state.data.indicators.find((i) => i.id === id);
+  const row = (label, cls, entry) => {
+    const ind = findInd(entry?.id);
+    if (!ind) return "";
+    return `
+      <div class="category-guide__row">
+        <span class="category-guide__badge ${cls}">${label}</span>
+        <div class="category-guide__body">
+          <button class="category-guide__link" data-id="${ind.id}">${ind.name}　${starsText(ind.importance)}</button>
+          <p>${entry.reason}</p>
+        </div>
+      </div>`;
+  };
+
+  el.innerHTML = row("① まず見る", "category-guide__badge--first", guide.first) + row("② 次に見る（補完）", "category-guide__badge--second", guide.second);
+  el.hidden = false;
+  el.querySelectorAll(".category-guide__link").forEach((btn) => {
+    btn.addEventListener("click", () => openDetail(btn.dataset.id));
   });
 }
 
@@ -223,6 +264,8 @@ function openDetail(id) {
   const s = ind.summary;
   document.getElementById("d-tag").textContent = ind.category;
   document.getElementById("d-tag").style.background = color;
+  document.getElementById("d-stars").textContent = starsText(ind.importance);
+  document.getElementById("d-stars").title = `重要度 ${ind.importance}/5`;
   document.getElementById("d-name").textContent = ind.name;
   document.getElementById("d-desc").textContent = ind.description;
 
@@ -450,6 +493,7 @@ async function init() {
     `最終更新 ${genStr}　／　${state.data.indicatorCount} 指標　／　毎回 API から全期間を再取得`;
 
   renderGrid();
+  renderCategoryGuide();
 }
 
 init();
