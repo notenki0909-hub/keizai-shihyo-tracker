@@ -74,6 +74,32 @@ function fmtDelta(d, ind) {
   return { text: `${arrow} ${num} ${unit}`, cls };
 }
 
+/**
+ * 過去の変化幅（前期比相当）の分布に対して、直近の変化がどれくらい珍しいかを表すz-score。
+ * 市場予想（コンセンサス）との比較ではなく、指標自身の過去の変動から見た統計的な目安。
+ */
+function computeSurprise(points) {
+  if (points.length < 10) return null;
+  const diffs = [];
+  for (let i = 1; i < points.length; i++) diffs.push(points[i].value - points[i - 1].value);
+  const latest = diffs.at(-1);
+  const history = diffs.slice(0, -1);
+  if (history.length < 8) return null;
+  const mean = history.reduce((a, b) => a + b, 0) / history.length;
+  const variance = history.reduce((a, b) => a + (b - mean) ** 2, 0) / history.length;
+  const sd = Math.sqrt(variance);
+  if (!Number.isFinite(sd) || sd === 0) return null;
+  return (latest - mean) / sd;
+}
+
+function surpriseInfo(z) {
+  if (z == null || !Number.isFinite(z)) return null;
+  const abs = Math.abs(z);
+  if (abs >= 2.5) return { level: "high", label: "非常に大きな変化", z };
+  if (abs >= 1.5) return { level: "mid", label: "やや大きな変化", z };
+  return { level: "low", label: "通常の範囲内", z };
+}
+
 function catColor(cat) {
   return getComputedStyle(document.documentElement).getPropertyValue(`--cat-${cat}`).trim() || "#2563eb";
 }
@@ -196,6 +222,11 @@ function renderGrid() {
       const dYoy = fmtDelta(s.changeFromYearAgo, ind);
       const color = catColor(ind.category);
       const fav = isFavorite(ind.id);
+      const surprise = surpriseInfo(computeSurprise(ind.points));
+      const surpriseBadge =
+        surprise && surprise.level !== "low"
+          ? `<span class="card__surprise card__surprise--${surprise.level}">⚡ ${surprise.label}</span>`
+          : "";
       const prevLabel = ind.frequency === "quarterly" ? "前期比" : ind.frequency === "daily" ? "前日比" : "前月比";
       return `
       <div class="card" data-id="${ind.id}" role="button" tabindex="0">
@@ -217,6 +248,7 @@ function renderGrid() {
           <span>${prevLabel} <b class="${dPrev.cls}">${dPrev.text}</b></span>
           <span>前年比 <b class="${dYoy.cls}">${dYoy.text}</b></span>
         </div>
+        ${surpriseBadge}
       </div>`;
     })
     .join("");
@@ -468,12 +500,19 @@ function openDetail(id) {
     const { num, unit } = fmtValue(v, ind);
     return `${num} ${unit}`;
   };
+  const surprise = surpriseInfo(computeSurprise(ind.points));
+  const surpriseText = surprise
+    ? `${surprise.level !== "low" ? "⚡ " : ""}${surprise.label}（z=${surprise.z.toFixed(1)}）`
+    : "算出不可（データ不足）";
   document.getElementById("d-stats").innerHTML = `
     <div><span>最新（${s.latest.t}）</span><b>${f(s.latest.value)}</b></div>
     <div><span>過去最大（${s.max.t}）</span><b>${f(s.max.value)}</b></div>
     <div><span>過去最小（${s.min.t}）</span><b>${f(s.min.value)}</b></div>
     <div><span>データ数</span><b>${s.count}点</b></div>
-    <div><span>季節調整</span><b>${ind.seasonalAdjustment}</b></div>`;
+    <div><span>季節調整</span><b>${ind.seasonalAdjustment}</b></div>
+    <div><span>変化の大きさ</span><b>${surpriseText}</b></div>`;
+  document.getElementById("d-stats-note").textContent =
+    "⚡は市場予想との比較ではなく、指標自身の過去の変化幅の分布から見た統計的な目安（|z|≥1.5）です。";
 
   const j = ind.judgment;
   document.getElementById("d-judgment").innerHTML = j

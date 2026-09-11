@@ -714,6 +714,24 @@ a {
   color: var(--neutral);
 }
 
+.card__surprise {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.card__surprise--mid {
+  background: color-mix(in srgb, var(--ref-target) 16%, transparent);
+  color: var(--ref-target);
+}
+
+.card__surprise--high {
+  background: color-mix(in srgb, var(--neg) 16%, transparent);
+  color: var(--neg);
+}
+
 .empty {
   text-align: center;
   color: var(--text-faint);
@@ -793,6 +811,12 @@ a {
 .detail__stats b {
   font-size: 1.05rem;
   font-variant-numeric: tabular-nums;
+}
+
+.detail__stats-note {
+  margin: 4px 24px 0;
+  font-size: 0.72rem;
+  color: var(--text-faint);
 }
 
 .detail__ranges {
