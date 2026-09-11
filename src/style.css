@@ -826,6 +826,27 @@ a {
   flex-wrap: wrap;
 }
 
+.detail__compare {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px 0;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  flex-wrap: wrap;
+}
+
+.detail__compare select {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 0.82rem;
+  font-family: inherit;
+  max-width: 100%;
+}
+
 .range-btn {
   border: 1px solid var(--border);
   background: var(--surface);

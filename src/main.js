@@ -460,6 +460,7 @@ function exportJSON(ind) {
 let chart = null;
 let currentInd = null;
 let currentRange = "10y";
+let compareInd = null;
 
 const RANGES = [
   { key: "1y", label: "1年", years: 1 },
@@ -485,6 +486,17 @@ function openDetail(id) {
   if (!ind) return;
   currentInd = ind;
   currentRange = "10y";
+  compareInd = null;
+
+  const compareSelect = document.getElementById("d-compare");
+  const byCat = (i) => CATEGORIES.indexOf(i.category);
+  const otherInds = state.data.indicators
+    .filter((i) => i.id !== ind.id)
+    .sort((a, b) => byCat(a) - byCat(b) || a.name.localeCompare(b.name, "ja"));
+  compareSelect.innerHTML =
+    `<option value="">選択しない</option>` +
+    otherInds.map((i) => `<option value="${i.id}">${i.name}</option>`).join("");
+  compareSelect.value = "";
 
   const color = catColor(ind.category);
   const s = ind.summary;
@@ -614,6 +626,28 @@ function drawChart() {
       tension: 0.15,
     });
   }
+  if (compareInd) {
+    // 比較指標がメイン指標と同じカテゴリだと色が被るため、カテゴリ色ではなく常に高コントラストな
+    // テーマ文字色（黒／白）を使い、破線と合わせてどのカテゴリでも視認できるようにする
+    const compareColor = css.getPropertyValue("--text").trim();
+    const cPts = compareInd.points
+      .map((p) => ({ x: parseT(p.t), y: p.value }))
+      .filter((p) => Number.isFinite(p.x) && p.x >= cutoff);
+    datasets.push({
+      label: compareInd.shortName,
+      data: cPts,
+      borderColor: compareColor,
+      backgroundColor: "transparent",
+      borderWidth: 1.8,
+      borderDash: [4, 2],
+      pointRadius: 0,
+      pointHoverRadius: 4,
+      fill: false,
+      tension: 0.15,
+      yAxisID: "y1",
+      _ind: compareInd,
+    });
+  }
   const multi = datasets.length > 1;
 
   const annotations = {};
@@ -660,7 +694,8 @@ function drawChart() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      interaction: { mode: "index", intersect: false },
+      // 比較指標は日付範囲・頻度が異なりうるため、index一致ではなくx値の近さで個別に対応点を探す
+      interaction: compareInd ? { mode: "nearest", axis: "x", intersect: false } : { mode: "index", intersect: false },
       scales: {
         x: {
           type: "linear",
@@ -682,6 +717,15 @@ function drawChart() {
           ticks: { color: tick },
           grid: { color: grid },
         },
+        ...(compareInd
+          ? {
+              y1: {
+                position: "right",
+                ticks: { color: tick },
+                grid: { drawOnChartArea: false },
+              },
+            }
+          : {}),
       },
       plugins: {
         legend: multi
@@ -701,7 +745,8 @@ function drawChart() {
               return `${d.getUTCFullYear()}/${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
             },
             label: (item) => {
-              const { num, unit } = fmtValue(item.parsed.y, ind);
+              const refInd = item.dataset._ind || ind;
+              const { num, unit } = fmtValue(item.parsed.y, refInd);
               return multi ? `${item.dataset.label}：${num} ${unit}` : `${num} ${unit}`;
             },
           },
@@ -753,6 +798,11 @@ async function init() {
   });
   document.getElementById("d-download-json").addEventListener("click", () => {
     if (currentInd) exportJSON(currentInd);
+  });
+  document.getElementById("d-compare").addEventListener("change", (e) => {
+    const id = e.target.value;
+    compareInd = id ? state.data.indicators.find((i) => i.id === id) : null;
+    drawChart();
   });
 
   try {
