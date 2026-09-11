@@ -2,6 +2,15 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      // 保存済みテーマを最初の描画前に反映（チラつき防止）
+      (function () {
+        try {
+          var t = localStorage.getItem("keizai-tracker-theme");
+          if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>日本経済指標トラッカー</title>
     <meta
@@ -14,7 +23,10 @@
     <div id="app">
       <header class="site-header">
         <div class="site-header__inner">
-          <h1>日本経済指標トラッカー</h1>
+          <div class="site-header__top">
+            <h1>日本経済指標トラッカー</h1>
+            <button id="theme-toggle" class="theme-toggle" type="button" aria-label="表示テーマを切り替え" title="表示テーマを切り替え">🌙</button>
+          </div>
           <p class="site-header__lead">
             主要な経済指標の「いま」と推移を一覧で確認できます。データ出典は
             <a href="https://dashboard.e-stat.go.jp/" target="_blank" rel="noopener">統計ダッシュボード（e-Stat）</a>。

@@ -28,7 +28,8 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  /* data-theme="light" が明示されている間はOS設定より手動選択を優先する */
+  :root:not([data-theme="light"]) {
     --bg: #0f1216;
     --surface: #171b21;
     --surface-2: #1e242c;
@@ -46,6 +47,32 @@
     --ref-neutral: #94a3b8;
     --ref-context: #5b6472;
   }
+}
+
+/* トグルボタンで明示的に選択された時は、OS設定に関わらずこちらを優先する */
+:root[data-theme="dark"] {
+  --bg: #0f1216;
+  --surface: #171b21;
+  --surface-2: #1e242c;
+  --border: #2b323c;
+  --text: #e8eaed;
+  --text-dim: #9aa2ad;
+  --text-faint: #6b7280;
+  --accent: #60a5fa;
+  --pos: #34d399;
+  --neg: #f87171;
+  --neutral: #94a3b8;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.35);
+
+  --ref-target: #f0b429;
+  --ref-neutral: #94a3b8;
+  --ref-context: #5b6472;
+
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
 }
 
 * {
@@ -88,10 +115,43 @@ a {
   padding: 32px 20px 24px;
 }
 
+.site-header__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .site-header h1 {
   margin: 0 0 8px;
   font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2rem);
   letter-spacing: 0.01em;
+}
+
+.theme-toggle {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--text-faint);
+}
+
+.theme-toggle:active {
+  transform: scale(0.94);
 }
 
 .site-header__lead {
