@@ -377,13 +377,14 @@ export const INDICATORS = [
     shortName: "ドル円",
     category: "為替・市場",
     unit: "円",
-    unitLabel: "円（対米ドル・月末17時時点）",
-    frequency: "monthly",
+    unitLabel: "円（対米ドル・17時時点、日次終値）",
+    frequency: "daily",
     seasonalAdjustment: "原数値",
     betterWhen: "neutral",
     description:
-      "東京市場で取引される円・ドルの為替レート（月末17時時点）。日本経済にとって最も影響の大きい価格の一つで、" +
-      "特に輸出企業の比率が高い日経平均株価とは強い相関を持つ。",
+      "東京市場で取引される円・ドルの為替レート（17時時点、日次終値）。日本経済にとって最も影響の大きい価格の一つで、" +
+      "特に輸出企業の比率が高い日経平均株価とは強い相関を持つ。日本銀行の一次データから日次で直接取得している" +
+      "（2016年以降。表示・容量の都合上、それ以前は対象外）。",
     judgment: {
       summary:
         "円安（数値上昇）は輸出企業の円建て収益を押し上げ株価にプラスに働きやすい一方、輸入物価上昇を通じた家計負担増というマイナス面もある。円高はその逆。",
@@ -393,8 +394,12 @@ export const INDICATORS = [
         "輸出企業には円安が有利、輸入依存企業・家計には円高が有利と、立場によって『良い』の意味が逆転する典型的な指標。日米の金利差（政策金利差）が主な変動要因の一つ。",
     },
     referenceLines: [],
-    releaseSchedule: "日本銀行が毎営業日、実勢レートを公表。本ツールは月末17時時点の値を採用。",
-    api: { indicatorCode: "0702020401000010010", cycle: "1", rank: "2", sa: "1", statName: "外国為替相場＜日本銀行＞" },
+    releaseSchedule: "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
+    api: {
+      provider: "boj-fx-daily",
+      statName: "外国為替相場（東京インターバンク相場）＜日本銀行＞",
+      sourceUrl: "https://www.stat-search.boj.or.jp/ssi/mtshtml/fm08_d_1_en.html",
+    },
   },
   {
     id: "nikkei225",
@@ -402,13 +407,15 @@ export const INDICATORS = [
     shortName: "日経平均",
     category: "為替・市場",
     unit: "円",
-    unitLabel: "円",
-    frequency: "monthly",
+    unitLabel: "円（日次終値）",
+    frequency: "daily",
     seasonalAdjustment: "原数値",
     betterWhen: "up",
     description:
       "日本経済新聞社が算出する、東証プライム市場上場銘柄のうち代表的な225銘柄の株価平均。日本株式市場全体の動向を示す" +
-      "最も知名度の高い指数で、値がさ株（株価の高い銘柄）の影響を受けやすい『価格加重平均』という特徴を持つ。",
+      "最も知名度の高い指数で、値がさ株（株価の高い銘柄）の影響を受けやすい『価格加重平均』という特徴を持つ。" +
+      "日次終値は米セントルイス連邦準備銀行（FRED）がNikkei Inc.の許諾を得て再配布しているデータを利用している" +
+      "（2016年以降。表示・容量の都合上、それ以前は対象外）。",
     judgment: {
       summary: "他の指標と異なり、これ自体が市場参加者による経済の先読みの結果。上昇は景気拡大・企業業績改善への期待、下落はその逆を織り込む。",
       goodWhen: "緩やかな右肩上がりのトレンド（企業業績の拡大を伴う持続的な上昇）。",
@@ -417,8 +424,13 @@ export const INDICATORS = [
         "225銘柄という限られた構成銘柄、かつ値がさ株（値嵩株）の影響を強く受けるため、市場全体の実態を見るには時価総額加重のTOPIXと合わせて見る方がよい。",
     },
     referenceLines: [],
-    releaseSchedule: "取引時間中は常時更新。本ツールは月末値を採用。",
-    api: { indicatorCode: "0702020501000010010", cycle: "1", rank: "2", sa: "1", statName: "日経平均プロフィル＜日本経済新聞社＞" },
+    releaseSchedule: "取引時間中は常時更新。日次終値を翌営業日にかけてFRED経由で取得・反映。",
+    api: {
+      provider: "fred-csv",
+      seriesId: "NIKKEI225",
+      statName: "Nikkei Stock Average, Nikkei 225（原典：日本経済新聞社／配信：FRED）",
+      sourceUrl: "https://fred.stlouisfed.org/series/NIKKEI225",
+    },
   },
   {
     id: "topix",

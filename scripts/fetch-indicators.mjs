@@ -12,6 +12,8 @@ import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { INDICATORS } from "./indicators.config.mjs";
 import { fetchForeignInvestorFlow } from "./fetch-jpx-investor-type.mjs";
+import { fetchUsdJpyDaily } from "./fetch-boj-fx-daily.mjs";
+import { fetchFredSeries } from "./fetch-fred-series.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = resolve(__dirname, "../public/data");
@@ -86,8 +88,21 @@ function summarize(points, frequency) {
   const n = points.length;
   const latest = points[n - 1];
   const prev = n >= 2 ? points[n - 2] : null;
-  const lag = frequency === "quarterly" ? 4 : 12;
-  const yearAgo = n > lag ? points[n - 1 - lag] : null;
+
+  let yearAgo;
+  if (frequency === "daily") {
+    // 日次は祝休日でズレるため、365日前以前で最も近い点を探す
+    const targetMs = new Date(latest.date).getTime() - 365 * 86400000;
+    for (let i = n - 1; i >= 0; i--) {
+      if (new Date(points[i].date).getTime() <= targetMs) {
+        yearAgo = points[i];
+        break;
+      }
+    }
+  } else {
+    const lag = frequency === "quarterly" ? 4 : 12;
+    yearAgo = n > lag ? points[n - 1 - lag] : null;
+  }
 
   const diff = (a, b) => (a && b ? +(a.value - b.value).toFixed(4) : null);
   const strip = (p) => (p ? { t: p.t, value: p.value } : null);
@@ -110,11 +125,25 @@ async function main() {
   for (const ind of INDICATORS) {
     process.stdout.write(`- ${ind.id} ... `);
     try {
-      const isJpx = ind.api.provider === "jpx-investor-type";
-      const points = isJpx ? await fetchForeignInvestorFlow() : await fetchSeries(ind);
-      const source = isJpx
-        ? { provider: "投資部門別売買状況（JPX）", statName: ind.api.statName, sourceUrl: ind.api.sourceUrl }
-        : { provider: "統計ダッシュボード（e-Stat）", statName: ind.api.statName, indicatorCode: ind.api.indicatorCode };
+      const provider = ind.api.provider ?? "estat";
+      let points, source;
+      switch (provider) {
+        case "jpx-investor-type":
+          points = await fetchForeignInvestorFlow();
+          source = { provider: "投資部門別売買状況（JPX）", statName: ind.api.statName, sourceUrl: ind.api.sourceUrl };
+          break;
+        case "boj-fx-daily":
+          points = await fetchUsdJpyDaily();
+          source = { provider: "日本銀行 時系列統計データ検索サイト", statName: ind.api.statName, sourceUrl: ind.api.sourceUrl };
+          break;
+        case "fred-csv":
+          points = await fetchFredSeries(ind.api.seriesId);
+          source = { provider: "FRED（セントルイス連邦準備銀行）", statName: ind.api.statName, sourceUrl: ind.api.sourceUrl };
+          break;
+        default:
+          points = await fetchSeries(ind);
+          source = { provider: "統計ダッシュボード（e-Stat）", statName: ind.api.statName, indicatorCode: ind.api.indicatorCode };
+      }
 
       out.push({
         id: ind.id,

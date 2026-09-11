@@ -16,9 +16,11 @@ const state = {
 
 /* ---------- helpers ---------- */
 
-/** "2026-07" / "2026 Q2" / "2026" → epoch ms */
+/** "2026-09-10" / "2026-07" / "2026 Q2" / "2026" → epoch ms */
 function parseT(t) {
-  let m = /^(\d{4})-(\d{2})$/.exec(t);
+  let m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(t);
+  if (m) return Date.UTC(+m[1], +m[2] - 1, +m[3]);
+  m = /^(\d{4})-(\d{2})$/.exec(t);
   if (m) return Date.UTC(+m[1], +m[2] - 1, 1);
   m = /^(\d{4}) Q(\d)$/.exec(t);
   if (m) return Date.UTC(+m[1], (+m[2] - 1) * 3, 1);
@@ -155,7 +157,7 @@ function renderGrid() {
       const dPrev = fmtDelta(s.changeFromPrev, ind);
       const dYoy = fmtDelta(s.changeFromYearAgo, ind);
       const color = catColor(ind.category);
-      const prevLabel = ind.frequency === "quarterly" ? "前期比" : "前月比";
+      const prevLabel = ind.frequency === "quarterly" ? "前期比" : ind.frequency === "daily" ? "前日比" : "前月比";
       return `
       <button class="card" data-id="${ind.id}">
         <span class="tag" style="background:${color}">${ind.category}</span>
@@ -392,9 +394,13 @@ function drawChart() {
           callbacks: {
             title: (items) => {
               const d = new Date(items[0].parsed.x);
-              return ind.frequency === "quarterly"
-                ? `${d.getUTCFullYear()} Q${Math.floor(d.getUTCMonth() / 3) + 1}`
-                : `${d.getUTCFullYear()}/${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
+              if (ind.frequency === "quarterly") {
+                return `${d.getUTCFullYear()} Q${Math.floor(d.getUTCMonth() / 3) + 1}`;
+              }
+              if (ind.frequency === "daily") {
+                return `${d.getUTCFullYear()}/${String(d.getUTCMonth() + 1).padStart(2, "0")}/${String(d.getUTCDate()).padStart(2, "0")}`;
+              }
+              return `${d.getUTCFullYear()}/${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
             },
             label: (item) => {
               const { num, unit } = fmtValue(item.parsed.y, ind);
