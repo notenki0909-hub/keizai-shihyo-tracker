@@ -23,6 +23,7 @@
   --ref-target: #b45309;
   --ref-neutral: #64748b;
   --ref-context: #94a3b8;
+  --recession: rgba(100, 116, 139, 0.14);
 
   color-scheme: light dark;
 }
@@ -46,6 +47,7 @@
     --ref-target: #f0b429;
     --ref-neutral: #94a3b8;
     --ref-context: #5b6472;
+    --recession: rgba(148, 163, 184, 0.16);
   }
 }
 
@@ -67,6 +69,7 @@
   --ref-target: #f0b429;
   --ref-neutral: #94a3b8;
   --ref-context: #5b6472;
+  --recession: rgba(148, 163, 184, 0.16);
 
   color-scheme: dark;
 }
@@ -761,6 +764,12 @@ a {
 .detail__chart {
   padding: 12px 20px 4px;
   height: 360px;
+}
+
+.detail__chart-note {
+  margin: 4px 24px 0;
+  font-size: 0.72rem;
+  color: var(--text-faint);
 }
 
 .detail__judgment {
