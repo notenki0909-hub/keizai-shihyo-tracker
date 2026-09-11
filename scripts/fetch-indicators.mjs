@@ -123,6 +123,7 @@ async function main() {
         description: ind.description,
         judgment: ind.judgment,
         referenceLines: ind.referenceLines ?? [],
+        movingAverage: ind.movingAverage ?? null,
         releaseSchedule: ind.releaseSchedule,
         source: {
           provider: "統計ダッシュボード（e-Stat）",

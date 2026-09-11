@@ -5,7 +5,7 @@ import annotationPlugin from "chartjs-plugin-annotation";
 Chart.register(annotationPlugin);
 
 const DATA_URL = import.meta.env.BASE_URL + "data/indicators.json";
-const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利"];
+const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "為替・市場"];
 
 const state = {
   category: "すべて",
@@ -32,6 +32,7 @@ function unitScale(unit) {
   if (unit === "百万円") return { unit: "兆円", div: 1e6, digits: 2 };
   if (unit === "億円") return { unit: "兆円", div: 1e4, digits: 2 };
   if (unit === "%" || unit === "倍") return { unit, div: 1, digits: 2 };
+  if (unit === "円") return { unit, div: 1, digits: 2 };
   return { unit, div: 1, digits: 1 };
 }
 
@@ -282,6 +283,43 @@ function drawChart() {
   const grid = css.getPropertyValue("--border").trim();
   const tick = css.getPropertyValue("--text-faint").trim();
   const labelText = css.getPropertyValue("--surface").trim();
+  const maColor = refColor("target");
+
+  const datasets = [
+    {
+      label: ind.movingAverage ? "実績" : ind.shortName,
+      data: pts,
+      borderColor: color,
+      backgroundColor: color + "20",
+      borderWidth: 1.8,
+      pointRadius: 0,
+      pointHoverRadius: 4,
+      fill: true,
+      tension: 0.15,
+    },
+  ];
+
+  if (ind.movingAverage) {
+    const win = ind.movingAverage.window;
+    const maAll = [];
+    for (let i = win - 1; i < ind.points.length; i++) {
+      const slice = ind.points.slice(i - win + 1, i + 1);
+      const avg = slice.reduce((sum, p) => sum + p.value, 0) / win;
+      maAll.push({ x: parseT(ind.points[i].t), y: avg });
+    }
+    datasets.push({
+      label: ind.movingAverage.label,
+      data: maAll.filter((p) => Number.isFinite(p.x) && p.x >= cutoff),
+      borderColor: maColor,
+      borderWidth: 2,
+      borderDash: [5, 3],
+      pointRadius: 0,
+      pointHoverRadius: 3,
+      fill: false,
+      tension: 0.15,
+    });
+  }
+  const multi = datasets.length > 1;
 
   const annotations = {};
   (ind.referenceLines || []).forEach((rl, i) => {
@@ -309,20 +347,7 @@ function drawChart() {
   if (chart) chart.destroy();
   chart = new Chart(document.getElementById("d-canvas"), {
     type: "line",
-    data: {
-      datasets: [
-        {
-          data: pts,
-          borderColor: color,
-          backgroundColor: color + "20",
-          borderWidth: 1.8,
-          pointRadius: 0,
-          pointHoverRadius: 4,
-          fill: true,
-          tension: 0.15,
-        },
-      ],
-    },
+    data: { datasets },
     options: {
       responsive: true,
       maintainAspectRatio: false,
@@ -350,7 +375,9 @@ function drawChart() {
         },
       },
       plugins: {
-        legend: { display: false },
+        legend: multi
+          ? { display: true, position: "top", align: "end", labels: { color: tick, boxWidth: 14, font: { size: 11 } } }
+          : { display: false },
         annotation: { annotations },
         tooltip: {
           callbacks: {
@@ -362,7 +389,7 @@ function drawChart() {
             },
             label: (item) => {
               const { num, unit } = fmtValue(item.parsed.y, ind);
-              return `${num} ${unit}`;
+              return multi ? `${item.dataset.label}：${num} ${unit}` : `${num} ${unit}`;
             },
           },
         },
