@@ -14,6 +14,7 @@ import { INDICATORS, CATEGORY_GUIDES } from "./indicators.config.mjs";
 import { fetchForeignInvestorFlow } from "./fetch-jpx-investor-type.mjs";
 import { fetchUsdJpyDaily } from "./fetch-boj-fx-daily.mjs";
 import { fetchFredSeries } from "./fetch-fred-series.mjs";
+import { fetchNextReleaseDate } from "./fetch-fred-release-date.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = resolve(__dirname, "../public/data");
@@ -39,6 +40,78 @@ function parseTime(code) {
   const y = s.match(/^(\d{4})CY00$/);
   if (y) return { key: m[1], date: `${y[1]}-01-01` };
   return { key: s, date: null };
+}
+
+/* ---------- 次回発表予定日の推定 ---------- */
+
+function lastDayOfMonth(year, month0) {
+  return new Date(Date.UTC(year, month0 + 1, 0));
+}
+
+function addDays(date, days) {
+  const d = new Date(date.getTime());
+  d.setUTCDate(d.getUTCDate() + days);
+  return d;
+}
+
+function nextBusinessDayFromToday() {
+  const now = new Date();
+  const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+  do {
+    d.setUTCDate(d.getUTCDate() + 1);
+  } while (d.getUTCDay() === 0 || d.getUTCDay() === 6);
+  return d;
+}
+
+function toISO(d) {
+  return d.toISOString().slice(0, 10);
+}
+
+/** "2026-09-10" / "2026-09" / "2026 Q2" → その期間の初日（UTC） */
+function periodStartFromT(t) {
+  let m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(t);
+  if (m) return new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+  m = /^(\d{4})-(\d{2})$/.exec(t);
+  if (m) return new Date(Date.UTC(+m[1], +m[2] - 1, 1));
+  m = /^(\d{4}) Q(\d)$/.exec(t);
+  if (m) return new Date(Date.UTC(+m[1], (+m[2] - 1) * 3, 1));
+  return null;
+}
+
+/**
+ * releaseSchedule の目安（例：「対象月の翌月末ごろ」）から、次回発表予定日を推定する。
+ * FRED（日経平均のみ）のような公式メタデータが存在しない e-Stat・JPX・BOJ系列向け。
+ * 「毎営業日・随時更新」で明確な発表周期を持たない系列（無担保コールレート・10年国債利回り・
+ * TOPIX＝いずれも月末値を採用しているだけの継続更新データ）には nextReleaseRule を設定せず、
+ * 推定値は出さない（不正確な断定より非表示の方が誠実という方針、市場予想と同じ考え方）。
+ */
+function estimateNextRelease(ind, latestT) {
+  const rule = ind.nextReleaseRule;
+  if (!rule) return null;
+
+  if (rule.type === "nextBusinessDay") {
+    return toISO(nextBusinessDayFromToday());
+  }
+
+  if (rule.type === "periodLag") {
+    const periodStart = periodStartFromT(latestT);
+    if (!periodStart) return null;
+    let periodEnd;
+    if (ind.frequency === "quarterly") {
+      const q = Math.floor(periodStart.getUTCMonth() / 3);
+      periodEnd = lastDayOfMonth(periodStart.getUTCFullYear(), (q + 1) * 3 + 2);
+    } else {
+      periodEnd = lastDayOfMonth(periodStart.getUTCFullYear(), periodStart.getUTCMonth() + 1);
+    }
+    let release = addDays(periodEnd, rule.daysAfterPeriodEnd);
+    // 官公庁は土日に発表しないため、土日に当たった場合は翌営業日（月曜）にずらす
+    // （祝日までは考慮していないため、あくまで目安）
+    if (release.getUTCDay() === 6) release = addDays(release, 2);
+    if (release.getUTCDay() === 0) release = addDays(release, 1);
+    return toISO(release);
+  }
+
+  return null; // rule.type === "fred" はFRED本体から別途取得するためここでは扱わない
 }
 
 async function fetchSeries(ind, { retries = 3 } = {}) {
@@ -145,6 +218,21 @@ async function main() {
           source = { provider: "統計ダッシュボード（e-Stat）", statName: ind.api.statName, indicatorCode: ind.api.indicatorCode };
       }
 
+      let nextRelease = null;
+      let nextReleaseKind = null; // "official"（FRED公式）/ "estimate"（releaseScheduleからの推定）/ null（対象外）
+      const rule = ind.nextReleaseRule;
+      if (rule?.type === "fred") {
+        nextReleaseKind = "official";
+        try {
+          nextRelease = await fetchNextReleaseDate(ind.api.seriesId);
+        } catch {
+          // 取得失敗時は nextRelease: null のまま（フロントは「未定」表示）
+        }
+      } else if (rule) {
+        nextReleaseKind = "estimate";
+        nextRelease = estimateNextRelease(ind, points.at(-1).t);
+      }
+
       out.push({
         id: ind.id,
         name: ind.name,
@@ -161,6 +249,8 @@ async function main() {
         referenceLines: ind.referenceLines ?? [],
         movingAverage: ind.movingAverage ?? null,
         releaseSchedule: ind.releaseSchedule,
+        nextRelease, // "YYYY-MM-DD" または null。nextReleaseKindが null の指標では常にnull（掲載対象外）
+        nextReleaseKind, // "official" | "estimate" | null
         source,
         summary: summarize(points, ind.frequency),
         // date は t（"2026-07" / "2026 Q2"）から復元できるため出力では省く

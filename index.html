@@ -30,12 +30,15 @@
           <p class="site-header__lead">
             主要な経済指標の「いま」と推移を一覧で確認できます。データ出典は
             <a href="https://dashboard.e-stat.go.jp/" target="_blank" rel="noopener">統計ダッシュボード（e-Stat）</a>。
+            <a href="./guide.html" class="guide-link">📖 このツールの見方</a>
           </p>
           <p class="site-header__meta" id="meta-line">読み込み中…</p>
         </div>
       </header>
 
       <main class="container">
+        <section id="release-calendar" class="calendar" aria-label="発表予定カレンダー"></section>
+
         <section class="toolbar" aria-label="絞り込み">
           <div class="chips" id="category-chips" role="group" aria-label="カテゴリ"></div>
           <div class="toolbar__right">
@@ -84,7 +87,7 @@
         <canvas id="d-canvas"></canvas>
       </div>
       <div class="detail__judgment" id="d-judgment"></div>
-      <p class="detail__release" id="d-release"></p>
+      <div class="detail__release" id="d-release"></div>
       <p class="detail__source" id="d-source"></p>
     </dialog>
 

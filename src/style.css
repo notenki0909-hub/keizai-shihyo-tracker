@@ -235,6 +235,227 @@ a {
   outline-offset: 1px;
 }
 
+/* ---------- guide link / guide page ---------- */
+.guide-link {
+  margin-left: 10px;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.guide {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 8px;
+  padding-bottom: 24px;
+}
+
+.guide-section {
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.guide-section h2 {
+  margin: 0 0 10px;
+  font-size: 1.02rem;
+}
+
+.guide-section p {
+  margin: 0 0 8px;
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: var(--text-dim);
+}
+
+.guide-section ul {
+  margin: 0 0 8px;
+  padding-left: 1.2em;
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: var(--text-dim);
+}
+
+.guide-section li {
+  margin-bottom: 4px;
+}
+
+.guide-section b {
+  color: var(--text);
+}
+
+.guide-note {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: var(--surface-2);
+  border-radius: 8px;
+  font-size: 0.84rem;
+  line-height: 1.75;
+  color: var(--text-dim);
+}
+
+/* ---------- release calendar ---------- */
+.calendar {
+  margin-bottom: 20px;
+  padding: 16px 18px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.calendar__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.calendar__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.calendar__nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.calendar__navbtn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.calendar__navbtn:hover {
+  border-color: var(--text-faint);
+}
+
+.calendar__month {
+  min-width: 6.5em;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.calendar__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 4px;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+.calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar__cell {
+  min-height: 64px;
+  padding: 6px 5px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-2);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calendar__cell--outside {
+  opacity: 0.4;
+}
+
+.calendar__cell--today {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.calendar__daynum {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.calendar__cell--sun .calendar__daynum {
+  color: var(--neg);
+}
+
+.calendar__cell--sat .calendar__daynum {
+  color: var(--accent);
+}
+
+.calendar__pills {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.calendar__pill {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 2px 5px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calendar__note {
+  margin: 10px 0 0;
+  font-size: 0.74rem;
+  line-height: 1.6;
+  color: var(--text-faint);
+}
+
+.calendar__note a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .calendar__cell {
+    min-height: 48px;
+  }
+  .calendar__daynum {
+    font-size: 0.68rem;
+  }
+  .calendar__pill {
+    font-size: 0.62rem;
+    padding: 1px 4px;
+  }
+}
+
 /* ---------- category guide ---------- */
 .category-guide {
   display: flex;
@@ -614,6 +835,22 @@ a {
   margin: 0;
   font-size: 0.8rem;
   color: var(--text-dim);
+}
+
+.detail__release p {
+  margin: 0 0 4px;
+}
+
+.detail__release p:last-child {
+  margin-bottom: 0;
+}
+
+.detail__release b {
+  color: var(--text);
+}
+
+.detail__release-note {
+  color: var(--text-faint);
 }
 
 .detail__source {

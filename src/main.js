@@ -1,17 +1,20 @@
 import "./style.css";
 import Chart from "chart.js/auto";
 import annotationPlugin from "chartjs-plugin-annotation";
+import { initTheme } from "./theme.js";
 
 Chart.register(annotationPlugin);
 
 const DATA_URL = import.meta.env.BASE_URL + "data/indicators.json";
 const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "為替・市場"];
 
+const now = new Date();
 const state = {
   category: "すべて",
   q: "",
   sort: "category",
   data: null,
+  calMonth: new Date(Date.UTC(now.getFullYear(), now.getMonth(), 1)),
 };
 
 /* ---------- helpers ---------- */
@@ -70,6 +73,15 @@ function fmtDelta(d, ind) {
 
 function catColor(cat) {
   return getComputedStyle(document.documentElement).getPropertyValue(`--cat-${cat}`).trim() || "#2563eb";
+}
+
+/** "2026-10-02" → "2026年10月2日（金）" */
+function fmtJpDateWithWeekday(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  if (!m) return iso;
+  const d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+  const wd = ["日", "月", "火", "水", "木", "金", "土"][d.getUTCDay()];
+  return `${+m[1]}年${+m[2]}月${+m[3]}日（${wd}）`;
 }
 
 /** 重要度（1〜5）を★☆の文字列に */
@@ -240,6 +252,95 @@ function renderCategoryGuide() {
   });
 }
 
+/* ---------- release calendar ---------- */
+
+function shiftMonth(d, delta) {
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + delta, 1));
+}
+
+function renderCalendar() {
+  const el = document.getElementById("release-calendar");
+  if (!el || !state.data) return;
+
+  const byDate = new Map();
+  state.data.indicators.forEach((ind) => {
+    if (!ind.nextRelease) return;
+    if (!byDate.has(ind.nextRelease)) byDate.set(ind.nextRelease, []);
+    byDate.get(ind.nextRelease).push(ind);
+  });
+
+  const year = state.calMonth.getUTCFullYear();
+  const month = state.calMonth.getUTCMonth();
+  const startOffset = new Date(Date.UTC(year, month, 1)).getUTCDay(); // 0=日
+  const todayStr = new Date().toISOString().slice(0, 10);
+
+  const cells = [];
+  for (let i = 0; i < 42; i++) {
+    const d = new Date(Date.UTC(year, month, 1 - startOffset + i));
+    const dateStr = d.toISOString().slice(0, 10);
+    cells.push({ d, dateStr, inMonth: d.getUTCMonth() === month, items: byDate.get(dateStr) || [] });
+  }
+  // 最終週が丸ごと翌月かつ発表予定もなければ間引く（5週で収まる月がほとんどのため）
+  while (cells.length > 35) {
+    const lastWeek = cells.slice(-7);
+    if (lastWeek.some((c) => c.inMonth || c.items.length)) break;
+    cells.length -= 7;
+  }
+
+  const weekdayHtml = ["日", "月", "火", "水", "木", "金", "土"].map((w) => `<span>${w}</span>`).join("");
+
+  const cellsHtml = cells
+    .map((c) => {
+      const dow = c.d.getUTCDay();
+      const cls = [
+        "calendar__cell",
+        c.inMonth ? "" : "calendar__cell--outside",
+        c.dateStr === todayStr ? "calendar__cell--today" : "",
+        dow === 0 ? "calendar__cell--sun" : dow === 6 ? "calendar__cell--sat" : "",
+      ]
+        .filter(Boolean)
+        .join(" ");
+      const pills = c.items
+        .map((ind) => {
+          const color = catColor(ind.category);
+          const estMark = ind.nextReleaseKind === "estimate" ? "（推定）" : "";
+          return `<button type="button" class="calendar__pill" style="background:${color}22;color:${color};border-color:${color}66" data-id="${ind.id}" title="${ind.name}${estMark}">${ind.shortName}</button>`;
+        })
+        .join("");
+      return `
+        <div class="${cls}">
+          <span class="calendar__daynum">${c.d.getUTCDate()}</span>
+          <div class="calendar__pills">${pills}</div>
+        </div>`;
+    })
+    .join("");
+
+  el.innerHTML = `
+    <div class="calendar__head">
+      <h2 class="calendar__title">📅 発表予定カレンダー</h2>
+      <div class="calendar__nav">
+        <button type="button" class="calendar__navbtn" id="cal-prev" aria-label="前月">←</button>
+        <span class="calendar__month">${year}年${month + 1}月</span>
+        <button type="button" class="calendar__navbtn" id="cal-next" aria-label="次月">→</button>
+      </div>
+    </div>
+    <div class="calendar__weekdays">${weekdayHtml}</div>
+    <div class="calendar__grid">${cellsHtml}</div>
+    <p class="calendar__note">※ 日経平均株価以外はFREDのような公式メタデータがないため、発表スケジュールの目安からの推定日です。詳しくは<a href="./guide.html">このツールの見方</a>を参照。</p>`;
+
+  el.querySelectorAll(".calendar__pill").forEach((btn) => {
+    btn.addEventListener("click", () => openDetail(btn.dataset.id));
+  });
+  document.getElementById("cal-prev").addEventListener("click", () => {
+    state.calMonth = shiftMonth(state.calMonth, -1);
+    renderCalendar();
+  });
+  document.getElementById("cal-next").addEventListener("click", () => {
+    state.calMonth = shiftMonth(state.calMonth, 1);
+    renderCalendar();
+  });
+}
+
 /* ---------- detail dialog ---------- */
 
 let chart = null;
@@ -292,9 +393,16 @@ function openDetail(id) {
     <p class="judgment__caveat">⚠️ ${j.caveat}</p>`
     : "";
 
-  document.getElementById("d-release").innerHTML = ind.releaseSchedule
-    ? `📅 発表スケジュールの目安：${ind.releaseSchedule}`
-    : "";
+  const releaseParts = [];
+  if (ind.nextReleaseKind) {
+    const nextText = ind.nextRelease ? fmtJpDateWithWeekday(ind.nextRelease) : "未定";
+    const suffix = ind.nextReleaseKind === "estimate" ? "（推定）" : "";
+    releaseParts.push(`<p>📅 次回発表予定日：<b>${nextText}${suffix}</b></p>`);
+  }
+  if (ind.releaseSchedule) {
+    releaseParts.push(`<p class="detail__release-note">発表スケジュールの目安：${ind.releaseSchedule}</p>`);
+  }
+  document.getElementById("d-release").innerHTML = releaseParts.join("");
 
   document.getElementById("d-ranges").innerHTML = RANGES.map(
     (r) => `<button class="range-btn" data-range="${r.key}" aria-pressed="${r.key === currentRange}">${r.label}</button>`
@@ -458,56 +566,12 @@ function drawChart() {
 
 /* ---------- init ---------- */
 
-/* ---------- theme (light/dark 手動切り替え) ---------- */
-
-const THEME_KEY = "keizai-tracker-theme"; // localStorage: "light" | "dark"（未設定＝OS設定に追従）
-
-function isDarkNow() {
-  const t = document.documentElement.getAttribute("data-theme");
-  if (t === "dark") return true;
-  if (t === "light") return false;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches;
-}
-
-function updateThemeToggleIcon() {
-  const btn = document.getElementById("theme-toggle");
-  if (!btn) return;
-  const dark = isDarkNow();
-  // 表示するのは「切り替えた先」のアイコン
-  btn.textContent = dark ? "☀️" : "🌙";
-  const label = dark ? "ライトモードに切り替え" : "ダークモードに切り替え";
-  btn.setAttribute("aria-label", label);
-  btn.title = label;
-}
-
-function initTheme() {
-  let saved = null;
-  try {
-    saved = localStorage.getItem(THEME_KEY);
-  } catch {
-    /* プライベートブラウジング等でlocalStorageが使えない場合はOS設定に追従 */
-  }
-  if (saved === "light" || saved === "dark") {
-    document.documentElement.setAttribute("data-theme", saved);
-  }
-  updateThemeToggleIcon();
-
-  document.getElementById("theme-toggle")?.addEventListener("click", () => {
-    const next = isDarkNow() ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
-    try {
-      localStorage.setItem(THEME_KEY, next);
-    } catch {
-      /* 保存できなくても表示の切り替え自体は機能する */
-    }
-    updateThemeToggleIcon();
+async function init() {
+  initTheme(() => {
     renderGrid(); // カテゴリ色・目安ラインのSVGは属性描画のため色変更を反映し直す
+    renderCalendar(); // カレンダーのピル色も同様にインラインstyleで描画しているため再描画
     if (chart) drawChart(); // 開いている詳細グラフの配色も更新
   });
-}
-
-async function init() {
-  initTheme();
   renderChips();
 
   const search = document.getElementById("search");
@@ -543,6 +607,7 @@ async function init() {
 
   renderGrid();
   renderCategoryGuide();
+  renderCalendar();
 }
 
 init();

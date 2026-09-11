@@ -52,6 +52,7 @@ export const INDICATORS = [
     referenceLines: [{ value: 0, label: "0%＝拡大・縮小の分岐", kind: "neutral" }],
     releaseSchedule:
       "内閣府が四半期終了の約1.5か月後（2月・5月・8月・11月の中旬ごろ）8:50に速報を公表。1か月後をめどに改定値。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 45 },
     api: { indicatorCode: "0705020501000060000", cycle: "2", rank: "2", sa: "2", statName: "国民経済計算" },
   },
   {
@@ -77,6 +78,7 @@ export const INDICATORS = [
     },
     referenceLines: [{ value: 100, label: "基準年(2020年)=100", kind: "context" }],
     releaseSchedule: "内閣府が対象月の約5週間後、14:00ごろに速報を公表。翌月に改定値。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 35 },
     api: { indicatorCode: "0706010500000090010", cycle: "1", rank: "2", sa: "1", statName: "景気動向指数" },
   },
   {
@@ -103,6 +105,7 @@ export const INDICATORS = [
     },
     referenceLines: [{ value: 100, label: "基準年(2020年)=100", kind: "context" }],
     releaseSchedule: "経済産業省が対象月の翌月末ごろ8:30に速報を公表、翌々月中旬に確報。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 30 },
     api: { indicatorCode: "0502070301000090010", cycle: "1", rank: "2", sa: "2", statName: "鉱工業生産・出荷・在庫指数" },
   },
   {
@@ -129,6 +132,7 @@ export const INDICATORS = [
     // 単月の振れが大きい指標のため、詳細グラフに3か月移動平均を重ねて基調を見やすくする
     movingAverage: { window: 3, label: "3か月移動平均" },
     releaseSchedule: "内閣府が対象月の翌々月上旬ごろ8:50に公表。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 38 },
     api: { indicatorCode: "0701030000000010010", cycle: "1", rank: "2", sa: "2", statName: "機械受注統計調査" },
   },
   {
@@ -158,6 +162,7 @@ export const INDICATORS = [
       { value: 0, label: "0%＝デフレとの分岐", kind: "neutral" },
     ],
     releaseSchedule: "総務省統計局が対象月の翌月中旬〜下旬に8:30発表（東京都区部の速報は対象月内に先行公表）。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 20 },
     api: { indicatorCode: "0703010601010030010", cycle: "1", rank: "2", sa: "1", statName: "消費者物価指数" },
   },
   {
@@ -186,6 +191,7 @@ export const INDICATORS = [
       { value: 0, label: "0%＝デフレとの分岐", kind: "neutral" },
     ],
     releaseSchedule: "日本銀行が対象月の翌月上旬（8営業日目ごろ）8:50に公表。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 12 },
     api: { indicatorCode: "0703040400000030010", cycle: "1", rank: "2", sa: "1", statName: "企業物価指数＜日本銀行＞" },
   },
   {
@@ -211,6 +217,7 @@ export const INDICATORS = [
     },
     referenceLines: [{ value: 2.5, label: "構造的失業率の目安 2.5%", kind: "target" }],
     releaseSchedule: "総務省統計局が対象月の翌月末（月末最終営業日）8:30に公表。有効求人倍率と同日発表。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 30 },
     api: { indicatorCode: "0301010000020020010", cycle: "1", rank: "2", sa: "2", statName: "労働力調査" },
   },
   {
@@ -235,6 +242,7 @@ export const INDICATORS = [
     },
     referenceLines: [{ value: 1, label: "1倍＝需給均衡ライン", kind: "target" }],
     releaseSchedule: "厚生労働省が対象月の翌月末ごろ8:30に公表（完全失業率と同日）。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 30 },
     api: { indicatorCode: "0301020001000010010", cycle: "1", rank: "2", sa: "2", statName: "一般職業紹介状況" },
   },
   {
@@ -260,6 +268,7 @@ export const INDICATORS = [
     },
     referenceLines: [{ value: 0, label: "0%＝実質増減の分岐", kind: "neutral" }],
     releaseSchedule: "厚生労働省が対象月の翌々月上旬ごろ8:30に速報を公表。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 38 },
     api: { indicatorCode: "0302030201010030010", cycle: "1", rank: "2", sa: "1", statName: "毎月勤労統計調査" },
   },
   {
@@ -284,6 +293,7 @@ export const INDICATORS = [
     },
     referenceLines: [{ value: 0, label: "0＝黒字・赤字の分岐", kind: "neutral" }],
     releaseSchedule: "財務省が対象月の翌月20日ごろ8:50に公表。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 20 },
     api: { indicatorCode: "1601010101000010020", cycle: "1", rank: "2", sa: "2", statName: "国際収支統計" },
   },
   {
@@ -310,6 +320,7 @@ export const INDICATORS = [
     },
     referenceLines: [{ value: 0, label: "0＝黒字・赤字の分岐", kind: "neutral" }],
     releaseSchedule: "財務省が対象月の翌々月上旬ごろ8:50に公表。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 38 },
     api: { indicatorCode: "1601010100000010000", cycle: "1", rank: "2", sa: "2", statName: "国際収支統計" },
   },
   {
@@ -386,6 +397,7 @@ export const INDICATORS = [
     },
     referenceLines: [{ value: 0, label: "0%＝拡大・縮小の分岐", kind: "neutral" }],
     releaseSchedule: "日本銀行が対象月終了後、翌月初旬に公表。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 7 },
     api: { indicatorCode: "0702010102000030010", cycle: "1", rank: "2", sa: "1", statName: "マネタリーベース統計＜日本銀行＞" },
   },
   {
@@ -413,6 +425,7 @@ export const INDICATORS = [
     },
     referenceLines: [],
     releaseSchedule: "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
+    nextReleaseRule: { type: "nextBusinessDay" },
     api: {
       provider: "boj-fx-daily",
       statName: "外国為替相場（東京インターバンク相場）＜日本銀行＞",
@@ -444,6 +457,7 @@ export const INDICATORS = [
     },
     referenceLines: [],
     releaseSchedule: "取引時間中は常時更新。日次終値を翌営業日にかけてFRED経由で取得・反映。",
+    nextReleaseRule: { type: "fred" },
     api: {
       provider: "fred-csv",
       seriesId: "NIKKEI225",
@@ -506,6 +520,7 @@ export const INDICATORS = [
     releaseSchedule:
       "東京証券取引所（JPX）が翌月初旬（前月最終週の週間発表と同日、毎月第4営業日ごろ）15:30に月間データを公表。" +
       "※JPXは2026年10月8日公表分からファイル形式を変更予定のため、本ツールの取得ロジックは将来的な追随が必要。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 6 },
     api: {
       provider: "jpx-investor-type",
       statName: "投資部門別売買状況＜JPX＞",
