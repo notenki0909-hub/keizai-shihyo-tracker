@@ -3,6 +3,7 @@ import Chart from "chart.js/auto";
 import annotationPlugin from "chartjs-plugin-annotation";
 import { initTheme } from "./theme.js";
 import { RECESSIONS } from "./recessions.js";
+import { isFavorite, toggleFavorite, getFavorites } from "./favorites.js";
 
 Chart.register(annotationPlugin);
 
@@ -16,6 +17,7 @@ const state = {
   sort: "category",
   data: null,
   calMonth: new Date(Date.UTC(now.getFullYear(), now.getMonth(), 1)),
+  favoritesOnly: false,
 };
 
 /* ---------- helpers ---------- */
@@ -149,6 +151,10 @@ function sparkline(points, color, referenceLines = []) {
 function visibleIndicators() {
   let list = state.data.indicators.slice();
   if (state.category !== "すべて") list = list.filter((i) => i.category === state.category);
+  if (state.favoritesOnly) {
+    const favSet = getFavorites();
+    list = list.filter((i) => favSet.has(i.id));
+  }
   if (state.q.trim()) {
     const q = state.q.trim().toLowerCase();
     list = list.filter(
@@ -168,6 +174,12 @@ function visibleIndicators() {
     changeDown: (a, b) => chg(a) - chg(b),
   };
   list.sort(sorters[state.sort] || sorters.category);
+
+  // お気に入りは常に先頭にまとめる（Array.sortは安定ソートなので各グループ内の順序は上記のまま保たれる）
+  if (!state.favoritesOnly) {
+    const favSet = getFavorites();
+    list.sort((a, b) => Number(favSet.has(b.id)) - Number(favSet.has(a.id)));
+  }
   return list;
 }
 
@@ -183,12 +195,16 @@ function renderGrid() {
       const dPrev = fmtDelta(s.changeFromPrev, ind);
       const dYoy = fmtDelta(s.changeFromYearAgo, ind);
       const color = catColor(ind.category);
+      const fav = isFavorite(ind.id);
       const prevLabel = ind.frequency === "quarterly" ? "前期比" : ind.frequency === "daily" ? "前日比" : "前月比";
       return `
-      <button class="card" data-id="${ind.id}">
+      <div class="card" data-id="${ind.id}" role="button" tabindex="0">
         <div class="card__top">
           <span class="tag" style="background:${color}">${ind.category}</span>
-          <span class="stars" title="重要度 ${ind.importance}/5">${starsText(ind.importance)}</span>
+          <div class="card__top-right">
+            <button type="button" class="card__fav${fav ? " is-active" : ""}" data-fav-id="${ind.id}" aria-pressed="${fav}" aria-label="${fav ? "お気に入りから外す" : "お気に入りに追加"}">${fav ? "★" : "☆"}</button>
+            <span class="stars" title="重要度 ${ind.importance}/5">${starsText(ind.importance)}</span>
+          </div>
         </div>
         <h3 class="card__name">${ind.name}</h3>
         <div class="card__valrow">
@@ -201,12 +217,31 @@ function renderGrid() {
           <span>${prevLabel} <b class="${dPrev.cls}">${dPrev.text}</b></span>
           <span>前年比 <b class="${dYoy.cls}">${dYoy.text}</b></span>
         </div>
-      </button>`;
+      </div>`;
     })
     .join("");
 
   grid.querySelectorAll(".card").forEach((el) => {
     el.addEventListener("click", () => openDetail(el.dataset.id));
+    el.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openDetail(el.dataset.id);
+      }
+    });
+  });
+  grid.querySelectorAll(".card__fav").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.favId;
+      const nowFav = toggleFavorite(id);
+      btn.classList.toggle("is-active", nowFav);
+      btn.textContent = nowFav ? "★" : "☆";
+      btn.setAttribute("aria-pressed", String(nowFav));
+      btn.setAttribute("aria-label", nowFav ? "お気に入りから外す" : "お気に入りに追加");
+      if (state.favoritesOnly) renderGrid();
+      if (currentInd?.id === id) updateDetailFavButton();
+    });
   });
 }
 
@@ -363,6 +398,17 @@ const RANGES = [
   { key: "all", label: "全期間", years: Infinity },
 ];
 
+/** 詳細モーダルの☆/★ボタンを現在の指標のお気に入り状態に合わせて更新 */
+function updateDetailFavButton() {
+  if (!currentInd) return;
+  const btn = document.getElementById("d-fav");
+  const fav = isFavorite(currentInd.id);
+  btn.textContent = fav ? "★" : "☆";
+  btn.classList.toggle("is-active", fav);
+  btn.setAttribute("aria-pressed", String(fav));
+  btn.setAttribute("aria-label", fav ? "お気に入りから外す" : "お気に入りに追加");
+}
+
 function openDetail(id) {
   const ind = state.data.indicators.find((i) => i.id === id);
   if (!ind) return;
@@ -375,6 +421,7 @@ function openDetail(id) {
   document.getElementById("d-tag").style.background = color;
   document.getElementById("d-stars").textContent = starsText(ind.importance);
   document.getElementById("d-stars").title = `重要度 ${ind.importance}/5`;
+  updateDetailFavButton();
   document.getElementById("d-name").textContent = ind.name;
   document.getElementById("d-desc").textContent = ind.description;
 
@@ -610,6 +657,18 @@ async function init() {
   document.getElementById("detail-close").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", (e) => {
     if (e.target === dlg) dlg.close();
+  });
+
+  document.getElementById("d-fav").addEventListener("click", () => {
+    if (!currentInd) return;
+    toggleFavorite(currentInd.id);
+    updateDetailFavButton();
+    renderGrid();
+  });
+  document.getElementById("fav-filter").addEventListener("click", (e) => {
+    state.favoritesOnly = !state.favoritesOnly;
+    e.currentTarget.setAttribute("aria-pressed", String(state.favoritesOnly));
+    renderGrid();
   });
 
   try {

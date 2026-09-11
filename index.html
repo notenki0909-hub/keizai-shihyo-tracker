@@ -42,6 +42,7 @@
         <section class="toolbar" aria-label="絞り込み">
           <div class="chips" id="category-chips" role="group" aria-label="カテゴリ"></div>
           <div class="toolbar__right">
+            <button type="button" id="fav-filter" class="fav-filter" aria-pressed="false">★ お気に入りのみ</button>
             <input
               type="search"
               id="search"
@@ -78,6 +79,7 @@
       <div class="detail__head">
         <span class="tag" id="d-tag"></span>
         <span class="stars" id="d-stars"></span>
+        <button type="button" id="d-fav" class="detail__fav"></button>
         <h2 id="d-name"></h2>
         <p id="d-desc" class="detail__desc"></p>
       </div>
