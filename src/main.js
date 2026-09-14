@@ -13,43 +13,73 @@ const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "
 /**
  * 「有名な指標比較」として、経済学・投資の分野でよく知られている組み合わせをおすすめ表示する。
  * type: "correlation"（順相関・逆相関の確認）/ "divergence"（普段は連動する2指標が乖離していないか確認）
+ * summary   : 一言でいうとどんな関係か
+ * howToRead : グラフの2本の線をどう見ればよいか（初心者向け）
+ * takeaway  : そこから何を判断すればよいか（初心者向け）
  */
 const RECOMMENDED_PAIRS = [
   {
     a: "nikkei225",
     b: "usdjpy",
     type: "correlation",
-    reason:
-      "日経平均とドル円は順相関で知られる。日経平均の構成銘柄には輸出企業が多く、円安になると" +
-      "外貨建て売上の円換算額が増えて業績が拡大しやすい（「円安→株高」の関係）。",
+    title: "日経平均株価 × ドル円レート",
+    summary: "円安になると日経平均が上がりやすい、順相関の関係で知られる。",
+    howToRead:
+      "ドル円（円安方向＝上向き）と日経平均が同じ方向に動いていれば『いつも通り』の関係。" +
+      "日経平均の主要企業には輸出企業が多く、円安だと海外での売上を円に換算した時の金額が増えて" +
+      "業績が良く見えやすいのが理由。",
+    takeaway:
+      "急激な円安・円高が進んだ時は、その分だけ日経平均も大きく動く可能性があると身構える材料になる。" +
+      "逆に日経平均が動いているのにドル円がほとんど動いていない場合は、為替以外の要因" +
+      "（決算・海外株安など）が主因と考えられる。",
   },
   {
     a: "nikkei225",
     b: "topix",
     type: "correlation",
-    reason:
-      "値がさ株（株価の高い個別銘柄）主導の相場か、市場全体に幅広く資金が向かう相場かを比較できる" +
-      "（両者の比率＝NT倍率として本ツールにも別途収録）。",
+    title: "日経平均株価 × TOPIX",
+    summary: "どちらも日本株全体の動きを表すが、構成の違いから『どちらが強いか』で相場の性格が変わる。",
+    howToRead:
+      "日経平均だけが大きく上昇していてTOPIXがそれほどでもない場合は、値がさ株（株価の高い一部の" +
+      "銘柄）が相場を牽引している状態。逆にTOPIXも同じくらい上がっていれば、市場全体に幅広く資金が" +
+      "向かっている健全な上昇と見られる。",
+    takeaway:
+      "『一部の銘柄だけが買われている相場』か『市場全体が買われている相場』かを見分けられる。" +
+      "前者は一部銘柄の急落で指数全体が崩れる反動に注意が必要。この2つの比率が「NT倍率」" +
+      "（本ツールにも別途収録）。",
   },
   {
     a: "jgb_10y_yield",
     b: "nikkei225",
     type: "correlation",
-    reason: "長期金利の上昇・低下が株価にどう影響しているか、時期のズレも含めて確認できる。",
+    title: "新発10年国債利回り × 日経平均株価",
+    summary: "長期金利が上がると、株式より債券の方が魅力的になり、株価の重荷になりやすい。",
+    howToRead:
+      "金利が上昇トレンドにある時に日経平均が伸び悩んでいれば『よくある反応』。金利が上がっているのに" +
+      "株価も一緒に上がっている場合は、金利上昇を上回るペースで企業業績への期待が強いと考えられる。",
+    takeaway:
+      "金利の急上昇局面では株価が下押しされやすい、という前提を持ったうえで、実際にどちらが" +
+      "勝っているかを確認する材料になる。",
   },
   {
     a: "unemployment_rate",
     b: "cpi_core_yoy",
     type: "divergence",
-    reason:
-      "完全失業率とコアCPIはどちらも遅行指標。雇用が改善（悪化）しても物価が別の動きをする" +
-      "『フィリップス曲線』的なトレードオフが崩れていないか確認できる。",
+    title: "完全失業率 × コアCPI（物価）",
+    summary: "雇用が改善すると物価も上がりやすい、というトレードオフの関係（フィリップス曲線）。",
+    howToRead:
+      "失業率が下がっているのに物価が大きく上振れしていなければ『理想的な状態』。失業率が高いままなのに" +
+      "物価だけ上がっている場合は、景気の弱さと生活費の上昇が同時に起きている状態で要注意。",
+    takeaway:
+      "両方が落ち着いている、または雇用改善と物価上昇が緩やかに連動していれば健全。どちらかだけが" +
+      "急激に動いている時は、その背景（原油高・為替・供給制約など）を確認する必要がある。",
   },
 ];
 
 const now = new Date();
 const state = {
   category: "すべて",
+  view: "list", // "list"（通常の一覧）/ "compare"（おすすめの比較ペア一覧）
   q: "",
   sort: "category",
   data: null,
@@ -246,8 +276,79 @@ function visibleIndicators() {
   return list;
 }
 
+/** 「おすすめの比較ペア」をすべて一覧表示する（📊比較タブ）。カードをクリックすると2指標を重ねた詳細画面を開く */
+function renderComparePairs(grid) {
+  document.getElementById("empty").hidden = true;
+
+  const pairs = RECOMMENDED_PAIRS.map((p) => ({
+    ...p,
+    indA: state.data.indicators.find((i) => i.id === p.a),
+    indB: state.data.indicators.find((i) => i.id === p.b),
+  })).filter((p) => p.indA && p.indB);
+
+  grid.innerHTML = `
+    <div class="pair-intro">
+      <p>経済学・投資の世界でよく知られている「2指標セットで見ると発見がある」組み合わせをまとめました。
+      カードをクリックすると、その2指標を重ねたグラフがすぐに開きます。</p>
+      <p class="pair-intro__note">
+        <b>🔗 相関確認</b>＝2本の線がいつも同じ方向・逆方向に動くかを確認するペア／
+        <b>⚠️ ダイバージェンス確認</b>＝普段は連動する2つが逆方向に乖離していないか（早期警戒）を確認するペア。
+        ただし2つの線が似た動きをしていても、それが「片方が原因でもう片方が結果」とは限りません
+        （相関関係は因果関係を意味しません）。
+      </p>
+    </div>
+    ${pairs
+      .map((p) => {
+        const icon = p.type === "divergence" ? "⚠️" : "🔗";
+        const label = p.type === "divergence" ? "ダイバージェンス確認" : "相関確認";
+        return `
+      <div class="pair-card" data-a="${p.a}" data-b="${p.b}" role="button" tabindex="0">
+        <span class="pair-card__type pair-card__type--${p.type}">${icon} ${label}</span>
+        <h3 class="pair-card__title">${p.title}</h3>
+        <p class="pair-card__summary">${p.summary}</p>
+        <div class="pair-card__detail">
+          <div><span>📈 どう見る？</span><p>${p.howToRead}</p></div>
+          <div><span>💡 何を判断する？</span><p>${p.takeaway}</p></div>
+        </div>
+        <span class="pair-card__open">この比較をグラフで見る →</span>
+      </div>`;
+      })
+      .join("")}`;
+
+  grid.querySelectorAll(".pair-card").forEach((el) => {
+    const open = () => openComparePair(el.dataset.a, el.dataset.b);
+    el.addEventListener("click", open);
+    el.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        open();
+      }
+    });
+  });
+}
+
+/** 指標Aの詳細を開き、指標Bを比較指標として自動選択した状態にする */
+function openComparePair(aId, bId) {
+  openDetail(aId);
+  const bInd = state.data.indicators.find((i) => i.id === bId);
+  if (!bInd) return;
+  compareInd = bInd;
+  const sel = document.getElementById("d-compare");
+  if (sel) sel.value = bId;
+  drawChart();
+}
+
 function renderGrid() {
   const grid = document.getElementById("grid");
+  const toolbarRight = document.querySelector(".toolbar__right");
+  if (state.view === "compare") {
+    if (toolbarRight) toolbarRight.hidden = true;
+    grid.classList.add("grid--compare");
+    renderComparePairs(grid);
+    return;
+  }
+  if (toolbarRight) toolbarRight.hidden = false;
+  grid.classList.remove("grid--compare");
   const list = visibleIndicators();
   document.getElementById("empty").hidden = list.length > 0;
 
@@ -317,15 +418,22 @@ function renderGrid() {
 function renderChips() {
   const wrap = document.getElementById("category-chips");
   const cats = ["すべて", ...CATEGORIES];
-  wrap.innerHTML = cats
-    .map(
-      (c) =>
-        `<button class="chip" data-cat="${c}" aria-pressed="${c === state.category}">${c}</button>`
-    )
-    .join("");
+  wrap.innerHTML =
+    cats
+      .map(
+        (c) =>
+          `<button class="chip" data-cat="${c}" aria-pressed="${state.view === "list" && c === state.category}">${c}</button>`
+      )
+      .join("") +
+    `<button class="chip chip--compare" data-cat="__compare__" aria-pressed="${state.view === "compare"}">📊 比較</button>`;
   wrap.querySelectorAll(".chip").forEach((el) => {
     el.addEventListener("click", () => {
-      state.category = el.dataset.cat;
+      if (el.dataset.cat === "__compare__") {
+        state.view = "compare";
+      } else {
+        state.view = "list";
+        state.category = el.dataset.cat;
+      }
       renderChips();
       renderGrid();
       renderCategoryGuide();
@@ -336,7 +444,10 @@ function renderChips() {
 /** 選択中カテゴリの「まず見る／次に見る」ガイドを表示 */
 function renderCategoryGuide() {
   const el = document.getElementById("category-guide");
-  const guide = state.data && state.category !== "すべて" ? state.data.categoryGuides?.[state.category] : null;
+  const guide =
+    state.data && state.view === "list" && state.category !== "すべて"
+      ? state.data.categoryGuides?.[state.category]
+      : null;
   if (!guide) {
     el.hidden = true;
     el.innerHTML = "";
@@ -524,7 +635,7 @@ function renderCompareSuggestions(ind) {
   if (!el) return;
 
   const suggestions = RECOMMENDED_PAIRS.filter((p) => p.a === ind.id || p.b === ind.id)
-    .map((p) => ({ partnerId: p.a === ind.id ? p.b : p.a, type: p.type, reason: p.reason }))
+    .map((p) => ({ partnerId: p.a === ind.id ? p.b : p.a, type: p.type, summary: p.summary }))
     .map((s) => ({ ...s, partner: state.data.indicators.find((i) => i.id === s.partnerId) }))
     .filter((s) => s.partner);
 
@@ -544,7 +655,7 @@ function renderCompareSuggestions(ind) {
           <button type="button" class="compare-suggest__btn" data-compare-id="${s.partnerId}">
             ${icon} ${label}：${s.partner.name}と比較
           </button>
-          <p class="compare-suggest__reason">${s.reason}</p>
+          <p class="compare-suggest__reason">${s.summary}</p>
         </div>`;
     })
     .join("");
