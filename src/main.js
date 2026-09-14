@@ -540,6 +540,17 @@ function renderEconSummary() {
   const findingRow = (f) =>
     `<li><button type="button" class="econ-summary__link" data-id="${f.id}">${f.name}</button>：${f.detail}</li>`;
 
+  const nameChip = (item) =>
+    `<button type="button" class="econ-summary__name-chip" data-id="${item.id}">${item.name}</button>`;
+
+  const group = (label, list, modifier) => `
+    <div class="econ-summary__group econ-summary__group--${modifier}">
+      <div class="econ-summary__group-head"><b>${list.length}</b><span>${label}</span></div>
+      <div class="econ-summary__names">
+        ${list.length ? list.map(nameChip).join("") : '<span class="econ-summary__names-empty">該当なし</span>'}
+      </div>
+    </div>`;
+
   const statusHtml = sum.statusFindings.length
     ? `<div class="econ-summary__block">
         <h3>⚠️ 注目ポイント（目安ラインとの比較）</h3>
@@ -560,10 +571,10 @@ function renderEconSummary() {
       <span class="econ-summary__updated">最終更新：${genStr}</span>
     </div>
     <p class="econ-summary__headline">${sum.headline}</p>
-    <div class="econ-summary__stats">
-      <div class="econ-summary__stat econ-summary__stat--up"><b>${sum.stats.improving}</b><span>改善傾向</span></div>
-      <div class="econ-summary__stat econ-summary__stat--down"><b>${sum.stats.worsening}</b><span>悪化傾向</span></div>
-      <div class="econ-summary__stat"><b>${sum.stats.neutral}</b><span>横ばい・中立</span></div>
+    <div class="econ-summary__groups">
+      ${group("改善傾向", sum.improvingList, "up")}
+      ${group("悪化傾向", sum.worseningList, "down")}
+      ${group("横ばい・中立", sum.neutralList, "neutral")}
     </div>
     ${statusHtml}
     ${surpriseHtml}
@@ -572,7 +583,7 @@ function renderEconSummary() {
       （AIによる分析ではありません）。因果関係の解説や将来予測、投資助言ではない点にご注意ください。
     </p>`;
 
-  el.querySelectorAll(".econ-summary__link").forEach((btn) => {
+  el.querySelectorAll(".econ-summary__link, .econ-summary__name-chip").forEach((btn) => {
     btn.addEventListener("click", () => openDetail(btn.dataset.id));
   });
 }

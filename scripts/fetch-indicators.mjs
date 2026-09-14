@@ -235,6 +235,9 @@ function buildEconSummary(indicators) {
   let improving = 0;
   let worsening = 0;
   let neutralCount = 0;
+  const improvingList = [];
+  const worseningList = [];
+  const neutralList = [];
   const statusFindings = [];
   const surpriseFindings = [];
 
@@ -242,12 +245,19 @@ function buildEconSummary(indicators) {
     const s = ind.summary;
     if (!s) continue;
 
+    const nameEntry = { id: ind.id, name: ind.name, category: ind.category };
     if (ind.betterWhen !== "neutral" && s.changeFromPrev != null && s.changeFromPrev !== 0) {
       const good = s.changeFromPrev > 0 === (ind.betterWhen === "up");
-      if (good) improving++;
-      else worsening++;
+      if (good) {
+        improving++;
+        improvingList.push(nameEntry);
+      } else {
+        worsening++;
+        worseningList.push(nameEntry);
+      }
     } else {
       neutralCount++;
+      neutralList.push(nameEntry);
     }
 
     if (ind.betterWhen !== "neutral") {
@@ -292,6 +302,9 @@ function buildEconSummary(indicators) {
     generatedAt: new Date().toISOString(),
     stats: { total, improving, worsening, neutral: neutralCount, surpriseCount: surpriseFindings.length },
     headline,
+    improvingList,
+    worseningList,
+    neutralList,
     statusFindings: statusFindings.slice(0, 8),
     surpriseFindings: surpriseFindings.slice(0, 6),
   };

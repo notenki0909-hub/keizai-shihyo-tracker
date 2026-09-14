@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T17:01:10.894Z",
+  "generatedAt": "2026-09-14T21:27:46.183Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 19,
@@ -67,7 +67,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-09-14T17:01:10.899Z",
+    "generatedAt": "2026-09-14T21:27:46.185Z",
     "stats": {
       "total": 19,
       "improving": 7,
@@ -76,6 +76,107 @@
       "surpriseCount": 4
     },
     "headline": "19指標中、改善傾向が7件、悪化傾向が4件、横ばい・中立が8件です。",
+    "improvingList": [
+      {
+        "id": "coincident_ci",
+        "name": "景気動向指数 CI一致指数",
+        "category": "景気"
+      },
+      {
+        "id": "machinery_orders",
+        "name": "機械受注（船舶・電力除く民需）",
+        "category": "景気"
+      },
+      {
+        "id": "unemployment_rate",
+        "name": "完全失業率",
+        "category": "雇用・所得"
+      },
+      {
+        "id": "real_wage_index_yoy",
+        "name": "実質賃金指数（現金給与総額）",
+        "category": "雇用・所得"
+      },
+      {
+        "id": "trade_balance",
+        "name": "貿易収支",
+        "category": "対外"
+      },
+      {
+        "id": "current_account",
+        "name": "経常収支",
+        "category": "対外"
+      },
+      {
+        "id": "topix",
+        "name": "TOPIX（東証株価指数）",
+        "category": "為替・市場"
+      }
+    ],
+    "worseningList": [
+      {
+        "id": "gdp_real_growth",
+        "name": "実質GDP成長率",
+        "category": "景気"
+      },
+      {
+        "id": "industrial_production",
+        "name": "鉱工業生産指数",
+        "category": "景気"
+      },
+      {
+        "id": "nikkei225",
+        "name": "日経平均株価",
+        "category": "為替・市場"
+      },
+      {
+        "id": "foreign_investor_flow",
+        "name": "海外投資家 売買動向（東証プライム）",
+        "category": "為替・市場"
+      }
+    ],
+    "neutralList": [
+      {
+        "id": "cpi_core_yoy",
+        "name": "コアCPI（生鮮食品除く総合）",
+        "category": "物価"
+      },
+      {
+        "id": "ppi_yoy",
+        "name": "国内企業物価指数（PPI）",
+        "category": "物価"
+      },
+      {
+        "id": "jobs_to_applicants_ratio",
+        "name": "有効求人倍率",
+        "category": "雇用・所得"
+      },
+      {
+        "id": "call_rate",
+        "name": "無担保コールレート（政策金利）",
+        "category": "金利"
+      },
+      {
+        "id": "jgb_10y_yield",
+        "name": "新発10年国債利回り",
+        "category": "金利"
+      },
+      {
+        "id": "monetary_base_yoy",
+        "name": "マネタリーベース",
+        "category": "金利"
+      },
+      {
+        "id": "usdjpy",
+        "name": "ドル円レート",
+        "category": "為替・市場"
+      },
+      {
+        "id": "nt_ratio",
+        "name": "NT倍率（日経平均÷TOPIX）",
+        "category": "為替・市場"
+      }
+    ],
     "statusFindings": [
       {
         "id": "trade_balance",
