@@ -342,12 +342,12 @@ function renderGrid() {
   const grid = document.getElementById("grid");
   const toolbarRight = document.querySelector(".toolbar__right");
   if (state.view === "compare") {
-    if (toolbarRight) toolbarRight.hidden = true;
+    if (toolbarRight) toolbarRight.style.display = "none"; // .toolbar__right の display:flex が hidden 属性より優先されてしまうため
     grid.classList.add("grid--compare");
     renderComparePairs(grid);
     return;
   }
-  if (toolbarRight) toolbarRight.hidden = false;
+  if (toolbarRight) toolbarRight.style.display = "";
   grid.classList.remove("grid--compare");
   const list = visibleIndicators();
   document.getElementById("empty").hidden = list.length > 0;
