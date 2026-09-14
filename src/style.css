@@ -847,6 +847,43 @@ a {
   max-width: 100%;
 }
 
+.detail__compare-suggest {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 24px 0;
+}
+
+.compare-suggest {
+  padding: 8px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.compare-suggest__btn {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.compare-suggest__btn:hover {
+  text-decoration: underline;
+}
+
+.compare-suggest__reason {
+  margin: 4px 0 0;
+  font-size: 0.76rem;
+  line-height: 1.6;
+  color: var(--text-faint);
+}
+
 .range-btn {
   border: 1px solid var(--border);
   background: var(--surface);

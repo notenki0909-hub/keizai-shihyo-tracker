@@ -10,6 +10,43 @@ Chart.register(annotationPlugin);
 const DATA_URL = import.meta.env.BASE_URL + "data/indicators.json";
 const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "為替・市場"];
 
+/**
+ * 「有名な指標比較」として、経済学・投資の分野でよく知られている組み合わせをおすすめ表示する。
+ * type: "correlation"（順相関・逆相関の確認）/ "divergence"（普段は連動する2指標が乖離していないか確認）
+ */
+const RECOMMENDED_PAIRS = [
+  {
+    a: "nikkei225",
+    b: "usdjpy",
+    type: "correlation",
+    reason:
+      "日経平均とドル円は順相関で知られる。日経平均の構成銘柄には輸出企業が多く、円安になると" +
+      "外貨建て売上の円換算額が増えて業績が拡大しやすい（「円安→株高」の関係）。",
+  },
+  {
+    a: "nikkei225",
+    b: "topix",
+    type: "correlation",
+    reason:
+      "値がさ株（株価の高い個別銘柄）主導の相場か、市場全体に幅広く資金が向かう相場かを比較できる" +
+      "（両者の比率＝NT倍率として本ツールにも別途収録）。",
+  },
+  {
+    a: "jgb_10y_yield",
+    b: "nikkei225",
+    type: "correlation",
+    reason: "長期金利の上昇・低下が株価にどう影響しているか、時期のズレも含めて確認できる。",
+  },
+  {
+    a: "unemployment_rate",
+    b: "cpi_core_yoy",
+    type: "divergence",
+    reason:
+      "完全失業率とコアCPIはどちらも遅行指標。雇用が改善（悪化）しても物価が別の動きをする" +
+      "『フィリップス曲線』的なトレードオフが崩れていないか確認できる。",
+  },
+];
+
 const now = new Date();
 const state = {
   category: "すべて",
@@ -481,6 +518,47 @@ function updateDetailFavButton() {
   btn.setAttribute("aria-label", fav ? "お気に入りから外す" : "お気に入りに追加");
 }
 
+/** 現在の指標に「有名な指標比較」があれば、比較セレクタの下にワンクリックの提案として表示 */
+function renderCompareSuggestions(ind) {
+  const el = document.getElementById("d-compare-suggest");
+  if (!el) return;
+
+  const suggestions = RECOMMENDED_PAIRS.filter((p) => p.a === ind.id || p.b === ind.id)
+    .map((p) => ({ partnerId: p.a === ind.id ? p.b : p.a, type: p.type, reason: p.reason }))
+    .map((s) => ({ ...s, partner: state.data.indicators.find((i) => i.id === s.partnerId) }))
+    .filter((s) => s.partner);
+
+  if (!suggestions.length) {
+    el.hidden = true;
+    el.innerHTML = "";
+    return;
+  }
+
+  el.hidden = false;
+  el.innerHTML = suggestions
+    .map((s) => {
+      const icon = s.type === "divergence" ? "⚠️" : "🔗";
+      const label = s.type === "divergence" ? "ダイバージェンス確認" : "相関確認";
+      return `
+        <div class="compare-suggest">
+          <button type="button" class="compare-suggest__btn" data-compare-id="${s.partnerId}">
+            ${icon} ${label}：${s.partner.name}と比較
+          </button>
+          <p class="compare-suggest__reason">${s.reason}</p>
+        </div>`;
+    })
+    .join("");
+
+  el.querySelectorAll(".compare-suggest__btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.compareId;
+      compareInd = state.data.indicators.find((i) => i.id === id) || null;
+      document.getElementById("d-compare").value = id;
+      drawChart();
+    });
+  });
+}
+
 function openDetail(id) {
   const ind = state.data.indicators.find((i) => i.id === id);
   if (!ind) return;
@@ -497,6 +575,7 @@ function openDetail(id) {
     `<option value="">選択しない</option>` +
     otherInds.map((i) => `<option value="${i.id}">${i.name}</option>`).join("");
   compareSelect.value = "";
+  renderCompareSuggestions(ind);
 
   const color = catColor(ind.category);
   const s = ind.summary;
