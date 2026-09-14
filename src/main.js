@@ -149,22 +149,74 @@ function computeSurprise(points) {
   if (points.length < 10) return null;
   const diffs = [];
   for (let i = 1; i < points.length; i++) diffs.push(points[i].value - points[i - 1].value);
-  const latest = diffs.at(-1);
+  const latestDiff = diffs.at(-1);
   const history = diffs.slice(0, -1);
   if (history.length < 8) return null;
   const mean = history.reduce((a, b) => a + b, 0) / history.length;
   const variance = history.reduce((a, b) => a + (b - mean) ** 2, 0) / history.length;
   const sd = Math.sqrt(variance);
   if (!Number.isFinite(sd) || sd === 0) return null;
-  return (latest - mean) / sd;
+  return {
+    z: (latestDiff - mean) / sd,
+    latestDiff,
+    sd,
+    prevPoint: points.at(-2),
+    latestPoint: points.at(-1),
+  };
 }
 
-function surpriseInfo(z) {
-  if (z == null || !Number.isFinite(z)) return null;
-  const abs = Math.abs(z);
-  if (abs >= 2.5) return { level: "high", label: "非常に大きな変化", z };
-  if (abs >= 1.5) return { level: "mid", label: "やや大きな変化", z };
-  return { level: "low", label: "通常の範囲内", z };
+function surpriseInfo(detail) {
+  if (!detail || !Number.isFinite(detail.z)) return null;
+  const abs = Math.abs(detail.z);
+  if (abs >= 2.5) return { level: "high", label: "非常に大きな変化", z: detail.z, detail };
+  if (abs >= 1.5) return { level: "mid", label: "やや大きな変化", z: detail.z, detail };
+  return { level: "low", label: "通常の範囲内", z: detail.z, detail };
+}
+
+/** 「いつからいつへの変化が、通常の何倍珍しいか」を人が読める文章にする */
+function surpriseExplanation(surprise, ind) {
+  if (!surprise || surprise.level === "low") return "";
+  const d = surprise.detail;
+  const delta = fmtDelta(d.latestDiff, ind);
+  const absZ = Math.abs(surprise.z).toFixed(1);
+  return (
+    `📅 ${d.prevPoint.t} → ${d.latestPoint.t} にかけて、${delta.text} の変化がありました。` +
+    `これは指標自身の過去の変動幅（標準偏差）のおよそ${absZ}倍にあたり、統計的に珍しい動きです。`
+  );
+}
+
+/**
+ * 表示範囲内で「非常に大きな変化」（|z|≥2.5）があった点を抽出する。
+ * 各時点のzは、その時点「より前」の変化幅だけを使って計算する（Welfordのオンライン分散計算で
+ * 逐次更新しながら1回のループで求める＝未来の情報を使ったカンニングにならない）。
+ */
+function computeSurpriseMarkers(points, cutoff) {
+  const markers = [];
+  if (points.length < 10) return markers;
+  const diffs = [];
+  for (let i = 1; i < points.length; i++) diffs.push(points[i].value - points[i - 1].value);
+
+  let n = 0;
+  let mean = 0;
+  let M2 = 0;
+  for (let i = 0; i < diffs.length; i++) {
+    if (n >= 8) {
+      const sd = Math.sqrt(M2 / n);
+      if (sd > 0) {
+        const z = (diffs[i] - mean) / sd;
+        if (Math.abs(z) >= 2.5) {
+          const p = points[i + 1];
+          const x = parseT(p.t);
+          if (Number.isFinite(x) && x >= cutoff) markers.push({ x, y: p.value, z, t: p.t });
+        }
+      }
+    }
+    n++;
+    const delta = diffs[i] - mean;
+    mean += delta / n;
+    M2 += delta * (diffs[i] - mean);
+  }
+  return markers;
 }
 
 function catColor(cat) {
@@ -363,7 +415,7 @@ function renderGrid() {
       const surprise = surpriseInfo(computeSurprise(ind.points));
       const surpriseBadge =
         surprise && surprise.level !== "low"
-          ? `<span class="card__surprise card__surprise--${surprise.level}">⚡ ${surprise.label}</span>`
+          ? `<span class="card__surprise card__surprise--${surprise.level}" title="${surpriseExplanation(surprise, ind).replace(/"/g, "&quot;")}">⚡ ${surprise.label}</span>`
           : "";
       const prevLabel = ind.frequency === "quarterly" ? "前期比" : ind.frequency === "daily" ? "前日比" : "前月比";
       return `
@@ -766,6 +818,15 @@ function openDetail(id) {
   document.getElementById("d-stats-note").textContent =
     "⚡は市場予想との比較ではなく、指標自身の過去の変化幅の分布から見た統計的な目安（|z|≥1.5）です。";
 
+  const surpriseDetailEl = document.getElementById("d-surprise-detail");
+  if (surprise && surprise.level !== "low") {
+    surpriseDetailEl.hidden = false;
+    surpriseDetailEl.textContent = surpriseExplanation(surprise, ind);
+  } else {
+    surpriseDetailEl.hidden = true;
+    surpriseDetailEl.textContent = "";
+  }
+
   const j = ind.judgment;
   document.getElementById("d-judgment").innerHTML = j
     ? `
@@ -924,6 +985,22 @@ function drawChart() {
         padding: 4,
         borderRadius: 4,
       },
+    };
+  });
+
+  // ⚡「非常に大きな変化」（|z|≥2.5）があった点にアイコンを表示
+  computeSurpriseMarkers(ind.points, cutoff).forEach((m, i) => {
+    annotations["surprise" + i] = {
+      type: "label",
+      xScaleID: "x",
+      yScaleID: "y",
+      xValue: m.x,
+      yValue: m.y,
+      content: "⚡",
+      font: { size: 13 },
+      color: "#f59e0b",
+      yAdjust: -12,
+      padding: 0,
     };
   });
 
