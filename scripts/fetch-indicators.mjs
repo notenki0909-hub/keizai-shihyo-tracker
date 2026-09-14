@@ -206,6 +206,97 @@ function summarize(points, frequency) {
   };
 }
 
+/**
+ * 過去の変化幅（前期比相当）の分布に対して、直近の変化がどれくらい珍しいかを表すz-score。
+ * フロントエンド（main.js の computeSurprise）と同じロジック。ビルド時点のサプライズ判定に使う。
+ */
+function computeSurpriseZ(points) {
+  if (points.length < 10) return null;
+  const diffs = [];
+  for (let i = 1; i < points.length; i++) diffs.push(points[i].value - points[i - 1].value);
+  const latest = diffs.at(-1);
+  const history = diffs.slice(0, -1);
+  if (history.length < 8) return null;
+  const mean = history.reduce((a, b) => a + b, 0) / history.length;
+  const variance = history.reduce((a, b) => a + (b - mean) ** 2, 0) / history.length;
+  const sd = Math.sqrt(variance);
+  if (!Number.isFinite(sd) || sd === 0) return null;
+  return (latest - mean) / sd;
+}
+
+/**
+ * 全指標を機械的に集計し、「現在の経済状況サマリー」を生成する（ルールベース、AI不使用）。
+ * - improving/worsening: betterWhen と前期比の符号だけで判定する単純な集計（因果関係の解説はしない）
+ * - statusFindings: 目安ライン（referenceLines）に対して現在どちら側にあるかの機械的な判定
+ * - surpriseFindings: 指標自身の過去の変化幅の分布から見て、直近の変化が統計的に珍しいかどうか
+ * すべて公開統計の再集計であり、投資助言ではない旨を運用側（フロント）で明記すること。
+ */
+function buildEconSummary(indicators) {
+  let improving = 0;
+  let worsening = 0;
+  let neutralCount = 0;
+  const statusFindings = [];
+  const surpriseFindings = [];
+
+  for (const ind of indicators) {
+    const s = ind.summary;
+    if (!s) continue;
+
+    if (ind.betterWhen !== "neutral" && s.changeFromPrev != null && s.changeFromPrev !== 0) {
+      const good = s.changeFromPrev > 0 === (ind.betterWhen === "up");
+      if (good) improving++;
+      else worsening++;
+    } else {
+      neutralCount++;
+    }
+
+    if (ind.betterWhen !== "neutral") {
+      for (const line of ind.referenceLines || []) {
+        if (line.kind !== "neutral" && line.kind !== "target") continue;
+        const above = s.latest.value >= line.value;
+        const concerning = ind.betterWhen === "up" ? !above : above;
+        if (!concerning) continue;
+        // detail: 「指標名：」に続けて読める断片。text: 単独でも読める完全な文。
+        statusFindings.push({
+          id: ind.id,
+          name: ind.name,
+          category: ind.category,
+          detail: `目安「${line.label}」を${above ? "上回っており" : "下回っており"}、注意が必要な水準です。`,
+          text: `${ind.name}は現在、目安「${line.label}」を${above ? "上回って" : "下回って"}おり、注意が必要な水準です。`,
+        });
+      }
+    }
+
+    const z = computeSurpriseZ(ind.points ?? []);
+    if (z != null && Number.isFinite(z) && Math.abs(z) >= 1.5) {
+      const level = Math.abs(z) >= 2.5 ? "high" : "mid";
+      const levelWord = level === "high" ? "非常に大きな" : "やや大きな";
+      surpriseFindings.push({
+        id: ind.id,
+        name: ind.name,
+        category: ind.category,
+        z: +z.toFixed(1),
+        level,
+        detail: `${levelWord}変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=${z.toFixed(1)}）。`,
+        text: `${ind.name}で${levelWord}変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=${z.toFixed(1)}）。`,
+      });
+    }
+  }
+
+  surpriseFindings.sort((a, b) => Math.abs(b.z) - Math.abs(a.z));
+
+  const total = improving + worsening + neutralCount;
+  const headline = `${total}指標中、改善傾向が${improving}件、悪化傾向が${worsening}件、横ばい・中立が${neutralCount}件です。`;
+
+  return {
+    generatedAt: new Date().toISOString(),
+    stats: { total, improving, worsening, neutral: neutralCount, surpriseCount: surpriseFindings.length },
+    headline,
+    statusFindings: statusFindings.slice(0, 8),
+    surpriseFindings: surpriseFindings.slice(0, 6),
+  };
+}
+
 async function main() {
   await mkdir(OUT_DIR, { recursive: true });
   const out = [];
@@ -302,6 +393,7 @@ async function main() {
     indicatorCount: out.length,
     failures,
     categoryGuides: CATEGORY_GUIDES,
+    econSummary: buildEconSummary(out),
     indicators: out,
   };
 

@@ -323,6 +323,128 @@ a {
   color: var(--text-dim);
 }
 
+/* ---------- 経済状況サマリー ---------- */
+.econ-summary {
+  margin-bottom: 20px;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.econ-summary__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.econ-summary__head h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.econ-summary__updated {
+  font-size: 0.78rem;
+  color: var(--text-faint);
+}
+
+.econ-summary__headline {
+  margin: 0 0 14px;
+  font-size: 0.92rem;
+  color: var(--text-dim);
+}
+
+.econ-summary__stats {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.econ-summary__stat {
+  flex: 1;
+  min-width: 100px;
+  padding: 10px 14px;
+  background: var(--surface-2);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.econ-summary__stat b {
+  display: block;
+  font-size: 1.4rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.econ-summary__stat span {
+  font-size: 0.76rem;
+  color: var(--text-faint);
+}
+
+.econ-summary__stat--up b {
+  color: var(--pos);
+}
+
+.econ-summary__stat--down b {
+  color: var(--neg);
+}
+
+.econ-summary__block {
+  margin-top: 12px;
+}
+
+.econ-summary__block h3 {
+  margin: 0 0 6px;
+  font-size: 0.86rem;
+}
+
+.econ-summary__block ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.econ-summary__block li {
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.econ-summary__link {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.84rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 2px;
+}
+
+.econ-summary__link:hover {
+  text-decoration-color: var(--accent);
+}
+
+.econ-summary__disclaimer {
+  margin: 14px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: var(--text-faint);
+}
+
 /* ---------- release calendar ---------- */
 .calendar {
   margin-bottom: 20px;

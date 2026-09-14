@@ -475,6 +475,56 @@ function renderCategoryGuide() {
   });
 }
 
+/* ---------- 経済状況サマリー（ルールベース、AI不使用） ---------- */
+
+function renderEconSummary() {
+  const el = document.getElementById("econ-summary");
+  const sum = state.data?.econSummary;
+  if (!el || !sum) return;
+
+  const gen = new Date(sum.generatedAt);
+  const genStr = `${gen.getFullYear()}年${gen.getMonth() + 1}月${gen.getDate()}日`;
+
+  const findingRow = (f) =>
+    `<li><button type="button" class="econ-summary__link" data-id="${f.id}">${f.name}</button>：${f.detail}</li>`;
+
+  const statusHtml = sum.statusFindings.length
+    ? `<div class="econ-summary__block">
+        <h3>⚠️ 注目ポイント（目安ラインとの比較）</h3>
+        <ul>${sum.statusFindings.map(findingRow).join("")}</ul>
+      </div>`
+    : "";
+
+  const surpriseHtml = sum.surpriseFindings.length
+    ? `<div class="econ-summary__block">
+        <h3>⚡ 直近の大きな変化</h3>
+        <ul>${sum.surpriseFindings.map(findingRow).join("")}</ul>
+      </div>`
+    : "";
+
+  el.innerHTML = `
+    <div class="econ-summary__head">
+      <h2>📊 現在の経済状況サマリー</h2>
+      <span class="econ-summary__updated">最終更新：${genStr}</span>
+    </div>
+    <p class="econ-summary__headline">${sum.headline}</p>
+    <div class="econ-summary__stats">
+      <div class="econ-summary__stat econ-summary__stat--up"><b>${sum.stats.improving}</b><span>改善傾向</span></div>
+      <div class="econ-summary__stat econ-summary__stat--down"><b>${sum.stats.worsening}</b><span>悪化傾向</span></div>
+      <div class="econ-summary__stat"><b>${sum.stats.neutral}</b><span>横ばい・中立</span></div>
+    </div>
+    ${statusHtml}
+    ${surpriseHtml}
+    <p class="econ-summary__disclaimer">
+      ※ このサマリーは、各指標の前期比・目安ライン・過去の変動幅を毎日機械的に集計したものです
+      （AIによる分析ではありません）。因果関係の解説や将来予測、投資助言ではない点にご注意ください。
+    </p>`;
+
+  el.querySelectorAll(".econ-summary__link").forEach((btn) => {
+    btn.addEventListener("click", () => openDetail(btn.dataset.id));
+  });
+}
+
 /* ---------- release calendar ---------- */
 
 function shiftMonth(d, delta) {
@@ -1013,6 +1063,7 @@ async function init() {
   renderGrid();
   renderCategoryGuide();
   renderCalendar();
+  renderEconSummary();
 }
 
 init();
