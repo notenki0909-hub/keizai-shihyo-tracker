@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T11:44:36.877Z",
+  "generatedAt": "2026-09-14T13:15:52.069Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 18,
@@ -2729,11 +2729,11 @@
       "summary": {
         "latest": {
           "t": "2026-07",
-          "value": 104.7,
-          "provisional": true
+          "value": 104.4,
+          "provisional": false
         },
-        "changeFromPrev": 0.1,
-        "changeFromYearAgo": 4.2,
+        "changeFromPrev": -0.2,
+        "changeFromYearAgo": 3.9,
         "min": {
           "t": "1978-02",
           "value": 69
@@ -5076,8 +5076,7 @@
         },
         {
           "t": "2026-07",
-          "value": 104.7,
-          "provisional": true
+          "value": 104.4
         }
       ]
     },
@@ -25603,7 +25602,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-09-14",
+      "nextRelease": "2026-09-15",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -25612,12 +25611,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09-09",
-          "value": 153.12,
+          "t": "2026-09-10",
+          "value": 153.41,
           "provisional": false
         },
-        "changeFromPrev": -0.69,
-        "changeFromYearAgo": 5.89,
+        "changeFromPrev": 0.29,
+        "changeFromYearAgo": 5.9,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -25626,7 +25625,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2612,
+        "count": 2613,
         "start": "2016-01-04"
       },
       "points": [
@@ -36077,6 +36076,10 @@
         {
           "t": "2026-09-09",
           "value": 153.12
+        },
+        {
+          "t": "2026-09-10",
+          "value": 153.41
         }
       ]
     },
@@ -36101,7 +36104,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "取引時間中は常時更新。日次終値を翌営業日にかけてFRED経由で取得・反映。",
-      "nextRelease": "2026-09-11",
+      "nextRelease": "2026-09-16",
       "nextReleaseKind": "official",
       "source": {
         "provider": "FRED（セントルイス連邦準備銀行）",
@@ -36110,12 +36113,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09-10",
-          "value": 65270.95,
+          "t": "2026-09-14",
+          "value": 63492.99,
           "provisional": false
         },
-        "changeFromPrev": 128.17,
-        "changeFromYearAgo": 21433.28,
+        "changeFromPrev": -518.35,
+        "changeFromYearAgo": 18724.87,
         "min": {
           "t": "2016-06-24",
           "value": 14952.02
@@ -36124,7 +36127,7 @@
           "t": "2026-06-25",
           "value": 72366.34
         },
-        "count": 2613,
+        "count": 2615,
         "start": "2016-01-04"
       },
       "points": [
@@ -46579,6 +46582,14 @@
         {
           "t": "2026-09-10",
           "value": 65270.95
+        },
+        {
+          "t": "2026-09-11",
+          "value": 64011.34
+        },
+        {
+          "t": "2026-09-14",
+          "value": 63492.99
         }
       ]
     },
