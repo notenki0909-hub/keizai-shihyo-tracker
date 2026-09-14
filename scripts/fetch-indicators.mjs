@@ -114,6 +114,22 @@ function estimateNextRelease(ind, latestT) {
   return null; // rule.type === "fred" はFRED本体から別途取得するためここでは扱わない
 }
 
+/**
+ * 2系列から比率（分子÷分母）の時系列を計算する（例：NT倍率＝日経平均÷TOPIX）。
+ * 分母（月次想定）の各時点について、その月内で最新の分子（日次想定）の値を対応させる。
+ */
+function computeRatioSeries(numeratorPoints, denominatorPoints) {
+  const out = [];
+  for (const d of denominatorPoints) {
+    const prefix = d.t.slice(0, 7); // "YYYY-MM"
+    const candidates = numeratorPoints.filter((p) => p.t.startsWith(prefix));
+    const matched = candidates.at(-1);
+    if (!matched || !Number.isFinite(d.value) || d.value === 0) continue;
+    out.push({ t: d.t, value: +(matched.value / d.value).toFixed(3) });
+  }
+  return out;
+}
+
 async function fetchSeries(ind, { retries = 3 } = {}) {
   const { indicatorCode, cycle, rank, sa } = ind.api;
   const url =
@@ -213,6 +229,16 @@ async function main() {
           points = await fetchFredSeries(ind.api.seriesId);
           source = { provider: "FRED（セントルイス連邦準備銀行）", statName: ind.api.statName, sourceUrl: ind.api.sourceUrl };
           break;
+        case "computed-ratio": {
+          const numInd = out.find((o) => o.id === ind.api.numerator);
+          const denInd = out.find((o) => o.id === ind.api.denominator);
+          if (!numInd || !denInd) {
+            throw new Error(`比率計算に必要な指標が未取得です（${ind.api.numerator} / ${ind.api.denominator}）`);
+          }
+          points = computeRatioSeries(numInd.points, denInd.points);
+          source = { provider: "本ツールによる計算", statName: ind.api.statName };
+          break;
+        }
         default:
           points = await fetchSeries(ind);
           source = { provider: "統計ダッシュボード（e-Stat）", statName: ind.api.statName, indicatorCode: ind.api.indicatorCode };

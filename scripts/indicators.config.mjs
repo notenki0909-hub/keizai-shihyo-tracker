@@ -491,6 +491,44 @@ export const INDICATORS = [
     api: { indicatorCode: "0702020590000090010", cycle: "1", rank: "2", sa: "1", statName: "日本取引所グループ統計月報" },
   },
   {
+    id: "nt_ratio",
+    importance: 3,
+    name: "NT倍率（日経平均÷TOPIX）",
+    shortName: "NT倍率",
+    category: "為替・市場",
+    unit: "倍",
+    unitLabel: "倍（日経平均株価 ÷ TOPIX、月末値ベース）",
+    frequency: "monthly",
+    seasonalAdjustment: "原数値",
+    betterWhen: "neutral",
+    description:
+      "日経平均株価をTOPIXで割った値。両指数の相対的な強さを示す指標で、値がさ株（株価の高い" +
+      "個別銘柄）が主導する相場か、市場全体に幅広く資金が向かう相場かを判断する材料になる。" +
+      "日経平均は値がさ株の影響を強く受け、TOPIXは時価総額の大きい銘柄の影響を受けやすいという" +
+      "構成の違いから生まれる指標で、本ツールの日経平均（日次）とTOPIX（月次）から計算している。",
+    judgment: {
+      summary:
+        "NT倍率が上昇＝日経平均がTOPIXより強い＝一部の値がさ株主導の相場。下落＝TOPIXが日経平均より" +
+        "強い＝市場全体に幅広く資金が向かう相場、と読まれることが多い。水準そのものに絶対的な" +
+        "良し悪しはなく、方向とその背景が重要。",
+      goodWhen: "緩やかに推移し、値がさ株と市場全体のどちらかに極端に偏っていない状態。",
+      badWhen: "急激に変化する局面（特定の値がさ株への物色集中、またはその反動の急落）。",
+      caveat:
+        "NT倍率自体に『正しい』水準は無く、あくまで相対的な強さの目安。本ツールのTOPIXが月次データ" +
+        "のため、この指標も月次（各月内の日経平均終値のうち最新の値を採用）でしか算出できない点に注意。",
+    },
+    referenceLines: [],
+    releaseSchedule:
+      "日経平均株価（日次）とTOPIX（月次、e-Stat経由）から本ツールが計算。TOPIXの更新に依存するため、" +
+      "次回発表予定日は掲載していない。",
+    api: {
+      provider: "computed-ratio",
+      numerator: "nikkei225",
+      denominator: "topix",
+      statName: "NT倍率（日経平均株価 ÷ TOPIX、本ツールによる計算）",
+    },
+  },
+  {
     id: "foreign_investor_flow",
     importance: 5,
     name: "海外投資家 売買動向（東証プライム）",
