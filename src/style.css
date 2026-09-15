@@ -476,6 +476,30 @@ a {
   text-decoration-color: var(--accent);
 }
 
+.econ-summary__recovery {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--text-faint) 8%, transparent);
+}
+
+.econ-summary__recovery b {
+  font-size: 0.84rem;
+}
+
+.econ-summary__recovery p {
+  margin: 4px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.econ-summary__recovery--active {
+  border-color: color-mix(in srgb, var(--pos) 45%, var(--border));
+  background: color-mix(in srgb, var(--pos) 10%, transparent);
+}
+
 .econ-summary__disclaimer {
   margin: 14px 0 0;
   padding-top: 10px;

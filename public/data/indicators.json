@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T12:02:34.039Z",
+  "generatedAt": "2026-09-15T13:08:51.498Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 19,
@@ -67,7 +67,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-09-15T12:02:34.042Z",
+    "generatedAt": "2026-09-15T13:08:51.501Z",
     "stats": {
       "total": 19,
       "improving": 7,
@@ -230,7 +230,34 @@
         "detail": "やや大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=1.6）。",
         "text": "新発10年国債利回りでやや大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=1.6）。"
       }
-    ]
+    ],
+    "turningPointFindings": [
+      {
+        "id": "industrial_production",
+        "name": "鉱工業生産指数",
+        "category": "景気",
+        "turnedGood": true,
+        "detail": "直近の傾向が改善方向に転じた可能性があります（変化の向きが直前の期間から反転）。",
+        "text": "鉱工業生産指数は、直近の傾向が改善方向に転じた可能性があります（変化の向きが直前の期間から反転）。"
+      },
+      {
+        "id": "machinery_orders",
+        "name": "機械受注（船舶・電力除く民需）",
+        "category": "景気",
+        "turnedGood": true,
+        "detail": "直近の傾向が改善方向に転じた可能性があります（変化の向きが直前の期間から反転）。",
+        "text": "機械受注（船舶・電力除く民需）は、直近の傾向が改善方向に転じた可能性があります（変化の向きが直前の期間から反転）。"
+      },
+      {
+        "id": "current_account",
+        "name": "経常収支",
+        "category": "対外",
+        "turnedGood": false,
+        "detail": "直近の傾向が悪化方向に転じた可能性があります（変化の向きが直前の期間から反転）。",
+        "text": "経常収支は、直近の傾向が悪化方向に転じた可能性があります（変化の向きが直前の期間から反転）。"
+      }
+    ],
+    "recoverySignal": null
   },
   "indicators": [
     {

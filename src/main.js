@@ -565,6 +565,21 @@ function renderEconSummary() {
       </div>`
     : "";
 
+  const turningPointHtml = sum.turningPointFindings?.length
+    ? `<div class="econ-summary__block">
+        <h3>🔄 傾向の転換点</h3>
+        <ul>${sum.turningPointFindings.map(findingRow).join("")}</ul>
+      </div>`
+    : "";
+
+  const rs = sum.recoverySignal;
+  const recoveryHtml = rs
+    ? `<div class="econ-summary__recovery ${rs.active ? "econ-summary__recovery--active" : ""}">
+        <b>🌱 景気回復シグナル（${rs.count}/${rs.total}）</b>
+        <p>${rs.text}</p>
+      </div>`
+    : "";
+
   el.innerHTML = `
     <div class="econ-summary__head">
       <h2>📊 現在の経済状況サマリー</h2>
@@ -578,6 +593,8 @@ function renderEconSummary() {
     </div>
     ${statusHtml}
     ${surpriseHtml}
+    ${turningPointHtml}
+    ${recoveryHtml}
     <p class="econ-summary__disclaimer">
       ※ このサマリーは、各指標の前期比・目安ライン・過去の変動幅を毎日機械的に集計したものです
       （AIによる分析ではありません）。因果関係の解説や将来予測、投資助言ではない点にご注意ください。

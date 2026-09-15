@@ -207,6 +207,30 @@ function summarize(points, frequency) {
 }
 
 /**
+ * 直近期間の変化幅の平均と、その直前期間の変化幅の平均を比べ、符号（プラス/マイナス）が
+ * 反転した「転換点」を検知する。単発のノイズに惑わされないよう、単純な前期比ではなく
+ * 直近複数期間の平均同士を比較する。窓の大きさは発表頻度によって変える
+ * （日次はノイズが大きいため長め、四半期はデータが少ないため短め）。
+ */
+const TURNING_POINT_WINDOW = { daily: 10, weekly: 4, monthly: 3, quarterly: 2 };
+
+function computeTurningPoint(points, frequency) {
+  const window = TURNING_POINT_WINDOW[frequency] ?? 3;
+  if (points.length < window * 2 + 1) return null;
+  const diffs = [];
+  for (let i = 1; i < points.length; i++) diffs.push(points[i].value - points[i - 1].value);
+  if (diffs.length < window * 2) return null;
+  const recent = diffs.slice(-window);
+  const prior = diffs.slice(-window * 2, -window);
+  const avg = (arr) => arr.reduce((a, b) => a + b, 0) / arr.length;
+  const recentAvg = avg(recent);
+  const priorAvg = avg(prior);
+  if (recentAvg === 0 || priorAvg === 0) return null;
+  if (Math.sign(recentAvg) === Math.sign(priorAvg)) return null;
+  return { recentAvg, priorAvg, direction: recentAvg > 0 ? "up" : "down" };
+}
+
+/**
  * 過去の変化幅（前期比相当）の分布に対して、直近の変化がどれくらい珍しいかを表すz-score。
  * フロントエンド（main.js の computeSurprise）と同じロジック。ビルド時点のサプライズ判定に使う。
  */
@@ -225,10 +249,21 @@ function computeSurpriseZ(points) {
 }
 
 /**
+ * 「景気回復シグナル」の機械判定に使う4指標（米国版限定）。新規失業保険申請件数・JOLTS求人件数・
+ * 長短金利差・S&P500は、いずれも景気回復局面で先行して改善するとされる代表的な指標の組み合わせ
+ * （Web調査に基づく）。日本版にはこれらに相当する指標が存在しないため、該当指標が4つとも揃わない
+ * ため常に null になる（このファイルを分岐させる必要がない設計。共通ロジックとして残している）。
+ */
+const RECOVERY_SIGNAL_IDS = ["jobless_claims_us", "job_openings_us", "yield_curve_spread_us", "sp500_us"];
+
+/**
  * 全指標を機械的に集計し、「現在の経済状況サマリー」を生成する（ルールベース、AI不使用）。
  * - improving/worsening: betterWhen と前期比の符号だけで判定する単純な集計（因果関係の解説はしない）
  * - statusFindings: 目安ライン（referenceLines）に対して現在どちら側にあるかの機械的な判定
  * - surpriseFindings: 指標自身の過去の変化幅の分布から見て、直近の変化が統計的に珍しいかどうか
+ * - turningPointFindings: 直近の変化の向きが、その直前の期間から反転したかどうか（改善→悪化／
+ *   悪化→改善のどちらも対等に扱う。どちらを優先すべきかという価値判断はしない）
+ * - recoverySignal: 米国版限定の4指標コンボ判定。日本版には該当指標がないため常に null
  * すべて公開統計の再集計であり、投資助言ではない旨を運用側（フロント）で明記すること。
  */
 function buildEconSummary(indicators) {
@@ -240,14 +275,18 @@ function buildEconSummary(indicators) {
   const neutralList = [];
   const statusFindings = [];
   const surpriseFindings = [];
+  const turningPointFindings = [];
+  const byId = new Map();
 
   for (const ind of indicators) {
     const s = ind.summary;
     if (!s) continue;
 
     const nameEntry = { id: ind.id, name: ind.name, category: ind.category };
+    let isImproving = null;
     if (ind.betterWhen !== "neutral" && s.changeFromPrev != null && s.changeFromPrev !== 0) {
       const good = s.changeFromPrev > 0 === (ind.betterWhen === "up");
+      isImproving = good;
       if (good) {
         improving++;
         improvingList.push(nameEntry);
@@ -259,6 +298,7 @@ function buildEconSummary(indicators) {
       neutralCount++;
       neutralList.push(nameEntry);
     }
+    byId.set(ind.id, { name: ind.name, isImproving });
 
     if (ind.betterWhen !== "neutral") {
       for (const line of ind.referenceLines || []) {
@@ -273,6 +313,20 @@ function buildEconSummary(indicators) {
           category: ind.category,
           detail: `目安「${line.label}」を${above ? "上回っており" : "下回っており"}、注意が必要な水準です。`,
           text: `${ind.name}は現在、目安「${line.label}」を${above ? "上回って" : "下回って"}おり、注意が必要な水準です。`,
+        });
+      }
+
+      const tp = computeTurningPoint(ind.points ?? [], ind.frequency);
+      if (tp) {
+        const turnedGood = tp.direction === "up" === (ind.betterWhen === "up");
+        const word = turnedGood ? "改善" : "悪化";
+        turningPointFindings.push({
+          id: ind.id,
+          name: ind.name,
+          category: ind.category,
+          turnedGood,
+          detail: `直近の傾向が${word}方向に転じた可能性があります（変化の向きが直前の期間から反転）。`,
+          text: `${ind.name}は、直近の傾向が${word}方向に転じた可能性があります（変化の向きが直前の期間から反転）。`,
         });
       }
     }
@@ -298,6 +352,24 @@ function buildEconSummary(indicators) {
   const total = improving + worsening + neutralCount;
   const headline = `${total}指標中、改善傾向が${improving}件、悪化傾向が${worsening}件、横ばい・中立が${neutralCount}件です。`;
 
+  let recoverySignal = null;
+  const recoveryEntries = RECOVERY_SIGNAL_IDS.map((id) => byId.get(id)).filter(Boolean);
+  if (recoveryEntries.length === RECOVERY_SIGNAL_IDS.length) {
+    const improvingCount = recoveryEntries.filter((e) => e.isImproving === true).length;
+    const active = improvingCount >= 3;
+    recoverySignal = {
+      active,
+      count: improvingCount,
+      total: RECOVERY_SIGNAL_IDS.length,
+      names: recoveryEntries.map((e) => e.name),
+      text: active
+        ? `景気回復に関連するとされる4指標（${recoveryEntries.map((e) => e.name).join("・")}）のうち` +
+          `${improvingCount}件が同時に改善方向にあり、景気回復を示唆するシグナルが重なっています。`
+        : `景気回復に関連するとされる4指標のうち、同時に改善方向にあるのは${improvingCount}件にとどまり、` +
+          `明確な回復シグナルの重なりは見られません。`,
+    };
+  }
+
   return {
     generatedAt: new Date().toISOString(),
     stats: { total, improving, worsening, neutral: neutralCount, surpriseCount: surpriseFindings.length },
@@ -307,6 +379,8 @@ function buildEconSummary(indicators) {
     neutralList,
     statusFindings: statusFindings.slice(0, 8),
     surpriseFindings: surpriseFindings.slice(0, 6),
+    turningPointFindings: turningPointFindings.slice(0, 8),
+    recoverySignal,
   };
 }
 
