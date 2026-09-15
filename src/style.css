@@ -476,6 +476,62 @@ a {
   text-decoration-color: var(--accent);
 }
 
+.econ-summary__momentum-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.econ-summary__momentum-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.econ-summary__momentum-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.econ-summary__momentum-pct {
+  flex-shrink: 0;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-faint);
+}
+
+.econ-summary__momentum-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text-faint) 20%, transparent);
+  overflow: hidden;
+}
+
+.econ-summary__momentum-fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.econ-summary__momentum-fill--up {
+  background: var(--pos);
+}
+
+.econ-summary__momentum-fill--down {
+  background: var(--neg);
+}
+
+.econ-summary__momentum-detail {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
 .econ-summary__recovery {
   margin-top: 12px;
   padding: 10px 12px;

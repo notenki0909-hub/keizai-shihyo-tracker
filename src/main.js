@@ -572,6 +572,25 @@ function renderEconSummary() {
       </div>`
     : "";
 
+  const momentumRow = (f) => `
+    <li class="econ-summary__momentum-item">
+      <div class="econ-summary__momentum-head">
+        <button type="button" class="econ-summary__link" data-id="${f.id}">${f.name}</button>
+        <span class="econ-summary__momentum-pct">転換まで${f.proximity}%</span>
+      </div>
+      <div class="econ-summary__momentum-bar">
+        <div class="econ-summary__momentum-fill econ-summary__momentum-fill--${f.currentlyGood ? "up" : "down"}" style="width:${f.proximity}%"></div>
+      </div>
+      <p class="econ-summary__momentum-detail">${f.detail}</p>
+    </li>`;
+
+  const momentumHtml = sum.momentumFindings?.length
+    ? `<div class="econ-summary__block">
+        <h3>🌡️ 転換の気配（勢いの変化）</h3>
+        <ul class="econ-summary__momentum-list">${sum.momentumFindings.map(momentumRow).join("")}</ul>
+      </div>`
+    : "";
+
   const rs = sum.recoverySignal;
   const recoveryHtml = rs
     ? `<div class="econ-summary__recovery ${rs.active ? "econ-summary__recovery--active" : ""}">
@@ -602,6 +621,7 @@ function renderEconSummary() {
     ${statusHtml}
     ${surpriseHtml}
     ${turningPointHtml}
+    ${momentumHtml}
     ${recoveryHtml}
     ${recessionHtml}
     <p class="econ-summary__disclaimer">

@@ -226,8 +226,11 @@ function computeTurningPoint(points, frequency) {
   const recentAvg = avg(recent);
   const priorAvg = avg(prior);
   if (recentAvg === 0 || priorAvg === 0) return null;
-  if (Math.sign(recentAvg) === Math.sign(priorAvg)) return null;
-  return { recentAvg, priorAvg, direction: recentAvg > 0 ? "up" : "down" };
+  const flipped = Math.sign(recentAvg) !== Math.sign(priorAvg);
+  // momentumRatio: 符号が同じ（まだ転換していない）場合の「勢いの残り具合」。
+  // 1に近いほど直前期間から変わっていない、0に近いほど転換点（符号の反転）に近づいている。
+  const momentumRatio = recentAvg / priorAvg;
+  return { recentAvg, priorAvg, direction: recentAvg > 0 ? "up" : "down", flipped, momentumRatio };
 }
 
 /**
@@ -265,6 +268,7 @@ const RECOVERY_SIGNAL_IDS = ["jobless_claims_us", "job_openings_us", "yield_curv
  */
 const RECESSION_SIGNAL_IDS = ["sahm_rule_us", "yield_curve_spread_us", "vix_us", "jobless_claims_us"];
 const COMBO_ACTIVE_THRESHOLD = 3; // 4指標中3件以上で「シグナルが重なっている」と判定（回復・後退で共通）
+const MOMENTUM_RATIO_THRESHOLD = 0.6; // 勢い（momentumRatio）がこれ未満まで弱まったら「気配あり」
 
 /**
  * 全指標を機械的に集計し、「現在の経済状況サマリー」を生成する（ルールベース、AI不使用）。
@@ -273,6 +277,8 @@ const COMBO_ACTIVE_THRESHOLD = 3; // 4指標中3件以上で「シグナルが�
  * - surpriseFindings: 指標自身の過去の変化幅の分布から見て、直近の変化が統計的に珍しいかどうか
  * - turningPointFindings: 直近の変化の向きが、その直前の期間から反転したかどうか（改善→悪化／
  *   悪化→改善のどちらも対等に扱う。どちらを優先すべきかという価値判断はしない）
+ * - momentumFindings: まだ転換していないが、直近の勢いが直前期間よりMOMENTUM_RATIO_THRESHOLD未満まで
+ *   弱まっている指標（転換の「気配」）。0〜100%の近さ（proximity）をフロントでバー表示する
  * - recoverySignal / recessionSignal: いずれも米国版限定の4指標コンボ判定。日本版には該当指標が
  *   ないため常に null になる
  * すべて公開統計の再集計であり、投資助言ではない旨を運用側（フロント）で明記すること。
@@ -287,6 +293,7 @@ function buildEconSummary(indicators) {
   const statusFindings = [];
   const surpriseFindings = [];
   const turningPointFindings = [];
+  const momentumFindings = [];
   const byId = new Map();
 
   for (const ind of indicators) {
@@ -330,7 +337,7 @@ function buildEconSummary(indicators) {
       }
 
       const tp = computeTurningPoint(ind.points ?? [], ind.frequency);
-      if (tp) {
+      if (tp?.flipped) {
         const turnedGood = tp.direction === "up" === (ind.betterWhen === "up");
         const word = turnedGood ? "改善" : "悪化";
         turningPointFindings.push({
@@ -340,6 +347,24 @@ function buildEconSummary(indicators) {
           turnedGood,
           detail: `直近の傾向が${word}方向に転じた可能性があります（変化の向きが直前の期間から反転）。`,
           text: `${ind.name}は、直近の傾向が${word}方向に転じた可能性があります（変化の向きが直前の期間から反転）。`,
+        });
+      } else if (tp && tp.momentumRatio < MOMENTUM_RATIO_THRESHOLD) {
+        // まだ転換はしていないが、勢いが弱まっている＝転換の「気配」。
+        // proximity: 0〜100（100に近いほど転換点に近い）。フロントでバー表示に使う。
+        const proximity = Math.round((1 - tp.momentumRatio) * 100);
+        const currentlyGood = tp.direction === "up" === (ind.betterWhen === "up");
+        const trendWord = currentlyGood ? "改善" : "悪化";
+        const cautionWord = currentlyGood
+          ? "改善の勢いが鈍化しており、今後の反転に注意が必要です"
+          : "悪化の勢いが鈍化しており、改善に転じる兆しの可能性があります";
+        momentumFindings.push({
+          id: ind.id,
+          name: ind.name,
+          category: ind.category,
+          proximity,
+          currentlyGood,
+          detail: `現在は${trendWord}方向ですが、直近の勢いが直前期間の${Math.round(tp.momentumRatio * 100)}%まで弱まっています。${cautionWord}。`,
+          text: `${ind.name}は現在${trendWord}方向ですが、直近の勢いが直前期間の${Math.round(tp.momentumRatio * 100)}%まで弱まっています。${cautionWord}。`,
         });
       }
     }
@@ -361,6 +386,7 @@ function buildEconSummary(indicators) {
   }
 
   surpriseFindings.sort((a, b) => Math.abs(b.z) - Math.abs(a.z));
+  momentumFindings.sort((a, b) => b.proximity - a.proximity);
 
   const total = improving + worsening + neutralCount;
   const headline = `${total}指標中、改善傾向が${improving}件、悪化傾向が${worsening}件、横ばい・中立が${neutralCount}件です。`;
@@ -411,6 +437,7 @@ function buildEconSummary(indicators) {
     statusFindings: statusFindings.slice(0, 8),
     surpriseFindings: surpriseFindings.slice(0, 6),
     turningPointFindings: turningPointFindings.slice(0, 8),
+    momentumFindings: momentumFindings.slice(0, 6),
     recoverySignal,
     recessionSignal,
   };
