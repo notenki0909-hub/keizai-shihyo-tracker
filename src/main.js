@@ -545,11 +545,11 @@ function renderEconSummary() {
     return `<button type="button" class="econ-summary__name-chip" data-id="${item.id}" title="${title}">${item.name}</button>`;
   };
 
-  const group = (label, list, modifier) => `
+  const group = (label, list, modifier, basis) => `
     <div class="econ-summary__group econ-summary__group--${modifier}">
       <div class="econ-summary__group-head">
         <b>${list.length}</b><span>${label}</span>
-        <span class="econ-summary__group-basis">（前回の数値と比べて）</span>
+        ${basis ? `<span class="econ-summary__group-basis">${basis}</span>` : ""}
       </div>
       <div class="econ-summary__names">
         ${list.length ? list.map(nameChip).join("") : '<span class="econ-summary__names-empty">該当なし</span>'}
@@ -640,9 +640,9 @@ function renderEconSummary() {
     </div>
     <p class="econ-summary__headline">${sum.headline}</p>
     <div class="econ-summary__groups">
-      ${group("改善傾向", sum.improvingList, "up")}
-      ${group("悪化傾向", sum.worseningList, "down")}
-      ${group("横ばい・中立", sum.neutralList, "neutral")}
+      ${group("改善傾向", sum.improvingList, "up", "（前回の数値と比べて）")}
+      ${group("悪化傾向", sum.worseningList, "down", "（前回の数値と比べて）")}
+      ${group("横ばい・中立", sum.neutralList, "neutral", "（前回から不変、または良し悪しの方向がない指標）")}
     </div>
     ${statusHtml}
     ${surpriseHtml}
