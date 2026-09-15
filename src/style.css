@@ -389,8 +389,10 @@ a {
   color: var(--text-faint);
 }
 
-.econ-summary__group-head .econ-summary__group-basis {
+.econ-summary__group-basis {
   font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-faint);
   opacity: 0.75;
 }
 

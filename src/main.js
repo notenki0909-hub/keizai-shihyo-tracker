@@ -582,9 +582,20 @@ function renderEconSummary() {
       <p class="econ-summary__momentum-detail">${f.detail}</p>
     </li>`;
 
+  const continuingHtml = sum.continuingImprovingList
+    ? `<div class="econ-summary__block">
+        <h3>🔁 直近の傾向（継続中）</h3>
+        <div class="econ-summary__groups">
+          ${group("改善継続", sum.continuingImprovingList, "up", "（直近複数期間の平均的な傾向）")}
+          ${group("悪化継続", sum.continuingWorseningList, "down", "（直近複数期間の平均的な傾向）")}
+          ${group("横ばい・中立", sum.continuingNeutralList, "neutral", "（直近複数期間で明確な傾向がない、または良し悪しの方向がない指標）")}
+        </div>
+      </div>`
+    : "";
+
   const turningSignalHtml = sum.turningSignalFindings?.length
     ? `<div class="econ-summary__block">
-        <h3>🔄 転換シグナル</h3>
+        <h3>🔄 転換シグナル <span class="econ-summary__group-basis">（直近複数期間の平均的な傾向）</span></h3>
         <ul class="econ-summary__momentum-list">${sum.turningSignalFindings.map(turningSignalRow).join("")}</ul>
       </div>`
     : "";
@@ -644,9 +655,10 @@ function renderEconSummary() {
       ${group("悪化傾向", sum.worseningList, "down", "（前回の数値と比べて）")}
       ${group("横ばい・中立", sum.neutralList, "neutral", "（前回から不変、または良し悪しの方向がない指標）")}
     </div>
+    ${continuingHtml}
+    ${turningSignalHtml}
     ${statusHtml}
     ${surpriseHtml}
-    ${turningSignalHtml}
     ${recoveryHtml}
     ${recessionHtml}
     ${leadingRecoveryHtml}

@@ -447,6 +447,26 @@ function buildEconSummary(indicators) {
   surpriseFindings.sort((a, b) => Math.abs(b.z) - Math.abs(a.z));
   turningSignalFindings.sort((a, b) => b.proximity - a.proximity);
 
+  // 「直近の傾向（継続中）」：転換シグナルに載っている指標（転換済み・気配あり）を除いた残りを、
+  // 複数期間平均の傾向（trendFavorable）で改善継続／悪化継続／横ばい・中立に分類する。
+  // 改善/悪化の内訳（単純な前期比較）と対になる、複数期間ベースの内訳。
+  const turningIds = new Set(turningSignalFindings.map((f) => f.id));
+  const continuingImprovingList = [];
+  const continuingWorseningList = [];
+  const continuingNeutralList = [];
+  for (const ind of indicators) {
+    if (!ind.summary || turningIds.has(ind.id)) continue;
+    const nameEntry = { id: ind.id, name: ind.name, category: ind.category };
+    const entry = byId.get(ind.id);
+    if (ind.betterWhen === "neutral" || entry?.trendFavorable == null) {
+      continuingNeutralList.push(nameEntry);
+    } else if (entry.trendFavorable) {
+      continuingImprovingList.push(nameEntry);
+    } else {
+      continuingWorseningList.push(nameEntry);
+    }
+  }
+
   const total = improving + worsening + neutralCount;
   const headline = `${total}指標中、改善傾向が${improving}件、悪化傾向が${worsening}件、横ばい・中立が${neutralCount}件です。`;
 
@@ -557,6 +577,9 @@ function buildEconSummary(indicators) {
     improvingList,
     worseningList,
     neutralList,
+    continuingImprovingList,
+    continuingWorseningList,
+    continuingNeutralList,
     statusFindings: statusFindings.slice(0, 8),
     surpriseFindings: surpriseFindings.slice(0, 6),
     turningSignalFindings: turningSignalFindings.slice(0, 10),
