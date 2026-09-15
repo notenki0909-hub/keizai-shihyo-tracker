@@ -584,7 +584,7 @@ function renderEconSummary() {
 
   const continuingHtml = sum.continuingImprovingList
     ? `<div class="econ-summary__block">
-        <h3>🔁 期間でみた傾向（継続中）</h3>
+        <h3>🔁 トレンドの向き（継続中）</h3>
         <div class="econ-summary__groups">
           ${group("改善継続", sum.continuingImprovingList, "up", "（直近複数期間の平均的な傾向）")}
           ${group("悪化継続", sum.continuingWorseningList, "down", "（直近複数期間の平均的な傾向）")}
@@ -595,7 +595,7 @@ function renderEconSummary() {
 
   const turningSignalHtml = sum.turningSignalFindings?.length
     ? `<div class="econ-summary__block">
-        <h3>🔄 転換シグナル <span class="econ-summary__group-basis">（直近複数期間の平均的な傾向）</span></h3>
+        <h3>🔄 トレンド転換シグナル <span class="econ-summary__group-basis">（直近複数期間の平均的な傾向）</span></h3>
         <ul class="econ-summary__momentum-list">${sum.turningSignalFindings.map(turningSignalRow).join("")}</ul>
       </div>`
     : "";

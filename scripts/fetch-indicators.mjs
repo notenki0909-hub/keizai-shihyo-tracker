@@ -528,7 +528,7 @@ function buildEconSummary(indicators) {
   const leadingEntries = JP_LEADING_SIGNAL_IDS.map((id) => byId.get(id)).filter(Boolean);
   const leadingCaveat =
     "先行指標のみで構成しているため、実際に生産・雇用へ波及する前の“気配”の段階です。" +
-    "一致・遅行指標（⚠️注目ポイント・🔄転換シグナル）で裏付けを確認してください。";
+    "一致・遅行指標（⚠️注目ポイント・🔄トレンド転換シグナル）で裏付けを確認してください。";
   if (leadingEntries.length === JP_LEADING_SIGNAL_IDS.length) {
     const leadingNames = leadingEntries.map((e) => e.name).join("・");
     const favorableCount = leadingEntries.filter((e) => e.trendFavorable === true).length;
