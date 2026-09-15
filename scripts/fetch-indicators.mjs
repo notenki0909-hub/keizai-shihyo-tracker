@@ -396,16 +396,23 @@ function buildEconSummary(indicators) {
   if (recoveryEntries.length === RECOVERY_SIGNAL_IDS.length) {
     const improvingCount = recoveryEntries.filter((e) => e.isImproving === true).length;
     const active = improvingCount >= COMBO_ACTIVE_THRESHOLD;
+    const recoveryNames = recoveryEntries.map((e) => e.name).join("・");
     recoverySignal = {
       active,
       count: improvingCount,
       total: RECOVERY_SIGNAL_IDS.length,
-      names: recoveryEntries.map((e) => e.name),
+      // items: 4指標それぞれの現在の寄与状況（サマリー上でチップとして常に表示し、
+      // 「4指標とは何か」が非発動時にも分かるようにする）
+      items: RECOVERY_SIGNAL_IDS.map((id, i) => ({
+        id,
+        name: recoveryEntries[i].name,
+        contributing: recoveryEntries[i].isImproving === true,
+      })),
       text: active
-        ? `景気回復に関連するとされる4指標（${recoveryEntries.map((e) => e.name).join("・")}）のうち` +
+        ? `景気回復に関連するとされる4指標（${recoveryNames}）のうち` +
           `${improvingCount}件が同時に改善方向にあり、景気回復を示唆するシグナルが重なっています。`
-        : `景気回復に関連するとされる4指標のうち、同時に改善方向にあるのは${improvingCount}件にとどまり、` +
-          `明確な回復シグナルの重なりは見られません。`,
+        : `景気回復に関連するとされる4指標（${recoveryNames}）のうち、` +
+          `同時に改善方向にあるのは${improvingCount}件にとどまり、明確な回復シグナルの重なりは見られません。`,
     };
   }
 
@@ -414,16 +421,21 @@ function buildEconSummary(indicators) {
   if (recessionEntries.length === RECESSION_SIGNAL_IDS.length) {
     const concerningCount = recessionEntries.filter((e) => e.isConcerning).length;
     const active = concerningCount >= COMBO_ACTIVE_THRESHOLD;
+    const recessionNames = recessionEntries.map((e) => e.name).join("・");
     recessionSignal = {
       active,
       count: concerningCount,
       total: RECESSION_SIGNAL_IDS.length,
-      names: recessionEntries.map((e) => e.name),
+      items: RECESSION_SIGNAL_IDS.map((id, i) => ({
+        id,
+        name: recessionEntries[i].name,
+        contributing: recessionEntries[i].isConcerning,
+      })),
       text: active
-        ? `景気後退の警戒シグナルとされる4指標（${recessionEntries.map((e) => e.name).join("・")}）のうち` +
+        ? `景気後退の警戒シグナルとされる4指標（${recessionNames}）のうち` +
           `${concerningCount}件が同時に警戒水準にあり、後退リスクを示すシグナルが重なっています。`
-        : `景気後退の警戒シグナルとされる4指標のうち、同時に警戒水準にあるのは${concerningCount}件にとどまり、` +
-          `明確な後退警戒シグナルの重なりは見られません。`,
+        : `景気後退の警戒シグナルとされる4指標（${recessionNames}）のうち、` +
+          `同時に警戒水準にあるのは${concerningCount}件にとどまり、明確な後退警戒シグナルの重なりは見られません。`,
     };
   }
 

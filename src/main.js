@@ -591,11 +591,20 @@ function renderEconSummary() {
       </div>`
     : "";
 
+  const comboItems = (items, kind) =>
+    items
+      .map(
+        (it) =>
+          `<button type="button" class="econ-summary__combo-chip ${it.contributing ? `econ-summary__combo-chip--${kind}` : ""}" data-id="${it.id}">${it.contributing ? "✓" : "・"} ${it.name}</button>`
+      )
+      .join("");
+
   const rs = sum.recoverySignal;
   const recoveryHtml = rs
     ? `<div class="econ-summary__recovery ${rs.active ? "econ-summary__recovery--active" : ""}">
         <b>🌱 景気回復シグナル（${rs.count}/${rs.total}）</b>
         <p>${rs.text}</p>
+        <div class="econ-summary__combo-items">${comboItems(rs.items, "up")}</div>
       </div>`
     : "";
 
@@ -604,6 +613,7 @@ function renderEconSummary() {
     ? `<div class="econ-summary__recovery ${recSig.active ? "econ-summary__recovery--warning" : ""}">
         <b>🚨 景気後退警戒コンボ（${recSig.count}/${recSig.total}）</b>
         <p>${recSig.text}</p>
+        <div class="econ-summary__combo-items">${comboItems(recSig.items, "down")}</div>
       </div>`
     : "";
 
@@ -629,7 +639,7 @@ function renderEconSummary() {
       （AIによる分析ではありません）。因果関係の解説や将来予測、投資助言ではない点にご注意ください。
     </p>`;
 
-  el.querySelectorAll(".econ-summary__link, .econ-summary__name-chip").forEach((btn) => {
+  el.querySelectorAll(".econ-summary__link, .econ-summary__name-chip, .econ-summary__combo-chip").forEach((btn) => {
     btn.addEventListener("click", () => openDetail(btn.dataset.id));
   });
 }

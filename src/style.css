@@ -561,6 +561,38 @@ a {
   background: color-mix(in srgb, var(--neg) 10%, transparent);
 }
 
+.econ-summary__combo-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.econ-summary__combo-chip {
+  border: 1px solid var(--border);
+  background: none;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 0.76rem;
+  color: var(--text-faint);
+  cursor: pointer;
+}
+
+.econ-summary__combo-chip:hover {
+  color: var(--text);
+  border-color: var(--text-faint);
+}
+
+.econ-summary__combo-chip--up {
+  border-color: color-mix(in srgb, var(--pos) 45%, var(--border));
+  color: var(--pos);
+}
+
+.econ-summary__combo-chip--down {
+  border-color: color-mix(in srgb, var(--neg) 45%, var(--border));
+  color: var(--neg);
+}
+
 .econ-summary__disclaimer {
   margin: 14px 0 0;
   padding-top: 10px;

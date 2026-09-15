@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T13:10:16.230Z",
+  "generatedAt": "2026-09-15T13:30:37.749Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 19,
@@ -67,7 +67,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-09-15T13:10:16.232Z",
+    "generatedAt": "2026-09-15T13:30:37.753Z",
     "stats": {
       "total": 19,
       "improving": 7,
