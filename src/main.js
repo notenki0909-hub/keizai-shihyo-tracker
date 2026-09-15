@@ -547,7 +547,10 @@ function renderEconSummary() {
 
   const group = (label, list, modifier) => `
     <div class="econ-summary__group econ-summary__group--${modifier}">
-      <div class="econ-summary__group-head"><b>${list.length}</b><span>${label}</span></div>
+      <div class="econ-summary__group-head">
+        <b>${list.length}</b><span>${label}</span>
+        <span class="econ-summary__group-basis">（前回の数値と比べて）</span>
+      </div>
       <div class="econ-summary__names">
         ${list.length ? list.map(nameChip).join("") : '<span class="econ-summary__names-empty">該当なし</span>'}
       </div>

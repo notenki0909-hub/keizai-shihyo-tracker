@@ -389,6 +389,11 @@ a {
   color: var(--text-faint);
 }
 
+.econ-summary__group-head .econ-summary__group-basis {
+  font-size: 0.72rem;
+  opacity: 0.75;
+}
+
 .econ-summary__group--up .econ-summary__group-head b {
   color: var(--pos);
 }
