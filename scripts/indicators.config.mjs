@@ -136,6 +136,34 @@ export const INDICATORS = [
     api: { indicatorCode: "0701030000000010010", cycle: "1", rank: "2", sa: "2", statName: "機械受注統計調査" },
   },
   {
+    id: "housing_starts",
+    importance: 2,
+    name: "新設住宅着工戸数",
+    shortName: "住宅着工戸数",
+    category: "景気",
+    unit: "戸",
+    unitLabel: "戸（季節調整値）",
+    frequency: "monthly",
+    seasonalAdjustment: "季節調整値",
+    betterWhen: "up",
+    description:
+      "新築・増築・改築によって新たに着工された住宅の戸数。国土交通省『住宅着工統計』による。" +
+      "住宅投資（設備投資に並ぶGDPの構成要素）は金利の変化に敏感に反応するため、内閣府の景気動向指数では" +
+      "『先行指数』の構成系列に位置づけられる代表的な先行指標。",
+    judgment: {
+      summary: "前月比・前年比のプラスマイナスで住宅投資意欲の拡大・縮小を判断する。単月の振れが大きいため、数か月の流れで見る。",
+      goodWhen: "数か月連続で底堅く推移している状態（住宅投資の底堅さは個人消費の先行きにも波及しやすい）。",
+      badWhen: "数か月連続で減少傾向にある状態（住宅ローン金利の上昇・先行き不安のサイン）。",
+      caveat:
+        "分譲マンション等は1件あたりの戸数が大きいため、大型物件の着工タイミング次第で単月の振れが大きくなりやすい。" +
+        "持家・貸家・分譲住宅の内訳を見るとより正確な実態が分かる。",
+    },
+    referenceLines: [],
+    releaseSchedule: "国土交通省が対象月の翌月末ごろに公表。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 30 },
+    api: { indicatorCode: "0802010103000010000", cycle: "1", rank: "2", sa: "2", statName: "住宅着工統計調査（建築着工統計調査）" },
+  },
+  {
     id: "cpi_core_yoy",
     importance: 5,
     name: "コアCPI（生鮮食品除く総合）",
@@ -244,6 +272,35 @@ export const INDICATORS = [
     releaseSchedule: "厚生労働省が対象月の翌月末ごろ8:30に公表（完全失業率と同日）。",
     nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 30 },
     api: { indicatorCode: "0301020001000010010", cycle: "1", rank: "2", sa: "2", statName: "一般職業紹介状況" },
+  },
+  {
+    id: "new_job_openings_ratio",
+    importance: 2,
+    name: "新規求人倍率",
+    shortName: "新規求人倍率",
+    category: "雇用・所得",
+    unit: "倍",
+    unitLabel: "倍",
+    frequency: "monthly",
+    seasonalAdjustment: "季節調整値",
+    betterWhen: "up",
+    description:
+      "期間中に新たに受け付けた求人数を、新たに受け付けた求職申込件数で割った値。厚生労働省『一般職業紹介状況』による。" +
+      "既存の『有効求人倍率』が過去からの累積（ストック）ベースなのに対し、こちらはその月の新規の動き（フロー）だけを見るため、" +
+      "企業の採用意欲の変化をより速く捉える。内閣府の景気動向指数でも『先行指数』の構成系列（新規求人数）に位置づけられている。",
+    judgment: {
+      summary:
+        "有効求人倍率と同様、1.0倍が需要と供給の目安になるが、フロー指標のため月々の振れが大きく、水準そのものより前月比・前年比の方向性を見る。",
+      goodWhen: "上昇基調が続いている状態（企業が新規採用に前向き）。",
+      badWhen: "低下基調が続いている状態（採用の手控えが広がり始めているサイン。有効求人倍率より早く反応しやすい）。",
+      caveat:
+        "新規求人数・新規求職申込件数それぞれの動きを分解しないと、『求人が減ったのか』『求職者が増えたのか』を取り違えることがある。" +
+        "既存の有効求人倍率と合わせて見ると、ストックとフローの両面から雇用需給を確認できる。",
+    },
+    referenceLines: [],
+    releaseSchedule: "厚生労働省が対象月の翌月末ごろ8:30に公表（有効求人倍率・完全失業率と同日）。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 30 },
+    api: { indicatorCode: "0301020002000010010", cycle: "1", rank: "2", sa: "2", statName: "一般職業紹介状況" },
   },
   {
     id: "real_wage_index_yoy",

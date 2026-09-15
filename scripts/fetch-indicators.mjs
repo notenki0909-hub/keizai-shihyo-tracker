@@ -271,16 +271,31 @@ const COMBO_ACTIVE_THRESHOLD = 3; // 4指標中3件以上で「シグナルが�
 const MOMENTUM_RATIO_THRESHOLD = 0.6; // 勢い（momentumRatio）がこれ未満まで弱まったら「気配あり」
 
 /**
+ * 「先行指標コンボ」の機械判定に使う4指標（日本版限定）。内閣府が公式に「先行指数」の構成系列として
+ * 認定している概念に対応する指標（機械受注・新設住宅着工戸数・新規求人倍率・東証株価＝日経平均株価で代替）
+ * のみで構成している。ユーザーから「景気の転換を判断するには先行指標の優先度が高いのでは」と指摘され、
+ * 一致・遅行指標（完全失業率・有効求人倍率・鉱工業生産指数等）は意図的に除外した。
+ * 米国版の回復/後退コンボと異なり、日本版は同じ4指標をそのまま使い回して「改善方向」「悪化方向」の
+ * 両方を対称に判定する（先行指標のみで揃えたため、回復専用・後退専用で指標を変える理由がないため）。
+ * 米国版とは異なり isImproving（単発の前期比）ではなく、computeTurningPointの複数期間平均に基づく
+ * trendFavorable（ノイズに強い）で判定する。単発の振れに反応しやすいという先行指標のみで組む際の弱点を
+ * 緩和するため。
+ */
+const JP_LEADING_SIGNAL_IDS = ["machinery_orders", "housing_starts", "new_job_openings_ratio", "nikkei225"];
+
+/**
  * 全指標を機械的に集計し、「現在の経済状況サマリー」を生成する（ルールベース、AI不使用）。
  * - improving/worsening: betterWhen と前期比の符号だけで判定する単純な集計（因果関係の解説はしない）
  * - statusFindings: 目安ライン（referenceLines）に対して現在どちら側にあるかの機械的な判定
  * - surpriseFindings: 指標自身の過去の変化幅の分布から見て、直近の変化が統計的に珍しいかどうか
- * - turningPointFindings: 直近の変化の向きが、その直前の期間から反転したかどうか（改善→悪化／
- *   悪化→改善のどちらも対等に扱う。どちらを優先すべきかという価値判断はしない）
- * - momentumFindings: まだ転換していないが、直近の勢いが直前期間よりMOMENTUM_RATIO_THRESHOLD未満まで
- *   弱まっている指標（転換の「気配」）。0〜100%の近さ（proximity）をフロントでバー表示する
+ * - turningSignalFindings: 直近の変化の向きが直前の期間から反転した（flipped）、またはまだ反転して
+ *   いないが勢いが弱まっている（気配）指標を1つに統合したもの。改善→悪化／悪化→改善のどちらも
+ *   対等に扱い、どちらを優先すべきかという価値判断はしない。0〜100%の近さ（proximity。反転済みは
+ *   100）をフロントでバー表示する
  * - recoverySignal / recessionSignal: いずれも米国版限定の4指標コンボ判定。日本版には該当指標が
  *   ないため常に null になる
+ * - leadingRecoverySignal / leadingRecessionSignal: JP_LEADING_SIGNAL_IDSのうち一定数が同時に
+ *   改善／悪化方向にあるかの機械判定（日本版限定）
  * すべて公開統計の再集計であり、投資助言ではない旨を運用側（フロント）で明記すること。
  */
 function buildEconSummary(indicators) {
@@ -292,8 +307,7 @@ function buildEconSummary(indicators) {
   const neutralList = [];
   const statusFindings = [];
   const surpriseFindings = [];
-  const turningPointFindings = [];
-  const momentumFindings = [];
+  const turningSignalFindings = [];
   const byId = new Map();
 
   for (const ind of indicators) {
@@ -316,7 +330,7 @@ function buildEconSummary(indicators) {
       neutralCount++;
       neutralList.push(nameEntry);
     }
-    const idEntry = { name: ind.name, isImproving, isConcerning: false };
+    const idEntry = { name: ind.name, isImproving, isConcerning: false, trendFavorable: null };
     byId.set(ind.id, idEntry);
 
     if (ind.betterWhen !== "neutral") {
@@ -336,33 +350,42 @@ function buildEconSummary(indicators) {
         });
       }
 
+      // 転換点（符号反転）と転換の気配（勢いの鈍化）は、どちらもcomputeTurningPointの同じ
+      // momentumRatioに基づく連続した1つの指標のため、1つの「転換シグナル」として統合する
+      // （リストとバーに分けて2ブロック表示していたものを1ブロックに集約）。
       const tp = computeTurningPoint(ind.points ?? [], ind.frequency);
+      if (tp) {
+        idEntry.trendFavorable = tp.direction === "up" === (ind.betterWhen === "up");
+      }
       if (tp?.flipped) {
-        const turnedGood = tp.direction === "up" === (ind.betterWhen === "up");
-        const word = turnedGood ? "改善" : "悪化";
-        turningPointFindings.push({
+        const favorable = idEntry.trendFavorable;
+        const word = favorable ? "改善" : "悪化";
+        turningSignalFindings.push({
           id: ind.id,
           name: ind.name,
           category: ind.category,
-          turnedGood,
-          detail: `直近の傾向が${word}方向に転じた可能性があります（変化の向きが直前の期間から反転）。`,
-          text: `${ind.name}は、直近の傾向が${word}方向に転じた可能性があります（変化の向きが直前の期間から反転）。`,
+          favorable,
+          flipped: true,
+          proximity: 100,
+          detail: `直近の傾向が${word}方向に転じました（転換点を通過）。`,
+          text: `${ind.name}は、直近の傾向が${word}方向に転じました（転換点を通過）。`,
         });
       } else if (tp && tp.momentumRatio < MOMENTUM_RATIO_THRESHOLD) {
-        // まだ転換はしていないが、勢いが弱まっている＝転換の「気配」。
+        // まだ転換点は通過していないが、勢いが弱まっている＝転換の「気配」。
         // proximity: 0〜100（100に近いほど転換点に近い）。フロントでバー表示に使う。
         const proximity = Math.round((1 - tp.momentumRatio) * 100);
-        const currentlyGood = tp.direction === "up" === (ind.betterWhen === "up");
-        const trendWord = currentlyGood ? "改善" : "悪化";
-        const cautionWord = currentlyGood
+        const favorable = idEntry.trendFavorable;
+        const trendWord = favorable ? "改善" : "悪化";
+        const cautionWord = favorable
           ? "改善の勢いが鈍化しており、今後の反転に注意が必要です"
           : "悪化の勢いが鈍化しており、改善に転じる兆しの可能性があります";
-        momentumFindings.push({
+        turningSignalFindings.push({
           id: ind.id,
           name: ind.name,
           category: ind.category,
+          favorable,
+          flipped: false,
           proximity,
-          currentlyGood,
           detail: `現在は${trendWord}方向ですが、直近の勢いが直前期間の${Math.round(tp.momentumRatio * 100)}%まで弱まっています。${cautionWord}。`,
           text: `${ind.name}は現在${trendWord}方向ですが、直近の勢いが直前期間の${Math.round(tp.momentumRatio * 100)}%まで弱まっています。${cautionWord}。`,
         });
@@ -386,7 +409,7 @@ function buildEconSummary(indicators) {
   }
 
   surpriseFindings.sort((a, b) => Math.abs(b.z) - Math.abs(a.z));
-  momentumFindings.sort((a, b) => b.proximity - a.proximity);
+  turningSignalFindings.sort((a, b) => b.proximity - a.proximity);
 
   const total = improving + worsening + neutralCount;
   const headline = `${total}指標中、改善傾向が${improving}件、悪化傾向が${worsening}件、横ばい・中立が${neutralCount}件です。`;
@@ -439,6 +462,58 @@ function buildEconSummary(indicators) {
     };
   }
 
+  // 先行指標コンボ（日本版限定）：同じ4指標を使い回し、改善方向・悪化方向を対称に判定する。
+  // 単発の振れに反応しないよう、trendFavorable（computeTurningPointの複数期間平均）で判定する。
+  let leadingRecoverySignal = null;
+  let leadingRecessionSignal = null;
+  const leadingEntries = JP_LEADING_SIGNAL_IDS.map((id) => byId.get(id)).filter(Boolean);
+  const leadingCaveat =
+    "先行指標のみで構成しているため、実際に生産・雇用へ波及する前の“気配”の段階です。" +
+    "一致・遅行指標（⚠️注目ポイント・🔄転換シグナル）で裏付けを確認してください。";
+  if (leadingEntries.length === JP_LEADING_SIGNAL_IDS.length) {
+    const leadingNames = leadingEntries.map((e) => e.name).join("・");
+    const favorableCount = leadingEntries.filter((e) => e.trendFavorable === true).length;
+    const unfavorableCount = leadingEntries.filter((e) => e.trendFavorable === false).length;
+
+    const recoveryActive = favorableCount >= COMBO_ACTIVE_THRESHOLD;
+    leadingRecoverySignal = {
+      active: recoveryActive,
+      count: favorableCount,
+      total: JP_LEADING_SIGNAL_IDS.length,
+      items: JP_LEADING_SIGNAL_IDS.map((id, i) => ({
+        id,
+        name: leadingEntries[i].name,
+        contributing: leadingEntries[i].trendFavorable === true,
+      })),
+      text:
+        (recoveryActive
+          ? `内閣府が先行指数の構成系列として認定する概念に対応する4指標（${leadingNames}）のうち` +
+            `${favorableCount}件が同時に改善方向にあり、景気回復の兆しを示唆するシグナルが重なっています。`
+          : `先行指標とされる4指標（${leadingNames}）のうち、同時に改善方向にあるのは${favorableCount}件に` +
+            `とどまり、明確な回復の兆しは見られません。`) +
+        ` ${leadingCaveat}`,
+    };
+
+    const recessionActive = unfavorableCount >= COMBO_ACTIVE_THRESHOLD;
+    leadingRecessionSignal = {
+      active: recessionActive,
+      count: unfavorableCount,
+      total: JP_LEADING_SIGNAL_IDS.length,
+      items: JP_LEADING_SIGNAL_IDS.map((id, i) => ({
+        id,
+        name: leadingEntries[i].name,
+        contributing: leadingEntries[i].trendFavorable === false,
+      })),
+      text:
+        (recessionActive
+          ? `内閣府が先行指数の構成系列として認定する概念に対応する4指標（${leadingNames}）のうち` +
+            `${unfavorableCount}件が同時に悪化方向にあり、景気後退の兆しを示唆するシグナルが重なっています。`
+          : `先行指標とされる4指標（${leadingNames}）のうち、同時に悪化方向にあるのは${unfavorableCount}件に` +
+            `とどまり、明確な後退の兆しは見られません。`) +
+        ` ${leadingCaveat}`,
+    };
+  }
+
   return {
     generatedAt: new Date().toISOString(),
     stats: { total, improving, worsening, neutral: neutralCount, surpriseCount: surpriseFindings.length },
@@ -448,10 +523,11 @@ function buildEconSummary(indicators) {
     neutralList,
     statusFindings: statusFindings.slice(0, 8),
     surpriseFindings: surpriseFindings.slice(0, 6),
-    turningPointFindings: turningPointFindings.slice(0, 8),
-    momentumFindings: momentumFindings.slice(0, 6),
+    turningSignalFindings: turningSignalFindings.slice(0, 10),
     recoverySignal,
     recessionSignal,
+    leadingRecoverySignal,
+    leadingRecessionSignal,
   };
 }
 
