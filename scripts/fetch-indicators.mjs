@@ -360,7 +360,7 @@ function buildEconSummary(indicators) {
       neutralCount++;
       neutralList.push(nameEntry);
     }
-    const idEntry = { name: ind.name, isImproving, isConcerning: false, trendFavorable: null };
+    const idEntry = { name: ind.name, isImproving, isConcerning: false, trendFavorable: null, trendPeriod: null };
     byId.set(ind.id, idEntry);
 
     if (ind.betterWhen !== "neutral") {
@@ -386,6 +386,9 @@ function buildEconSummary(indicators) {
       const tp = computeTurningPoint(ind.points ?? [], ind.frequency);
       if (tp) {
         idEntry.trendFavorable = tp.direction === "up" === (ind.betterWhen === "up");
+        // 「期間でみた傾向（継続中）」のチップにホバー期間を表示するために、判定に使った
+        // 直近の窓（recentPeriod）を保持しておく。
+        idEntry.trendPeriod = tp.recentPeriod;
       }
       if (tp?.flipped) {
         const favorable = idEntry.trendFavorable;
@@ -456,8 +459,8 @@ function buildEconSummary(indicators) {
   const continuingNeutralList = [];
   for (const ind of indicators) {
     if (!ind.summary || turningIds.has(ind.id)) continue;
-    const nameEntry = { id: ind.id, name: ind.name, category: ind.category };
     const entry = byId.get(ind.id);
+    const nameEntry = { id: ind.id, name: ind.name, category: ind.category, period: entry?.trendPeriod ?? null };
     if (ind.betterWhen === "neutral" || entry?.trendFavorable == null) {
       continuingNeutralList.push(nameEntry);
     } else if (entry.trendFavorable) {

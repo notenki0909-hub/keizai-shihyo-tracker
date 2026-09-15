@@ -359,6 +359,11 @@ a {
   color: var(--text-dim);
 }
 
+.econ-summary__section-title {
+  margin: 0 0 8px;
+  font-size: 0.86rem;
+}
+
 .econ-summary__groups {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

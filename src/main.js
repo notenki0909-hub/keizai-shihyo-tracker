@@ -584,7 +584,7 @@ function renderEconSummary() {
 
   const continuingHtml = sum.continuingImprovingList
     ? `<div class="econ-summary__block">
-        <h3>🔁 直近の傾向（継続中）</h3>
+        <h3>🔁 期間でみた傾向（継続中）</h3>
         <div class="econ-summary__groups">
           ${group("改善継続", sum.continuingImprovingList, "up", "（直近複数期間の平均的な傾向）")}
           ${group("悪化継続", sum.continuingWorseningList, "down", "（直近複数期間の平均的な傾向）")}
@@ -650,6 +650,7 @@ function renderEconSummary() {
       <span class="econ-summary__updated">最終更新：${genStr}</span>
     </div>
     <p class="econ-summary__headline">${sum.headline}</p>
+    <h3 class="econ-summary__section-title">前回数値との比較</h3>
     <div class="econ-summary__groups">
       ${group("改善傾向", sum.improvingList, "up", "（前回の数値と比べて）")}
       ${group("悪化傾向", sum.worseningList, "down", "（前回の数値と比べて）")}
