@@ -230,7 +230,28 @@ function computeTurningPoint(points, frequency) {
   // momentumRatio: 符号が同じ（まだ転換していない）場合の「勢いの残り具合」。
   // 1に近いほど直前期間から変わっていない、0に近いほど転換点（符号の反転）に近づいている。
   const momentumRatio = recentAvg / priorAvg;
-  return { recentAvg, priorAvg, direction: recentAvg > 0 ? "up" : "down", flipped, momentumRatio };
+  // recentPoints/priorPointsは、recent/prior（diffs）と同じ添字範囲を points 側に対応させたもの
+  // （diffs[k] は points[k+1]-points[k] なので、同じ負のインデックス範囲がそのまま対応する）。
+  // 「どの期間とどの期間を比べているか」をフロントで具体的な日付として表示するために使う。
+  const recentPoints = points.slice(-window);
+  const priorPoints = points.slice(-window * 2, -window);
+  const recentPeriod = { from: recentPoints[0].t, to: recentPoints.at(-1).t };
+  const priorPeriod = { from: priorPoints[0].t, to: priorPoints.at(-1).t };
+  return {
+    recentAvg,
+    priorAvg,
+    direction: recentAvg > 0 ? "up" : "down",
+    flipped,
+    momentumRatio,
+    recentPeriod,
+    priorPeriod,
+  };
+}
+
+/** {from, to} の期間を人が読める文字列にする（同じ時点なら1つだけ表示） */
+function periodLabel(period) {
+  if (!period) return "";
+  return period.from === period.to ? period.from : `${period.from}〜${period.to}`;
 }
 
 /**
@@ -314,7 +335,16 @@ function buildEconSummary(indicators) {
     const s = ind.summary;
     if (!s) continue;
 
-    const nameEntry = { id: ind.id, name: ind.name, category: ind.category };
+    // 改善/悪化の内訳は「直近1期間 vs その前の1期間」の単純比較なので、比較している具体的な
+    // 期間をチップのツールチップで表示できるよう、対象2点の日付を持たせる。
+    const latestT = ind.points?.at(-1)?.t ?? null;
+    const prevT = ind.points?.length >= 2 ? ind.points.at(-2).t : null;
+    const nameEntry = {
+      id: ind.id,
+      name: ind.name,
+      category: ind.category,
+      period: prevT && latestT ? { from: prevT, to: latestT } : null,
+    };
     let isImproving = null;
     if (ind.betterWhen !== "neutral" && s.changeFromPrev != null && s.changeFromPrev !== 0) {
       const good = s.changeFromPrev > 0 === (ind.betterWhen === "up");
@@ -360,6 +390,8 @@ function buildEconSummary(indicators) {
       if (tp?.flipped) {
         const favorable = idEntry.trendFavorable;
         const word = favorable ? "改善" : "悪化";
+        const recentLabel = periodLabel(tp.recentPeriod);
+        const priorLabel = periodLabel(tp.priorPeriod);
         turningSignalFindings.push({
           id: ind.id,
           name: ind.name,
@@ -367,8 +399,9 @@ function buildEconSummary(indicators) {
           favorable,
           flipped: true,
           proximity: 100,
-          detail: `直近の傾向が${word}方向に転じました（転換点を通過）。`,
-          text: `${ind.name}は、直近の傾向が${word}方向に転じました（転換点を通過）。`,
+          period: { recent: tp.recentPeriod, prior: tp.priorPeriod },
+          detail: `直近（${recentLabel}）の傾向が、その前（${priorLabel}）から${word}方向に転じました（転換点を通過）。`,
+          text: `${ind.name}は、直近（${recentLabel}）の傾向が、その前（${priorLabel}）から${word}方向に転じました（転換点を通過）。`,
         });
       } else if (tp && tp.momentumRatio < MOMENTUM_RATIO_THRESHOLD) {
         // まだ転換点は通過していないが、勢いが弱まっている＝転換の「気配」。
@@ -379,6 +412,8 @@ function buildEconSummary(indicators) {
         const cautionWord = favorable
           ? "改善の勢いが鈍化しており、今後の反転に注意が必要です"
           : "悪化の勢いが鈍化しており、改善に転じる兆しの可能性があります";
+        const recentLabel = periodLabel(tp.recentPeriod);
+        const priorLabel = periodLabel(tp.priorPeriod);
         turningSignalFindings.push({
           id: ind.id,
           name: ind.name,
@@ -386,8 +421,9 @@ function buildEconSummary(indicators) {
           favorable,
           flipped: false,
           proximity,
-          detail: `現在は${trendWord}方向ですが、直近の勢いが直前期間の${Math.round(tp.momentumRatio * 100)}%まで弱まっています。${cautionWord}。`,
-          text: `${ind.name}は現在${trendWord}方向ですが、直近の勢いが直前期間の${Math.round(tp.momentumRatio * 100)}%まで弱まっています。${cautionWord}。`,
+          period: { recent: tp.recentPeriod, prior: tp.priorPeriod },
+          detail: `直近（${recentLabel}）は${trendWord}方向ですが、その前（${priorLabel}）と比べて勢いが${Math.round(tp.momentumRatio * 100)}%まで弱まっています。${cautionWord}。`,
+          text: `${ind.name}は直近（${recentLabel}）${trendWord}方向ですが、その前（${priorLabel}）と比べて勢いが${Math.round(tp.momentumRatio * 100)}%まで弱まっています。${cautionWord}。`,
         });
       }
     }

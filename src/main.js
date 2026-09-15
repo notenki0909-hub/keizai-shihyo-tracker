@@ -540,8 +540,10 @@ function renderEconSummary() {
   const findingRow = (f) =>
     `<li><button type="button" class="econ-summary__link" data-id="${f.id}">${f.name}</button>：${f.detail}</li>`;
 
-  const nameChip = (item) =>
-    `<button type="button" class="econ-summary__name-chip" data-id="${item.id}">${item.name}</button>`;
+  const nameChip = (item) => {
+    const title = item.period ? `比較期間：${item.period.from} → ${item.period.to}` : "";
+    return `<button type="button" class="econ-summary__name-chip" data-id="${item.id}" title="${title}">${item.name}</button>`;
+  };
 
   const group = (label, list, modifier) => `
     <div class="econ-summary__group econ-summary__group--${modifier}">
