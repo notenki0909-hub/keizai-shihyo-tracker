@@ -580,6 +580,14 @@ function renderEconSummary() {
       </div>`
     : "";
 
+  const recSig = sum.recessionSignal;
+  const recessionHtml = recSig
+    ? `<div class="econ-summary__recovery ${recSig.active ? "econ-summary__recovery--warning" : ""}">
+        <b>🚨 景気後退警戒コンボ（${recSig.count}/${recSig.total}）</b>
+        <p>${recSig.text}</p>
+      </div>`
+    : "";
+
   el.innerHTML = `
     <div class="econ-summary__head">
       <h2>📊 現在の経済状況サマリー</h2>
@@ -595,6 +603,7 @@ function renderEconSummary() {
     ${surpriseHtml}
     ${turningPointHtml}
     ${recoveryHtml}
+    ${recessionHtml}
     <p class="econ-summary__disclaimer">
       ※ このサマリーは、各指標の前期比・目安ライン・過去の変動幅を毎日機械的に集計したものです
       （AIによる分析ではありません）。因果関係の解説や将来予測、投資助言ではない点にご注意ください。

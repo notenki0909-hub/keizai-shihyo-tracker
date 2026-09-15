@@ -500,6 +500,11 @@ a {
   background: color-mix(in srgb, var(--pos) 10%, transparent);
 }
 
+.econ-summary__recovery--warning {
+  border-color: color-mix(in srgb, var(--neg) 45%, var(--border));
+  background: color-mix(in srgb, var(--neg) 10%, transparent);
+}
+
 .econ-summary__disclaimer {
   margin: 14px 0 0;
   padding-top: 10px;

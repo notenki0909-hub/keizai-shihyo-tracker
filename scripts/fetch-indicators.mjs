@@ -257,13 +257,24 @@ function computeSurpriseZ(points) {
 const RECOVERY_SIGNAL_IDS = ["jobless_claims_us", "job_openings_us", "yield_curve_spread_us", "sp500_us"];
 
 /**
+ * 「景気後退警戒コンボ」の機械判定に使う4指標（米国版限定）。景気回復シグナルと対称になるよう、
+ * サーム・ルール発動・逆イールド・VIX高水準・新規失業保険申請件数の警戒水準超えという、
+ * いずれも有名な後退警戒シグナルの組み合わせを採用。閾値N（何件以上で「重なっている」とするか）は
+ * 景気回復シグナルと同じ基準（4件中3件以上）を使う。片方だけ発動しやすい基準にすると恣意的な
+ * 非対称になるため、意図的に揃えている。日本版には該当指標がないため常に null になる。
+ */
+const RECESSION_SIGNAL_IDS = ["sahm_rule_us", "yield_curve_spread_us", "vix_us", "jobless_claims_us"];
+const COMBO_ACTIVE_THRESHOLD = 3; // 4指標中3件以上で「シグナルが重なっている」と判定（回復・後退で共通）
+
+/**
  * 全指標を機械的に集計し、「現在の経済状況サマリー」を生成する（ルールベース、AI不使用）。
  * - improving/worsening: betterWhen と前期比の符号だけで判定する単純な集計（因果関係の解説はしない）
  * - statusFindings: 目安ライン（referenceLines）に対して現在どちら側にあるかの機械的な判定
  * - surpriseFindings: 指標自身の過去の変化幅の分布から見て、直近の変化が統計的に珍しいかどうか
  * - turningPointFindings: 直近の変化の向きが、その直前の期間から反転したかどうか（改善→悪化／
  *   悪化→改善のどちらも対等に扱う。どちらを優先すべきかという価値判断はしない）
- * - recoverySignal: 米国版限定の4指標コンボ判定。日本版には該当指標がないため常に null
+ * - recoverySignal / recessionSignal: いずれも米国版限定の4指標コンボ判定。日本版には該当指標が
+ *   ないため常に null になる
  * すべて公開統計の再集計であり、投資助言ではない旨を運用側（フロント）で明記すること。
  */
 function buildEconSummary(indicators) {
@@ -298,7 +309,8 @@ function buildEconSummary(indicators) {
       neutralCount++;
       neutralList.push(nameEntry);
     }
-    byId.set(ind.id, { name: ind.name, isImproving });
+    const idEntry = { name: ind.name, isImproving, isConcerning: false };
+    byId.set(ind.id, idEntry);
 
     if (ind.betterWhen !== "neutral") {
       for (const line of ind.referenceLines || []) {
@@ -306,6 +318,7 @@ function buildEconSummary(indicators) {
         const above = s.latest.value >= line.value;
         const concerning = ind.betterWhen === "up" ? !above : above;
         if (!concerning) continue;
+        idEntry.isConcerning = true;
         // detail: 「指標名：」に続けて読める断片。text: 単独でも読める完全な文。
         statusFindings.push({
           id: ind.id,
@@ -356,7 +369,7 @@ function buildEconSummary(indicators) {
   const recoveryEntries = RECOVERY_SIGNAL_IDS.map((id) => byId.get(id)).filter(Boolean);
   if (recoveryEntries.length === RECOVERY_SIGNAL_IDS.length) {
     const improvingCount = recoveryEntries.filter((e) => e.isImproving === true).length;
-    const active = improvingCount >= 3;
+    const active = improvingCount >= COMBO_ACTIVE_THRESHOLD;
     recoverySignal = {
       active,
       count: improvingCount,
@@ -367,6 +380,24 @@ function buildEconSummary(indicators) {
           `${improvingCount}件が同時に改善方向にあり、景気回復を示唆するシグナルが重なっています。`
         : `景気回復に関連するとされる4指標のうち、同時に改善方向にあるのは${improvingCount}件にとどまり、` +
           `明確な回復シグナルの重なりは見られません。`,
+    };
+  }
+
+  let recessionSignal = null;
+  const recessionEntries = RECESSION_SIGNAL_IDS.map((id) => byId.get(id)).filter(Boolean);
+  if (recessionEntries.length === RECESSION_SIGNAL_IDS.length) {
+    const concerningCount = recessionEntries.filter((e) => e.isConcerning).length;
+    const active = concerningCount >= COMBO_ACTIVE_THRESHOLD;
+    recessionSignal = {
+      active,
+      count: concerningCount,
+      total: RECESSION_SIGNAL_IDS.length,
+      names: recessionEntries.map((e) => e.name),
+      text: active
+        ? `景気後退の警戒シグナルとされる4指標（${recessionEntries.map((e) => e.name).join("・")}）のうち` +
+          `${concerningCount}件が同時に警戒水準にあり、後退リスクを示すシグナルが重なっています。`
+        : `景気後退の警戒シグナルとされる4指標のうち、同時に警戒水準にあるのは${concerningCount}件にとどまり、` +
+          `明確な後退警戒シグナルの重なりは見られません。`,
     };
   }
 
@@ -381,6 +412,7 @@ function buildEconSummary(indicators) {
     surpriseFindings: surpriseFindings.slice(0, 6),
     turningPointFindings: turningPointFindings.slice(0, 8),
     recoverySignal,
+    recessionSignal,
   };
 }
 
