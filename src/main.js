@@ -588,7 +588,7 @@ function renderEconSummary() {
         <div class="econ-summary__groups">
           ${group("改善継続", sum.continuingImprovingList, "up", "（直近複数期間の平均的な傾向）")}
           ${group("悪化継続", sum.continuingWorseningList, "down", "（直近複数期間の平均的な傾向）")}
-          ${group("横ばい・中立", sum.continuingNeutralList, "neutral", "（直近複数期間で明確な傾向がない、または良し悪しの方向がない指標）")}
+          ${group("横ばい・中立", sum.continuingNeutralList, "neutral", "（前回から不変、または良し悪しの方向がない指標）")}
         </div>
       </div>`
     : "";
@@ -611,7 +611,7 @@ function renderEconSummary() {
   const rs = sum.recoverySignal;
   const recoveryHtml = rs
     ? `<div class="econ-summary__recovery ${rs.active ? "econ-summary__recovery--active" : ""}">
-        <b>🌱 景気回復シグナル（${rs.count}/${rs.total}）</b>
+        <b>🌱 景気回復シグナル（先行指標・${rs.count}/${rs.total}）</b>
         <p>${rs.text}</p>
         <div class="econ-summary__combo-items">${comboItems(rs.items, "up")}</div>
       </div>`
@@ -620,7 +620,7 @@ function renderEconSummary() {
   const recSig = sum.recessionSignal;
   const recessionHtml = recSig
     ? `<div class="econ-summary__recovery ${recSig.active ? "econ-summary__recovery--warning" : ""}">
-        <b>🚨 景気後退警戒コンボ（${recSig.count}/${recSig.total}）</b>
+        <b>🚨 景気後退警戒コンボ（総合・${recSig.count}/${recSig.total}）</b>
         <p>${recSig.text}</p>
         <div class="econ-summary__combo-items">${comboItems(recSig.items, "down")}</div>
       </div>`

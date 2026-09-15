@@ -273,19 +273,26 @@ function computeSurpriseZ(points) {
 }
 
 /**
- * 「景気回復シグナル」の機械判定に使う4指標（米国版限定）。新規失業保険申請件数・JOLTS求人件数・
- * 長短金利差・S&P500は、いずれも景気回復局面で先行して改善するとされる代表的な指標の組み合わせ
- * （Web調査に基づく）。日本版にはこれらに相当する指標が存在しないため、該当指標が4つとも揃わない
- * ため常に null になる（このファイルを分岐させる必要がない設計。共通ロジックとして残している）。
+ * 「景気回復シグナル（先行指標）」の機械判定に使う4指標（米国版限定）。新規失業保険申請件数・
+ * 耐久財受注・長短金利差・S&P500は、いずれもConference Board（全米産業審議委員会）が公式に定める
+ * LEI（米国景気先行指数）の構成系列に対応する指標で統一している（日本版の先行指標コンボと同じ
+ * 「公式な先行指数への準拠」という設計原則）。当初はJOLTS求人件数を含めていたが、これはLEIの
+ * 構成系列ではない（一致に近い）ため、耐久財受注に差し替えた。日本版にはこれらに相当する指標が
+ * 存在しないため、該当指標が4つとも揃わないため常に null になる（このファイルを分岐させる必要が
+ * ない設計。共通ロジックとして残している）。
  */
-const RECOVERY_SIGNAL_IDS = ["jobless_claims_us", "job_openings_us", "yield_curve_spread_us", "sp500_us"];
+const RECOVERY_SIGNAL_IDS = ["jobless_claims_us", "durable_goods_orders_us", "yield_curve_spread_us", "sp500_us"];
 
 /**
- * 「景気後退警戒コンボ」の機械判定に使う4指標（米国版限定）。景気回復シグナルと対称になるよう、
- * サーム・ルール発動・逆イールド・VIX高水準・新規失業保険申請件数の警戒水準超えという、
- * いずれも有名な後退警戒シグナルの組み合わせを採用。閾値N（何件以上で「重なっている」とするか）は
- * 景気回復シグナルと同じ基準（4件中3件以上）を使う。片方だけ発動しやすい基準にすると恣意的な
- * 非対称になるため、意図的に揃えている。日本版には該当指標がないため常に null になる。
+ * 「景気後退警戒コンボ（総合）」の機械判定に使う4指標（米国版限定）。サーム・ルール発動・逆イール
+ * ド・VIX高水準・新規失業保険申請件数の警戒水準超えという、いずれも個別に著名な後退警戒シグナルの
+ * 組み合わせを採用。景気回復シグナル（LEI公式先行指数のみで構成）とは異なり、こちらは先行・一致・
+ * 遅行を問わず「個別に確立された著名な警戒シグナル」を束ねる設計（サーム・ルールは遅行、VIXは
+ * 一致、長短金利差と新規失業保険申請件数は先行、と分類が混在する）。これは見落としではなく、
+ * 「早期発見」を目的とする景気回復シグナルとは異なる目的のための意図的な設計。閾値N（何件以上で
+ * 「重なっている」とするか）は景気回復シグナルと同じ基準（4件中3件以上）を使う。片方だけ発動しや
+ * すい基準にすると恣意的な非対称になるため、意図的に揃えている。日本版には該当指標がないため
+ * 常に null になる。
  */
 const RECESSION_SIGNAL_IDS = ["sahm_rule_us", "yield_curve_spread_us", "vix_us", "jobless_claims_us"];
 const COMBO_ACTIVE_THRESHOLD = 3; // 4指標中3件以上で「シグナルが重なっている」と判定（回復・後退で共通）
@@ -473,28 +480,39 @@ function buildEconSummary(indicators) {
   const total = improving + worsening + neutralCount;
   const headline = `${total}指標中、改善傾向が${improving}件、悪化傾向が${worsening}件、横ばい・中立が${neutralCount}件です。`;
 
+  const leadingCaveatUs =
+    "この4指標はConference Board（全米産業審議委員会）が公式に定めるLEI（米国景気先行指数）の" +
+    "構成系列に対応しており、実際に生産・雇用へ波及する前の“気配”の段階です。" +
+    "一致・遅行指標（⚠️注目ポイント・🔄トレンド転換シグナル）で裏付けを確認してください。";
+  const mixedCaveatUs =
+    "この4指標は先行指標に限定していません。サーム・ルール（遅行）・長短金利差（先行）・" +
+    "VIX（一致）・新規失業保険申請件数（先行）と分類が混在する、個別に確立された著名な" +
+    "警戒シグナルを束ねたものです。";
+
   let recoverySignal = null;
   const recoveryEntries = RECOVERY_SIGNAL_IDS.map((id) => byId.get(id)).filter(Boolean);
   if (recoveryEntries.length === RECOVERY_SIGNAL_IDS.length) {
-    const improvingCount = recoveryEntries.filter((e) => e.isImproving === true).length;
-    const active = improvingCount >= COMBO_ACTIVE_THRESHOLD;
+    const favorableCount = recoveryEntries.filter((e) => e.trendFavorable === true).length;
+    const active = favorableCount >= COMBO_ACTIVE_THRESHOLD;
     const recoveryNames = recoveryEntries.map((e) => e.name).join("・");
     recoverySignal = {
       active,
-      count: improvingCount,
+      count: favorableCount,
       total: RECOVERY_SIGNAL_IDS.length,
       // items: 4指標それぞれの現在の寄与状況（サマリー上でチップとして常に表示し、
       // 「4指標とは何か」が非発動時にも分かるようにする）
       items: RECOVERY_SIGNAL_IDS.map((id, i) => ({
         id,
         name: recoveryEntries[i].name,
-        contributing: recoveryEntries[i].isImproving === true,
+        contributing: recoveryEntries[i].trendFavorable === true,
       })),
-      text: active
-        ? `景気回復に関連するとされる4指標（${recoveryNames}）のうち` +
-          `${improvingCount}件が同時に改善方向にあり、景気回復を示唆するシグナルが重なっています。`
-        : `景気回復に関連するとされる4指標（${recoveryNames}）のうち、` +
-          `同時に改善方向にあるのは${improvingCount}件にとどまり、明確な回復シグナルの重なりは見られません。`,
+      text:
+        (active
+          ? `景気回復局面で先行して改善するとされる米国景気先行指数（LEI）準拠の4指標（${recoveryNames}）のうち` +
+            `${favorableCount}件が同時に改善方向にあり、景気回復を示唆するシグナルが重なっています。`
+          : `米国景気先行指数（LEI）準拠の4指標（${recoveryNames}）のうち、` +
+            `同時に改善方向にあるのは${favorableCount}件にとどまり、明確な回復シグナルの重なりは見られません。`) +
+        ` ${leadingCaveatUs}`,
     };
   }
 
@@ -513,11 +531,13 @@ function buildEconSummary(indicators) {
         name: recessionEntries[i].name,
         contributing: recessionEntries[i].isConcerning,
       })),
-      text: active
-        ? `景気後退の警戒シグナルとされる4指標（${recessionNames}）のうち` +
-          `${concerningCount}件が同時に警戒水準にあり、後退リスクを示すシグナルが重なっています。`
-        : `景気後退の警戒シグナルとされる4指標（${recessionNames}）のうち、` +
-          `同時に警戒水準にあるのは${concerningCount}件にとどまり、明確な後退警戒シグナルの重なりは見られません。`,
+      text:
+        (active
+          ? `景気後退の警戒シグナルとされる4指標（${recessionNames}）のうち` +
+            `${concerningCount}件が同時に警戒水準にあり、後退リスクを示すシグナルが重なっています。`
+          : `景気後退の警戒シグナルとされる4指標（${recessionNames}）のうち、` +
+            `同時に警戒水準にあるのは${concerningCount}件にとどまり、明確な後退警戒シグナルの重なりは見られません。`) +
+        ` ${mixedCaveatUs}`,
     };
   }
 
