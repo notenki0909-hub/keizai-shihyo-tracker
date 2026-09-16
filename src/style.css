@@ -277,7 +277,50 @@ a {
   padding-bottom: 24px;
 }
 
+.guide-toc {
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.guide-toc h2 {
+  margin: 0 0 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-faint);
+  letter-spacing: 0.04em;
+}
+
+.guide-toc ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.guide-toc a {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 0.84rem;
+  text-decoration: none;
+  transition: border-color 0.12s ease, color 0.12s ease;
+}
+
+.guide-toc a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .guide-section {
+  scroll-margin-top: 16px;
   padding: 22px 24px;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -332,22 +375,85 @@ a {
   color: var(--accent);
 }
 
+/* 長いセクション内で項目を意味のあるグループに分けるための小見出し */
+.guide-subhead {
+  margin: 20px 0 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-faint);
+  letter-spacing: 0.04em;
+}
+
+.guide-subhead:first-of-type {
+  margin-top: 2px;
+}
+
+/* 各項目の詳しい説明の前に置く「ひとことで言うと」の要約行 */
+.guide-gist {
+  display: block;
+  margin: 2px 0 10px;
+  padding: 8px 10px;
+  background: var(--bg);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.guide-gist b {
+  color: var(--accent);
+}
+
+/* 注記は<details>にして初期状態では畳んでおき、詳しい説明は必要な人だけが
+   開いて読める（情報量は削らず、初見の見た目だけを整理する）。 */
 .guide-note {
   margin-top: 14px;
-  padding: 14px 16px;
   background: var(--surface-2);
   border-left: 4px solid var(--ref-target);
   border-radius: 8px;
+  overflow: hidden;
+}
+
+.guide-note summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--ref-target);
+  cursor: pointer;
+  list-style: none;
+}
+
+.guide-note summary::-webkit-details-marker {
+  display: none;
+}
+
+.guide-note summary::before {
+  content: "▸";
+  font-size: 0.75em;
+  transition: transform 0.15s ease;
+}
+
+.guide-note[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.guide-note summary:hover {
+  text-decoration: underline;
+}
+
+.guide-note p {
+  margin: 0;
+  padding: 0 16px 16px;
   font-size: 0.9rem;
   line-height: 1.95;
   color: var(--text-dim);
 }
 
 .guide-note b {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 0.94rem;
-  color: var(--ref-target);
+  color: var(--text);
 }
 
 /* ---------- 経済状況サマリー ---------- */
