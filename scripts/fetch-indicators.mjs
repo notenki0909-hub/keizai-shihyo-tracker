@@ -367,7 +367,15 @@ function buildEconSummary(indicators) {
       neutralCount++;
       neutralList.push(nameEntry);
     }
-    const idEntry = { name: ind.name, isImproving, isConcerning: false, trendFavorable: null, trendPeriod: null };
+    const idEntry = {
+      name: ind.name,
+      isImproving,
+      isConcerning: false,
+      trendFavorable: null,
+      trendPeriod: null,
+      levelStatus: null, // "favorable" | "unfavorable"（現在値が目安ラインのどちら側にあるか）
+      levelReference: null, // {label, value}（📍現在の指標の状況のホバーに使う基準ライン）
+    };
     byId.set(ind.id, idEntry);
 
     if (ind.betterWhen !== "neutral") {
@@ -375,6 +383,12 @@ function buildEconSummary(indicators) {
         if (line.kind !== "neutral" && line.kind !== "target") continue;
         const above = s.latest.value >= line.value;
         const concerning = ind.betterWhen === "up" ? !above : above;
+        // 📍現在の指標の状況：最初に見つかった目安ライン（neutral/target）を基準として、
+        // 現在値がどちら側にあるかを保持する（複数ラインがある指標は稀で、実質1本のみのため）。
+        if (idEntry.levelStatus === null) {
+          idEntry.levelStatus = concerning ? "unfavorable" : "favorable";
+          idEntry.levelReference = { label: line.label, value: line.value };
+        }
         if (!concerning) continue;
         idEntry.isConcerning = true;
         // detail: 「指標名：」に続けて読める断片。text: 単独でも読める完全な文。
@@ -474,6 +488,29 @@ function buildEconSummary(indicators) {
       continuingImprovingList.push(nameEntry);
     } else {
       continuingWorseningList.push(nameEntry);
+    }
+  }
+
+  // 📍現在の指標の状況：改善/悪化の内訳（前回比の"変化"）とは別に、現在値そのものが目安ライン
+  // （referenceLines）のどちら側にあるかで好転位置／逆転位置／該当なしに分類する。判定は
+  // ⚠️注目ポイントと全く同じisConcerning/levelStatusを再利用する。betterWhenがneutral、または
+  // 目安ラインを持たない指標は「該当なし」に入れる（存在しない目標値を恣意的に作らないため）。
+  const currentFavorableList = [];
+  const currentUnfavorableList = [];
+  const currentNoRefList = [];
+  for (const ind of indicators) {
+    if (!ind.summary) continue;
+    const entry = byId.get(ind.id);
+    const reference = entry?.levelReference
+      ? { label: entry.levelReference.label, value: entry.levelReference.value, current: ind.summary.latest.value }
+      : null;
+    const nameEntry = { id: ind.id, name: ind.name, category: ind.category, reference };
+    if (entry?.levelStatus === "favorable") {
+      currentFavorableList.push(nameEntry);
+    } else if (entry?.levelStatus === "unfavorable") {
+      currentUnfavorableList.push(nameEntry);
+    } else {
+      currentNoRefList.push(nameEntry);
     }
   }
 
@@ -603,6 +640,9 @@ function buildEconSummary(indicators) {
     continuingImprovingList,
     continuingWorseningList,
     continuingNeutralList,
+    currentFavorableList,
+    currentUnfavorableList,
+    currentNoRefList,
     statusFindings: statusFindings.slice(0, 8),
     surpriseFindings: surpriseFindings.slice(0, 6),
     turningSignalFindings: turningSignalFindings.slice(0, 10),

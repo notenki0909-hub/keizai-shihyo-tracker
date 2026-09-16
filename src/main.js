@@ -541,7 +541,9 @@ function renderEconSummary() {
     `<li><button type="button" class="econ-summary__link" data-id="${f.id}">${f.name}</button>：${f.detail}</li>`;
 
   const nameChip = (item) => {
-    const title = item.period ? `比較期間：${item.period.from} → ${item.period.to}` : "";
+    let title = "";
+    if (item.period) title = `比較期間：${item.period.from} → ${item.period.to}`;
+    else if (item.reference) title = `基準値：${item.reference.label}（${item.reference.value}） ／ 現在値：${item.reference.current}`;
     return `<button type="button" class="econ-summary__name-chip" data-id="${item.id}" title="${title}">${item.name}</button>`;
   };
 
@@ -650,6 +652,12 @@ function renderEconSummary() {
       <span class="econ-summary__updated">最終更新：${genStr}</span>
     </div>
     <p class="econ-summary__headline">${sum.headline}</p>
+    <h3 class="econ-summary__section-title">📍 現在の指標の状況</h3>
+    <div class="econ-summary__groups">
+      ${group("好転位置", sum.currentFavorableList, "up", "（目安ラインとの比較）")}
+      ${group("逆転位置", sum.currentUnfavorableList, "down", "（目安ラインとの比較）")}
+      ${group("該当なし", sum.currentNoRefList, "neutral", "（目安ラインを持たない、または良し悪しの方向がない指標）")}
+    </div>
     <h3 class="econ-summary__section-title">前回数値との比較</h3>
     <div class="econ-summary__groups">
       ${group("改善傾向", sum.improvingList, "up", "（前回の数値と比べて）")}
