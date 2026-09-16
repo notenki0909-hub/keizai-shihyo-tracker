@@ -645,7 +645,9 @@ function buildEconSummary(indicators) {
     currentNoRefList,
     statusFindings: statusFindings.slice(0, 8),
     surpriseFindings: surpriseFindings.slice(0, 6),
-    turningSignalFindings: turningSignalFindings.slice(0, 10),
+    // 表示上限は設けない（フロント側でturningSignalVisibleLimit件まで表示し、
+    // 残りは折りたたみで表示する。件数が指標総数を超えることはないため安全）。
+    turningSignalFindings,
     recoverySignal,
     recessionSignal,
     leadingRecoverySignal,

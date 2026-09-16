@@ -543,7 +543,17 @@ function renderEconSummary() {
   const nameChip = (item) => {
     let title = "";
     if (item.period) title = `比較期間：${item.period.from} → ${item.period.to}`;
-    else if (item.reference) title = `基準値：${item.reference.label}（${item.reference.value}） ／ 現在値：${item.reference.current}`;
+    else if (item.reference) {
+      // ホバーの現在値・基準値は、カード本体と同じ単位変換（fmtValue）で整形する
+      // （生の数字だけだと桁の大きい指標で意味が伝わりにくいため）。
+      const ind = state.data.indicators.find((i) => i.id === item.id);
+      const fmt = (v) => {
+        if (!ind) return String(v);
+        const f = fmtValue(v, ind);
+        return `${f.num} ${f.unit}`;
+      };
+      title = `基準値：${item.reference.label}（${fmt(item.reference.value)}） ／ 現在値：${fmt(item.reference.current)}`;
+    }
     return `<button type="button" class="econ-summary__name-chip" data-id="${item.id}" title="${title}">${item.name}</button>`;
   };
 
@@ -595,11 +605,25 @@ function renderEconSummary() {
       </div>`
     : "";
 
+  // 表示件数が多くなりすぎないよう、最初の一定件数だけ常時表示し、残りは折りたたみに入れる
+  // （バックエンド側では件数を絞っていないため、指標が増えても取りこぼしは発生しない）。
+  const TURNING_SIGNAL_VISIBLE = 10;
   const turningSignalHtml = sum.turningSignalFindings?.length
-    ? `<div class="econ-summary__block">
-        <h3>🔄 トレンド転換シグナル <span class="econ-summary__group-basis">（直近複数期間の平均的な傾向）</span></h3>
-        <ul class="econ-summary__momentum-list">${sum.turningSignalFindings.map(turningSignalRow).join("")}</ul>
-      </div>`
+    ? (() => {
+        const visible = sum.turningSignalFindings.slice(0, TURNING_SIGNAL_VISIBLE);
+        const rest = sum.turningSignalFindings.slice(TURNING_SIGNAL_VISIBLE);
+        const restHtml = rest.length
+          ? `<details class="econ-summary__momentum-more">
+              <summary>さらに${rest.length}件を表示</summary>
+              <ul class="econ-summary__momentum-list">${rest.map(turningSignalRow).join("")}</ul>
+            </details>`
+          : "";
+        return `<div class="econ-summary__block">
+          <h3>🔄 トレンド転換シグナル <span class="econ-summary__group-basis">（直近複数期間の平均的な傾向）</span></h3>
+          <ul class="econ-summary__momentum-list">${visible.map(turningSignalRow).join("")}</ul>
+          ${restHtml}
+        </div>`;
+      })()
     : "";
 
   const comboItems = (items, kind) =>

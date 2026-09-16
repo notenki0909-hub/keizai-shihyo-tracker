@@ -677,6 +677,43 @@ a {
   color: var(--text-dim);
 }
 
+.econ-summary__momentum-more {
+  margin-top: 10px;
+}
+
+.econ-summary__momentum-more summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--accent);
+  list-style: none;
+}
+
+.econ-summary__momentum-more summary::-webkit-details-marker {
+  display: none;
+}
+
+.econ-summary__momentum-more summary::before {
+  content: "▸";
+  font-size: 0.75em;
+  transition: transform 0.15s ease;
+}
+
+.econ-summary__momentum-more[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.econ-summary__momentum-more summary:hover {
+  text-decoration: underline;
+}
+
+.econ-summary__momentum-more .econ-summary__momentum-list {
+  margin-top: 12px;
+}
+
 .econ-summary__recovery {
   margin-top: 12px;
   padding: 10px 12px;
