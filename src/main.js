@@ -682,15 +682,15 @@ function renderEconSummary() {
       ${group("逆転位置", sum.currentUnfavorableList, "down", "（目安ラインとの比較）")}
       ${group("該当なし", sum.currentNoRefList, "neutral", "（目安ラインを持たない、または良し悪しの方向がない指標）")}
     </div>
+    ${statusHtml}
+    ${continuingHtml}
+    ${turningSignalHtml}
     <h3 class="econ-summary__section-title">前回数値との比較</h3>
     <div class="econ-summary__groups">
       ${group("改善傾向", sum.improvingList, "up", "（前回の数値と比べて）")}
       ${group("悪化傾向", sum.worseningList, "down", "（前回の数値と比べて）")}
       ${group("横ばい・中立", sum.neutralList, "neutral", "（前回から不変、または良し悪しの方向がない指標）")}
     </div>
-    ${continuingHtml}
-    ${turningSignalHtml}
-    ${statusHtml}
     ${surpriseHtml}
     ${recoveryHtml}
     ${recessionHtml}
