@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T15:09:14.005Z",
+  "generatedAt": "2026-09-17T12:00:14.238Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 21,
@@ -67,7 +67,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-09-16T15:09:14.013Z",
+    "generatedAt": "2026-09-17T12:00:14.240Z",
     "stats": {
       "total": 21,
       "improving": 7,
@@ -257,8 +257,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-09-11",
-          "to": "2026-09-14"
+          "from": "2026-09-14",
+          "to": "2026-09-15"
         }
       },
       {
@@ -31577,7 +31577,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-09-17",
+      "nextRelease": "2026-09-18",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -31586,12 +31586,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09-14",
-          "value": 154.4,
+          "t": "2026-09-15",
+          "value": 154.89,
           "provisional": false
         },
-        "changeFromPrev": 0.18,
-        "changeFromYearAgo": 6.94,
+        "changeFromPrev": 0.49,
+        "changeFromYearAgo": 7.43,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -31600,7 +31600,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2615,
+        "count": 2616,
         "start": "2016-01-04"
       },
       "points": [
@@ -42063,6 +42063,10 @@
         {
           "t": "2026-09-14",
           "value": 154.4
+        },
+        {
+          "t": "2026-09-15",
+          "value": 154.89
         }
       ]
     },
