@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T12:01:56.395Z",
+  "generatedAt": "2026-09-24T12:08:05.732Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 21,
@@ -67,7 +67,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-09-23T12:01:56.398Z",
+    "generatedAt": "2026-09-24T12:08:05.737Z",
     "stats": {
       "total": 21,
       "improving": 7,
@@ -136,8 +136,8 @@
         "name": "TOPIX（東証株価指数）",
         "category": "為替・市場",
         "period": {
-          "from": "2026-06",
-          "to": "2026-07"
+          "from": "2026-07",
+          "to": "2026-08"
         }
       }
     ],
@@ -257,8 +257,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-09-15",
-          "to": "2026-09-16"
+          "from": "2026-09-16",
+          "to": "2026-09-17"
         }
       },
       {
@@ -266,8 +266,8 @@
         "name": "NT倍率（日経平均÷TOPIX）",
         "category": "為替・市場",
         "period": {
-          "from": "2026-06",
-          "to": "2026-07"
+          "from": "2026-07",
+          "to": "2026-08"
         }
       }
     ],
@@ -286,8 +286,8 @@
         "name": "TOPIX（東証株価指数）",
         "category": "為替・市場",
         "period": {
-          "from": "2026-05",
-          "to": "2026-07"
+          "from": "2026-06",
+          "to": "2026-08"
         }
       }
     ],
@@ -545,15 +545,6 @@
     ],
     "surpriseFindings": [
       {
-        "id": "nt_ratio",
-        "name": "NT倍率（日経平均÷TOPIX）",
-        "category": "為替・市場",
-        "z": -5,
-        "level": "high",
-        "detail": "非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=-5.0）。",
-        "text": "NT倍率（日経平均÷TOPIX）で非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=-5.0）。"
-      },
-      {
         "id": "current_account",
         "name": "経常収支",
         "category": "対外",
@@ -570,6 +561,15 @@
         "level": "mid",
         "detail": "やや大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=1.8）。",
         "text": "日経平均株価でやや大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=1.8）。"
+      },
+      {
+        "id": "topix",
+        "name": "TOPIX（東証株価指数）",
+        "category": "為替・市場",
+        "z": 1.8,
+        "level": "mid",
+        "detail": "やや大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=1.8）。",
+        "text": "TOPIX（東証株価指数）でやや大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=1.8）。"
       },
       {
         "id": "jgb_10y_yield",
@@ -31590,7 +31590,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-09-24",
+      "nextRelease": "2026-09-25",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -31599,12 +31599,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09-16",
-          "value": 154.98,
+          "t": "2026-09-17",
+          "value": 155.69,
           "provisional": false
         },
-        "changeFromPrev": 0.09,
-        "changeFromYearAgo": 8.09,
+        "changeFromPrev": 0.71,
+        "changeFromYearAgo": 9.02,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -31613,7 +31613,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2617,
+        "count": 2618,
         "start": "2016-01-04"
       },
       "points": [
@@ -42084,6 +42084,10 @@
         {
           "t": "2026-09-16",
           "value": 154.98
+        },
+        {
+          "t": "2026-09-17",
+          "value": 155.69
         }
       ]
     },
@@ -42108,7 +42112,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "取引時間中は常時更新。日次終値を翌営業日にかけてFRED経由で取得・反映。",
-      "nextRelease": "2026-09-24",
+      "nextRelease": "2026-09-25",
       "nextReleaseKind": "official",
       "source": {
         "provider": "FRED（セントルイス連邦準備銀行）",
@@ -52643,21 +52647,21 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
-          "value": 4003.3,
+          "t": "2026-08",
+          "value": 4156.29,
           "provisional": false
         },
-        "changeFromPrev": 8.54,
-        "changeFromYearAgo": 1060.23,
+        "changeFromPrev": 152.99,
+        "changeFromYearAgo": 1081.11,
         "min": {
           "t": "2012-05",
           "value": 719.49
         },
         "max": {
-          "t": "2026-07",
-          "value": 4003.3
+          "t": "2026-08",
+          "value": 4156.29
         },
-        "count": 234,
+        "count": 235,
         "start": "2007-02"
       },
       "points": [
@@ -53596,6 +53600,10 @@
         {
           "t": "2026-07",
           "value": 4003.3
+        },
+        {
+          "t": "2026-08",
+          "value": 4156.29
         }
       ]
     },
@@ -53628,12 +53636,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
-          "value": 16.077,
+          "t": "2026-08",
+          "value": 15.955,
           "provisional": false
         },
-        "changeFromPrev": -1.462,
-        "changeFromYearAgo": 2.122,
+        "changeFromPrev": -0.122,
+        "changeFromYearAgo": 2.064,
         "min": {
           "t": "2017-08",
           "value": 12.147
@@ -53642,7 +53650,7 @@
           "t": "2026-06",
           "value": 17.539
         },
-        "count": 127,
+        "count": 128,
         "start": "2016-01"
       },
       "points": [
@@ -54153,6 +54161,10 @@
         {
           "t": "2026-07",
           "value": 16.077
+        },
+        {
+          "t": "2026-08",
+          "value": 15.955
         }
       ]
     },
