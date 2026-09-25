@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T12:08:05.732Z",
+  "generatedAt": "2026-09-25T12:07:45.679Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 21,
@@ -67,13 +67,13 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-09-24T12:08:05.737Z",
+    "generatedAt": "2026-09-25T12:07:45.684Z",
     "stats": {
       "total": 21,
       "improving": 7,
       "worsening": 6,
       "neutral": 8,
-      "surpriseCount": 4
+      "surpriseCount": 5
     },
     "headline": "21指標中、改善傾向が7件、悪化傾向が6件、横ばい・中立が8件です。",
     "improvingList": [
@@ -127,8 +127,8 @@
         "name": "日経平均株価",
         "category": "為替・市場",
         "period": {
-          "from": "2026-09-17",
-          "to": "2026-09-18"
+          "from": "2026-09-24",
+          "to": "2026-09-25"
         }
       },
       {
@@ -257,8 +257,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-09-16",
-          "to": "2026-09-17"
+          "from": "2026-09-17",
+          "to": "2026-09-18"
         }
       },
       {
@@ -554,6 +554,15 @@
         "text": "経常収支で非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=2.8）。"
       },
       {
+        "id": "usdjpy",
+        "name": "ドル円レート",
+        "category": "為替・市場",
+        "z": 2.4,
+        "level": "mid",
+        "detail": "やや大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=2.4）。",
+        "text": "ドル円レートでやや大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=2.4）。"
+      },
+      {
         "id": "nikkei225",
         "name": "日経平均株価",
         "category": "為替・市場",
@@ -666,21 +675,21 @@
         "id": "nikkei225",
         "name": "日経平均株価",
         "category": "為替・市場",
-        "favorable": false,
-        "flipped": false,
+        "favorable": true,
+        "flipped": true,
         "proximity": 100,
         "period": {
           "recent": {
-            "from": "2026-09-07",
-            "to": "2026-09-18"
+            "from": "2026-09-09",
+            "to": "2026-09-25"
           },
           "prior": {
-            "from": "2026-08-24",
-            "to": "2026-09-04"
+            "from": "2026-08-26",
+            "to": "2026-09-08"
           }
         },
-        "detail": "直近（2026-09-07〜2026-09-18）は悪化方向ですが、その前（2026-08-24〜2026-09-04）と比べて勢いが0%まで弱まっています。悪化の勢いが鈍化しており、改善に転じる兆しの可能性があります。",
-        "text": "日経平均株価は直近（2026-09-07〜2026-09-18）悪化方向ですが、その前（2026-08-24〜2026-09-04）と比べて勢いが0%まで弱まっています。悪化の勢いが鈍化しており、改善に転じる兆しの可能性があります。"
+        "detail": "直近（2026-09-09〜2026-09-25）の傾向が、その前（2026-08-26〜2026-09-08）から改善方向に転じました（転換点を通過）。",
+        "text": "日経平均株価は、直近（2026-09-09〜2026-09-25）の傾向が、その前（2026-08-26〜2026-09-08）から改善方向に転じました（転換点を通過）。"
       },
       {
         "id": "real_wage_index_yoy",
@@ -747,40 +756,40 @@
     "recessionSignal": null,
     "leadingRecoverySignal": {
       "active": false,
-      "count": 1,
-      "total": 4,
-      "items": [
-        {
-          "id": "machinery_orders",
-          "name": "機械受注（船舶・電力除く民需）",
-          "contributing": false
-        },
-        {
-          "id": "housing_starts",
-          "name": "新設住宅着工戸数",
-          "contributing": true
-        },
-        {
-          "id": "new_job_openings_ratio",
-          "name": "新規求人倍率",
-          "contributing": false
-        },
-        {
-          "id": "nikkei225",
-          "name": "日経平均株価",
-          "contributing": false
-        }
-      ],
-      "text": "先行指標とされる4指標（機械受注（船舶・電力除く民需）・新設住宅着工戸数・新規求人倍率・日経平均株価）のうち、同時に改善方向にあるのは1件にとどまり、明確な回復の兆しは見られません。 先行指標のみで構成しているため、実際に生産・雇用へ波及する前の“気配”の段階です。一致・遅行指標（⚠️注目ポイント・🔄トレンド転換シグナル）で裏付けを確認してください。"
-    },
-    "leadingRecessionSignal": {
-      "active": false,
       "count": 2,
       "total": 4,
       "items": [
         {
           "id": "machinery_orders",
           "name": "機械受注（船舶・電力除く民需）",
+          "contributing": false
+        },
+        {
+          "id": "housing_starts",
+          "name": "新設住宅着工戸数",
+          "contributing": true
+        },
+        {
+          "id": "new_job_openings_ratio",
+          "name": "新規求人倍率",
+          "contributing": false
+        },
+        {
+          "id": "nikkei225",
+          "name": "日経平均株価",
+          "contributing": true
+        }
+      ],
+      "text": "先行指標とされる4指標（機械受注（船舶・電力除く民需）・新設住宅着工戸数・新規求人倍率・日経平均株価）のうち、同時に改善方向にあるのは2件にとどまり、明確な回復の兆しは見られません。 先行指標のみで構成しているため、実際に生産・雇用へ波及する前の“気配”の段階です。一致・遅行指標（⚠️注目ポイント・🔄トレンド転換シグナル）で裏付けを確認してください。"
+    },
+    "leadingRecessionSignal": {
+      "active": false,
+      "count": 1,
+      "total": 4,
+      "items": [
+        {
+          "id": "machinery_orders",
+          "name": "機械受注（船舶・電力除く民需）",
           "contributing": true
         },
         {
@@ -796,10 +805,10 @@
         {
           "id": "nikkei225",
           "name": "日経平均株価",
-          "contributing": true
+          "contributing": false
         }
       ],
-      "text": "先行指標とされる4指標（機械受注（船舶・電力除く民需）・新設住宅着工戸数・新規求人倍率・日経平均株価）のうち、同時に悪化方向にあるのは2件にとどまり、明確な後退の兆しは見られません。 先行指標のみで構成しているため、実際に生産・雇用へ波及する前の“気配”の段階です。一致・遅行指標（⚠️注目ポイント・🔄トレンド転換シグナル）で裏付けを確認してください。"
+      "text": "先行指標とされる4指標（機械受注（船舶・電力除く民需）・新設住宅着工戸数・新規求人倍率・日経平均株価）のうち、同時に悪化方向にあるのは1件にとどまり、明確な後退の兆しは見られません。 先行指標のみで構成しているため、実際に生産・雇用へ波及する前の“気配”の段階です。一致・遅行指標（⚠️注目ポイント・🔄トレンド転換シグナル）で裏付けを確認してください。"
     }
   },
   "indicators": [
@@ -31590,7 +31599,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-09-25",
+      "nextRelease": "2026-09-28",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -31599,12 +31608,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09-17",
-          "value": 155.69,
+          "t": "2026-09-18",
+          "value": 157.49,
           "provisional": false
         },
-        "changeFromPrev": 0.71,
-        "changeFromYearAgo": 9.02,
+        "changeFromPrev": 1.8,
+        "changeFromYearAgo": 10.37,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -31613,7 +31622,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2618,
+        "count": 2619,
         "start": "2016-01-04"
       },
       "points": [
@@ -42088,6 +42097,10 @@
         {
           "t": "2026-09-17",
           "value": 155.69
+        },
+        {
+          "t": "2026-09-18",
+          "value": 157.49
         }
       ]
     },
@@ -42112,7 +42125,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "取引時間中は常時更新。日次終値を翌営業日にかけてFRED経由で取得・反映。",
-      "nextRelease": "2026-09-25",
+      "nextRelease": "2026-09-28",
       "nextReleaseKind": "official",
       "source": {
         "provider": "FRED（セントルイス連邦準備銀行）",
@@ -42121,12 +42134,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09-18",
-          "value": 65018.95,
+          "t": "2026-09-25",
+          "value": 66364.2,
           "provisional": false
         },
-        "changeFromPrev": 882.7,
-        "changeFromYearAgo": 19715.52,
+        "changeFromPrev": 850.21,
+        "changeFromYearAgo": 20609.27,
         "min": {
           "t": "2016-06-24",
           "value": 14952.02
@@ -42135,7 +42148,7 @@
           "t": "2026-06-25",
           "value": 72366.34
         },
-        "count": 2619,
+        "count": 2621,
         "start": "2016-01-04"
       },
       "points": [
@@ -52614,6 +52627,14 @@
         {
           "t": "2026-09-18",
           "value": 65018.95
+        },
+        {
+          "t": "2026-09-24",
+          "value": 65513.99
+        },
+        {
+          "t": "2026-09-25",
+          "value": 66364.2
         }
       ]
     },
