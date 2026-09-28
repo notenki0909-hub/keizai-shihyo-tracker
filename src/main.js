@@ -1,11 +1,12 @@
 import "./style.css";
 import Chart from "chart.js/auto";
 import annotationPlugin from "chartjs-plugin-annotation";
+import zoomPlugin from "chartjs-plugin-zoom";
 import { initTheme } from "./theme.js";
 import { RECESSIONS } from "./recessions.js";
 import { isFavorite, toggleFavorite, getFavorites } from "./favorites.js";
 
-Chart.register(annotationPlugin);
+Chart.register(annotationPlugin, zoomPlugin);
 
 const DATA_URL = import.meta.env.BASE_URL + "data/indicators.json";
 const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "為替・市場"];
@@ -1233,9 +1234,103 @@ function drawChart() {
             },
           },
         },
+        // 縦軸・横軸の目盛り表示領域の上でのみ、ホイール／ピンチでその軸だけを拡大縮小できるようにする
+        // （scaleMode: "xy" により、カーソル／指がどちらの軸の上にあるかで対象を自動判定する。
+        // グラフ本体の上でホイール操作しても反応しない＝誤操作防止）。ドラッグでの拡大縮小は
+        // プラグイン標準のpan機能（平行移動）ではなく、下のattachAxisDragZoom()で独自に実装している。
+        zoom: {
+          zoom: {
+            wheel: { enabled: true },
+            pinch: { enabled: true },
+            mode: "",
+            scaleMode: "xy",
+          },
+          pan: { enabled: false },
+        },
       },
     },
   });
+  attachAxisDragZoom(document.getElementById("d-canvas"));
+}
+
+/**
+ * 縦軸・横軸の目盛り表示領域をドラッグしたとき、その軸だけを拡大縮小する
+ * （chartjs-plugin-zoomの標準pan機能は「平行移動」のため、ここは独自実装）。
+ * - 縦軸エリアで上にドラッグ＝拡大、下にドラッグ＝縮小
+ * - 横軸エリアで左にドラッグ＝拡大、右にドラッグ＝縮小
+ * drawChart()はグラフを再生成するたびに呼ばれるが、リスナーはcanvas要素に対して
+ * 一度だけ登録し（要素自体は破棄・再生成されないため）、内部では常に最新のchart
+ * （モジュールスコープの変数）を参照することで、重複登録を防いでいる。
+ */
+const ZOOM_DRAG_SENSITIVITY = 150; // このpx分ドラッグすると拡大率が2倍/半分になる
+const ZOOM_DRAG_FACTOR_MIN = 0.05;
+const ZOOM_DRAG_FACTOR_MAX = 20;
+
+function attachAxisDragZoom(canvas) {
+  if (!canvas || canvas._axisDragZoomAttached) return;
+  canvas._axisDragZoomAttached = true;
+
+  let session = null; // { scaleId, axis: "x" | "y", startPos, startRange }
+
+  const findAxisAt = (x, y) => {
+    if (!chart) return null;
+    const area = chart.chartArea;
+    if (!area) return null;
+    if (y > area.bottom) return { scaleId: "x", axis: "x" };
+    if (x < area.left) return { scaleId: "y", axis: "y" };
+    if (x > area.right && chart.scales.y1) return { scaleId: "y1", axis: "y" };
+    return null;
+  };
+
+  canvas.addEventListener("pointerdown", (e) => {
+    if (!chart) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const hit = findAxisAt(x, y);
+    if (!hit) return;
+    const scale = chart.scales[hit.scaleId];
+    if (!scale || !Number.isFinite(scale.min) || !Number.isFinite(scale.max) || scale.min === scale.max) return;
+
+    session = {
+      scaleId: hit.scaleId,
+      axis: hit.axis,
+      startX: e.clientX,
+      startY: e.clientY,
+      startRange: { min: scale.min, max: scale.max },
+    };
+    canvas.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+
+  canvas.addEventListener("pointermove", (e) => {
+    if (!session || !chart) return;
+    e.preventDefault();
+    // 縦軸：上にドラッグ（画面上でY座標が小さくなる）＝拡大。横軸：左にドラッグ＝拡大。
+    const delta =
+      session.axis === "y" ? session.startY - e.clientY : session.startX - e.clientX;
+    let factor = Math.pow(2, delta / ZOOM_DRAG_SENSITIVITY);
+    factor = Math.min(ZOOM_DRAG_FACTOR_MAX, Math.max(ZOOM_DRAG_FACTOR_MIN, factor));
+    const { min, max } = session.startRange;
+    const mid = (min + max) / 2;
+    const halfSpan = (max - min) / 2 / factor;
+    chart.zoomScale(session.scaleId, { min: mid - halfSpan, max: mid + halfSpan }, "none");
+  });
+
+  const endSession = (e) => {
+    if (!session) return;
+    try {
+      canvas.releasePointerCapture(e.pointerId);
+    } catch {
+      // すでに解放済みの場合は無視
+    }
+    session = null;
+  };
+  canvas.addEventListener("pointerup", endSession);
+  canvas.addEventListener("pointercancel", endSession);
+
+  // 軸エリア上でのドラッグ中はページ自体のスクロール・タッチ操作を奪わない（誤スクロール防止）
+  canvas.style.touchAction = "none";
 }
 
 /* ---------- init ---------- */
