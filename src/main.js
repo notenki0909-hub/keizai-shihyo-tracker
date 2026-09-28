@@ -860,13 +860,15 @@ function updateDetailFavButton() {
   btn.setAttribute("aria-label", fav ? "お気に入りから外す" : "お気に入りに追加");
 }
 
-/** 現在の指標に「有名な指標比較」があれば、比較セレクタの下にワンクリックの提案として表示 */
-function renderCompareSuggestions(ind) {
+/** 現在の指標に「有名な指標比較」があれば、比較セレクタの下にワンクリックの提案として表示
+ *  （既に選択中の比較指標は、下のdetail__pair-explainで詳しく説明されるため提案から除く） */
+function renderCompareSuggestions(ind, activeCompareId) {
   const el = document.getElementById("d-compare-suggest");
   if (!el) return;
 
   const suggestions = RECOMMENDED_PAIRS.filter((p) => p.a === ind.id || p.b === ind.id)
     .map((p) => ({ partnerId: p.a === ind.id ? p.b : p.a, type: p.type, summary: p.summary }))
+    .filter((s) => s.partnerId !== activeCompareId)
     .map((s) => ({ ...s, partner: state.data.indicators.find((i) => i.id === s.partnerId) }))
     .filter((s) => s.partner);
 
@@ -917,7 +919,7 @@ function openDetail(id) {
     `<option value="">選択しない</option>` +
     otherInds.map((i) => `<option value="${i.id}">${i.name}</option>`).join("");
   compareSelect.value = "";
-  renderCompareSuggestions(ind);
+  // 比較指標の提案・説明は下のdrawChart()内でcompareInd（この時点ではnull）に応じて描画される
 
   const color = catColor(ind.category);
   const s = ind.summary;
@@ -1005,8 +1007,42 @@ function openDetail(id) {
   drawChart();
 }
 
+/**
+ * 現在表示中の2指標（主指標＋比較指標）が「おすすめの比較ペア」に該当する場合、
+ * 📊比較タブのカードと同じ3段階の説明（一言でいうと／どう見る？／何を判断する？）を
+ * グラフの直上に表示する。詳細画面は主指標1本の「判断の目安」しか持たないため、
+ * 2本の線を重ねて見ているときに「この組み合わせ全体で何が言えるか」が伝わるようにする。
+ */
+function renderPairExplain(ind, compare) {
+  const el = document.getElementById("d-pair-explain");
+  if (!el) return;
+  const pair = compare
+    ? RECOMMENDED_PAIRS.find(
+        (p) => (p.a === ind.id && p.b === compare.id) || (p.b === ind.id && p.a === compare.id)
+      )
+    : null;
+  if (!pair) {
+    el.hidden = true;
+    el.innerHTML = "";
+    return;
+  }
+  const icon = pair.type === "divergence" ? "⚠️" : "🔗";
+  const label = pair.type === "divergence" ? "ダイバージェンス確認" : "相関確認";
+  el.hidden = false;
+  el.innerHTML = `
+    <span class="pair-card__type pair-card__type--${pair.type}">${icon} ${label}</span>
+    <h3 class="detail__pair-explain-title">${pair.title}</h3>
+    <p class="detail__pair-explain-summary">${pair.summary}</p>
+    <div class="detail__pair-explain-detail">
+      <div><span>📈 どう見る？</span><p>${pair.howToRead}</p></div>
+      <div><span>💡 何を判断する？</span><p>${pair.takeaway}</p></div>
+    </div>`;
+}
+
 function drawChart() {
   const ind = currentInd;
+  renderPairExplain(ind, compareInd);
+  renderCompareSuggestions(ind, compareInd?.id ?? null);
   const color = catColor(ind.category);
   const r = RANGES.find((x) => x.key === currentRange);
   const cutoff =

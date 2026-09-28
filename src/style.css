@@ -1482,6 +1482,61 @@ a {
   color: var(--text-faint);
 }
 
+/* 比較指標を選択中、その組み合わせが「おすすめの比較ペア」に該当する場合に
+   グラフの直上に表示する、2指標を組み合わせた説明（📊比較タブのカードと同じ内容）。
+   1指標だけの「判断の目安」では伝わらない、2本の線を重ねて見る意味を補う。 */
+.detail__pair-explain {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 24px 0;
+  padding: 14px 16px;
+  background: var(--surface-2);
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+}
+
+.detail__pair-explain:has(.pair-card__type--divergence) {
+  border-left-color: var(--ref-target);
+}
+
+.detail__pair-explain-title {
+  margin: 0;
+  font-size: 0.94rem;
+  font-weight: 700;
+}
+
+.detail__pair-explain-summary {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+
+.detail__pair-explain-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border-radius: 8px;
+}
+
+.detail__pair-explain-detail span {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-faint);
+  margin-bottom: 2px;
+}
+
+.detail__pair-explain-detail p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+
 .range-btn {
   border: 1px solid var(--border);
   background: var(--surface);
