@@ -1235,9 +1235,11 @@ function drawChart() {
           },
         },
         // 縦軸・横軸の目盛り表示領域の上でのみ、ホイール／ピンチでその軸だけを拡大縮小できるようにする
-        // （scaleMode: "xy" により、カーソル／指がどちらの軸の上にあるかで対象を自動判定する。
-        // グラフ本体の上でホイール操作しても反応しない＝誤操作防止）。ドラッグでの拡大縮小は
+        // （scaleMode: "xy" により、カーソル／指がどちらの軸の上にあるかで自動判定。
+        // グラフ本体の上でホイール操作しても反応しない＝誤操作防止）。目盛り領域でのドラッグ拡大縮小は
         // プラグイン標準のpan機能（平行移動）ではなく、下のattachAxisDragZoom()で独自に実装している。
+        // 一方、グラフ本体（プロット領域）でのドラッグ／スワイプはプラグイン標準のpan機能で平行移動を行う
+        // （mode: "xy" のみ設定しscaleModeは設定しないため、目盛り領域には及ばずattachAxisDragZoomと競合しない）。
         zoom: {
           zoom: {
             wheel: { enabled: true },
@@ -1245,7 +1247,10 @@ function drawChart() {
             mode: "",
             scaleMode: "xy",
           },
-          pan: { enabled: false },
+          pan: {
+            enabled: true,
+            mode: "xy",
+          },
         },
       },
     },
