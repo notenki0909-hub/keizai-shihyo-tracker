@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T14:23:23.258Z",
+  "generatedAt": "2026-09-30T12:56:55.383Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 21,
@@ -67,15 +67,15 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-09-28T14:23:23.263Z",
+    "generatedAt": "2026-09-30T12:56:55.388Z",
     "stats": {
       "total": 21,
-      "improving": 5,
-      "worsening": 8,
+      "improving": 6,
+      "worsening": 7,
       "neutral": 8,
-      "surpriseCount": 3
+      "surpriseCount": 4
     },
-    "headline": "21指標中、改善傾向が5件、悪化傾向が8件、横ばい・中立が8件です。",
+    "headline": "21指標中、改善傾向が6件、悪化傾向が7件、横ばい・中立が8件です。",
     "improvingList": [
       {
         "id": "coincident_ci",
@@ -114,6 +114,15 @@
         }
       },
       {
+        "id": "nikkei225",
+        "name": "日経平均株価",
+        "category": "為替・市場",
+        "period": {
+          "from": "2026-09-29",
+          "to": "2026-09-30"
+        }
+      },
+      {
         "id": "topix",
         "name": "TOPIX（東証株価指数）",
         "category": "為替・市場",
@@ -138,8 +147,8 @@
         "name": "鉱工業生産指数",
         "category": "景気",
         "period": {
-          "from": "2026-06",
-          "to": "2026-07"
+          "from": "2026-07",
+          "to": "2026-08"
         }
       },
       {
@@ -156,8 +165,8 @@
         "name": "新設住宅着工戸数",
         "category": "景気",
         "period": {
-          "from": "2026-06",
-          "to": "2026-07"
+          "from": "2026-07",
+          "to": "2026-08"
         }
       },
       {
@@ -176,15 +185,6 @@
         "period": {
           "from": "2026-06",
           "to": "2026-07"
-        }
-      },
-      {
-        "id": "nikkei225",
-        "name": "日経平均株価",
-        "category": "為替・市場",
-        "period": {
-          "from": "2026-09-25",
-          "to": "2026-09-28"
         }
       },
       {
@@ -257,8 +257,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-09-18",
-          "to": "2026-09-24"
+          "from": "2026-09-25",
+          "to": "2026-09-28"
         }
       },
       {
@@ -312,6 +312,12 @@
       }
     ],
     "continuingNeutralList": [
+      {
+        "id": "industrial_production",
+        "name": "鉱工業生産指数",
+        "category": "景気",
+        "period": null
+      },
       {
         "id": "cpi_core_yoy",
         "name": "コアCPI（生鮮食品除く総合）",
@@ -560,6 +566,15 @@
         "text": "経常収支で非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=2.8）。"
       },
       {
+        "id": "nikkei225",
+        "name": "日経平均株価",
+        "category": "為替・市場",
+        "z": 2.7,
+        "level": "high",
+        "detail": "非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=2.7）。",
+        "text": "日経平均株価で非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=2.7）。"
+      },
+      {
         "id": "topix",
         "name": "TOPIX（東証株価指数）",
         "category": "為替・市場",
@@ -579,26 +594,6 @@
       }
     ],
     "turningSignalFindings": [
-      {
-        "id": "industrial_production",
-        "name": "鉱工業生産指数",
-        "category": "景気",
-        "favorable": true,
-        "flipped": true,
-        "proximity": 100,
-        "period": {
-          "recent": {
-            "from": "2026-05",
-            "to": "2026-07"
-          },
-          "prior": {
-            "from": "2026-02",
-            "to": "2026-04"
-          }
-        },
-        "detail": "直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から改善方向に転じました（転換点を通過）。",
-        "text": "鉱工業生産指数は、直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から改善方向に転じました（転換点を通過）。"
-      },
       {
         "id": "machinery_orders",
         "name": "機械受注（船舶・電力除く民需）",
@@ -623,21 +618,21 @@
         "id": "housing_starts",
         "name": "新設住宅着工戸数",
         "category": "景気",
-        "favorable": true,
+        "favorable": false,
         "flipped": true,
         "proximity": 100,
         "period": {
           "recent": {
-            "from": "2026-05",
-            "to": "2026-07"
+            "from": "2026-06",
+            "to": "2026-08"
           },
           "prior": {
-            "from": "2026-02",
-            "to": "2026-04"
+            "from": "2026-03",
+            "to": "2026-05"
           }
         },
-        "detail": "直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から改善方向に転じました（転換点を通過）。",
-        "text": "新設住宅着工戸数は、直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から改善方向に転じました（転換点を通過）。"
+        "detail": "直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。",
+        "text": "新設住宅着工戸数は、直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。"
       },
       {
         "id": "current_account",
@@ -668,16 +663,16 @@
         "proximity": 100,
         "period": {
           "recent": {
-            "from": "2026-09-10",
-            "to": "2026-09-28"
+            "from": "2026-09-14",
+            "to": "2026-09-30"
           },
           "prior": {
-            "from": "2026-08-27",
-            "to": "2026-09-09"
+            "from": "2026-08-31",
+            "to": "2026-09-11"
           }
         },
-        "detail": "直近（2026-09-10〜2026-09-28）の傾向が、その前（2026-08-27〜2026-09-09）から改善方向に転じました（転換点を通過）。",
-        "text": "日経平均株価は、直近（2026-09-10〜2026-09-28）の傾向が、その前（2026-08-27〜2026-09-09）から改善方向に転じました（転換点を通過）。"
+        "detail": "直近（2026-09-14〜2026-09-30）の傾向が、その前（2026-08-31〜2026-09-11）から改善方向に転じました（転換点を通過）。",
+        "text": "日経平均株価は、直近（2026-09-14〜2026-09-30）の傾向が、その前（2026-08-31〜2026-09-11）から改善方向に転じました（転換点を通過）。"
       },
       {
         "id": "gdp_real_growth",
@@ -724,41 +719,13 @@
     "recessionSignal": null,
     "leadingRecoverySignal": {
       "active": false,
-      "count": 2,
-      "total": 4,
-      "items": [
-        {
-          "id": "machinery_orders",
-          "name": "機械受注（船舶・電力除く民需）",
-          "contributing": false
-        },
-        {
-          "id": "housing_starts",
-          "name": "新設住宅着工戸数",
-          "contributing": true
-        },
-        {
-          "id": "new_job_openings_ratio",
-          "name": "新規求人倍率",
-          "contributing": false
-        },
-        {
-          "id": "nikkei225",
-          "name": "日経平均株価",
-          "contributing": true
-        }
-      ],
-      "text": "先行指標とされる4指標（機械受注（船舶・電力除く民需）・新設住宅着工戸数・新規求人倍率・日経平均株価）のうち、同時に改善方向にあるのは2件にとどまり、明確な回復の兆しは見られません。 先行指標のみで構成しているため、実際に生産・雇用へ波及する前の“気配”の段階です。一致・遅行指標（⚠️注目ポイント・🔄トレンド転換シグナル）で裏付けを確認してください。"
-    },
-    "leadingRecessionSignal": {
-      "active": false,
       "count": 1,
       "total": 4,
       "items": [
         {
           "id": "machinery_orders",
           "name": "機械受注（船舶・電力除く民需）",
-          "contributing": true
+          "contributing": false
         },
         {
           "id": "housing_starts",
@@ -773,10 +740,38 @@
         {
           "id": "nikkei225",
           "name": "日経平均株価",
+          "contributing": true
+        }
+      ],
+      "text": "先行指標とされる4指標（機械受注（船舶・電力除く民需）・新設住宅着工戸数・新規求人倍率・日経平均株価）のうち、同時に改善方向にあるのは1件にとどまり、明確な回復の兆しは見られません。 先行指標のみで構成しているため、実際に生産・雇用へ波及する前の“気配”の段階です。一致・遅行指標（⚠️注目ポイント・🔄トレンド転換シグナル）で裏付けを確認してください。"
+    },
+    "leadingRecessionSignal": {
+      "active": false,
+      "count": 2,
+      "total": 4,
+      "items": [
+        {
+          "id": "machinery_orders",
+          "name": "機械受注（船舶・電力除く民需）",
+          "contributing": true
+        },
+        {
+          "id": "housing_starts",
+          "name": "新設住宅着工戸数",
+          "contributing": true
+        },
+        {
+          "id": "new_job_openings_ratio",
+          "name": "新規求人倍率",
+          "contributing": false
+        },
+        {
+          "id": "nikkei225",
+          "name": "日経平均株価",
           "contributing": false
         }
       ],
-      "text": "先行指標とされる4指標（機械受注（船舶・電力除く民需）・新設住宅着工戸数・新規求人倍率・日経平均株価）のうち、同時に悪化方向にあるのは1件にとどまり、明確な後退の兆しは見られません。 先行指標のみで構成しているため、実際に生産・雇用へ波及する前の“気配”の段階です。一致・遅行指標（⚠️注目ポイント・🔄トレンド転換シグナル）で裏付けを確認してください。"
+      "text": "先行指標とされる4指標（機械受注（船舶・電力除く民需）・新設住宅着工戸数・新規求人倍率・日経平均株価）のうち、同時に悪化方向にあるのは2件にとどまり、明確な後退の兆しは見られません。 先行指標のみで構成しているため、実際に生産・雇用へ波及する前の“気配”の段階です。一致・遅行指標（⚠️注目ポイント・🔄トレンド転換シグナル）で裏付けを確認してください。"
     }
   },
   "indicators": [
@@ -1390,7 +1385,7 @@
         "latest": {
           "t": "2026-07",
           "value": 120.6,
-          "provisional": true
+          "provisional": false
         },
         "changeFromPrev": 1.7,
         "changeFromYearAgo": 5.7,
@@ -3400,8 +3395,7 @@
         },
         {
           "t": "2026-07",
-          "value": 120.6,
-          "provisional": true
+          "value": 120.6
         }
       ]
     },
@@ -3432,7 +3426,7 @@
       ],
       "movingAverage": null,
       "releaseSchedule": "経済産業省が対象月の翌月末ごろ8:30に速報を公表、翌々月中旬に確報。",
-      "nextRelease": "2026-09-30",
+      "nextRelease": "2026-10-30",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -3441,12 +3435,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
-          "value": 104.4,
-          "provisional": false
+          "t": "2026-08",
+          "value": 102.6,
+          "provisional": true
         },
-        "changeFromPrev": -0.2,
-        "changeFromYearAgo": 3.9,
+        "changeFromPrev": -1.8,
+        "changeFromYearAgo": 3.4,
         "min": {
           "t": "1978-02",
           "value": 69
@@ -3455,7 +3449,7 @@
           "t": "2007-10",
           "value": 132
         },
-        "count": 583,
+        "count": 584,
         "start": "1978-01"
       },
       "points": [
@@ -5790,6 +5784,11 @@
         {
           "t": "2026-07",
           "value": 104.4
+        },
+        {
+          "t": "2026-08",
+          "value": 102.6,
+          "provisional": true
         }
       ]
     },
@@ -6891,7 +6890,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "国土交通省が対象月の翌月末ごろに公表。",
-      "nextRelease": "2026-09-30",
+      "nextRelease": "2026-10-30",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -6900,12 +6899,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
-          "value": 64493,
+          "t": "2026-08",
+          "value": 62759,
           "provisional": false
         },
-        "changeFromPrev": -1043,
-        "changeFromYearAgo": 5060,
+        "changeFromPrev": -1734,
+        "changeFromYearAgo": 3171,
         "min": {
           "t": "2025-05",
           "value": 46153
@@ -6914,7 +6913,7 @@
           "t": "1987-11",
           "value": 151802
         },
-        "count": 523,
+        "count": 524,
         "start": "1983-01"
       },
       "points": [
@@ -9009,6 +9008,10 @@
         {
           "t": "2026-07",
           "value": 64493
+        },
+        {
+          "t": "2026-08",
+          "value": 62759
         }
       ]
     },
@@ -31566,7 +31569,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-09-29",
+      "nextRelease": "2026-10-01",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -31575,12 +31578,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09-24",
-          "value": 158.22,
+          "t": "2026-09-28",
+          "value": 157.23,
           "provisional": false
         },
-        "changeFromPrev": 0.73,
-        "changeFromYearAgo": 10.17,
+        "changeFromPrev": -0.87,
+        "changeFromYearAgo": 7.39,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -31589,7 +31592,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2620,
+        "count": 2622,
         "start": "2016-01-04"
       },
       "points": [
@@ -42072,6 +42075,14 @@
         {
           "t": "2026-09-24",
           "value": 158.22
+        },
+        {
+          "t": "2026-09-25",
+          "value": 158.1
+        },
+        {
+          "t": "2026-09-28",
+          "value": 157.23
         }
       ]
     },
@@ -42096,7 +42107,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "取引時間中は常時更新。日次終値を翌営業日にかけてFRED経由で取得・反映。",
-      "nextRelease": "2026-09-29",
+      "nextRelease": "2026-10-01",
       "nextReleaseKind": "official",
       "source": {
         "provider": "FRED（セントルイス連邦準備銀行）",
@@ -42105,12 +42116,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09-28",
-          "value": 65877.62,
+          "t": "2026-09-30",
+          "value": 66753.72,
           "provisional": false
         },
-        "changeFromPrev": -486.58,
-        "changeFromYearAgo": 20522.63,
+        "changeFromPrev": 1272.45,
+        "changeFromYearAgo": 21821.09,
         "min": {
           "t": "2016-06-24",
           "value": 14952.02
@@ -42119,7 +42130,7 @@
           "t": "2026-06-25",
           "value": 72366.34
         },
-        "count": 2622,
+        "count": 2624,
         "start": "2016-01-04"
       },
       "points": [
@@ -52610,6 +52621,14 @@
         {
           "t": "2026-09-28",
           "value": 65877.62
+        },
+        {
+          "t": "2026-09-29",
+          "value": 65481.27
+        },
+        {
+          "t": "2026-09-30",
+          "value": 66753.72
         }
       ]
     },
