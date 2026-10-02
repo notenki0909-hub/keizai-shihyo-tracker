@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T13:48:31.818Z",
+  "generatedAt": "2026-10-02T13:04:52.821Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 21,
@@ -67,29 +67,20 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-10-01T13:48:31.821Z",
+    "generatedAt": "2026-10-02T13:04:52.826Z",
     "stats": {
       "total": 21,
-      "improving": 6,
-      "worsening": 7,
+      "improving": 4,
+      "worsening": 9,
       "neutral": 8,
-      "surpriseCount": 3
+      "surpriseCount": 2
     },
-    "headline": "21指標中、改善傾向が6件、悪化傾向が7件、横ばい・中立が8件です。",
+    "headline": "21指標中、改善傾向が4件、悪化傾向が9件、横ばい・中立が8件です。",
     "improvingList": [
       {
         "id": "coincident_ci",
         "name": "景気動向指数 CI一致指数",
         "category": "景気",
-        "period": {
-          "from": "2026-06",
-          "to": "2026-07"
-        }
-      },
-      {
-        "id": "unemployment_rate",
-        "name": "完全失業率",
-        "category": "雇用・所得",
         "period": {
           "from": "2026-06",
           "to": "2026-07"
@@ -111,15 +102,6 @@
         "period": {
           "from": "2026-06",
           "to": "2026-07"
-        }
-      },
-      {
-        "id": "nikkei225",
-        "name": "日経平均株価",
-        "category": "為替・市場",
-        "period": {
-          "from": "2026-09-30",
-          "to": "2026-10-01"
         }
       },
       {
@@ -170,12 +152,21 @@
         }
       },
       {
+        "id": "unemployment_rate",
+        "name": "完全失業率",
+        "category": "雇用・所得",
+        "period": {
+          "from": "2026-07",
+          "to": "2026-08"
+        }
+      },
+      {
         "id": "new_job_openings_ratio",
         "name": "新規求人倍率",
         "category": "雇用・所得",
         "period": {
-          "from": "2026-06",
-          "to": "2026-07"
+          "from": "2026-07",
+          "to": "2026-08"
         }
       },
       {
@@ -185,6 +176,15 @@
         "period": {
           "from": "2026-06",
           "to": "2026-07"
+        }
+      },
+      {
+        "id": "nikkei225",
+        "name": "日経平均株価",
+        "category": "為替・市場",
+        "period": {
+          "from": "2026-10-01",
+          "to": "2026-10-02"
         }
       },
       {
@@ -221,8 +221,8 @@
         "name": "有効求人倍率",
         "category": "雇用・所得",
         "period": {
-          "from": "2026-06",
-          "to": "2026-07"
+          "from": "2026-07",
+          "to": "2026-08"
         }
       },
       {
@@ -248,8 +248,8 @@
         "name": "マネタリーベース",
         "category": "金利",
         "period": {
-          "from": "2026-07",
-          "to": "2026-08"
+          "from": "2026-08",
+          "to": "2026-09"
         }
       },
       {
@@ -257,8 +257,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-09-28",
-          "to": "2026-09-29"
+          "from": "2026-09-29",
+          "to": "2026-09-30"
         }
       },
       {
@@ -331,14 +331,8 @@
         "period": null
       },
       {
-        "id": "jobs_to_applicants_ratio",
-        "name": "有効求人倍率",
-        "category": "雇用・所得",
-        "period": null
-      },
-      {
-        "id": "new_job_openings_ratio",
-        "name": "新規求人倍率",
+        "id": "unemployment_rate",
+        "name": "完全失業率",
         "category": "雇用・所得",
         "period": null
       },
@@ -391,16 +385,6 @@
         }
       },
       {
-        "id": "unemployment_rate",
-        "name": "完全失業率",
-        "category": "雇用・所得",
-        "reference": {
-          "label": "構造的失業率の目安 2.5%",
-          "value": 2.5,
-          "current": 2.4
-        }
-      },
-      {
         "id": "jobs_to_applicants_ratio",
         "name": "有効求人倍率",
         "category": "雇用・所得",
@@ -432,6 +416,16 @@
       }
     ],
     "currentUnfavorableList": [
+      {
+        "id": "unemployment_rate",
+        "name": "完全失業率",
+        "category": "雇用・所得",
+        "reference": {
+          "label": "構造的失業率の目安 2.5%",
+          "value": 2.5,
+          "current": 2.5
+        }
+      },
       {
         "id": "trade_balance",
         "name": "貿易収支",
@@ -541,6 +535,13 @@
     ],
     "statusFindings": [
       {
+        "id": "unemployment_rate",
+        "name": "完全失業率",
+        "category": "雇用・所得",
+        "detail": "目安「構造的失業率の目安 2.5%」を上回っており、注意が必要な水準です。",
+        "text": "完全失業率は現在、目安「構造的失業率の目安 2.5%」を上回っており、注意が必要な水準です。"
+      },
+      {
         "id": "trade_balance",
         "name": "貿易収支",
         "category": "対外",
@@ -556,15 +557,6 @@
       }
     ],
     "surpriseFindings": [
-      {
-        "id": "nikkei225",
-        "name": "日経平均株価",
-        "category": "為替・市場",
-        "z": 4.6,
-        "level": "high",
-        "detail": "非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=4.6）。",
-        "text": "日経平均株価で非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=4.6）。"
-      },
       {
         "id": "current_account",
         "name": "経常収支",
@@ -626,6 +618,46 @@
         "text": "新設住宅着工戸数は、直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。"
       },
       {
+        "id": "jobs_to_applicants_ratio",
+        "name": "有効求人倍率",
+        "category": "雇用・所得",
+        "favorable": true,
+        "flipped": true,
+        "proximity": 100,
+        "period": {
+          "recent": {
+            "from": "2026-06",
+            "to": "2026-08"
+          },
+          "prior": {
+            "from": "2026-03",
+            "to": "2026-05"
+          }
+        },
+        "detail": "直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から改善方向に転じました（転換点を通過）。",
+        "text": "有効求人倍率は、直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から改善方向に転じました（転換点を通過）。"
+      },
+      {
+        "id": "new_job_openings_ratio",
+        "name": "新規求人倍率",
+        "category": "雇用・所得",
+        "favorable": false,
+        "flipped": true,
+        "proximity": 100,
+        "period": {
+          "recent": {
+            "from": "2026-06",
+            "to": "2026-08"
+          },
+          "prior": {
+            "from": "2026-03",
+            "to": "2026-05"
+          }
+        },
+        "detail": "直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。",
+        "text": "新規求人倍率は、直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。"
+      },
+      {
         "id": "current_account",
         "name": "経常収支",
         "category": "対外",
@@ -654,16 +686,16 @@
         "proximity": 100,
         "period": {
           "recent": {
-            "from": "2026-09-15",
-            "to": "2026-10-01"
+            "from": "2026-09-16",
+            "to": "2026-10-02"
           },
           "prior": {
-            "from": "2026-09-01",
-            "to": "2026-09-14"
+            "from": "2026-09-02",
+            "to": "2026-09-15"
           }
         },
-        "detail": "直近（2026-09-15〜2026-10-01）の傾向が、その前（2026-09-01〜2026-09-14）から改善方向に転じました（転換点を通過）。",
-        "text": "日経平均株価は、直近（2026-09-15〜2026-10-01）の傾向が、その前（2026-09-01〜2026-09-14）から改善方向に転じました（転換点を通過）。"
+        "detail": "直近（2026-09-16〜2026-10-02）の傾向が、その前（2026-09-02〜2026-09-15）から改善方向に転じました（転換点を通過）。",
+        "text": "日経平均株価は、直近（2026-09-16〜2026-10-02）の傾向が、その前（2026-09-02〜2026-09-15）から改善方向に転じました（転換点を通過）。"
       },
       {
         "id": "gdp_real_growth",
@@ -684,26 +716,6 @@
         },
         "detail": "直近（2026 Q1〜2026 Q2）は改善方向ですが、その前（2025 Q3〜2025 Q4）と比べて勢いが50%まで弱まっています。改善の勢いが鈍化しており、今後の反転に注意が必要です。",
         "text": "実質GDP成長率は直近（2026 Q1〜2026 Q2）改善方向ですが、その前（2025 Q3〜2025 Q4）と比べて勢いが50%まで弱まっています。改善の勢いが鈍化しており、今後の反転に注意が必要です。"
-      },
-      {
-        "id": "unemployment_rate",
-        "name": "完全失業率",
-        "category": "雇用・所得",
-        "favorable": true,
-        "flipped": false,
-        "proximity": 50,
-        "period": {
-          "recent": {
-            "from": "2026-05",
-            "to": "2026-07"
-          },
-          "prior": {
-            "from": "2026-02",
-            "to": "2026-04"
-          }
-        },
-        "detail": "直近（2026-05〜2026-07）は改善方向ですが、その前（2026-02〜2026-04）と比べて勢いが50%まで弱まっています。改善の勢いが鈍化しており、今後の反転に注意が必要です。",
-        "text": "完全失業率は直近（2026-05〜2026-07）改善方向ですが、その前（2026-02〜2026-04）と比べて勢いが50%まで弱まっています。改善の勢いが鈍化しており、今後の反転に注意が必要です。"
       }
     ],
     "recoverySignal": null,
@@ -737,8 +749,8 @@
       "text": "先行指標とされる4指標（機械受注（船舶・電力除く民需）・新設住宅着工戸数・新規求人倍率・日経平均株価）のうち、同時に改善方向にあるのは1件にとどまり、明確な回復の兆しは見られません。 先行指標のみで構成しているため、実際に生産・雇用へ波及する前の“気配”の段階です。一致・遅行指標（⚠️注目ポイント・🔄トレンド転換シグナル）で裏付けを確認してください。"
     },
     "leadingRecessionSignal": {
-      "active": false,
-      "count": 2,
+      "active": true,
+      "count": 3,
       "total": 4,
       "items": [
         {
@@ -754,7 +766,7 @@
         {
           "id": "new_job_openings_ratio",
           "name": "新規求人倍率",
-          "contributing": false
+          "contributing": true
         },
         {
           "id": "nikkei225",
@@ -762,7 +774,7 @@
           "contributing": false
         }
       ],
-      "text": "先行指標とされる4指標（機械受注（船舶・電力除く民需）・新設住宅着工戸数・新規求人倍率・日経平均株価）のうち、同時に悪化方向にあるのは2件にとどまり、明確な後退の兆しは見られません。 先行指標のみで構成しているため、実際に生産・雇用へ波及する前の“気配”の段階です。一致・遅行指標（⚠️注目ポイント・🔄トレンド転換シグナル）で裏付けを確認してください。"
+      "text": "内閣府が先行指数の構成系列として認定する概念に対応する4指標（機械受注（船舶・電力除く民需）・新設住宅着工戸数・新規求人倍率・日経平均株価）のうち3件が同時に悪化方向にあり、景気後退の兆しを示唆するシグナルが重なっています。 先行指標のみで構成しているため、実際に生産・雇用へ波及する前の“気配”の段階です。一致・遅行指標（⚠️注目ポイント・🔄トレンド転換シグナル）で裏付けを確認してください。"
     }
   },
   "indicators": [
@@ -13108,7 +13120,7 @@
       ],
       "movingAverage": null,
       "releaseSchedule": "総務省統計局が対象月の翌月末（月末最終営業日）8:30に公表。有効求人倍率と同日発表。",
-      "nextRelease": "2026-09-30",
+      "nextRelease": "2026-10-30",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -13117,12 +13129,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
-          "value": 2.4,
+          "t": "2026-08",
+          "value": 2.5,
           "provisional": false
         },
-        "changeFromPrev": -0.1,
-        "changeFromYearAgo": 0,
+        "changeFromPrev": 0.1,
+        "changeFromYearAgo": -0.1,
         "min": {
           "t": "1968-11",
           "value": 1
@@ -13131,7 +13143,7 @@
           "t": "2002-06",
           "value": 5.5
         },
-        "count": 883,
+        "count": 884,
         "start": "1953-01"
       },
       "points": [
@@ -16666,6 +16678,10 @@
         {
           "t": "2026-07",
           "value": 2.4
+        },
+        {
+          "t": "2026-08",
+          "value": 2.5
         }
       ]
     },
@@ -16696,7 +16712,7 @@
       ],
       "movingAverage": null,
       "releaseSchedule": "厚生労働省が対象月の翌月末ごろ8:30に公表（完全失業率と同日）。",
-      "nextRelease": "2026-09-30",
+      "nextRelease": "2026-10-30",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -16705,12 +16721,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
+          "t": "2026-08",
           "value": 1.18,
           "provisional": false
         },
         "changeFromPrev": 0,
-        "changeFromYearAgo": -0.04,
+        "changeFromYearAgo": -0.03,
         "min": {
           "t": "2009-08",
           "value": 0.42
@@ -16719,7 +16735,7 @@
           "t": "1973-11",
           "value": 1.93
         },
-        "count": 763,
+        "count": 764,
         "start": "1963-01"
       },
       "points": [
@@ -19774,6 +19790,10 @@
         {
           "t": "2026-07",
           "value": 1.18
+        },
+        {
+          "t": "2026-08",
+          "value": 1.18
         }
       ]
     },
@@ -19798,7 +19818,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "厚生労働省が対象月の翌月末ごろ8:30に公表（有効求人倍率・完全失業率と同日）。",
-      "nextRelease": "2026-09-30",
+      "nextRelease": "2026-10-30",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -19807,12 +19827,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
-          "value": 2.1,
+          "t": "2026-08",
+          "value": 2.06,
           "provisional": false
         },
-        "changeFromPrev": -0.06,
-        "changeFromYearAgo": -0.08,
+        "changeFromPrev": -0.04,
+        "changeFromYearAgo": -0.09,
         "min": {
           "t": "2009-05",
           "value": 0.76
@@ -19821,7 +19841,7 @@
           "t": "2019-04",
           "value": 2.49
         },
-        "count": 763,
+        "count": 764,
         "start": "1963-01"
       },
       "points": [
@@ -22876,6 +22896,10 @@
         {
           "t": "2026-07",
           "value": 2.1
+        },
+        {
+          "t": "2026-08",
+          "value": 2.06
         }
       ]
     },
@@ -29382,7 +29406,7 @@
       ],
       "movingAverage": null,
       "releaseSchedule": "日本銀行が対象月終了後、翌月初旬に公表。",
-      "nextRelease": "2026-10-07",
+      "nextRelease": "2026-11-09",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -29391,12 +29415,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-08",
-          "value": -15.7,
+          "t": "2026-09",
+          "value": -15.2,
           "provisional": false
         },
-        "changeFromPrev": -1.9,
-        "changeFromYearAgo": -11.6,
+        "changeFromPrev": 0.5,
+        "changeFromYearAgo": -9,
         "min": {
           "t": "2006-11",
           "value": -22.3
@@ -29405,7 +29429,7 @@
           "t": "2014-02",
           "value": 55.7
         },
-        "count": 533,
+        "count": 534,
         "start": "1982-04"
       },
       "points": [
@@ -31540,6 +31564,10 @@
         {
           "t": "2026-08",
           "value": -15.7
+        },
+        {
+          "t": "2026-09",
+          "value": -15.2
         }
       ]
     },
@@ -31564,7 +31592,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-10-02",
+      "nextRelease": "2026-10-05",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -31573,12 +31601,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09-29",
-          "value": 157.38,
+          "t": "2026-09-30",
+          "value": 156.91,
           "provisional": false
         },
-        "changeFromPrev": 0.15,
-        "changeFromYearAgo": 8.81,
+        "changeFromPrev": -0.47,
+        "changeFromYearAgo": 8.84,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -31587,7 +31615,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2623,
+        "count": 2624,
         "start": "2016-01-04"
       },
       "points": [
@@ -42082,6 +42110,10 @@
         {
           "t": "2026-09-29",
           "value": 157.38
+        },
+        {
+          "t": "2026-09-30",
+          "value": 156.91
         }
       ]
     },
@@ -42106,7 +42138,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "取引時間中は常時更新。日次終値を翌営業日にかけてFRED経由で取得・反映。",
-      "nextRelease": "2026-10-02",
+      "nextRelease": "2026-10-05",
       "nextReleaseKind": "official",
       "source": {
         "provider": "FRED（セントルイス連邦準備銀行）",
@@ -42115,12 +42147,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-10-01",
-          "value": 68956.72,
+          "t": "2026-10-02",
+          "value": 68309.46,
           "provisional": false
         },
-        "changeFromPrev": 2203,
-        "changeFromYearAgo": 24405.87,
+        "changeFromPrev": -647.26,
+        "changeFromYearAgo": 23372.73,
         "min": {
           "t": "2016-06-24",
           "value": 14952.02
@@ -42129,7 +42161,7 @@
           "t": "2026-06-25",
           "value": 72366.34
         },
-        "count": 2625,
+        "count": 2626,
         "start": "2016-01-04"
       },
       "points": [
@@ -52632,6 +52664,10 @@
         {
           "t": "2026-10-01",
           "value": 68956.72
+        },
+        {
+          "t": "2026-10-02",
+          "value": 68309.46
         }
       ]
     },
