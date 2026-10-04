@@ -1098,6 +1098,30 @@ a {
   color: var(--text-dim);
 }
 
+.ev-help {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  line-height: 1.75;
+  color: var(--text-dim);
+}
+
+.ev-result .ev-help {
+  margin: 10px 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+
+.ev-intro {
+  padding: 12px 14px;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  border-radius: 10px;
+}
+
+.ev-intro .ev-help {
+  margin: 0;
+}
+
 .ev-section h3 {
   margin: 0 0 8px;
   font-size: 0.92rem;
