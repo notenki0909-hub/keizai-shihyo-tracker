@@ -38,13 +38,19 @@ jobs:
         if: github.event_name != 'push'
         run: npm run fetch
 
+      # 日銀の金融政策決定会合などのイベント。日銀ページの構造変更等で失敗しても、指標データの更新・公開は止めない
+      - name: イベントデータを取得
+        if: github.event_name != 'push'
+        continue-on-error: true
+        run: npm run fetch:events
+
       - name: 変更があればコミット
         if: github.event_name != 'push'
         run: |
-          if ! git diff --quiet -- public/data/indicators.json; then
+          git add public/data/*.json
+          if ! git diff --cached --quiet; then
             git config user.name  "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add public/data/indicators.json
             git commit -m "chore(data): 経済指標データを更新 ($(date -u +%Y-%m-%d))"
             git push
           else

@@ -6,11 +6,13 @@
   "description": "日本の主要経済指標トラッカー（統計ダッシュボード/e-Stat・利用登録不要）",
   "scripts": {
     "fetch": "node scripts/fetch-indicators.mjs",
+    "fetch:events": "node scripts/fetch-events.mjs",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "pdfjs-dist": "^4.10.38",
     "vite": "^5.4.10"
   },
   "dependencies": {

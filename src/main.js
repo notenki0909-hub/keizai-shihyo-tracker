@@ -8,6 +8,8 @@ import { isFavorite, toggleFavorite, getFavorites } from "./favorites.js";
 
 Chart.register(annotationPlugin, zoomPlugin);
 
+import { loadEvents, groupEventsByDate, eventPillHtml, renderEventDetail } from "./events.js";
+
 const DATA_URL = import.meta.env.BASE_URL + "data/indicators.json";
 const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "為替・市場"];
 
@@ -86,7 +88,25 @@ const state = {
   data: null,
   calMonth: new Date(Date.UTC(now.getFullYear(), now.getMonth(), 1)),
   favoritesOnly: false,
+  events: [], // 経済指標以外のイベント（events.json）。読み込みに失敗しても空配列のまま動く
+  calShowIndicators: loadCalPref("indicators"),
+  calShowEvents: loadCalPref("events"),
 };
+
+function loadCalPref(key) {
+  try {
+    return localStorage.getItem("keizai-tracker-cal-" + key) !== "off";
+  } catch {
+    return true;
+  }
+}
+function saveCalPref(key, on) {
+  try {
+    localStorage.setItem("keizai-tracker-cal-" + key, on ? "on" : "off");
+  } catch {
+    // 保存できなくても表示自体には影響しない
+  }
+}
 
 /* ---------- helpers ---------- */
 
@@ -718,7 +738,8 @@ function renderCalendar() {
   if (!el || !state.data) return;
 
   const byDate = new Map();
-  state.data.indicators.forEach((ind) => {
+  const eventsByDate = state.calShowEvents ? groupEventsByDate(state.events) : new Map();
+  (state.calShowIndicators ? state.data.indicators : []).forEach((ind) => {
     if (!ind.nextRelease) return;
     if (!byDate.has(ind.nextRelease)) byDate.set(ind.nextRelease, []);
     byDate.get(ind.nextRelease).push(ind);
@@ -733,12 +754,18 @@ function renderCalendar() {
   for (let i = 0; i < 42; i++) {
     const d = new Date(Date.UTC(year, month, 1 - startOffset + i));
     const dateStr = d.toISOString().slice(0, 10);
-    cells.push({ d, dateStr, inMonth: d.getUTCMonth() === month, items: byDate.get(dateStr) || [] });
+    cells.push({
+      d,
+      dateStr,
+      inMonth: d.getUTCMonth() === month,
+      items: byDate.get(dateStr) || [],
+      events: eventsByDate.get(dateStr) || [],
+    });
   }
   // 最終週が丸ごと翌月かつ発表予定もなければ間引く（5週で収まる月がほとんどのため）
   while (cells.length > 35) {
     const lastWeek = cells.slice(-7);
-    if (lastWeek.some((c) => c.inMonth || c.items.length)) break;
+    if (lastWeek.some((c) => c.inMonth || c.items.length || c.events.length)) break;
     cells.length -= 7;
   }
 
@@ -755,6 +782,7 @@ function renderCalendar() {
       ]
         .filter(Boolean)
         .join(" ");
+      const eventPills = c.events.map(eventPillHtml).join("");
       const pills = c.items
         .map((ind) => {
           const color = catColor(ind.category);
@@ -765,7 +793,7 @@ function renderCalendar() {
       return `
         <div class="${cls}">
           <span class="calendar__daynum">${c.d.getUTCDate()}</span>
-          <div class="calendar__pills">${pills}</div>
+          <div class="calendar__pills">${eventPills}${pills}</div>
         </div>`;
     })
     .join("");
@@ -779,12 +807,29 @@ function renderCalendar() {
         <button type="button" class="calendar__navbtn" id="cal-next" aria-label="次月">→</button>
       </div>
     </div>
+    <div class="calendar__filters" role="group" aria-label="カレンダーの表示内容">
+      <button type="button" class="calendar__toggle" id="cal-toggle-ind" aria-pressed="${state.calShowIndicators}">📊 経済指標</button>
+      <button type="button" class="calendar__toggle calendar__toggle--event" id="cal-toggle-ev" aria-pressed="${state.calShowEvents}">🏦 イベント（日銀会合など）</button>
+    </div>
     <div class="calendar__weekdays">${weekdayHtml}</div>
     <div class="calendar__grid">${cellsHtml}</div>
     <p class="calendar__note">※ 日経平均株価以外はFREDのような公式メタデータがないため、発表スケジュールの目安からの推定日です。詳しくは<a href="./guide.html">このツールの見方</a>を参照。</p>`;
 
   el.querySelectorAll(".calendar__pill").forEach((btn) => {
     btn.addEventListener("click", () => openDetail(btn.dataset.id));
+  });
+  el.querySelectorAll(".calendar__pill--event").forEach((btn) => {
+    btn.addEventListener("click", () => openEventDetail(btn.dataset.eventId));
+  });
+  document.getElementById("cal-toggle-ind").addEventListener("click", () => {
+    state.calShowIndicators = !state.calShowIndicators;
+    saveCalPref("indicators", state.calShowIndicators);
+    renderCalendar();
+  });
+  document.getElementById("cal-toggle-ev").addEventListener("click", () => {
+    state.calShowEvents = !state.calShowEvents;
+    saveCalPref("events", state.calShowEvents);
+    renderCalendar();
   });
   document.getElementById("cal-prev").addEventListener("click", () => {
     state.calMonth = shiftMonth(state.calMonth, -1);
@@ -794,6 +839,13 @@ function renderCalendar() {
     state.calMonth = shiftMonth(state.calMonth, 1);
     renderCalendar();
   });
+}
+
+function openEventDetail(id) {
+  const ev = state.events.find((e) => e.id === id);
+  if (!ev) return;
+  document.getElementById("event-detail-content").innerHTML = renderEventDetail(ev);
+  document.getElementById("event-detail").showModal();
 }
 
 /* ---------- data export ---------- */
@@ -1358,6 +1410,12 @@ async function init() {
     renderGrid();
   });
 
+  const evDlg = document.getElementById("event-detail");
+  document.getElementById("event-detail-close").addEventListener("click", () => evDlg.close());
+  evDlg.addEventListener("click", (e) => {
+    if (e.target === evDlg) evDlg.close();
+  });
+
   const dlg = document.getElementById("detail");
   document.getElementById("detail-close").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", (e) => {
@@ -1387,6 +1445,8 @@ async function init() {
     drawChart();
   });
 
+  const eventsPromise = loadEvents(); // 指標データと並行して取得（失敗しても指標表示には影響しない）
+
   try {
     const res = await fetch(DATA_URL, { cache: "no-cache" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -1402,6 +1462,7 @@ async function init() {
   document.getElementById("meta-line").textContent =
     `最終更新 ${genStr}　／　${state.data.indicatorCount} 指標　／　毎回 API から全期間を再取得`;
 
+  state.events = await eventsPromise;
   renderGrid();
   renderCategoryGuide();
   renderCalendar();

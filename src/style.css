@@ -840,7 +840,7 @@ a {
 
 .calendar__weekdays {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 4px;
   margin-bottom: 4px;
   font-size: 0.75rem;
@@ -850,11 +850,12 @@ a {
 
 .calendar__grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 4px;
 }
 
 .calendar__cell {
+  min-width: 0; /* 長いイベント名で列幅が広がり、スマホで横スクロールになるのを防ぐ */
   min-height: 64px;
   padding: 6px 5px;
   border: 1px solid var(--border);
@@ -930,6 +931,257 @@ a {
     font-size: 0.62rem;
     padding: 1px 4px;
   }
+}
+
+/* ---------- calendar: events (FOMC・FRB講演など) ---------- */
+.calendar__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.calendar__toggle {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-dim);
+  border-radius: 999px;
+  padding: 3px 11px;
+  font-size: 0.76rem;
+  cursor: pointer;
+}
+
+.calendar__toggle[aria-pressed="true"] {
+  color: var(--text);
+  font-weight: 700;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+}
+
+.calendar__pill--event {
+  --ev: var(--text-dim);
+  border-radius: 999px;
+  color: var(--ev);
+  background: color-mix(in srgb, var(--ev) 13%, transparent);
+  border-color: color-mix(in srgb, var(--ev) 45%, transparent);
+}
+
+.calendar__pill--event:hover {
+  background: color-mix(in srgb, var(--ev) 24%, transparent);
+}
+
+.calendar__pill--ev-fomc { --ev: var(--cat-金利); }
+.calendar__pill--ev-minutes { --ev: var(--cat-対外); }
+.calendar__pill--ev-beige { --ev: var(--cat-雇用・所得); }
+.calendar__pill--ev-speech,
+.calendar__pill--ev-testimony { --ev: var(--cat-物価); }
+.calendar__pill--ev-jackson { --ev: var(--cat-為替・市場); }
+.calendar__pill--ev-boj { --ev: var(--cat-金利); }
+.calendar__pill--ev-boj_outlook { --ev: var(--cat-景気); }
+.calendar__pill--ev-boj_opinion,
+.calendar__pill--ev-boj_minutes { --ev: var(--cat-対外); }
+.calendar__pill--ev-boj_press { --ev: var(--cat-物価); }
+
+/* 発表済み（結果が確認できるもの）は枠を実線で強調 */
+.calendar__pill--event.calendar__pill--done {
+  border-color: var(--ev);
+}
+
+/* ---------- event detail dialog ---------- */
+.event-detail {
+  width: min(720px, calc(100vw - 32px));
+}
+
+.event-detail__head {
+  padding: 24px 24px 0;
+}
+
+.event-detail__head h2 {
+  margin: 12px 0 6px;
+  font-size: 1.25rem;
+}
+
+.ev-tag {
+  --ev: var(--text-dim);
+  color: var(--ev);
+  background: color-mix(in srgb, var(--ev) 14%, transparent);
+}
+.ev-tag--fomc { --ev: var(--cat-金利); }
+.ev-tag--minutes { --ev: var(--cat-対外); }
+.ev-tag--beige { --ev: var(--cat-雇用・所得); }
+.ev-tag--speech,
+.ev-tag--testimony { --ev: var(--cat-物価); }
+.ev-tag--jackson { --ev: var(--cat-為替・市場); }
+.ev-tag--boj { --ev: var(--cat-金利); }
+.ev-tag--boj_outlook { --ev: var(--cat-景気); }
+.ev-tag--boj_opinion,
+.ev-tag--boj_minutes { --ev: var(--cat-対外); }
+.ev-tag--boj_press { --ev: var(--cat-物価); }
+
+.ev-status {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 9px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.ev-status--done {
+  color: var(--pos);
+  border-color: var(--pos);
+}
+
+.event-detail__when {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.event-detail__sub {
+  margin: 6px 0 0;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.event-detail__body {
+  padding: 16px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ev-result {
+  padding: 14px 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--cat-金利);
+  border-radius: 10px;
+}
+
+.ev-result__label {
+  font-size: 0.74rem;
+  color: var(--text-dim);
+}
+
+.ev-result__main {
+  margin-top: 4px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.ev-result__main--sm {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.ev-result__badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--neutral);
+  color: var(--neutral);
+}
+.ev-result__badge--hike { color: var(--neg); border-color: var(--neg); }
+.ev-result__badge--cut { color: var(--pos); border-color: var(--pos); }
+
+.ev-result__meta {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.ev-section h3 {
+  margin: 0 0 8px;
+  font-size: 0.92rem;
+}
+
+.ev-diff {
+  margin: 0;
+  padding: 12px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: var(--text-dim);
+}
+
+.ev-diff ins {
+  color: var(--pos);
+  font-weight: 700;
+  text-decoration: underline;
+  background: color-mix(in srgb, var(--pos) 12%, transparent);
+}
+
+.ev-diff del {
+  color: var(--neg);
+  background: color-mix(in srgb, var(--neg) 10%, transparent);
+}
+
+.ev-diff__skip {
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+.ev-sep__wrap {
+  overflow-x: auto;
+}
+
+.ev-sep {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.ev-sep th,
+.ev-sep td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+.ev-sep th[scope="row"] {
+  text-align: left;
+  font-weight: 600;
+}
+
+.ev-sep thead th {
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.ev-sep__prev {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--text-faint);
+}
+
+.ev-links {
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: 0.88rem;
+  line-height: 1.9;
+}
+
+.ev-note {
+  margin: 8px 0 0;
+  font-size: 0.74rem;
+  color: var(--text-faint);
+  line-height: 1.6;
+}
+
+.ev-note--foot {
+  margin-top: 0;
 }
 
 /* ---------- category guide ---------- */
