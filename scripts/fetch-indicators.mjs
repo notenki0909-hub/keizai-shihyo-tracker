@@ -15,6 +15,8 @@ import { fetchForeignInvestorFlow } from "./fetch-jpx-investor-type.mjs";
 import { fetchUsdJpyDaily } from "./fetch-boj-fx-daily.mjs";
 import { fetchFredSeries } from "./fetch-fred-series.mjs";
 import { fetchNextReleaseDate } from "./fetch-fred-release-date.mjs";
+import { fetchTankanDi } from "./fetch-boj-tankan.mjs";
+import { fetchWatchersDi } from "./fetch-cao-watchers.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = resolve(__dirname, "../public/data");
@@ -109,6 +111,25 @@ function estimateNextRelease(ind, latestT) {
     if (release.getUTCDay() === 6) release = addDays(release, 2);
     if (release.getUTCDay() === 0) release = addDays(release, 1);
     return toISO(release);
+  }
+
+  if (rule.type === "annualDates") {
+    // 毎年ほぼ決まった月日に公表される指標（例：日銀短観は4/1・7/1・10/1・12月中旬）。
+    // 今日より後で最も近い日付を返す。土日は翌営業日（月曜）にずらす。
+    const now = new Date();
+    const todayMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+    const candidates = [];
+    for (let y = now.getUTCFullYear(); y <= now.getUTCFullYear() + 1; y++) {
+      for (const md of rule.dates) {
+        const [mm, dd] = md.split("-").map(Number);
+        let d = new Date(Date.UTC(y, mm - 1, dd));
+        if (d.getUTCDay() === 6) d = addDays(d, 2);
+        if (d.getUTCDay() === 0) d = addDays(d, 1);
+        if (d.getTime() > todayMs) candidates.push(d);
+      }
+    }
+    candidates.sort((a, b) => a - b);
+    return candidates.length ? toISO(candidates[0]) : null;
   }
 
   return null; // rule.type === "fred" はFRED本体から別途取得するためここでは扱わない
@@ -674,8 +695,18 @@ async function main() {
           points = await fetchUsdJpyDaily();
           source = { provider: "日本銀行 時系列統計データ検索サイト", statName: ind.api.statName, sourceUrl: ind.api.sourceUrl };
           break;
+        case "boj-tankan":
+          points = await fetchTankanDi(ind.api.seriesCode);
+          source = { provider: "日本銀行 時系列統計データ検索サイト", statName: ind.api.statName, sourceUrl: ind.api.sourceUrl };
+          break;
+        case "cao-watchers":
+          points = await fetchWatchersDi();
+          source = { provider: "内閣府 景気ウォッチャー調査", statName: ind.api.statName, sourceUrl: ind.api.sourceUrl };
+          break;
         case "fred-csv":
           points = await fetchFredSeries(ind.api.seriesId);
+          // 月次系列は他の月次指標と同じ "YYYY-MM" 表記にそろえる（日次はそのまま）
+          if (ind.frequency === "monthly") points = points.map((p) => ({ ...p, t: p.date.slice(0, 7) }));
           source = { provider: "FRED（セントルイス連邦準備銀行）", statName: ind.api.statName, sourceUrl: ind.api.sourceUrl };
           break;
         case "computed-ratio": {

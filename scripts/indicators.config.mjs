@@ -622,6 +622,178 @@ export const INDICATORS = [
       sourceUrl: "https://www.jpx.co.jp/markets/statistics-equities/investor-type/00-01.html",
     },
   },
+  {
+    id: "tankan_large_mfg",
+    importance: 5,
+    name: "日銀短観 業況判断DI（大企業・製造業）",
+    shortName: "短観（大企業製造業）",
+    category: "景気",
+    unit: "ポイント",
+    unitLabel: "DI（「良い」-「悪い」、%ポイント）",
+    frequency: "quarterly",
+    seasonalAdjustment: "原数値",
+    betterWhen: "up",
+    description:
+      "日本銀行が年4回、全国の約1万社の企業に行う『全国企業短期経済観測調査（短観）』のうち、大企業・製造業の" +
+      "業況判断DI。自社の業況が『良い』と答えた企業の割合から『悪い』と答えた企業の割合を引いた値で、日本の" +
+      "企業の景況感を示す代表的な指標。日銀の金融政策判断でも重視され、結果は円相場や株価を動かすこともある。",
+    judgment: {
+      summary: "0を上回れば『良い』と感じる企業が多く、下回れば『悪い』と感じる企業が多い。水準だけでなく、前回調査からの上がり下がりを見る。",
+      goodWhen: "プラス圏で、前回調査から改善している状態（企業の景況感が良い）。",
+      badWhen: "マイナス圏に入る、または前回から大きく悪化している状態（企業が先行きに慎重になっている）。",
+      caveat: "輸出企業が多い製造業は、為替・海外景気の影響を強く受ける。内需中心の非製造業と合わせて見ると全体像がつかめる。表示の「Q1〜Q4」は3・6・9・12月調査にあたる。",
+    },
+    referenceLines: [{ value: 0, label: "0＝「良い」と「悪い」が同数", kind: "neutral" }],
+    releaseSchedule: "日本銀行が年4回、3・6・9月調査は翌月1日ごろ（4月・7月・10月）、12月調査は12月中旬に公表。",
+    nextReleaseRule: { type: "annualDates", dates: ["04-01", "07-01", "10-01", "12-15"] },
+    api: {
+      provider: "boj-tankan",
+      seriesCode: "TK99F1000601GCQ01000",
+      statName: "全国企業短期経済観測調査 業況判断D.I.／大企業／製造業／実績",
+      sourceUrl: "https://www.stat-search.boj.or.jp/",
+    },
+  },
+  {
+    id: "tankan_large_nonmfg",
+    importance: 4,
+    name: "日銀短観 業況判断DI（大企業・非製造業）",
+    shortName: "短観（大企業非製造業）",
+    category: "景気",
+    unit: "ポイント",
+    unitLabel: "DI（「良い」-「悪い」、%ポイント）",
+    frequency: "quarterly",
+    seasonalAdjustment: "原数値",
+    betterWhen: "up",
+    description:
+      "日銀短観のうち、大企業・非製造業（小売・サービス・建設・運輸・不動産など）の業況判断DI。日本経済の" +
+      "大半を占めるサービス業を含み、国内の消費や観光（インバウンド）の動きが反映されやすい。製造業のDIと" +
+      "合わせて見ることで、輸出と内需のどちらが景況感を支えているかが分かる。",
+    judgment: {
+      summary: "0を上回れば『良い』と感じる企業が多く、下回れば『悪い』と感じる企業が多い。製造業と比べて、為替や海外景気の影響を受けにくい。",
+      goodWhen: "プラス圏で、前回調査から改善している状態（国内需要が堅調）。",
+      badWhen: "マイナス圏に入る、または前回から大きく悪化している状態（国内の消費や投資が弱い）。",
+      caveat: "業種が幅広く、人手不足や仕入れ価格の上昇が景況感を押し下げる局面もある。製造業DIと合わせて見る。",
+    },
+    referenceLines: [{ value: 0, label: "0＝「良い」と「悪い」が同数", kind: "neutral" }],
+    releaseSchedule: "日本銀行が年4回、3・6・9月調査は翌月1日ごろ（4月・7月・10月）、12月調査は12月中旬に公表。",
+    nextReleaseRule: { type: "annualDates", dates: ["04-01", "07-01", "10-01", "12-15"] },
+    api: {
+      provider: "boj-tankan",
+      seriesCode: "TK99F2000601GCQ01000",
+      statName: "全国企業短期経済観測調査 業況判断D.I.／大企業／非製造業／実績",
+      sourceUrl: "https://www.stat-search.boj.or.jp/",
+    },
+  },
+  {
+    id: "economy_watchers",
+    importance: 3,
+    name: "景気ウォッチャー調査（現状判断DI・全国）",
+    shortName: "景気ウォッチャー",
+    category: "景気",
+    unit: "",
+    unitLabel: "DI（50が横ばいの分かれ目）",
+    frequency: "monthly",
+    seasonalAdjustment: "季節調整値",
+    betterWhen: "up",
+    description:
+      "内閣府が毎月、タクシー運転手・小売店の店員・飲食店の経営者など、街角の景気を肌で感じる職業の約2,000人に" +
+      "行うアンケート調査から算出する、景気の現状判断DI（全国）。統計の数字に表れる前の『街の実感』を早く" +
+      "つかめるため、速報性の高い景気指標として注目される。",
+    judgment: {
+      summary: "50が『横ばい』の目安。50を上回れば景気が良くなっていると感じる人が多く、下回れば悪くなっていると感じる人が多い。",
+      goodWhen: "50を上回り、上昇している状態（街角の景気実感が改善している）。",
+      badWhen: "50を下回り、低下している状態（家計・企業・雇用の実感が悪化している）。",
+      caveat: "アンケートに基づく実感の指標のため、天候・物価・ニュースなど短期的な要因で振れやすい。実際の販売額や生産の統計と合わせて確認する。",
+    },
+    referenceLines: [{ value: 50, label: "50＝横ばいの分かれ目", kind: "neutral" }],
+    releaseSchedule: "内閣府が毎月、調査月の翌月上旬（8日前後）に公表。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 8 },
+    api: {
+      provider: "cao-watchers",
+      statName: "景気ウォッチャー調査 景気の現状判断DI（方向性）／全国・合計",
+      sourceUrl: "https://www5.cao.go.jp/keizai3/watcher.html",
+    },
+  },
+  {
+    id: "consumer_confidence_jp",
+    importance: 2,
+    name: "消費者信頼感（OECD総合指標・日本）",
+    shortName: "消費者信頼感",
+    category: "景気",
+    unit: "",
+    unitLabel: "指数（OECDの総合指標）",
+    frequency: "monthly",
+    seasonalAdjustment: "季節調整値",
+    betterWhen: "up",
+    description:
+      "OECD（経済協力開発機構）が、各国の消費者アンケート調査をもとに作成している『消費者信頼感』の総合指標の日本版。" +
+      "家計が暮らし向きや今後の収入・購買についてどう感じているかを示し、個人消費の先行きを探る材料になる。" +
+      "米セントルイス連銀（FRED）経由で取得している。",
+    judgment: {
+      summary: "数値が高いほど消費者の気持ちが明るく、低いほど慎重。絶対水準より、数か月単位で上向いているか下向いているかを見る。",
+      goodWhen: "数か月にわたって上昇している状態（消費者マインドの改善）。",
+      badWhen: "物価上昇や先行き不安で急に低下している状態。",
+      caveat: "実際の消費支出（家計調査など）とは、一時的にずれることがある。OECDの指標の更新時期は、各国の調査の公表に左右される。",
+    },
+    referenceLines: [],
+    releaseSchedule: "OECDが各国の調査をもとに毎月更新し、FRED経由で反映（公表日は不定期）。",
+    api: {
+      provider: "fred-csv",
+      seriesId: "CSCICP02JPM460S",
+      statName: "Consumer Opinion Surveys: Composite Consumer Confidence for Japan（OECD／配信：FRED）",
+      sourceUrl: "https://fred.stlouisfed.org/series/CSCICP02JPM460S",
+    },
+  },
+  {
+    id: "household_spending_yoy",
+    importance: 3,
+    name: "家計調査 実質消費支出（二人以上の世帯・前年同月比）",
+    shortName: "家計消費支出",
+    category: "景気",
+    unit: "%",
+    unitLabel: "前年同月比 %（物価を除いた実質）",
+    frequency: "monthly",
+    seasonalAdjustment: "原数値",
+    betterWhen: "up",
+    description:
+      "総務省『家計調査』による、二人以上の世帯の1か月あたり消費支出（物価の変動を除いた実質）の前年同月比。" +
+      "GDPの過半を占める個人消費の動きを、毎月つかむための代表的な統計。",
+    judgment: {
+      summary: "プラスなら前年より消費が増えており、マイナスなら減っている。単月でなく、数か月の傾向で見る。",
+      goodWhen: "プラス圏で推移している状態（賃金の伸びを背景に、家計の消費が増えている）。",
+      badWhen: "マイナスが続く状態（物価上昇で買い控えが広がるなど、消費が弱い）。",
+      caveat: "標本調査のため月ごとの振れが大きく、旅行・住宅関連など大きな支出や、天候・うるう年の影響も受ける。実質賃金・小売販売額と合わせて見ると確かめやすい。",
+    },
+    referenceLines: [{ value: 0, label: "0%＝前年と同水準", kind: "neutral" }],
+    releaseSchedule: "総務省が対象月の翌々月上旬（月初の金曜日ごろ）8:30に公表。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 38 },
+    api: { indicatorCode: "0704010101000230000", cycle: "1", rank: "2", sa: "1", statName: "家計調査" },
+  },
+  {
+    id: "tertiary_industry_activity",
+    importance: 3,
+    name: "第3次産業活動指数（季節調整値）",
+    shortName: "第3次産業活動",
+    category: "景気",
+    unit: "",
+    unitLabel: "指数（2020年=100）",
+    frequency: "monthly",
+    seasonalAdjustment: "季節調整値",
+    betterWhen: "up",
+    description:
+      "経済産業省が算出する、サービス業（運輸・卸売・小売・金融・情報通信・医療福祉など）全体の活動量を示す指数。" +
+      "日本のGDPの約7割はサービス業が占めるため、製造業が中心の鉱工業生産指数を補い、国内の景気の基調を確認するのに使う。",
+    judgment: {
+      summary: "指数が上昇していればサービス業の活動が拡大、低下していれば縮小している。水準よりも、数か月の方向性を見る。",
+      goodWhen: "数か月にわたって上昇している状態（国内のサービス消費・事業活動が活発）。",
+      badWhen: "数か月連続で低下している状態（国内需要の弱さ、または感染症・災害など外的要因の影響）。",
+      caveat: "最新月は速報値で、後から改定される。業種ごとに振れ方が違うため、全体の動きと合わせて内訳（小売・運輸・医療福祉など）も確認するとよい。",
+    },
+    referenceLines: [{ value: 100, label: "2020年平均=100", kind: "context" }],
+    releaseSchedule: "経済産業省が対象月の翌々月中旬ごろに公表。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 45 },
+    api: { indicatorCode: "0603100300000090010", cycle: "1", rank: "2", sa: "2", statName: "第3次産業活動指数" },
+  },
 ];
 
 export const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "為替・市場"];
