@@ -13,6 +13,14 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs";
 import { fetchText, stripTags, ymd, isoDate, addDays, diffTokens } from "./events-util.mjs";
+import {
+  bodyHeightOf,
+  statementItems,
+  outlookExcerpt,
+  opinionExcerpt,
+  minutesExcerpt,
+  pressExcerpt,
+} from "./boj-excerpts.mjs";
 
 const BASE = "https://www.boj.or.jp";
 const SCHEDULE_URL = `${BASE}/mopo/mpmsche_minu/index.htm`;
@@ -63,10 +71,11 @@ export function parseSchedule(html) {
   return meetings.sort((a, b) => a.end - b.end);
 }
 
-async function fetchPdfText(url) {
+/** PDFを行単位に分解して返す。[{ p, x, h, t }]（tは空白を除いたNFKC正規化済みの文字列） */
+async function fetchPdfLines(url, maxPages = Infinity) {
   let res;
   try {
-    res = await fetch(url, { signal: AbortSignal.timeout(60000) });
+    res = await fetch(url, { signal: AbortSignal.timeout(90000) });
   } catch {
     return null;
   }
@@ -78,24 +87,49 @@ async function fetchPdfText(url) {
       cMapPacked: true,
       standardFontDataUrl: resolve(PDFJS_DIR, "standard_fonts") + "/",
     }).promise;
-    const items = [];
-    for (let p = 1; p <= doc.numPages; p++) {
-      const tc = await (await doc.getPage(p)).getTextContent();
-      items.push(...tc.items);
-    }
-    // 本文は最も多く使われているフォント高さ。脚注・注記（より小さい文字）は除く
+    const pages = [];
     const count = new Map();
-    for (const it of items) if (it.height > 0) count.set(it.height, (count.get(it.height) ?? 0) + it.str.length);
-    const bodyHeight = [...count.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? 0;
-    return items
-      .filter((it) => it.height >= bodyHeight * 0.95)
-      .map((it) => it.str)
-      .join("")
-      .normalize("NFKC")
-      .replace(/\s+/g, "");
+    for (let p = 1; p <= Math.min(doc.numPages, maxPages); p++) {
+      const items = (await (await doc.getPage(p)).getTextContent()).items;
+      pages.push(items);
+      for (const it of items) if (it.height > 0) count.set(it.height, (count.get(it.height) ?? 0) + it.str.length);
+    }
+    const bodyH = [...count.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? 0;
+    const lines = [];
+    pages.forEach((items, idx) => {
+      const p = idx + 1;
+      let cur = "";
+      let x = null;
+      let h = 0;
+      const flush = () => {
+        const t = cur.normalize("NFKC").replace(/\s+/g, "");
+        if (t) lines.push({ p, x: x ?? 0, h, t });
+        cur = "";
+        x = null;
+        h = 0;
+      };
+      for (const it of items) {
+        // 脚注番号・「（注）」など、本文よりずっと小さい文字は取り込まない
+        const tiny = it.height > 0 && it.height < bodyH * 0.8;
+        if (!tiny) {
+          if (x === null && it.str.trim()) x = it.transform[4];
+          cur += it.str;
+          h = Math.max(h, it.height);
+        }
+        if (it.hasEOL) flush();
+      }
+      flush();
+    });
+    return lines;
   } catch {
     return null;
   }
+}
+
+/** 本文だけの文字列（脚注・ページ番号を除く）。公表文の解析に使う */
+function bodyText(lines) {
+  const bh = bodyHeightOf(lines);
+  return lines.filter((l) => l.h >= bh * 0.95).map((l) => l.t).join("");
 }
 
 /** 公表文のテキストから政策金利・賛否・本文（文単位）を取り出す */
@@ -135,8 +169,12 @@ export async function buildBojEvents(existing, now = new Date()) {
   const getStatement = async (m) => {
     if (!m.statementUrl) return null;
     if (!stmtCache.has(m.statementUrl)) {
-      const text = await fetchPdfText(m.statementUrl);
-      stmtCache.set(m.statementUrl, text ? parseStatementText(text) : null);
+      const lines = await fetchPdfLines(m.statementUrl);
+      const text = lines ? bodyText(lines) : null;
+      stmtCache.set(
+        m.statementUrl,
+        text ? { ...parseStatementText(text), excerpt: statementItems(text) } : null
+      );
     }
     return stmtCache.get(m.statementUrl);
   };
@@ -151,6 +189,7 @@ export async function buildBojEvents(existing, now = new Date()) {
             links: [...new Map([...(old.links ?? []), ...ev.links].map((l) => [l.url, l])).values()],
             result: ev.result ?? old.result,
             diff: ev.diff ?? old.diff,
+            excerpt: ev.excerpt ?? old.excerpt,
           }
         : ev
     );
@@ -177,13 +216,14 @@ export async function buildBojEvents(existing, now = new Date()) {
       status: m.statementUrl ? "done" : "scheduled",
       links: m.statementUrl ? [{ label: "金融市場調節方針に関する公表文（日銀公式・PDF）", url: m.statementUrl }] : [],
     };
-    if (old?.status === "done" && old.result) {
+    if (old?.status === "done" && old.result && old.excerpt?.length) {
       events.push({ ...old, subtitle: ev.subtitle, short: ev.short });
     } else {
       if (m.statementUrl) {
         const cur = await getStatement(m);
         if (cur) {
           ev.result = { rate: cur.rate, vote: cur.vote };
+          if (cur.excerpt.length) ev.excerpt = cur.excerpt;
           const prev = meetings[i - 1];
           const prevSt = prev ? await getStatement(prev) : null;
           if (prevSt) {
@@ -212,6 +252,8 @@ export async function buildBojEvents(existing, now = new Date()) {
         subtitle: `${range}会合分。経済・物価の見通し（政策委員の見通しの中央値）。基本的見解は会合終了後直ちに、背景説明を含む全文は翌営業日14時に公表`,
         time: "会合終了後",
         linkLabel: "展望レポート 基本的見解（日銀公式・PDF）",
+        extract: (lines) => outlookExcerpt(lines),
+        maxPages: 8,
       },
       {
         key: "opinion",
@@ -221,6 +263,7 @@ export async function buildBojEvents(existing, now = new Date()) {
         subtitle: `${range}会合分。政策委員の主な意見の要約`,
         time: "08:50 JST",
         linkLabel: "主な意見（日銀公式・PDF）",
+        extract: (lines) => opinionExcerpt(lines),
       },
       {
         key: "minutes",
@@ -230,6 +273,7 @@ export async function buildBojEvents(existing, now = new Date()) {
         subtitle: `${range}会合分。次回会合後に承認・公表される議事要旨`,
         time: "08:50 JST",
         linkLabel: "議事要旨（日銀公式・PDF）",
+        extract: (lines) => minutesExcerpt(lines),
       },
       {
         key: "press",
@@ -239,14 +283,23 @@ export async function buildBojEvents(existing, now = new Date()) {
         subtitle: `${range}会合分。会見の記録は後日公表`,
         time: "",
         linkLabel: "総裁会見の記録（日銀公式・PDF）",
+        extract: (lines) => pressExcerpt(lines),
+        maxPages: 3,
       },
     ];
     for (const r of related) {
       const c = m[r.key];
       const d = c.dates.at(-1);
       if (!d) continue;
+      const relId = `${r.type.replace("_", "-")}-${code}`;
+      let excerpt = oldById.get(relId)?.excerpt;
+      if (c.url && !excerpt?.length) {
+        const lines = await fetchPdfLines(c.url, r.maxPages);
+        excerpt = lines ? r.extract(lines) : undefined;
+      }
       push({
-        id: `${r.type.replace("_", "-")}-${code}`,
+        id: relId,
+        ...(excerpt?.length ? { excerpt } : {}),
         src: "boj",
         type: r.type,
         date: isoDate(d),

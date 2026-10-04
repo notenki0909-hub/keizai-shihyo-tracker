@@ -1122,6 +1122,30 @@ a {
   margin: 0;
 }
 
+.ev-ex {
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+
+.ev-ex summary {
+  padding: 9px 12px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ev-ex__body {
+  padding: 2px 14px 12px;
+}
+
+.ev-ex__body p {
+  margin: 8px 0 0;
+  font-size: 0.84rem;
+  line-height: 1.85;
+}
+
 .ev-section h3 {
   margin: 0 0 8px;
   font-size: 0.92rem;

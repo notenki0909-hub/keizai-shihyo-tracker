@@ -44,6 +44,8 @@ const HELP = {
   headline: "講演の題名（公式・英語）です。話した内容は、下の「公式資料」にある講演原稿のリンクから読めます。",
   sep: "SEP（経済見通し）は、FOMCの参加者（約19人）が、3・6・9・12月の会合で公表する今後数年間の見通しです。表の数字は、参加者の予想の「中央値」で、各年の年末時点の値です。「政策金利」の行は、参加者が将来の金利水準をどう見ているかを表し、いわゆる「ドット・プロット」の中央値にあたります。この表の見通しが前回より上がった・下がったかで、今後の利上げ・利下げの方向感を探る人が多くいます。",
   diff: "中央銀行は、声明文の言い回しを慎重に選びます。そのため、1語の追加や削除でも、判断の変化のサインとして市場に注目されます。このツールは前回の文書との違いを色で示しているだけで、意味の解釈は行いません。変更が少ないときは、「基本方針は大きく変わっていない」と読むことが多くあります。",
+  excerpt:
+    "公式文書のうち、重要な部分をそのまま抜き出したものです。このツールが文章を要約・言い換え・翻訳したものではなく、公式の記載そのままです。見出しをクリックすると開閉できます。全文は、下の「公式資料」から読めます。",
   links: "判断の根拠になる原文は、公式サイトで誰でも読めます。このツールの表示は機械的に抜き出したものなので、詳しく知りたいときは、原文で確認してください。",
 };
 
@@ -150,6 +152,24 @@ function resultHtml(ev) {
   return html;
 }
 
+/** 公式文書の重要部分の抜粋（原文のまま。要約・翻訳ではない） */
+function excerptHtml(ev) {
+  if (!ev.excerpt?.length) return "";
+  const isJa = ev.type.startsWith("boj");
+  const sections = ev.excerpt
+    .map((sec, i) => {
+      const paras = sec.paragraphs.map((p) => `<p${isJa ? "" : ' lang="en"'}>${esc(p)}</p>`).join("");
+      return `<details class="ev-ex"${i === 0 ? " open" : ""}><summary>${esc(sec.heading)}</summary><div class="ev-ex__body">${paras}</div></details>`;
+    })
+    .join("");
+  return `
+    <section class="ev-section">
+      <h3>公式文書の抜粋（原文のまま${isJa ? "" : "・英語"}）</h3>
+      <p class="ev-help">${HELP.excerpt}</p>
+      ${sections}
+    </section>`;
+}
+
 function sepHtml(sep) {
   if (!sep) return "";
   const head = sep.years.map((y) => `<th>${esc(y)}</th>`).join("");
@@ -205,6 +225,7 @@ export function renderEventDetail(ev) {
       ${EVENT_INTRO[ev.type] ? `<section class="ev-section ev-intro"><h3>このイベントとは？</h3><p class="ev-help">${EVENT_INTRO[ev.type]}</p></section>` : ""}
       ${resultHtml(ev)}
       ${sepHtml(ev.sep)}
+      ${excerptHtml(ev)}
       ${diffBlock}
       ${links ? `<section class="ev-section"><h3>公式資料</h3><p class="ev-help">${HELP.links}</p><ul class="ev-links">${links}</ul></section>` : ""}
       <p class="ev-note ev-note--foot">※ 公式ページの記載を機械的に抽出・比較したもので、内容の解釈・要約・将来予測は含みません（AIによる分析ではありません）。結果は定期更新のタイミングで反映されるため、発表直後は未反映の場合があります。</p>
