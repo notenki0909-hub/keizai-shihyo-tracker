@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T13:33:42.668Z",
+  "generatedAt": "2026-10-07T13:47:47.971Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 27,
@@ -67,25 +67,16 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-10-06T13:33:42.673Z",
+    "generatedAt": "2026-10-07T13:47:47.974Z",
     "stats": {
       "total": 27,
-      "improving": 9,
-      "worsening": 10,
+      "improving": 7,
+      "worsening": 12,
       "neutral": 8,
-      "surpriseCount": 3
+      "surpriseCount": 2
     },
-    "headline": "27指標中、改善傾向が9件、悪化傾向が10件、横ばい・中立が8件です。",
+    "headline": "27指標中、改善傾向が7件、悪化傾向が12件、横ばい・中立が8件です。",
     "improvingList": [
-      {
-        "id": "coincident_ci",
-        "name": "景気動向指数 CI一致指数",
-        "category": "景気",
-        "period": {
-          "from": "2026-06",
-          "to": "2026-07"
-        }
-      },
       {
         "id": "trade_balance",
         "name": "貿易収支",
@@ -102,15 +93,6 @@
         "period": {
           "from": "2026-06",
           "to": "2026-07"
-        }
-      },
-      {
-        "id": "nikkei225",
-        "name": "日経平均株価",
-        "category": "為替・市場",
-        "period": {
-          "from": "2026-10-05",
-          "to": "2026-10-06"
         }
       },
       {
@@ -170,6 +152,15 @@
         }
       },
       {
+        "id": "coincident_ci",
+        "name": "景気動向指数 CI一致指数",
+        "category": "景気",
+        "period": {
+          "from": "2026-07",
+          "to": "2026-08"
+        }
+      },
+      {
         "id": "industrial_production",
         "name": "鉱工業生産指数",
         "category": "景気",
@@ -219,8 +210,17 @@
         "name": "実質賃金指数（現金給与総額）",
         "category": "雇用・所得",
         "period": {
-          "from": "2026-06",
-          "to": "2026-07"
+          "from": "2026-07",
+          "to": "2026-08"
+        }
+      },
+      {
+        "id": "nikkei225",
+        "name": "日経平均株価",
+        "category": "為替・市場",
+        "period": {
+          "from": "2026-10-06",
+          "to": "2026-10-07"
         }
       },
       {
@@ -311,8 +311,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-10-01",
-          "to": "2026-10-02"
+          "from": "2026-10-02",
+          "to": "2026-10-05"
         }
       },
       {
@@ -326,15 +326,6 @@
       }
     ],
     "continuingImprovingList": [
-      {
-        "id": "coincident_ci",
-        "name": "景気動向指数 CI一致指数",
-        "category": "景気",
-        "period": {
-          "from": "2026-05",
-          "to": "2026-07"
-        }
-      },
       {
         "id": "topix",
         "name": "TOPIX（東証株価指数）",
@@ -400,12 +391,6 @@
         "period": null
       },
       {
-        "id": "real_wage_index_yoy",
-        "name": "実質賃金指数（現金給与総額）",
-        "category": "雇用・所得",
-        "period": null
-      },
-      {
         "id": "call_rate",
         "name": "無担保コールレート（政策金利）",
         "category": "金利",
@@ -464,7 +449,7 @@
         "reference": {
           "label": "0%＝実質増減の分岐",
           "value": 0,
-          "current": 2
+          "current": 1.5
         }
       },
       {
@@ -703,15 +688,6 @@
         "level": "mid",
         "detail": "やや大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=1.8）。",
         "text": "TOPIX（東証株価指数）でやや大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=1.8）。"
-      },
-      {
-        "id": "nikkei225",
-        "name": "日経平均株価",
-        "category": "為替・市場",
-        "z": 1.5,
-        "level": "mid",
-        "detail": "やや大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=1.5）。",
-        "text": "日経平均株価でやや大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=1.5）。"
       }
     ],
     "turningSignalFindings": [
@@ -824,16 +800,16 @@
         "proximity": 100,
         "period": {
           "recent": {
-            "from": "2026-09-18",
-            "to": "2026-10-06"
+            "from": "2026-09-24",
+            "to": "2026-10-07"
           },
           "prior": {
-            "from": "2026-09-04",
-            "to": "2026-09-17"
+            "from": "2026-09-07",
+            "to": "2026-09-18"
           }
         },
-        "detail": "直近（2026-09-18〜2026-10-06）の傾向が、その前（2026-09-04〜2026-09-17）から改善方向に転じました（転換点を通過）。",
-        "text": "日経平均株価は、直近（2026-09-18〜2026-10-06）の傾向が、その前（2026-09-04〜2026-09-17）から改善方向に転じました（転換点を通過）。"
+        "detail": "直近（2026-09-24〜2026-10-07）の傾向が、その前（2026-09-07〜2026-09-18）から改善方向に転じました（転換点を通過）。",
+        "text": "日経平均株価は、直近（2026-09-24〜2026-10-07）の傾向が、その前（2026-09-07〜2026-09-18）から改善方向に転じました（転換点を通過）。"
       },
       {
         "id": "tankan_large_nonmfg",
@@ -934,6 +910,46 @@
         },
         "detail": "直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から改善方向に転じました（転換点を通過）。",
         "text": "第3次産業活動指数（季節調整値）は、直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から改善方向に転じました（転換点を通過）。"
+      },
+      {
+        "id": "coincident_ci",
+        "name": "景気動向指数 CI一致指数",
+        "category": "景気",
+        "favorable": true,
+        "flipped": false,
+        "proximity": 76,
+        "period": {
+          "recent": {
+            "from": "2026-06",
+            "to": "2026-08"
+          },
+          "prior": {
+            "from": "2026-03",
+            "to": "2026-05"
+          }
+        },
+        "detail": "直近（2026-06〜2026-08）は改善方向ですが、その前（2026-03〜2026-05）と比べて勢いが24%まで弱まっています。改善の勢いが鈍化しており、今後の反転に注意が必要です。",
+        "text": "景気動向指数 CI一致指数は直近（2026-06〜2026-08）改善方向ですが、その前（2026-03〜2026-05）と比べて勢いが24%まで弱まっています。改善の勢いが鈍化しており、今後の反転に注意が必要です。"
+      },
+      {
+        "id": "real_wage_index_yoy",
+        "name": "実質賃金指数（現金給与総額）",
+        "category": "雇用・所得",
+        "favorable": false,
+        "flipped": false,
+        "proximity": 75,
+        "period": {
+          "recent": {
+            "from": "2026-06",
+            "to": "2026-08"
+          },
+          "prior": {
+            "from": "2026-03",
+            "to": "2026-05"
+          }
+        },
+        "detail": "直近（2026-06〜2026-08）は悪化方向ですが、その前（2026-03〜2026-05）と比べて勢いが25%まで弱まっています。悪化の勢いが鈍化しており、改善に転じる兆しの可能性があります。",
+        "text": "実質賃金指数（現金給与総額）は直近（2026-06〜2026-08）悪化方向ですが、その前（2026-03〜2026-05）と比べて勢いが25%まで弱まっています。悪化の勢いが鈍化しており、改善に転じる兆しの可能性があります。"
       },
       {
         "id": "gdp_real_growth",
@@ -1615,7 +1631,7 @@
       ],
       "movingAverage": null,
       "releaseSchedule": "内閣府が対象月の約5週間後、14:00ごろに速報を公表。翌月に改定値。",
-      "nextRelease": "2026-10-05",
+      "nextRelease": "2026-11-04",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -1624,12 +1640,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
-          "value": 120.6,
-          "provisional": false
+          "t": "2026-08",
+          "value": 118.7,
+          "provisional": true
         },
-        "changeFromPrev": 1.7,
-        "changeFromYearAgo": 5.7,
+        "changeFromPrev": -1.9,
+        "changeFromYearAgo": 4.7,
         "min": {
           "t": "2009-03",
           "value": 83.5
@@ -1638,7 +1654,7 @@
           "t": "2017-12",
           "value": 124.4
         },
-        "count": 499,
+        "count": 500,
         "start": "1985-01"
       },
       "points": [
@@ -3637,6 +3653,11 @@
         {
           "t": "2026-07",
           "value": 120.6
+        },
+        {
+          "t": "2026-08",
+          "value": 118.7,
+          "provisional": true
         }
       ]
     },
@@ -23168,7 +23189,7 @@
       ],
       "movingAverage": null,
       "releaseSchedule": "厚生労働省が対象月の翌々月上旬ごろ8:30に速報を公表。",
-      "nextRelease": "2026-10-08",
+      "nextRelease": "2026-11-09",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -23177,12 +23198,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
-          "value": 2,
-          "provisional": false
+          "t": "2026-08",
+          "value": 1.5,
+          "provisional": true
         },
-        "changeFromPrev": -0.2,
-        "changeFromYearAgo": 2.2,
+        "changeFromPrev": -0.5,
+        "changeFromYearAgo": 3.2,
         "min": {
           "t": "2014-05",
           "value": -4.1
@@ -23191,7 +23212,7 @@
           "t": "2021-05",
           "value": 3.1
         },
-        "count": 163,
+        "count": 164,
         "start": "2013-01"
       },
       "points": [
@@ -23846,6 +23867,11 @@
         {
           "t": "2026-07",
           "value": 2
+        },
+        {
+          "t": "2026-08",
+          "value": 1.5,
+          "provisional": true
         }
       ]
     },
@@ -31834,7 +31860,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-10-07",
+      "nextRelease": "2026-10-08",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -31843,12 +31869,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-10-02",
-          "value": 157.58,
+          "t": "2026-10-05",
+          "value": 157.66,
           "provisional": false
         },
-        "changeFromPrev": -0.81,
-        "changeFromYearAgo": 10.5,
+        "changeFromPrev": 0.08,
+        "changeFromYearAgo": 10.25,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -31857,7 +31883,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2626,
+        "count": 2627,
         "start": "2016-01-04"
       },
       "points": [
@@ -42364,6 +42390,10 @@
         {
           "t": "2026-10-02",
           "value": 157.58
+        },
+        {
+          "t": "2026-10-05",
+          "value": 157.66
         }
       ]
     },
@@ -42388,7 +42418,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "取引時間中は常時更新。日次終値を翌営業日にかけてFRED経由で取得・反映。",
-      "nextRelease": "2026-10-07",
+      "nextRelease": "2026-10-08",
       "nextReleaseKind": "official",
       "source": {
         "provider": "FRED（セントルイス連邦準備銀行）",
@@ -42397,12 +42427,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-10-06",
-          "value": 70683.98,
+          "t": "2026-10-07",
+          "value": 70035.71,
           "provisional": false
         },
-        "changeFromPrev": 737.12,
-        "changeFromYearAgo": 22739.22,
+        "changeFromPrev": -648.27,
+        "changeFromYearAgo": 22084.83,
         "min": {
           "t": "2016-06-24",
           "value": 14952.02
@@ -42411,7 +42441,7 @@
           "t": "2026-06-25",
           "value": 72366.34
         },
-        "count": 2628,
+        "count": 2629,
         "start": "2016-01-04"
       },
       "points": [
@@ -52926,6 +52956,10 @@
         {
           "t": "2026-10-06",
           "value": 70683.98
+        },
+        {
+          "t": "2026-10-07",
+          "value": 70035.71
         }
       ]
     },
