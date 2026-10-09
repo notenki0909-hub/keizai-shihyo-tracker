@@ -15,7 +15,8 @@ import { fetchForeignInvestorFlow } from "./fetch-jpx-investor-type.mjs";
 import { fetchUsdJpyDaily } from "./fetch-boj-fx-daily.mjs";
 import { fetchFredSeries } from "./fetch-fred-series.mjs";
 import { fetchNextReleaseDate } from "./fetch-fred-release-date.mjs";
-import { fetchTankanDi } from "./fetch-boj-tankan.mjs";
+import { fetchTankanDi, fetchTankanCapexPlan } from "./fetch-boj-tankan.mjs";
+import { fetchCustomsTradeBalance } from "./fetch-mof-customs.mjs";
 import { fetchWatchersDi } from "./fetch-cao-watchers.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -190,6 +191,24 @@ async function fetchSeries(ind, { retries = 3 } = {}) {
     }
   }
   throw lastErr;
+}
+
+/**
+ * 取得した系列から変化率を自前で計算する（api.transform）。
+ *   mom_pct : 1つ前の点との変化率(%)。例：機械受注の前月比
+ */
+function applyTransform(points, transform) {
+  if (transform !== "mom_pct") throw new Error(`未対応の transform: ${transform}`);
+  const out = [];
+  for (let i = 1; i < points.length; i++) {
+    const prev = points[i - 1].value;
+    if (!prev) continue;
+    const pct = ((points[i].value - prev) / Math.abs(prev)) * 100;
+    const p = { t: points[i].t, date: points[i].date, value: Math.round(pct * 100) / 100 };
+    if (points[i].provisional) p.provisional = true;
+    out.push(p);
+  }
+  return out;
 }
 
 /** 直近値・前期比・前年比などの派生指標 */
@@ -473,7 +492,8 @@ function buildEconSummary(indicators) {
       }
     }
 
-    const z = computeSurpriseZ(ind.points ?? []);
+    // noSurprise：調査ごとに系統的な上下（季節性）がある系列では、変化の大きさの判定が意味を持たないため除く
+    const z = ind.noSurprise ? null : computeSurpriseZ(ind.points ?? []);
     if (z != null && Number.isFinite(z) && Math.abs(z) >= 1.5) {
       const level = Math.abs(z) >= 2.5 ? "high" : "mid";
       const levelWord = level === "high" ? "非常に大きな" : "やや大きな";
@@ -696,8 +716,16 @@ async function main() {
           source = { provider: "日本銀行 時系列統計データ検索サイト", statName: ind.api.statName, sourceUrl: ind.api.sourceUrl };
           break;
         case "boj-tankan":
-          points = await fetchTankanDi(ind.api.seriesCode);
+          points = await fetchTankanDi(ind.api.seriesCode, { forecast: ind.api.forecast === true });
           source = { provider: "日本銀行 時系列統計データ検索サイト", statName: ind.api.statName, sourceUrl: ind.api.sourceUrl };
+          break;
+        case "boj-tankan-capex":
+          points = await fetchTankanCapexPlan();
+          source = { provider: "日本銀行 時系列統計データ検索サイト", statName: ind.api.statName, sourceUrl: ind.api.sourceUrl };
+          break;
+        case "mof-customs":
+          points = await fetchCustomsTradeBalance();
+          source = { provider: "財務省 貿易統計", statName: ind.api.statName, sourceUrl: ind.api.sourceUrl };
           break;
         case "cao-watchers":
           points = await fetchWatchersDi();
@@ -721,6 +749,7 @@ async function main() {
         }
         default:
           points = await fetchSeries(ind);
+          if (ind.api.transform) points = applyTransform(points, ind.api.transform);
           source = { provider: "統計ダッシュボード（e-Stat）", statName: ind.api.statName, indicatorCode: ind.api.indicatorCode };
       }
 
@@ -754,6 +783,7 @@ async function main() {
         judgment: ind.judgment,
         referenceLines: ind.referenceLines ?? [],
         movingAverage: ind.movingAverage ?? null,
+        noSurprise: ind.noSurprise === true ? true : undefined,
         releaseSchedule: ind.releaseSchedule,
         nextRelease, // "YYYY-MM-DD" または null。nextReleaseKindが null の指標では常にnull（掲載対象外）
         nextReleaseKind, // "official" | "estimate" | null

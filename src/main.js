@@ -433,7 +433,7 @@ function renderGrid() {
       const dYoy = fmtDelta(s.changeFromYearAgo, ind);
       const color = catColor(ind.category);
       const fav = isFavorite(ind.id);
-      const surprise = surpriseInfo(computeSurprise(ind.points));
+      const surprise = ind.noSurprise ? null : surpriseInfo(computeSurprise(ind.points));
       const surpriseBadge =
         surprise && surprise.level !== "low"
           ? `<span class="card__surprise card__surprise--${surprise.level}" title="${surpriseExplanation(surprise, ind).replace(/"/g, "&quot;")}">⚡ ${surprise.label}</span>`
@@ -988,10 +988,12 @@ function openDetail(id) {
     const { num, unit } = fmtValue(v, ind);
     return `${num} ${unit}`;
   };
-  const surprise = surpriseInfo(computeSurprise(ind.points));
+  const surprise = ind.noSurprise ? null : surpriseInfo(computeSurprise(ind.points));
   const surpriseText = surprise
     ? `${surprise.level !== "low" ? "⚡ " : ""}${surprise.label}（z=${surprise.z.toFixed(1)}）`
-    : "算出不可（データ不足）";
+    : ind.noSurprise
+      ? "対象外（調査月ごとに上下するため）"
+      : "算出不可（データ不足）";
   document.getElementById("d-stats").innerHTML = `
     <div><span>最新（${s.latest.t}）</span><b>${f(s.latest.value)}</b></div>
     <div><span>過去最大（${s.max.t}）</span><b>${f(s.max.value)}</b></div>
@@ -1207,7 +1209,7 @@ function drawChart() {
   });
 
   // ⚡「非常に大きな変化」（|z|≥2.5）があった点にアイコンを表示
-  computeSurpriseMarkers(ind.points, cutoff).forEach((m, i) => {
+  (ind.noSurprise ? [] : computeSurpriseMarkers(ind.points, cutoff)).forEach((m, i) => {
     annotations["surprise" + i] = {
       type: "label",
       xScaleID: "x",

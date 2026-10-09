@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-04T11:49:43.760Z",
+  "generatedAt": "2026-10-09T13:38:35.981Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
-  "indicatorCount": 27,
+  "indicatorCount": 33,
   "failures": [],
   "categoryGuides": {
     "景気": {
@@ -67,41 +67,23 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-10-04T11:49:43.770Z",
+    "generatedAt": "2026-10-09T13:38:35.988Z",
     "stats": {
-      "total": 27,
-      "improving": 8,
-      "worsening": 11,
-      "neutral": 8,
-      "surpriseCount": 2
+      "total": 33,
+      "improving": 9,
+      "worsening": 14,
+      "neutral": 10,
+      "surpriseCount": 1
     },
-    "headline": "27指標中、改善傾向が8件、悪化傾向が11件、横ばい・中立が8件です。",
+    "headline": "33指標中、改善傾向が9件、悪化傾向が14件、横ばい・中立が10件です。",
     "improvingList": [
-      {
-        "id": "coincident_ci",
-        "name": "景気動向指数 CI一致指数",
-        "category": "景気",
-        "period": {
-          "from": "2026-06",
-          "to": "2026-07"
-        }
-      },
-      {
-        "id": "trade_balance",
-        "name": "貿易収支",
-        "category": "対外",
-        "period": {
-          "from": "2026-06",
-          "to": "2026-07"
-        }
-      },
       {
         "id": "current_account",
         "name": "経常収支",
         "category": "対外",
         "period": {
-          "from": "2026-06",
-          "to": "2026-07"
+          "from": "2026-07",
+          "to": "2026-08"
         }
       },
       {
@@ -127,13 +109,22 @@
         "name": "景気ウォッチャー調査（現状判断DI・全国）",
         "category": "景気",
         "period": {
-          "from": "2026-07",
-          "to": "2026-08"
+          "from": "2026-08",
+          "to": "2026-09"
         }
       },
       {
         "id": "consumer_confidence_jp",
         "name": "消費者信頼感（OECD総合指標・日本）",
+        "category": "景気",
+        "period": {
+          "from": "2026-07",
+          "to": "2026-08"
+        }
+      },
+      {
+        "id": "household_spending_yoy",
+        "name": "家計調査 実質消費支出（二人以上の世帯・前年同月比）",
         "category": "景気",
         "period": {
           "from": "2026-07",
@@ -148,6 +139,24 @@
           "from": "2026-06",
           "to": "2026-07"
         }
+      },
+      {
+        "id": "tankan_large_mfg_outlook",
+        "name": "日銀短観 業況判断DI・先行き（大企業・製造業）",
+        "category": "景気",
+        "period": {
+          "from": "2026 Q2",
+          "to": "2026 Q3"
+        }
+      },
+      {
+        "id": "tankan_large_nonmfg_outlook",
+        "name": "日銀短観 業況判断DI・先行き（大企業・非製造業）",
+        "category": "景気",
+        "period": {
+          "from": "2026 Q2",
+          "to": "2026 Q3"
+        }
       }
     ],
     "worseningList": [
@@ -158,6 +167,15 @@
         "period": {
           "from": "2026 Q1",
           "to": "2026 Q2"
+        }
+      },
+      {
+        "id": "coincident_ci",
+        "name": "景気動向指数 CI一致指数",
+        "category": "景気",
+        "period": {
+          "from": "2026-07",
+          "to": "2026-08"
         }
       },
       {
@@ -210,8 +228,17 @@
         "name": "実質賃金指数（現金給与総額）",
         "category": "雇用・所得",
         "period": {
-          "from": "2026-06",
-          "to": "2026-07"
+          "from": "2026-07",
+          "to": "2026-08"
+        }
+      },
+      {
+        "id": "trade_balance",
+        "name": "貿易収支",
+        "category": "対外",
+        "period": {
+          "from": "2026-07",
+          "to": "2026-08"
         }
       },
       {
@@ -219,8 +246,8 @@
         "name": "日経平均株価",
         "category": "為替・市場",
         "period": {
-          "from": "2026-10-01",
-          "to": "2026-10-02"
+          "from": "2026-10-08",
+          "to": "2026-10-09"
         }
       },
       {
@@ -242,8 +269,17 @@
         }
       },
       {
-        "id": "household_spending_yoy",
-        "name": "家計調査 実質消費支出（二人以上の世帯・前年同月比）",
+        "id": "trade_balance_customs",
+        "name": "貿易収支（通関ベース）",
+        "category": "対外",
+        "period": {
+          "from": "2026-07",
+          "to": "2026-08"
+        }
+      },
+      {
+        "id": "machinery_orders_mom",
+        "name": "機械受注（船舶・電力除く民需・前月比）",
         "category": "景気",
         "period": {
           "from": "2026-06",
@@ -284,8 +320,8 @@
         "name": "無担保コールレート（政策金利）",
         "category": "金利",
         "period": {
-          "from": "2026-07",
-          "to": "2026-08"
+          "from": "2026-08",
+          "to": "2026-09"
         }
       },
       {
@@ -311,8 +347,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-09-29",
-          "to": "2026-09-30"
+          "from": "2026-10-06",
+          "to": "2026-10-07"
         }
       },
       {
@@ -323,16 +359,34 @@
           "from": "2026-07",
           "to": "2026-08"
         }
+      },
+      {
+        "id": "tankan_capex_large_all",
+        "name": "日銀短観 設備投資計画（大企業・全産業・当年度）",
+        "category": "景気",
+        "period": {
+          "from": "2026 Q2",
+          "to": "2026 Q3"
+        }
+      },
+      {
+        "id": "cpi_total_yoy",
+        "name": "消費者物価指数（総合・前年同月比）",
+        "category": "物価",
+        "period": {
+          "from": "2026-07",
+          "to": "2026-08"
+        }
       }
     ],
     "continuingImprovingList": [
       {
-        "id": "coincident_ci",
-        "name": "景気動向指数 CI一致指数",
-        "category": "景気",
+        "id": "nikkei225",
+        "name": "日経平均株価",
+        "category": "為替・市場",
         "period": {
-          "from": "2026-05",
-          "to": "2026-07"
+          "from": "2026-09-28",
+          "to": "2026-10-09"
         }
       },
       {
@@ -352,22 +406,40 @@
           "from": "2026 Q2",
           "to": "2026 Q3"
         }
+      },
+      {
+        "id": "tankan_large_mfg_outlook",
+        "name": "日銀短観 業況判断DI・先行き（大企業・製造業）",
+        "category": "景気",
+        "period": {
+          "from": "2026 Q2",
+          "to": "2026 Q3"
+        }
+      },
+      {
+        "id": "tankan_large_nonmfg_outlook",
+        "name": "日銀短観 業況判断DI・先行き（大企業・非製造業）",
+        "category": "景気",
+        "period": {
+          "from": "2026 Q2",
+          "to": "2026 Q3"
+        }
       }
     ],
     "continuingWorseningList": [
       {
-        "id": "trade_balance",
-        "name": "貿易収支",
-        "category": "対外",
-        "period": {
-          "from": "2026-05",
-          "to": "2026-07"
-        }
-      },
-      {
         "id": "foreign_investor_flow",
         "name": "海外投資家 売買動向（東証プライム）",
         "category": "為替・市場",
+        "period": {
+          "from": "2026-06",
+          "to": "2026-08"
+        }
+      },
+      {
+        "id": "trade_balance_customs",
+        "name": "貿易収支（通関ベース）",
+        "category": "対外",
         "period": {
           "from": "2026-06",
           "to": "2026-08"
@@ -400,12 +472,6 @@
         "period": null
       },
       {
-        "id": "real_wage_index_yoy",
-        "name": "実質賃金指数（現金給与総額）",
-        "category": "雇用・所得",
-        "period": null
-      },
-      {
         "id": "call_rate",
         "name": "無担保コールレート（政策金利）",
         "category": "金利",
@@ -433,6 +499,18 @@
         "id": "nt_ratio",
         "name": "NT倍率（日経平均÷TOPIX）",
         "category": "為替・市場",
+        "period": null
+      },
+      {
+        "id": "tankan_capex_large_all",
+        "name": "日銀短観 設備投資計画（大企業・全産業・当年度）",
+        "category": "景気",
+        "period": null
+      },
+      {
+        "id": "cpi_total_yoy",
+        "name": "消費者物価指数（総合・前年同月比）",
+        "category": "物価",
         "period": null
       }
     ],
@@ -464,7 +542,7 @@
         "reference": {
           "label": "0%＝実質増減の分岐",
           "value": 0,
-          "current": 2
+          "current": 1.5
         }
       },
       {
@@ -474,7 +552,7 @@
         "reference": {
           "label": "0＝黒字・赤字の分岐",
           "value": 0,
-          "current": 25231
+          "current": 29794
         }
       },
       {
@@ -496,6 +574,26 @@
           "value": 0,
           "current": 35
         }
+      },
+      {
+        "id": "tankan_large_mfg_outlook",
+        "name": "日銀短観 業況判断DI・先行き（大企業・製造業）",
+        "category": "景気",
+        "reference": {
+          "label": "0＝「良い」と「悪い」が同数",
+          "value": 0,
+          "current": 21
+        }
+      },
+      {
+        "id": "tankan_large_nonmfg_outlook",
+        "name": "日銀短観 業況判断DI・先行き（大企業・非製造業）",
+        "category": "景気",
+        "reference": {
+          "label": "0＝「良い」と「悪い」が同数",
+          "value": 0,
+          "current": 30
+        }
       }
     ],
     "currentUnfavorableList": [
@@ -516,7 +614,7 @@
         "reference": {
           "label": "0＝黒字・赤字の分岐",
           "value": 0,
-          "current": -4294
+          "current": -4852
         }
       },
       {
@@ -536,7 +634,7 @@
         "reference": {
           "label": "50＝横ばいの分かれ目",
           "value": 50,
-          "current": 46.2
+          "current": 46.4
         }
       },
       {
@@ -546,7 +644,27 @@
         "reference": {
           "label": "0%＝前年と同水準",
           "value": 0,
-          "current": -3.6
+          "current": -3.1
+        }
+      },
+      {
+        "id": "trade_balance_customs",
+        "name": "貿易収支（通関ベース）",
+        "category": "対外",
+        "reference": {
+          "label": "0＝黒字・赤字の分岐",
+          "value": 0,
+          "current": -11119
+        }
+      },
+      {
+        "id": "machinery_orders_mom",
+        "name": "機械受注（船舶・電力除く民需・前月比）",
+        "category": "景気",
+        "reference": {
+          "label": "0＝増加・減少の分岐",
+          "value": 0,
+          "current": -3.68
         }
       }
     ],
@@ -646,6 +764,18 @@
         "name": "第3次産業活動指数（季節調整値）",
         "category": "景気",
         "reference": null
+      },
+      {
+        "id": "tankan_capex_large_all",
+        "name": "日銀短観 設備投資計画（大企業・全産業・当年度）",
+        "category": "景気",
+        "reference": null
+      },
+      {
+        "id": "cpi_total_yoy",
+        "name": "消費者物価指数（総合・前年同月比）",
+        "category": "物価",
+        "reference": null
       }
     ],
     "statusFindings": [
@@ -683,18 +813,23 @@
         "category": "景気",
         "detail": "目安「0%＝前年と同水準」を下回っており、注意が必要な水準です。",
         "text": "家計調査 実質消費支出（二人以上の世帯・前年同月比）は現在、目安「0%＝前年と同水準」を下回っており、注意が必要な水準です。"
+      },
+      {
+        "id": "trade_balance_customs",
+        "name": "貿易収支（通関ベース）",
+        "category": "対外",
+        "detail": "目安「0＝黒字・赤字の分岐」を下回っており、注意が必要な水準です。",
+        "text": "貿易収支（通関ベース）は現在、目安「0＝黒字・赤字の分岐」を下回っており、注意が必要な水準です。"
+      },
+      {
+        "id": "machinery_orders_mom",
+        "name": "機械受注（船舶・電力除く民需・前月比）",
+        "category": "景気",
+        "detail": "目安「0＝増加・減少の分岐」を下回っており、注意が必要な水準です。",
+        "text": "機械受注（船舶・電力除く民需・前月比）は現在、目安「0＝増加・減少の分岐」を下回っており、注意が必要な水準です。"
       }
     ],
     "surpriseFindings": [
-      {
-        "id": "current_account",
-        "name": "経常収支",
-        "category": "対外",
-        "z": 2.8,
-        "level": "high",
-        "detail": "非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=2.8）。",
-        "text": "経常収支で非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=2.8）。"
-      },
       {
         "id": "topix",
         "name": "TOPIX（東証株価指数）",
@@ -787,6 +922,26 @@
         "text": "新規求人倍率は、直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。"
       },
       {
+        "id": "trade_balance",
+        "name": "貿易収支",
+        "category": "対外",
+        "favorable": false,
+        "flipped": true,
+        "proximity": 100,
+        "period": {
+          "recent": {
+            "from": "2026-06",
+            "to": "2026-08"
+          },
+          "prior": {
+            "from": "2026-03",
+            "to": "2026-05"
+          }
+        },
+        "detail": "直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。",
+        "text": "貿易収支は、直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。"
+      },
+      {
         "id": "current_account",
         "name": "経常収支",
         "category": "対外",
@@ -795,36 +950,16 @@
         "proximity": 100,
         "period": {
           "recent": {
-            "from": "2026-05",
-            "to": "2026-07"
+            "from": "2026-06",
+            "to": "2026-08"
           },
           "prior": {
-            "from": "2026-02",
-            "to": "2026-04"
+            "from": "2026-03",
+            "to": "2026-05"
           }
         },
-        "detail": "直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から悪化方向に転じました（転換点を通過）。",
-        "text": "経常収支は、直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から悪化方向に転じました（転換点を通過）。"
-      },
-      {
-        "id": "nikkei225",
-        "name": "日経平均株価",
-        "category": "為替・市場",
-        "favorable": true,
-        "flipped": true,
-        "proximity": 100,
-        "period": {
-          "recent": {
-            "from": "2026-09-16",
-            "to": "2026-10-02"
-          },
-          "prior": {
-            "from": "2026-09-02",
-            "to": "2026-09-15"
-          }
-        },
-        "detail": "直近（2026-09-16〜2026-10-02）の傾向が、その前（2026-09-02〜2026-09-15）から改善方向に転じました（転換点を通過）。",
-        "text": "日経平均株価は、直近（2026-09-16〜2026-10-02）の傾向が、その前（2026-09-02〜2026-09-15）から改善方向に転じました（転換点を通過）。"
+        "detail": "直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。",
+        "text": "経常収支は、直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。"
       },
       {
         "id": "tankan_large_nonmfg",
@@ -855,16 +990,16 @@
         "proximity": 100,
         "period": {
           "recent": {
-            "from": "2026-06",
-            "to": "2026-08"
+            "from": "2026-07",
+            "to": "2026-09"
           },
           "prior": {
-            "from": "2026-03",
-            "to": "2026-05"
+            "from": "2026-04",
+            "to": "2026-06"
           }
         },
-        "detail": "直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から改善方向に転じました（転換点を通過）。",
-        "text": "景気ウォッチャー調査（現状判断DI・全国）は、直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から改善方向に転じました（転換点を通過）。"
+        "detail": "直近（2026-07〜2026-09）の傾向が、その前（2026-04〜2026-06）から改善方向に転じました（転換点を通過）。",
+        "text": "景気ウォッチャー調査（現状判断DI・全国）は、直近（2026-07〜2026-09）の傾向が、その前（2026-04〜2026-06）から改善方向に転じました（転換点を通過）。"
       },
       {
         "id": "consumer_confidence_jp",
@@ -895,16 +1030,16 @@
         "proximity": 100,
         "period": {
           "recent": {
-            "from": "2026-05",
-            "to": "2026-07"
+            "from": "2026-06",
+            "to": "2026-08"
           },
           "prior": {
-            "from": "2026-02",
-            "to": "2026-04"
+            "from": "2026-03",
+            "to": "2026-05"
           }
         },
-        "detail": "直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から悪化方向に転じました（転換点を通過）。",
-        "text": "家計調査 実質消費支出（二人以上の世帯・前年同月比）は、直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から悪化方向に転じました（転換点を通過）。"
+        "detail": "直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。",
+        "text": "家計調査 実質消費支出（二人以上の世帯・前年同月比）は、直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。"
       },
       {
         "id": "tertiary_industry_activity",
@@ -925,6 +1060,66 @@
         },
         "detail": "直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から改善方向に転じました（転換点を通過）。",
         "text": "第3次産業活動指数（季節調整値）は、直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から改善方向に転じました（転換点を通過）。"
+      },
+      {
+        "id": "machinery_orders_mom",
+        "name": "機械受注（船舶・電力除く民需・前月比）",
+        "category": "景気",
+        "favorable": false,
+        "flipped": true,
+        "proximity": 100,
+        "period": {
+          "recent": {
+            "from": "2026-05",
+            "to": "2026-07"
+          },
+          "prior": {
+            "from": "2026-02",
+            "to": "2026-04"
+          }
+        },
+        "detail": "直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から悪化方向に転じました（転換点を通過）。",
+        "text": "機械受注（船舶・電力除く民需・前月比）は、直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から悪化方向に転じました（転換点を通過）。"
+      },
+      {
+        "id": "coincident_ci",
+        "name": "景気動向指数 CI一致指数",
+        "category": "景気",
+        "favorable": true,
+        "flipped": false,
+        "proximity": 76,
+        "period": {
+          "recent": {
+            "from": "2026-06",
+            "to": "2026-08"
+          },
+          "prior": {
+            "from": "2026-03",
+            "to": "2026-05"
+          }
+        },
+        "detail": "直近（2026-06〜2026-08）は改善方向ですが、その前（2026-03〜2026-05）と比べて勢いが24%まで弱まっています。改善の勢いが鈍化しており、今後の反転に注意が必要です。",
+        "text": "景気動向指数 CI一致指数は直近（2026-06〜2026-08）改善方向ですが、その前（2026-03〜2026-05）と比べて勢いが24%まで弱まっています。改善の勢いが鈍化しており、今後の反転に注意が必要です。"
+      },
+      {
+        "id": "real_wage_index_yoy",
+        "name": "実質賃金指数（現金給与総額）",
+        "category": "雇用・所得",
+        "favorable": false,
+        "flipped": false,
+        "proximity": 75,
+        "period": {
+          "recent": {
+            "from": "2026-06",
+            "to": "2026-08"
+          },
+          "prior": {
+            "from": "2026-03",
+            "to": "2026-05"
+          }
+        },
+        "detail": "直近（2026-06〜2026-08）は悪化方向ですが、その前（2026-03〜2026-05）と比べて勢いが25%まで弱まっています。悪化の勢いが鈍化しており、改善に転じる兆しの可能性があります。",
+        "text": "実質賃金指数（現金給与総額）は直近（2026-06〜2026-08）悪化方向ですが、その前（2026-03〜2026-05）と比べて勢いが25%まで弱まっています。悪化の勢いが鈍化しており、改善に転じる兆しの可能性があります。"
       },
       {
         "id": "gdp_real_growth",
@@ -1606,7 +1801,7 @@
       ],
       "movingAverage": null,
       "releaseSchedule": "内閣府が対象月の約5週間後、14:00ごろに速報を公表。翌月に改定値。",
-      "nextRelease": "2026-10-05",
+      "nextRelease": "2026-11-04",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -1615,12 +1810,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
-          "value": 120.6,
-          "provisional": false
+          "t": "2026-08",
+          "value": 118.7,
+          "provisional": true
         },
-        "changeFromPrev": 1.7,
-        "changeFromYearAgo": 5.7,
+        "changeFromPrev": -1.9,
+        "changeFromYearAgo": 4.7,
         "min": {
           "t": "2009-03",
           "value": 83.5
@@ -1629,7 +1824,7 @@
           "t": "2017-12",
           "value": 124.4
         },
-        "count": 499,
+        "count": 500,
         "start": "1985-01"
       },
       "points": [
@@ -3628,6 +3823,11 @@
         {
           "t": "2026-07",
           "value": 120.6
+        },
+        {
+          "t": "2026-08",
+          "value": 118.7,
+          "provisional": true
         }
       ]
     },
@@ -23159,7 +23359,7 @@
       ],
       "movingAverage": null,
       "releaseSchedule": "厚生労働省が対象月の翌々月上旬ごろ8:30に速報を公表。",
-      "nextRelease": "2026-10-08",
+      "nextRelease": "2026-11-09",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -23168,12 +23368,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
-          "value": 2,
-          "provisional": false
+          "t": "2026-08",
+          "value": 1.5,
+          "provisional": true
         },
-        "changeFromPrev": -0.2,
-        "changeFromYearAgo": 2.2,
+        "changeFromPrev": -0.5,
+        "changeFromYearAgo": 3.2,
         "min": {
           "t": "2014-05",
           "value": -4.1
@@ -23182,7 +23382,7 @@
           "t": "2021-05",
           "value": 3.1
         },
-        "count": 163,
+        "count": 164,
         "start": "2013-01"
       },
       "points": [
@@ -23837,6 +24037,11 @@
         {
           "t": "2026-07",
           "value": 2
+        },
+        {
+          "t": "2026-08",
+          "value": 1.5,
+          "provisional": true
         }
       ]
     },
@@ -23851,7 +24056,7 @@
       "seasonalAdjustment": "季節調整値",
       "betterWhen": "up",
       "importance": 3,
-      "description": "モノの輸出額から輸入額を差し引いた収支。財務省『貿易統計』による。資源価格（原油等）や為替レート、海外景気の影響を強く受ける。",
+      "description": "モノの輸出額から輸入額を差し引いた収支。財務省・日本銀行『国際収支統計』（国際収支ベース、季節調整値）による。通関ベースの『貿易統計』を使った別カード「貿易収支（通関ベース）」より約1か月遅れて公表される。資源価格（原油等）や為替レート、海外景気の影響を強く受ける。",
       "judgment": {
         "summary": "黒字（プラス）か赤字（マイナス）かだけでなく、なぜそうなっているか（輸出が伸びているのか、資源高で輸入が膨らんでいるのか）を合わせて見る必要がある。",
         "goodWhen": "輸出の増加を伴う黒字拡大（海外需要の強さを反映）。",
@@ -23866,8 +24071,8 @@
         }
       ],
       "movingAverage": null,
-      "releaseSchedule": "財務省が対象月の翌月20日ごろ8:50に公表。",
-      "nextRelease": "2026-09-21",
+      "releaseSchedule": "財務省・日本銀行が対象月の翌々月上旬ごろ8:50に公表（経常収支と同時）。",
+      "nextRelease": "2026-11-09",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -23876,12 +24081,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
-          "value": -4294,
+          "t": "2026-08",
+          "value": -4852,
           "provisional": true
         },
-        "changeFromPrev": 1514,
-        "changeFromYearAgo": -2027,
+        "changeFromPrev": -558,
+        "changeFromYearAgo": -5358,
         "min": {
           "t": "2022-10",
           "value": -19989
@@ -23890,7 +24095,7 @@
           "t": "1998-05",
           "value": 15446
         },
-        "count": 367,
+        "count": 368,
         "start": "1996-01"
       },
       "points": [
@@ -25348,22 +25553,24 @@
         },
         {
           "t": "2026-04",
-          "value": 4696,
-          "provisional": true
+          "value": 4223
         },
         {
           "t": "2026-05",
-          "value": 2045,
-          "provisional": true
+          "value": 1848
         },
         {
           "t": "2026-06",
-          "value": -5808,
-          "provisional": true
+          "value": -5779
         },
         {
           "t": "2026-07",
           "value": -4294,
+          "provisional": true
+        },
+        {
+          "t": "2026-08",
+          "value": -4852,
           "provisional": true
         }
       ]
@@ -25395,7 +25602,7 @@
       ],
       "movingAverage": null,
       "releaseSchedule": "財務省が対象月の翌々月上旬ごろ8:50に公表。",
-      "nextRelease": "2026-10-08",
+      "nextRelease": "2026-11-09",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -25404,21 +25611,21 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
-          "value": 25231,
+          "t": "2026-08",
+          "value": 29794,
           "provisional": true
         },
-        "changeFromPrev": 11262,
-        "changeFromYearAgo": 4382,
+        "changeFromPrev": 4563,
+        "changeFromYearAgo": 3524,
         "min": {
           "t": "2014-03",
           "value": -6823
         },
         "max": {
           "t": "2026-04",
-          "value": 42111
+          "value": 42471
         },
-        "count": 367,
+        "count": 368,
         "start": "1996-01"
       },
       "points": [
@@ -26876,22 +27083,24 @@
         },
         {
           "t": "2026-04",
-          "value": 42111,
-          "provisional": true
+          "value": 42471
         },
         {
           "t": "2026-05",
-          "value": 30645,
-          "provisional": true
+          "value": 31694
         },
         {
           "t": "2026-06",
-          "value": 13969,
-          "provisional": true
+          "value": 15481
         },
         {
           "t": "2026-07",
           "value": 25231,
+          "provisional": true
+        },
+        {
+          "t": "2026-08",
+          "value": 29794,
           "provisional": true
         }
       ]
@@ -26932,12 +27141,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-08",
-          "value": 0.977,
+          "t": "2026-09",
+          "value": 1.043,
           "provisional": false
         },
-        "changeFromPrev": -0.001,
-        "changeFromYearAgo": 0.5,
+        "changeFromPrev": 0.066,
+        "changeFromYearAgo": 0.566,
         "min": {
           "t": "2018-06",
           "value": -0.071
@@ -26946,7 +27155,7 @@
           "t": "1991-03",
           "value": 8.27813
         },
-        "count": 494,
+        "count": 495,
         "start": "1985-07"
       },
       "points": [
@@ -28925,6 +29134,10 @@
         {
           "t": "2026-08",
           "value": 0.977
+        },
+        {
+          "t": "2026-09",
+          "value": 1.043
         }
       ]
     },
@@ -31821,7 +32034,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-10-05",
+      "nextRelease": "2026-10-12",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -31830,12 +32043,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09-30",
-          "value": 156.91,
+          "t": "2026-10-07",
+          "value": 158.11,
           "provisional": false
         },
-        "changeFromPrev": -0.47,
-        "changeFromYearAgo": 8.84,
+        "changeFromPrev": -0.01,
+        "changeFromYearAgo": 7.48,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -31844,7 +32057,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2624,
+        "count": 2629,
         "start": "2016-01-04"
       },
       "points": [
@@ -42343,6 +42556,26 @@
         {
           "t": "2026-09-30",
           "value": 156.91
+        },
+        {
+          "t": "2026-10-01",
+          "value": 158.39
+        },
+        {
+          "t": "2026-10-02",
+          "value": 157.58
+        },
+        {
+          "t": "2026-10-05",
+          "value": 157.66
+        },
+        {
+          "t": "2026-10-06",
+          "value": 158.12
+        },
+        {
+          "t": "2026-10-07",
+          "value": 158.11
         }
       ]
     },
@@ -42367,7 +42600,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "取引時間中は常時更新。日次終値を翌営業日にかけてFRED経由で取得・反映。",
-      "nextRelease": "2026-10-05",
+      "nextRelease": "2026-10-14",
       "nextReleaseKind": "official",
       "source": {
         "provider": "FRED（セントルイス連邦準備銀行）",
@@ -42376,12 +42609,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-10-02",
-          "value": 68309.46,
+          "t": "2026-10-09",
+          "value": 69030.92,
           "provisional": false
         },
-        "changeFromPrev": -647.26,
-        "changeFromYearAgo": 23372.73,
+        "changeFromPrev": -11.19,
+        "changeFromYearAgo": 20450.48,
         "min": {
           "t": "2016-06-24",
           "value": 14952.02
@@ -42390,7 +42623,7 @@
           "t": "2026-06-25",
           "value": 72366.34
         },
-        "count": 2626,
+        "count": 2631,
         "start": "2016-01-04"
       },
       "points": [
@@ -52897,6 +53130,26 @@
         {
           "t": "2026-10-02",
           "value": 68309.46
+        },
+        {
+          "t": "2026-10-05",
+          "value": 69946.86
+        },
+        {
+          "t": "2026-10-06",
+          "value": 70683.98
+        },
+        {
+          "t": "2026-10-07",
+          "value": 70035.71
+        },
+        {
+          "t": "2026-10-08",
+          "value": 69042.11
+        },
+        {
+          "t": "2026-10-09",
+          "value": 69030.92
         }
       ]
     },
@@ -56034,7 +56287,7 @@
       ],
       "movingAverage": null,
       "releaseSchedule": "内閣府が毎月、調査月の翌月上旬（8日前後）に公表。",
-      "nextRelease": "2026-10-08",
+      "nextRelease": "2026-11-09",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "内閣府 景気ウォッチャー調査",
@@ -56043,12 +56296,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-08",
-          "value": 46.2,
+          "t": "2026-09",
+          "value": 46.4,
           "provisional": false
         },
-        "changeFromPrev": 0.4,
-        "changeFromYearAgo": -0.1,
+        "changeFromPrev": 0.2,
+        "changeFromYearAgo": -0.2,
         "min": {
           "t": "2020-04",
           "value": 9.5
@@ -56057,7 +56310,7 @@
           "t": "2021-12",
           "value": 58.6
         },
-        "count": 320,
+        "count": 321,
         "start": "2000-01"
       },
       "points": [
@@ -57340,6 +57593,10 @@
         {
           "t": "2026-08",
           "value": 46.2
+        },
+        {
+          "t": "2026-09",
+          "value": 46.4
         }
       ]
     },
@@ -57932,7 +58189,7 @@
       ],
       "movingAverage": null,
       "releaseSchedule": "総務省が対象月の翌々月上旬（月初の金曜日ごろ）8:30に公表。",
-      "nextRelease": "2026-10-08",
+      "nextRelease": "2026-11-09",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -57941,12 +58198,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
-          "value": -3.6,
+          "t": "2026-08",
+          "value": -3.1,
           "provisional": false
         },
-        "changeFromPrev": -0.3,
-        "changeFromYearAgo": -5,
+        "changeFromPrev": 0.5,
+        "changeFromYearAgo": -5.4,
         "min": {
           "t": "2020-05",
           "value": -16.2
@@ -57955,7 +58212,7 @@
           "t": "2021-04",
           "value": 13.9
         },
-        "count": 307,
+        "count": 308,
         "start": "2001-01"
       },
       "points": [
@@ -59186,6 +59443,10 @@
         {
           "t": "2026-07",
           "value": -3.6
+        },
+        {
+          "t": "2026-08",
+          "value": -3.1
         }
       ]
     },
@@ -60135,6 +60396,8096 @@
           "t": "2026-07",
           "value": 107.1,
           "provisional": true
+        }
+      ]
+    },
+    {
+      "id": "tankan_large_mfg_outlook",
+      "name": "日銀短観 業況判断DI・先行き（大企業・製造業）",
+      "shortName": "短観・先行き（大企業製造業）",
+      "category": "景気",
+      "unit": "ポイント",
+      "unitLabel": "DI（先行き＝次の四半期の見通し、%ポイント）",
+      "frequency": "quarterly",
+      "seasonalAdjustment": "原数値",
+      "betterWhen": "up",
+      "importance": 4,
+      "description": "日銀短観の同じ調査で、大企業・製造業に『3か月後（次の四半期）の業況はどうなりそうか』を聞いた見通しの業況判断DI。現在の景況感（実績）に対して、企業が先行きをどう見ているかを示す。市場では実績よりも先行きのほうが注目されることが多い。表示は調査月に合わせてあり、『2026 Q3』は9月調査で答えた12月時点の見通し。",
+      "judgment": {
+        "summary": "先行きが現在の実績を上回れば企業は改善を見込み、下回れば悪化を見込んでいる。実績カードと並べて、その差と変化を見る。",
+        "goodWhen": "プラス圏で、実績と同程度かそれ以上の水準（企業が先行きにも自信を持っている）。",
+        "badWhen": "実績を大きく下回る、またはマイナス圏に入る状態（企業が今後の悪化を見込んでいる）。",
+        "caveat": "先行きは慎重な回答になりやすく、実績より低めに出る傾向がある。水準そのものより、前回調査からの変化や実績との差で見る。表示の「Q1〜Q4」は3・6・9・12月調査にあたる。"
+      },
+      "referenceLines": [
+        {
+          "value": 0,
+          "label": "0＝「良い」と「悪い」が同数",
+          "kind": "neutral"
+        }
+      ],
+      "movingAverage": null,
+      "releaseSchedule": "日本銀行が年4回、3・6・9月調査は翌月1日ごろ（4月・7月・10月）、12月調査は12月中旬に公表（実績と同時）。",
+      "nextRelease": "2026-12-15",
+      "nextReleaseKind": "estimate",
+      "source": {
+        "provider": "日本銀行 時系列統計データ検索サイト",
+        "statName": "全国企業短期経済観測調査 業況判断D.I.／大企業／製造業／先行き（予測）",
+        "sourceUrl": "https://www.stat-search.boj.or.jp/"
+      },
+      "summary": {
+        "latest": {
+          "t": "2026 Q3",
+          "value": 21,
+          "provisional": false
+        },
+        "changeFromPrev": 4,
+        "changeFromYearAgo": 9,
+        "min": {
+          "t": "2009 Q1",
+          "value": -51
+        },
+        "max": {
+          "t": "1990 Q1",
+          "value": 38
+        },
+        "count": 147,
+        "start": "1990 Q1"
+      },
+      "points": [
+        {
+          "t": "1990 Q1",
+          "value": 38
+        },
+        {
+          "t": "1990 Q2",
+          "value": 37
+        },
+        {
+          "t": "1990 Q3",
+          "value": 38
+        },
+        {
+          "t": "1990 Q4",
+          "value": 29
+        },
+        {
+          "t": "1991 Q1",
+          "value": 26
+        },
+        {
+          "t": "1991 Q2",
+          "value": 24
+        },
+        {
+          "t": "1991 Q3",
+          "value": 20
+        },
+        {
+          "t": "1991 Q4",
+          "value": 2
+        },
+        {
+          "t": "1992 Q1",
+          "value": -13
+        },
+        {
+          "t": "1992 Q2",
+          "value": -16
+        },
+        {
+          "t": "1992 Q3",
+          "value": -20
+        },
+        {
+          "t": "1992 Q4",
+          "value": -29
+        },
+        {
+          "t": "1993 Q1",
+          "value": -36
+        },
+        {
+          "t": "1993 Q2",
+          "value": -29
+        },
+        {
+          "t": "1993 Q3",
+          "value": -30
+        },
+        {
+          "t": "1993 Q4",
+          "value": -42
+        },
+        {
+          "t": "1994 Q1",
+          "value": -40
+        },
+        {
+          "t": "1994 Q2",
+          "value": -27
+        },
+        {
+          "t": "1994 Q3",
+          "value": -14
+        },
+        {
+          "t": "1994 Q4",
+          "value": -8
+        },
+        {
+          "t": "1995 Q1",
+          "value": -5
+        },
+        {
+          "t": "1995 Q2",
+          "value": -7
+        },
+        {
+          "t": "1995 Q3",
+          "value": -11
+        },
+        {
+          "t": "1995 Q4",
+          "value": -6
+        },
+        {
+          "t": "1996 Q1",
+          "value": -1
+        },
+        {
+          "t": "1996 Q2",
+          "value": 2
+        },
+        {
+          "t": "1996 Q3",
+          "value": 2
+        },
+        {
+          "t": "1996 Q4",
+          "value": 3
+        },
+        {
+          "t": "1997 Q1",
+          "value": 4
+        },
+        {
+          "t": "1997 Q2",
+          "value": 13
+        },
+        {
+          "t": "1997 Q3",
+          "value": 3
+        },
+        {
+          "t": "1997 Q4",
+          "value": -13
+        },
+        {
+          "t": "1998 Q1",
+          "value": -28
+        },
+        {
+          "t": "1998 Q2",
+          "value": -31
+        },
+        {
+          "t": "1998 Q3",
+          "value": -39
+        },
+        {
+          "t": "1998 Q4",
+          "value": -45
+        },
+        {
+          "t": "1999 Q1",
+          "value": -38
+        },
+        {
+          "t": "1999 Q2",
+          "value": -22
+        },
+        {
+          "t": "1999 Q3",
+          "value": -16
+        },
+        {
+          "t": "1999 Q4",
+          "value": -9
+        },
+        {
+          "t": "2000 Q1",
+          "value": -5
+        },
+        {
+          "t": "2000 Q2",
+          "value": 6
+        },
+        {
+          "t": "2000 Q3",
+          "value": 11
+        },
+        {
+          "t": "2000 Q4",
+          "value": 7
+        },
+        {
+          "t": "2001 Q1",
+          "value": -8
+        },
+        {
+          "t": "2001 Q2",
+          "value": -14
+        },
+        {
+          "t": "2001 Q3",
+          "value": -31
+        },
+        {
+          "t": "2001 Q4",
+          "value": -36
+        },
+        {
+          "t": "2002 Q1",
+          "value": -27
+        },
+        {
+          "t": "2002 Q2",
+          "value": -11
+        },
+        {
+          "t": "2002 Q3",
+          "value": -11
+        },
+        {
+          "t": "2002 Q4",
+          "value": -10
+        },
+        {
+          "t": "2003 Q1",
+          "value": -8
+        },
+        {
+          "t": "2003 Q2",
+          "value": -5
+        },
+        {
+          "t": "2003 Q3",
+          "value": 3
+        },
+        {
+          "t": "2003 Q4",
+          "value": 8
+        },
+        {
+          "t": "2004 Q1",
+          "value": 12
+        },
+        {
+          "t": "2004 Q2",
+          "value": 21
+        },
+        {
+          "t": "2004 Q3",
+          "value": 21
+        },
+        {
+          "t": "2004 Q4",
+          "value": 15
+        },
+        {
+          "t": "2005 Q1",
+          "value": 14
+        },
+        {
+          "t": "2005 Q2",
+          "value": 17
+        },
+        {
+          "t": "2005 Q3",
+          "value": 18
+        },
+        {
+          "t": "2005 Q4",
+          "value": 19
+        },
+        {
+          "t": "2006 Q1",
+          "value": 22
+        },
+        {
+          "t": "2006 Q2",
+          "value": 22
+        },
+        {
+          "t": "2006 Q3",
+          "value": 21
+        },
+        {
+          "t": "2006 Q4",
+          "value": 22
+        },
+        {
+          "t": "2007 Q1",
+          "value": 20
+        },
+        {
+          "t": "2007 Q2",
+          "value": 22
+        },
+        {
+          "t": "2007 Q3",
+          "value": 19
+        },
+        {
+          "t": "2007 Q4",
+          "value": 15
+        },
+        {
+          "t": "2008 Q1",
+          "value": 7
+        },
+        {
+          "t": "2008 Q2",
+          "value": 4
+        },
+        {
+          "t": "2008 Q3",
+          "value": -4
+        },
+        {
+          "t": "2008 Q4",
+          "value": -36
+        },
+        {
+          "t": "2009 Q1",
+          "value": -51
+        },
+        {
+          "t": "2009 Q2",
+          "value": -30
+        },
+        {
+          "t": "2009 Q3",
+          "value": -21
+        },
+        {
+          "t": "2009 Q4",
+          "value": -18
+        },
+        {
+          "t": "2010 Q1",
+          "value": -8
+        },
+        {
+          "t": "2010 Q2",
+          "value": 3
+        },
+        {
+          "t": "2010 Q3",
+          "value": -1
+        },
+        {
+          "t": "2010 Q4",
+          "value": -2
+        },
+        {
+          "t": "2011 Q1",
+          "value": 2
+        },
+        {
+          "t": "2011 Q2",
+          "value": 2
+        },
+        {
+          "t": "2011 Q3",
+          "value": 4
+        },
+        {
+          "t": "2011 Q4",
+          "value": -5
+        },
+        {
+          "t": "2012 Q1",
+          "value": -3
+        },
+        {
+          "t": "2012 Q2",
+          "value": 1
+        },
+        {
+          "t": "2012 Q3",
+          "value": -3
+        },
+        {
+          "t": "2012 Q4",
+          "value": -10
+        },
+        {
+          "t": "2013 Q1",
+          "value": -1
+        },
+        {
+          "t": "2013 Q2",
+          "value": 10
+        },
+        {
+          "t": "2013 Q3",
+          "value": 11
+        },
+        {
+          "t": "2013 Q4",
+          "value": 14
+        },
+        {
+          "t": "2014 Q1",
+          "value": 8
+        },
+        {
+          "t": "2014 Q2",
+          "value": 15
+        },
+        {
+          "t": "2014 Q3",
+          "value": 13
+        },
+        {
+          "t": "2014 Q4",
+          "value": 9
+        },
+        {
+          "t": "2015 Q1",
+          "value": 10
+        },
+        {
+          "t": "2015 Q2",
+          "value": 16
+        },
+        {
+          "t": "2015 Q3",
+          "value": 10
+        },
+        {
+          "t": "2015 Q4",
+          "value": 7
+        },
+        {
+          "t": "2016 Q1",
+          "value": 3
+        },
+        {
+          "t": "2016 Q2",
+          "value": 6
+        },
+        {
+          "t": "2016 Q3",
+          "value": 6
+        },
+        {
+          "t": "2016 Q4",
+          "value": 8
+        },
+        {
+          "t": "2017 Q1",
+          "value": 11
+        },
+        {
+          "t": "2017 Q2",
+          "value": 15
+        },
+        {
+          "t": "2017 Q3",
+          "value": 19
+        },
+        {
+          "t": "2017 Q4",
+          "value": 19
+        },
+        {
+          "t": "2018 Q1",
+          "value": 20
+        },
+        {
+          "t": "2018 Q2",
+          "value": 21
+        },
+        {
+          "t": "2018 Q3",
+          "value": 19
+        },
+        {
+          "t": "2018 Q4",
+          "value": 15
+        },
+        {
+          "t": "2019 Q1",
+          "value": 8
+        },
+        {
+          "t": "2019 Q2",
+          "value": 7
+        },
+        {
+          "t": "2019 Q3",
+          "value": 2
+        },
+        {
+          "t": "2019 Q4",
+          "value": 0
+        },
+        {
+          "t": "2020 Q1",
+          "value": -11
+        },
+        {
+          "t": "2020 Q2",
+          "value": -27
+        },
+        {
+          "t": "2020 Q3",
+          "value": -17
+        },
+        {
+          "t": "2020 Q4",
+          "value": -8
+        },
+        {
+          "t": "2021 Q1",
+          "value": 4
+        },
+        {
+          "t": "2021 Q2",
+          "value": 13
+        },
+        {
+          "t": "2021 Q3",
+          "value": 14
+        },
+        {
+          "t": "2021 Q4",
+          "value": 13
+        },
+        {
+          "t": "2022 Q1",
+          "value": 9
+        },
+        {
+          "t": "2022 Q2",
+          "value": 10
+        },
+        {
+          "t": "2022 Q3",
+          "value": 9
+        },
+        {
+          "t": "2022 Q4",
+          "value": 6
+        },
+        {
+          "t": "2023 Q1",
+          "value": 3
+        },
+        {
+          "t": "2023 Q2",
+          "value": 9
+        },
+        {
+          "t": "2023 Q3",
+          "value": 10
+        },
+        {
+          "t": "2023 Q4",
+          "value": 8
+        },
+        {
+          "t": "2024 Q1",
+          "value": 10
+        },
+        {
+          "t": "2024 Q2",
+          "value": 14
+        },
+        {
+          "t": "2024 Q3",
+          "value": 14
+        },
+        {
+          "t": "2024 Q4",
+          "value": 13
+        },
+        {
+          "t": "2025 Q1",
+          "value": 12
+        },
+        {
+          "t": "2025 Q2",
+          "value": 12
+        },
+        {
+          "t": "2025 Q3",
+          "value": 12
+        },
+        {
+          "t": "2025 Q4",
+          "value": 15
+        },
+        {
+          "t": "2026 Q1",
+          "value": 14
+        },
+        {
+          "t": "2026 Q2",
+          "value": 17
+        },
+        {
+          "t": "2026 Q3",
+          "value": 21
+        }
+      ]
+    },
+    {
+      "id": "tankan_large_nonmfg_outlook",
+      "name": "日銀短観 業況判断DI・先行き（大企業・非製造業）",
+      "shortName": "短観・先行き（大企業非製造業）",
+      "category": "景気",
+      "unit": "ポイント",
+      "unitLabel": "DI（先行き＝次の四半期の見通し、%ポイント）",
+      "frequency": "quarterly",
+      "seasonalAdjustment": "原数値",
+      "betterWhen": "up",
+      "importance": 4,
+      "description": "日銀短観の同じ調査で、大企業・非製造業（小売・サービス・建設・運輸・不動産など）に『3か月後（次の四半期）の業況はどうなりそうか』を聞いた見通しの業況判断DI。内需の見通しを映す。表示は調査月に合わせてあり、『2026 Q3』は9月調査で答えた12月時点の見通し。",
+      "judgment": {
+        "summary": "先行きが現在の実績を上回れば企業は改善を見込み、下回れば悪化を見込んでいる。実績カードと並べて、その差と変化を見る。",
+        "goodWhen": "プラス圏で、実績と同程度かそれ以上の水準（企業が先行きにも自信を持っている）。",
+        "badWhen": "実績を大きく下回る、またはマイナス圏に入る状態（企業が今後の悪化を見込んでいる）。",
+        "caveat": "先行きは慎重な回答になりやすく、実績より低めに出る傾向がある。水準そのものより、前回調査からの変化や実績との差で見る。表示の「Q1〜Q4」は3・6・9・12月調査にあたる。"
+      },
+      "referenceLines": [
+        {
+          "value": 0,
+          "label": "0＝「良い」と「悪い」が同数",
+          "kind": "neutral"
+        }
+      ],
+      "movingAverage": null,
+      "releaseSchedule": "日本銀行が年4回、3・6・9月調査は翌月1日ごろ（4月・7月・10月）、12月調査は12月中旬に公表（実績と同時）。",
+      "nextRelease": "2026-12-15",
+      "nextReleaseKind": "estimate",
+      "source": {
+        "provider": "日本銀行 時系列統計データ検索サイト",
+        "statName": "全国企業短期経済観測調査 業況判断D.I.／大企業／非製造業／先行き（予測）",
+        "sourceUrl": "https://www.stat-search.boj.or.jp/"
+      },
+      "summary": {
+        "latest": {
+          "t": "2026 Q3",
+          "value": 30,
+          "provisional": false
+        },
+        "changeFromPrev": 2,
+        "changeFromYearAgo": 2,
+        "min": {
+          "t": "1998 Q4",
+          "value": -36
+        },
+        "max": {
+          "t": "1990 Q3",
+          "value": 51
+        },
+        "count": 147,
+        "start": "1990 Q1"
+      },
+      "points": [
+        {
+          "t": "1990 Q1",
+          "value": 48
+        },
+        {
+          "t": "1990 Q2",
+          "value": 47
+        },
+        {
+          "t": "1990 Q3",
+          "value": 51
+        },
+        {
+          "t": "1990 Q4",
+          "value": 40
+        },
+        {
+          "t": "1991 Q1",
+          "value": 37
+        },
+        {
+          "t": "1991 Q2",
+          "value": 38
+        },
+        {
+          "t": "1991 Q3",
+          "value": 35
+        },
+        {
+          "t": "1991 Q4",
+          "value": 22
+        },
+        {
+          "t": "1992 Q1",
+          "value": 7
+        },
+        {
+          "t": "1992 Q2",
+          "value": 3
+        },
+        {
+          "t": "1992 Q3",
+          "value": -7
+        },
+        {
+          "t": "1992 Q4",
+          "value": -19
+        },
+        {
+          "t": "1993 Q1",
+          "value": -27
+        },
+        {
+          "t": "1993 Q2",
+          "value": -20
+        },
+        {
+          "t": "1993 Q3",
+          "value": -21
+        },
+        {
+          "t": "1993 Q4",
+          "value": -30
+        },
+        {
+          "t": "1994 Q1",
+          "value": -29
+        },
+        {
+          "t": "1994 Q2",
+          "value": -18
+        },
+        {
+          "t": "1994 Q3",
+          "value": -12
+        },
+        {
+          "t": "1994 Q4",
+          "value": -10
+        },
+        {
+          "t": "1995 Q1",
+          "value": -13
+        },
+        {
+          "t": "1995 Q2",
+          "value": -11
+        },
+        {
+          "t": "1995 Q3",
+          "value": -12
+        },
+        {
+          "t": "1995 Q4",
+          "value": -11
+        },
+        {
+          "t": "1996 Q1",
+          "value": -5
+        },
+        {
+          "t": "1996 Q2",
+          "value": 3
+        },
+        {
+          "t": "1996 Q3",
+          "value": 4
+        },
+        {
+          "t": "1996 Q4",
+          "value": 2
+        },
+        {
+          "t": "1997 Q1",
+          "value": -5
+        },
+        {
+          "t": "1997 Q2",
+          "value": -2
+        },
+        {
+          "t": "1997 Q3",
+          "value": -10
+        },
+        {
+          "t": "1997 Q4",
+          "value": -26
+        },
+        {
+          "t": "1998 Q1",
+          "value": -28
+        },
+        {
+          "t": "1998 Q2",
+          "value": -26
+        },
+        {
+          "t": "1998 Q3",
+          "value": -35
+        },
+        {
+          "t": "1998 Q4",
+          "value": -36
+        },
+        {
+          "t": "1999 Q1",
+          "value": -27
+        },
+        {
+          "t": "1999 Q2",
+          "value": -21
+        },
+        {
+          "t": "1999 Q3",
+          "value": -18
+        },
+        {
+          "t": "1999 Q4",
+          "value": -16
+        },
+        {
+          "t": "2000 Q1",
+          "value": -11
+        },
+        {
+          "t": "2000 Q2",
+          "value": -7
+        },
+        {
+          "t": "2000 Q3",
+          "value": -4
+        },
+        {
+          "t": "2000 Q4",
+          "value": -8
+        },
+        {
+          "t": "2001 Q1",
+          "value": -11
+        },
+        {
+          "t": "2001 Q2",
+          "value": -11
+        },
+        {
+          "t": "2001 Q3",
+          "value": -20
+        },
+        {
+          "t": "2001 Q4",
+          "value": -25
+        },
+        {
+          "t": "2002 Q1",
+          "value": -21
+        },
+        {
+          "t": "2002 Q2",
+          "value": -12
+        },
+        {
+          "t": "2002 Q3",
+          "value": -11
+        },
+        {
+          "t": "2002 Q4",
+          "value": -15
+        },
+        {
+          "t": "2003 Q1",
+          "value": -13
+        },
+        {
+          "t": "2003 Q2",
+          "value": -12
+        },
+        {
+          "t": "2003 Q3",
+          "value": -8
+        },
+        {
+          "t": "2003 Q4",
+          "value": -7
+        },
+        {
+          "t": "2004 Q1",
+          "value": 7
+        },
+        {
+          "t": "2004 Q2",
+          "value": 11
+        },
+        {
+          "t": "2004 Q3",
+          "value": 10
+        },
+        {
+          "t": "2004 Q4",
+          "value": 10
+        },
+        {
+          "t": "2005 Q1",
+          "value": 10
+        },
+        {
+          "t": "2005 Q2",
+          "value": 14
+        },
+        {
+          "t": "2005 Q3",
+          "value": 16
+        },
+        {
+          "t": "2005 Q4",
+          "value": 17
+        },
+        {
+          "t": "2006 Q1",
+          "value": 19
+        },
+        {
+          "t": "2006 Q2",
+          "value": 21
+        },
+        {
+          "t": "2006 Q3",
+          "value": 21
+        },
+        {
+          "t": "2006 Q4",
+          "value": 20
+        },
+        {
+          "t": "2007 Q1",
+          "value": 23
+        },
+        {
+          "t": "2007 Q2",
+          "value": 23
+        },
+        {
+          "t": "2007 Q3",
+          "value": 21
+        },
+        {
+          "t": "2007 Q4",
+          "value": 15
+        },
+        {
+          "t": "2008 Q1",
+          "value": 13
+        },
+        {
+          "t": "2008 Q2",
+          "value": 8
+        },
+        {
+          "t": "2008 Q3",
+          "value": -1
+        },
+        {
+          "t": "2008 Q4",
+          "value": -14
+        },
+        {
+          "t": "2009 Q1",
+          "value": -30
+        },
+        {
+          "t": "2009 Q2",
+          "value": -21
+        },
+        {
+          "t": "2009 Q3",
+          "value": -17
+        },
+        {
+          "t": "2009 Q4",
+          "value": -19
+        },
+        {
+          "t": "2010 Q1",
+          "value": -10
+        },
+        {
+          "t": "2010 Q2",
+          "value": -4
+        },
+        {
+          "t": "2010 Q3",
+          "value": -2
+        },
+        {
+          "t": "2010 Q4",
+          "value": -1
+        },
+        {
+          "t": "2011 Q1",
+          "value": -1
+        },
+        {
+          "t": "2011 Q2",
+          "value": -2
+        },
+        {
+          "t": "2011 Q3",
+          "value": 1
+        },
+        {
+          "t": "2011 Q4",
+          "value": 0
+        },
+        {
+          "t": "2012 Q1",
+          "value": 5
+        },
+        {
+          "t": "2012 Q2",
+          "value": 6
+        },
+        {
+          "t": "2012 Q3",
+          "value": 5
+        },
+        {
+          "t": "2012 Q4",
+          "value": 3
+        },
+        {
+          "t": "2013 Q1",
+          "value": 9
+        },
+        {
+          "t": "2013 Q2",
+          "value": 12
+        },
+        {
+          "t": "2013 Q3",
+          "value": 14
+        },
+        {
+          "t": "2013 Q4",
+          "value": 17
+        },
+        {
+          "t": "2014 Q1",
+          "value": 13
+        },
+        {
+          "t": "2014 Q2",
+          "value": 19
+        },
+        {
+          "t": "2014 Q3",
+          "value": 14
+        },
+        {
+          "t": "2014 Q4",
+          "value": 15
+        },
+        {
+          "t": "2015 Q1",
+          "value": 17
+        },
+        {
+          "t": "2015 Q2",
+          "value": 21
+        },
+        {
+          "t": "2015 Q3",
+          "value": 19
+        },
+        {
+          "t": "2015 Q4",
+          "value": 18
+        },
+        {
+          "t": "2016 Q1",
+          "value": 17
+        },
+        {
+          "t": "2016 Q2",
+          "value": 17
+        },
+        {
+          "t": "2016 Q3",
+          "value": 16
+        },
+        {
+          "t": "2016 Q4",
+          "value": 16
+        },
+        {
+          "t": "2017 Q1",
+          "value": 16
+        },
+        {
+          "t": "2017 Q2",
+          "value": 18
+        },
+        {
+          "t": "2017 Q3",
+          "value": 19
+        },
+        {
+          "t": "2017 Q4",
+          "value": 20
+        },
+        {
+          "t": "2018 Q1",
+          "value": 20
+        },
+        {
+          "t": "2018 Q2",
+          "value": 21
+        },
+        {
+          "t": "2018 Q3",
+          "value": 22
+        },
+        {
+          "t": "2018 Q4",
+          "value": 20
+        },
+        {
+          "t": "2019 Q1",
+          "value": 20
+        },
+        {
+          "t": "2019 Q2",
+          "value": 17
+        },
+        {
+          "t": "2019 Q3",
+          "value": 15
+        },
+        {
+          "t": "2019 Q4",
+          "value": 18
+        },
+        {
+          "t": "2020 Q1",
+          "value": -1
+        },
+        {
+          "t": "2020 Q2",
+          "value": -14
+        },
+        {
+          "t": "2020 Q3",
+          "value": -11
+        },
+        {
+          "t": "2020 Q4",
+          "value": -6
+        },
+        {
+          "t": "2021 Q1",
+          "value": -1
+        },
+        {
+          "t": "2021 Q2",
+          "value": 3
+        },
+        {
+          "t": "2021 Q3",
+          "value": 3
+        },
+        {
+          "t": "2021 Q4",
+          "value": 8
+        },
+        {
+          "t": "2022 Q1",
+          "value": 7
+        },
+        {
+          "t": "2022 Q2",
+          "value": 13
+        },
+        {
+          "t": "2022 Q3",
+          "value": 11
+        },
+        {
+          "t": "2022 Q4",
+          "value": 11
+        },
+        {
+          "t": "2023 Q1",
+          "value": 15
+        },
+        {
+          "t": "2023 Q2",
+          "value": 20
+        },
+        {
+          "t": "2023 Q3",
+          "value": 21
+        },
+        {
+          "t": "2023 Q4",
+          "value": 24
+        },
+        {
+          "t": "2024 Q1",
+          "value": 27
+        },
+        {
+          "t": "2024 Q2",
+          "value": 27
+        },
+        {
+          "t": "2024 Q3",
+          "value": 28
+        },
+        {
+          "t": "2024 Q4",
+          "value": 28
+        },
+        {
+          "t": "2025 Q1",
+          "value": 28
+        },
+        {
+          "t": "2025 Q2",
+          "value": 27
+        },
+        {
+          "t": "2025 Q3",
+          "value": 28
+        },
+        {
+          "t": "2025 Q4",
+          "value": 28
+        },
+        {
+          "t": "2026 Q1",
+          "value": 29
+        },
+        {
+          "t": "2026 Q2",
+          "value": 28
+        },
+        {
+          "t": "2026 Q3",
+          "value": 30
+        }
+      ]
+    },
+    {
+      "id": "tankan_capex_large_all",
+      "name": "日銀短観 設備投資計画（大企業・全産業・当年度）",
+      "shortName": "短観・設備投資計画",
+      "category": "景気",
+      "unit": "%",
+      "unitLabel": "前年度比 %（当年度計画、土地投資額を含む）",
+      "frequency": "quarterly",
+      "seasonalAdjustment": "原数値",
+      "betterWhen": "neutral",
+      "importance": 4,
+      "description": "日銀短観で、大企業・全産業に『今年度（4月〜翌3月）に設備投資をいくら予定しているか』を聞き、前年度の実績に対する伸び率にしたもの。3・6・9・12月の調査ごとに、同じ年度の計画が見直されて更新される。企業の投資意欲をつかむ材料として、短観の中でも市場の注目度が高い項目。",
+      "judgment": {
+        "summary": "同じ年度の計画は調査のたびに修正される。近年は3月調査で3〜4%台と低めに出て、6月調査で11〜13%台へ大きく上方修正される年が続いている。前回調査との差ではなく、前年の同じ調査月と比べて見る。",
+        "goodWhen": "前年の同じ調査月より高い水準にある状態（企業の投資意欲が強い）。",
+        "badWhen": "前年の同じ調査月より大きく低い、または年度の途中で計画が下方修正されていく状態（投資を控える動き）。",
+        "caveat": "3月→6月で大きく上がるのは毎年繰り返される傾向（3月時点では計画が固まっていない）で、景気の改善を意味するとは限らない。そのためカード・詳細の「前期比」は参考程度にし、「前年比」（前年の同じ調査月との差）を見る。変化の大きさ（⚡）や改善・悪化の自動集計の対象にはしていない。表示の「Q1〜Q4」は3・6・9・12月調査にあたる。"
+      },
+      "referenceLines": [
+        {
+          "value": 0,
+          "label": "0＝前年度と同じ投資額",
+          "kind": "neutral"
+        }
+      ],
+      "movingAverage": null,
+      "noSurprise": true,
+      "releaseSchedule": "日本銀行が年4回、3・6・9月調査は翌月1日ごろ（4月・7月・10月）、12月調査は12月中旬に公表。",
+      "nextRelease": "2026-12-15",
+      "nextReleaseKind": "estimate",
+      "source": {
+        "provider": "日本銀行 時系列統計データ検索サイト",
+        "statName": "全国企業短期経済観測調査 設備投資額（含む土地投資額）／前年比・年度／大企業／全産業（3・6・9・12月調査の当年度計画）",
+        "sourceUrl": "https://www.stat-search.boj.or.jp/"
+      },
+      "summary": {
+        "latest": {
+          "t": "2026 Q3",
+          "value": 11.3,
+          "provisional": false
+        },
+        "changeFromPrev": -0.2,
+        "changeFromYearAgo": -1.2,
+        "min": {
+          "t": "2009 Q4",
+          "value": -13.8
+        },
+        "max": {
+          "t": "2022 Q3",
+          "value": 21.5
+        },
+        "count": 147,
+        "start": "1990 Q1"
+      },
+      "points": [
+        {
+          "t": "1990 Q1",
+          "value": 5
+        },
+        {
+          "t": "1990 Q2",
+          "value": 13.4
+        },
+        {
+          "t": "1990 Q3",
+          "value": 14.8
+        },
+        {
+          "t": "1990 Q4",
+          "value": 16.6
+        },
+        {
+          "t": "1991 Q1",
+          "value": 0.2
+        },
+        {
+          "t": "1991 Q2",
+          "value": 6.6
+        },
+        {
+          "t": "1991 Q3",
+          "value": 7.4
+        },
+        {
+          "t": "1991 Q4",
+          "value": 7.4
+        },
+        {
+          "t": "1992 Q1",
+          "value": -6.3
+        },
+        {
+          "t": "1992 Q2",
+          "value": -6
+        },
+        {
+          "t": "1992 Q3",
+          "value": -6
+        },
+        {
+          "t": "1992 Q4",
+          "value": -7.3
+        },
+        {
+          "t": "1993 Q1",
+          "value": -7.6
+        },
+        {
+          "t": "1993 Q2",
+          "value": -7.5
+        },
+        {
+          "t": "1993 Q3",
+          "value": -9.3
+        },
+        {
+          "t": "1993 Q4",
+          "value": -10.6
+        },
+        {
+          "t": "1994 Q1",
+          "value": -8.3
+        },
+        {
+          "t": "1994 Q2",
+          "value": -6.2
+        },
+        {
+          "t": "1994 Q3",
+          "value": -6.2
+        },
+        {
+          "t": "1994 Q4",
+          "value": -6.4
+        },
+        {
+          "t": "1995 Q1",
+          "value": -1.8
+        },
+        {
+          "t": "1995 Q2",
+          "value": 4
+        },
+        {
+          "t": "1995 Q3",
+          "value": 3.8
+        },
+        {
+          "t": "1995 Q4",
+          "value": 5.3
+        },
+        {
+          "t": "1996 Q1",
+          "value": -0.6
+        },
+        {
+          "t": "1996 Q2",
+          "value": 5.9
+        },
+        {
+          "t": "1996 Q3",
+          "value": 6.1
+        },
+        {
+          "t": "1996 Q4",
+          "value": 6.3
+        },
+        {
+          "t": "1997 Q1",
+          "value": 1.8
+        },
+        {
+          "t": "1997 Q2",
+          "value": 2.2
+        },
+        {
+          "t": "1997 Q3",
+          "value": 2.1
+        },
+        {
+          "t": "1997 Q4",
+          "value": 2.5
+        },
+        {
+          "t": "1998 Q1",
+          "value": -5.7
+        },
+        {
+          "t": "1998 Q2",
+          "value": -3.4
+        },
+        {
+          "t": "1998 Q3",
+          "value": -4.4
+        },
+        {
+          "t": "1998 Q4",
+          "value": -3.8
+        },
+        {
+          "t": "1999 Q1",
+          "value": -9.4
+        },
+        {
+          "t": "1999 Q2",
+          "value": -7.9
+        },
+        {
+          "t": "1999 Q3",
+          "value": -9.4
+        },
+        {
+          "t": "1999 Q4",
+          "value": -10.8
+        },
+        {
+          "t": "2000 Q1",
+          "value": -0.6
+        },
+        {
+          "t": "2000 Q2",
+          "value": 4.6
+        },
+        {
+          "t": "2000 Q3",
+          "value": 6
+        },
+        {
+          "t": "2000 Q4",
+          "value": 7.6
+        },
+        {
+          "t": "2001 Q1",
+          "value": -4.7
+        },
+        {
+          "t": "2001 Q2",
+          "value": -1.3
+        },
+        {
+          "t": "2001 Q3",
+          "value": -3.1
+        },
+        {
+          "t": "2001 Q4",
+          "value": -6.5
+        },
+        {
+          "t": "2002 Q1",
+          "value": -8.4
+        },
+        {
+          "t": "2002 Q2",
+          "value": -6.7
+        },
+        {
+          "t": "2002 Q3",
+          "value": -6.2
+        },
+        {
+          "t": "2002 Q4",
+          "value": -6.8
+        },
+        {
+          "t": "2003 Q1",
+          "value": -0.8
+        },
+        {
+          "t": "2003 Q2",
+          "value": 4.9
+        },
+        {
+          "t": "2003 Q3",
+          "value": 4.4
+        },
+        {
+          "t": "2003 Q4",
+          "value": 5.2
+        },
+        {
+          "t": "2004 Q1",
+          "value": -0.6
+        },
+        {
+          "t": "2004 Q2",
+          "value": 5.7
+        },
+        {
+          "t": "2004 Q3",
+          "value": 6.1
+        },
+        {
+          "t": "2004 Q4",
+          "value": 7.7
+        },
+        {
+          "t": "2005 Q1",
+          "value": 1
+        },
+        {
+          "t": "2005 Q2",
+          "value": 9.4
+        },
+        {
+          "t": "2005 Q3",
+          "value": 9.3
+        },
+        {
+          "t": "2005 Q4",
+          "value": 10.4
+        },
+        {
+          "t": "2006 Q1",
+          "value": 2.7
+        },
+        {
+          "t": "2006 Q2",
+          "value": 11.6
+        },
+        {
+          "t": "2006 Q3",
+          "value": 11.5
+        },
+        {
+          "t": "2006 Q4",
+          "value": 12.4
+        },
+        {
+          "t": "2007 Q1",
+          "value": 2.9
+        },
+        {
+          "t": "2007 Q2",
+          "value": 7.7
+        },
+        {
+          "t": "2007 Q3",
+          "value": 8.7
+        },
+        {
+          "t": "2007 Q4",
+          "value": 10.5
+        },
+        {
+          "t": "2008 Q1",
+          "value": -1.6
+        },
+        {
+          "t": "2008 Q2",
+          "value": 2.4
+        },
+        {
+          "t": "2008 Q3",
+          "value": 1.7
+        },
+        {
+          "t": "2008 Q4",
+          "value": -0.2
+        },
+        {
+          "t": "2009 Q1",
+          "value": -6.6
+        },
+        {
+          "t": "2009 Q2",
+          "value": -9.4
+        },
+        {
+          "t": "2009 Q3",
+          "value": -10.8
+        },
+        {
+          "t": "2009 Q4",
+          "value": -13.8
+        },
+        {
+          "t": "2010 Q1",
+          "value": -0.4
+        },
+        {
+          "t": "2010 Q2",
+          "value": 4.4
+        },
+        {
+          "t": "2010 Q3",
+          "value": 2.4
+        },
+        {
+          "t": "2010 Q4",
+          "value": 2.9
+        },
+        {
+          "t": "2011 Q1",
+          "value": -0.4
+        },
+        {
+          "t": "2011 Q2",
+          "value": 4.2
+        },
+        {
+          "t": "2011 Q3",
+          "value": 3
+        },
+        {
+          "t": "2011 Q4",
+          "value": 1.4
+        },
+        {
+          "t": "2012 Q1",
+          "value": 0
+        },
+        {
+          "t": "2012 Q2",
+          "value": 6.2
+        },
+        {
+          "t": "2012 Q3",
+          "value": 6.4
+        },
+        {
+          "t": "2012 Q4",
+          "value": 6.8
+        },
+        {
+          "t": "2013 Q1",
+          "value": -2
+        },
+        {
+          "t": "2013 Q2",
+          "value": 5.5
+        },
+        {
+          "t": "2013 Q3",
+          "value": 5.1
+        },
+        {
+          "t": "2013 Q4",
+          "value": 4.6
+        },
+        {
+          "t": "2014 Q1",
+          "value": 0.1
+        },
+        {
+          "t": "2014 Q2",
+          "value": 7.4
+        },
+        {
+          "t": "2014 Q3",
+          "value": 8.6
+        },
+        {
+          "t": "2014 Q4",
+          "value": 8.9
+        },
+        {
+          "t": "2015 Q1",
+          "value": -1.2
+        },
+        {
+          "t": "2015 Q2",
+          "value": 9.3
+        },
+        {
+          "t": "2015 Q3",
+          "value": 10.9
+        },
+        {
+          "t": "2015 Q4",
+          "value": 10.8
+        },
+        {
+          "t": "2016 Q1",
+          "value": -0.9
+        },
+        {
+          "t": "2016 Q2",
+          "value": 6.2
+        },
+        {
+          "t": "2016 Q3",
+          "value": 6.3
+        },
+        {
+          "t": "2016 Q4",
+          "value": 5.5
+        },
+        {
+          "t": "2017 Q1",
+          "value": 0.6
+        },
+        {
+          "t": "2017 Q2",
+          "value": 8
+        },
+        {
+          "t": "2017 Q3",
+          "value": 7.7
+        },
+        {
+          "t": "2017 Q4",
+          "value": 7.4
+        },
+        {
+          "t": "2018 Q1",
+          "value": 2.3
+        },
+        {
+          "t": "2018 Q2",
+          "value": 13.6
+        },
+        {
+          "t": "2018 Q3",
+          "value": 13.4
+        },
+        {
+          "t": "2018 Q4",
+          "value": 14.3
+        },
+        {
+          "t": "2019 Q1",
+          "value": 1.2
+        },
+        {
+          "t": "2019 Q2",
+          "value": 7.4
+        },
+        {
+          "t": "2019 Q3",
+          "value": 6.6
+        },
+        {
+          "t": "2019 Q4",
+          "value": 6.8
+        },
+        {
+          "t": "2020 Q1",
+          "value": 1.8
+        },
+        {
+          "t": "2020 Q2",
+          "value": 3.2
+        },
+        {
+          "t": "2020 Q3",
+          "value": 1.4
+        },
+        {
+          "t": "2020 Q4",
+          "value": -1.2
+        },
+        {
+          "t": "2021 Q1",
+          "value": 3
+        },
+        {
+          "t": "2021 Q2",
+          "value": 9.6
+        },
+        {
+          "t": "2021 Q3",
+          "value": 10.1
+        },
+        {
+          "t": "2021 Q4",
+          "value": 9.3
+        },
+        {
+          "t": "2022 Q1",
+          "value": 2.2
+        },
+        {
+          "t": "2022 Q2",
+          "value": 18.6
+        },
+        {
+          "t": "2022 Q3",
+          "value": 21.5
+        },
+        {
+          "t": "2022 Q4",
+          "value": 19.2
+        },
+        {
+          "t": "2023 Q1",
+          "value": 3.2
+        },
+        {
+          "t": "2023 Q2",
+          "value": 13.4
+        },
+        {
+          "t": "2023 Q3",
+          "value": 13.6
+        },
+        {
+          "t": "2023 Q4",
+          "value": 13.5
+        },
+        {
+          "t": "2024 Q1",
+          "value": 4
+        },
+        {
+          "t": "2024 Q2",
+          "value": 11.1
+        },
+        {
+          "t": "2024 Q3",
+          "value": 10.6
+        },
+        {
+          "t": "2024 Q4",
+          "value": 11.3
+        },
+        {
+          "t": "2025 Q1",
+          "value": 3.1
+        },
+        {
+          "t": "2025 Q2",
+          "value": 11.5
+        },
+        {
+          "t": "2025 Q3",
+          "value": 12.5
+        },
+        {
+          "t": "2025 Q4",
+          "value": 12.6
+        },
+        {
+          "t": "2026 Q1",
+          "value": 3.3
+        },
+        {
+          "t": "2026 Q2",
+          "value": 11.5
+        },
+        {
+          "t": "2026 Q3",
+          "value": 11.3
+        }
+      ]
+    },
+    {
+      "id": "trade_balance_customs",
+      "name": "貿易収支（通関ベース）",
+      "shortName": "貿易収支（通関）",
+      "category": "対外",
+      "unit": "億円",
+      "unitLabel": "億円（輸出額−輸入額、季節調整なし）",
+      "frequency": "monthly",
+      "seasonalAdjustment": "原数値",
+      "betterWhen": "up",
+      "importance": 4,
+      "description": "財務省が毎月公表する『貿易統計』（税関を通った貨物の金額）にもとづく、輸出額から輸入額を引いた収支。国際収支統計の貿易収支（本ツールの「貿易収支」）より約1か月早く出るため、貿易の最新の動きを最も早く確認できる。国際収支ベースとは運賃・保険料の扱い（輸入額）などが違い、金額は一致しない。",
+      "judgment": {
+        "summary": "黒字（プラス）か赤字（マイナス）かだけでなく、輸出が伸びているのか、資源高や円安で輸入が膨らんでいるのかを合わせて見る。",
+        "goodWhen": "輸出の増加を伴う黒字拡大（海外需要の強さを反映）。",
+        "badWhen": "資源価格高騰や円安による輸入額急増を主因とする赤字拡大。",
+        "caveat": "季節調整をしていない原数値のため、1月は赤字になりやすいなど月ごとの季節要因が出る。前月との比較ではなく、前年の同じ月との比較（カードの「前年比」）で見る。最新月は速報値で、翌月に確報へ修正される。"
+      },
+      "referenceLines": [
+        {
+          "value": 0,
+          "label": "0＝黒字・赤字の分岐",
+          "kind": "neutral"
+        }
+      ],
+      "movingAverage": null,
+      "releaseSchedule": "財務省が対象月の翌月中旬〜下旬（17〜22日ごろ）8:50に速報を公表。",
+      "nextRelease": "2026-10-20",
+      "nextReleaseKind": "estimate",
+      "source": {
+        "provider": "財務省 貿易統計",
+        "statName": "貿易統計（通関ベース）世界 月別 輸出額−輸入額",
+        "sourceUrl": "https://www.customs.go.jp/toukei/suii/html/time_e.htm"
+      },
+      "summary": {
+        "latest": {
+          "t": "2026-08",
+          "value": -11119,
+          "provisional": true
+        },
+        "changeFromPrev": -4670,
+        "changeFromYearAgo": -8178,
+        "min": {
+          "t": "2023-01",
+          "value": -35389
+        },
+        "max": {
+          "t": "2007-09",
+          "value": 16087
+        },
+        "count": 572,
+        "start": "1979-01"
+      },
+      "points": [
+        {
+          "t": "1979-01",
+          "value": -2838
+        },
+        {
+          "t": "1979-02",
+          "value": 723
+        },
+        {
+          "t": "1979-03",
+          "value": 1957
+        },
+        {
+          "t": "1979-04",
+          "value": -798
+        },
+        {
+          "t": "1979-05",
+          "value": -1764
+        },
+        {
+          "t": "1979-06",
+          "value": 526
+        },
+        {
+          "t": "1979-07",
+          "value": -510
+        },
+        {
+          "t": "1979-08",
+          "value": -3613
+        },
+        {
+          "t": "1979-09",
+          "value": -1648
+        },
+        {
+          "t": "1979-10",
+          "value": -3161
+        },
+        {
+          "t": "1979-11",
+          "value": -5267
+        },
+        {
+          "t": "1979-12",
+          "value": -745
+        },
+        {
+          "t": "1980-01",
+          "value": -8248
+        },
+        {
+          "t": "1980-02",
+          "value": -3364
+        },
+        {
+          "t": "1980-03",
+          "value": -2686
+        },
+        {
+          "t": "1980-04",
+          "value": -5083
+        },
+        {
+          "t": "1980-05",
+          "value": -4536
+        },
+        {
+          "t": "1980-06",
+          "value": -2299
+        },
+        {
+          "t": "1980-07",
+          "value": -2135
+        },
+        {
+          "t": "1980-08",
+          "value": -1821
+        },
+        {
+          "t": "1980-09",
+          "value": 1914
+        },
+        {
+          "t": "1980-10",
+          "value": -656
+        },
+        {
+          "t": "1980-11",
+          "value": -499
+        },
+        {
+          "t": "1980-12",
+          "value": 3284
+        },
+        {
+          "t": "1981-01",
+          "value": -5119
+        },
+        {
+          "t": "1981-02",
+          "value": 610
+        },
+        {
+          "t": "1981-03",
+          "value": 2156
+        },
+        {
+          "t": "1981-04",
+          "value": 943
+        },
+        {
+          "t": "1981-05",
+          "value": 11
+        },
+        {
+          "t": "1981-06",
+          "value": 3279
+        },
+        {
+          "t": "1981-07",
+          "value": 3429
+        },
+        {
+          "t": "1981-08",
+          "value": 1740
+        },
+        {
+          "t": "1981-09",
+          "value": 5318
+        },
+        {
+          "t": "1981-10",
+          "value": 4858
+        },
+        {
+          "t": "1981-11",
+          "value": -384
+        },
+        {
+          "t": "1981-12",
+          "value": 3207
+        },
+        {
+          "t": "1982-01",
+          "value": -4080
+        },
+        {
+          "t": "1982-02",
+          "value": 817
+        },
+        {
+          "t": "1982-03",
+          "value": 2032
+        },
+        {
+          "t": "1982-04",
+          "value": 1214
+        },
+        {
+          "t": "1982-05",
+          "value": 1071
+        },
+        {
+          "t": "1982-06",
+          "value": 4085
+        },
+        {
+          "t": "1982-07",
+          "value": 3261
+        },
+        {
+          "t": "1982-08",
+          "value": -47
+        },
+        {
+          "t": "1982-09",
+          "value": 4123
+        },
+        {
+          "t": "1982-10",
+          "value": 2587
+        },
+        {
+          "t": "1982-11",
+          "value": -1160
+        },
+        {
+          "t": "1982-12",
+          "value": 3861
+        },
+        {
+          "t": "1983-01",
+          "value": -4098
+        },
+        {
+          "t": "1983-02",
+          "value": 3337
+        },
+        {
+          "t": "1983-03",
+          "value": 4827
+        },
+        {
+          "t": "1983-04",
+          "value": 4841
+        },
+        {
+          "t": "1983-05",
+          "value": 4226
+        },
+        {
+          "t": "1983-06",
+          "value": 4659
+        },
+        {
+          "t": "1983-07",
+          "value": 6843
+        },
+        {
+          "t": "1983-08",
+          "value": 4074
+        },
+        {
+          "t": "1983-09",
+          "value": 5848
+        },
+        {
+          "t": "1983-10",
+          "value": 4804
+        },
+        {
+          "t": "1983-11",
+          "value": 2798
+        },
+        {
+          "t": "1983-12",
+          "value": 6786
+        },
+        {
+          "t": "1984-01",
+          "value": -1966
+        },
+        {
+          "t": "1984-02",
+          "value": 5097
+        },
+        {
+          "t": "1984-03",
+          "value": 7265
+        },
+        {
+          "t": "1984-04",
+          "value": 6995
+        },
+        {
+          "t": "1984-05",
+          "value": 4255
+        },
+        {
+          "t": "1984-06",
+          "value": 9295
+        },
+        {
+          "t": "1984-07",
+          "value": 7602
+        },
+        {
+          "t": "1984-08",
+          "value": 2703
+        },
+        {
+          "t": "1984-09",
+          "value": 10929
+        },
+        {
+          "t": "1984-10",
+          "value": 8868
+        },
+        {
+          "t": "1984-11",
+          "value": 7546
+        },
+        {
+          "t": "1984-12",
+          "value": 11453
+        },
+        {
+          "t": "1985-01",
+          "value": 1243
+        },
+        {
+          "t": "1985-02",
+          "value": 6042
+        },
+        {
+          "t": "1985-03",
+          "value": 8301
+        },
+        {
+          "t": "1985-04",
+          "value": 8272
+        },
+        {
+          "t": "1985-05",
+          "value": 8492
+        },
+        {
+          "t": "1985-06",
+          "value": 12555
+        },
+        {
+          "t": "1985-07",
+          "value": 11262
+        },
+        {
+          "t": "1985-08",
+          "value": 8308
+        },
+        {
+          "t": "1985-09",
+          "value": 10998
+        },
+        {
+          "t": "1985-10",
+          "value": 9742
+        },
+        {
+          "t": "1985-11",
+          "value": 10016
+        },
+        {
+          "t": "1985-12",
+          "value": 13477
+        },
+        {
+          "t": "1986-01",
+          "value": 3801
+        },
+        {
+          "t": "1986-02",
+          "value": 7585
+        },
+        {
+          "t": "1986-03",
+          "value": 12007
+        },
+        {
+          "t": "1986-04",
+          "value": 12250
+        },
+        {
+          "t": "1986-05",
+          "value": 12530
+        },
+        {
+          "t": "1986-06",
+          "value": 12419
+        },
+        {
+          "t": "1986-07",
+          "value": 13306
+        },
+        {
+          "t": "1986-08",
+          "value": 11590
+        },
+        {
+          "t": "1986-09",
+          "value": 13848
+        },
+        {
+          "t": "1986-10",
+          "value": 11985
+        },
+        {
+          "t": "1986-11",
+          "value": 11872
+        },
+        {
+          "t": "1986-12",
+          "value": 14198
+        },
+        {
+          "t": "1987-01",
+          "value": 6768
+        },
+        {
+          "t": "1987-02",
+          "value": 10905
+        },
+        {
+          "t": "1987-03",
+          "value": 12347
+        },
+        {
+          "t": "1987-04",
+          "value": 11048
+        },
+        {
+          "t": "1987-05",
+          "value": 8992
+        },
+        {
+          "t": "1987-06",
+          "value": 9425
+        },
+        {
+          "t": "1987-07",
+          "value": 10270
+        },
+        {
+          "t": "1987-08",
+          "value": 7763
+        },
+        {
+          "t": "1987-09",
+          "value": 10602
+        },
+        {
+          "t": "1987-10",
+          "value": 9808
+        },
+        {
+          "t": "1987-11",
+          "value": 6536
+        },
+        {
+          "t": "1987-12",
+          "value": 11321
+        },
+        {
+          "t": "1988-01",
+          "value": 3914
+        },
+        {
+          "t": "1988-02",
+          "value": 6753
+        },
+        {
+          "t": "1988-03",
+          "value": 9585
+        },
+        {
+          "t": "1988-04",
+          "value": 8536
+        },
+        {
+          "t": "1988-05",
+          "value": 6469
+        },
+        {
+          "t": "1988-06",
+          "value": 7451
+        },
+        {
+          "t": "1988-07",
+          "value": 9414
+        },
+        {
+          "t": "1988-08",
+          "value": 6622
+        },
+        {
+          "t": "1988-09",
+          "value": 10405
+        },
+        {
+          "t": "1988-10",
+          "value": 10056
+        },
+        {
+          "t": "1988-11",
+          "value": 8214
+        },
+        {
+          "t": "1988-12",
+          "value": 11908
+        },
+        {
+          "t": "1989-01",
+          "value": 4125
+        },
+        {
+          "t": "1989-02",
+          "value": 9293
+        },
+        {
+          "t": "1989-03",
+          "value": 8474
+        },
+        {
+          "t": "1989-04",
+          "value": 9628
+        },
+        {
+          "t": "1989-05",
+          "value": 5068
+        },
+        {
+          "t": "1989-06",
+          "value": 7552
+        },
+        {
+          "t": "1989-07",
+          "value": 8475
+        },
+        {
+          "t": "1989-08",
+          "value": 4719
+        },
+        {
+          "t": "1989-09",
+          "value": 10438
+        },
+        {
+          "t": "1989-10",
+          "value": 6675
+        },
+        {
+          "t": "1989-11",
+          "value": 5044
+        },
+        {
+          "t": "1989-12",
+          "value": 8949
+        },
+        {
+          "t": "1990-01",
+          "value": 500
+        },
+        {
+          "t": "1990-02",
+          "value": 7211
+        },
+        {
+          "t": "1990-03",
+          "value": 10529
+        },
+        {
+          "t": "1990-04",
+          "value": 5569
+        },
+        {
+          "t": "1990-05",
+          "value": 4805
+        },
+        {
+          "t": "1990-06",
+          "value": 10197
+        },
+        {
+          "t": "1990-07",
+          "value": 8031
+        },
+        {
+          "t": "1990-08",
+          "value": 5093
+        },
+        {
+          "t": "1990-09",
+          "value": 9749
+        },
+        {
+          "t": "1990-10",
+          "value": 4300
+        },
+        {
+          "t": "1990-11",
+          "value": 2870
+        },
+        {
+          "t": "1990-12",
+          "value": 7163
+        },
+        {
+          "t": "1991-01",
+          "value": 1239
+        },
+        {
+          "t": "1991-02",
+          "value": 6620
+        },
+        {
+          "t": "1991-03",
+          "value": 11402
+        },
+        {
+          "t": "1991-04",
+          "value": 8662
+        },
+        {
+          "t": "1991-05",
+          "value": 5753
+        },
+        {
+          "t": "1991-06",
+          "value": 10089
+        },
+        {
+          "t": "1991-07",
+          "value": 9147
+        },
+        {
+          "t": "1991-08",
+          "value": 7810
+        },
+        {
+          "t": "1991-09",
+          "value": 13117
+        },
+        {
+          "t": "1991-10",
+          "value": 9486
+        },
+        {
+          "t": "1991-11",
+          "value": 8354
+        },
+        {
+          "t": "1991-12",
+          "value": 12919
+        },
+        {
+          "t": "1992-01",
+          "value": 4751
+        },
+        {
+          "t": "1992-02",
+          "value": 12807
+        },
+        {
+          "t": "1992-03",
+          "value": 14368
+        },
+        {
+          "t": "1992-04",
+          "value": 9475
+        },
+        {
+          "t": "1992-05",
+          "value": 10210
+        },
+        {
+          "t": "1992-06",
+          "value": 11436
+        },
+        {
+          "t": "1992-07",
+          "value": 11584
+        },
+        {
+          "t": "1992-08",
+          "value": 8892
+        },
+        {
+          "t": "1992-09",
+          "value": 14986
+        },
+        {
+          "t": "1992-10",
+          "value": 13126
+        },
+        {
+          "t": "1992-11",
+          "value": 9323
+        },
+        {
+          "t": "1992-12",
+          "value": 13890
+        },
+        {
+          "t": "1993-01",
+          "value": 6551
+        },
+        {
+          "t": "1993-02",
+          "value": 13042
+        },
+        {
+          "t": "1993-03",
+          "value": 15762
+        },
+        {
+          "t": "1993-04",
+          "value": 11790
+        },
+        {
+          "t": "1993-05",
+          "value": 8626
+        },
+        {
+          "t": "1993-06",
+          "value": 10641
+        },
+        {
+          "t": "1993-07",
+          "value": 12805
+        },
+        {
+          "t": "1993-08",
+          "value": 7832
+        },
+        {
+          "t": "1993-09",
+          "value": 13085
+        },
+        {
+          "t": "1993-10",
+          "value": 11575
+        },
+        {
+          "t": "1993-11",
+          "value": 7984
+        },
+        {
+          "t": "1993-12",
+          "value": 14067
+        },
+        {
+          "t": "1994-01",
+          "value": 6785
+        },
+        {
+          "t": "1994-02",
+          "value": 11831
+        },
+        {
+          "t": "1994-03",
+          "value": 14612
+        },
+        {
+          "t": "1994-04",
+          "value": 11578
+        },
+        {
+          "t": "1994-05",
+          "value": 6743
+        },
+        {
+          "t": "1994-06",
+          "value": 11816
+        },
+        {
+          "t": "1994-07",
+          "value": 12182
+        },
+        {
+          "t": "1994-08",
+          "value": 6044
+        },
+        {
+          "t": "1994-09",
+          "value": 11863
+        },
+        {
+          "t": "1994-10",
+          "value": 9153
+        },
+        {
+          "t": "1994-11",
+          "value": 8326
+        },
+        {
+          "t": "1994-12",
+          "value": 12999
+        },
+        {
+          "t": "1995-01",
+          "value": 2749
+        },
+        {
+          "t": "1995-02",
+          "value": 11213
+        },
+        {
+          "t": "1995-03",
+          "value": 12949
+        },
+        {
+          "t": "1995-04",
+          "value": 9288
+        },
+        {
+          "t": "1995-05",
+          "value": 5870
+        },
+        {
+          "t": "1995-06",
+          "value": 9896
+        },
+        {
+          "t": "1995-07",
+          "value": 8084
+        },
+        {
+          "t": "1995-08",
+          "value": 5351
+        },
+        {
+          "t": "1995-09",
+          "value": 11184
+        },
+        {
+          "t": "1995-10",
+          "value": 5405
+        },
+        {
+          "t": "1995-11",
+          "value": 6736
+        },
+        {
+          "t": "1995-12",
+          "value": 11097
+        },
+        {
+          "t": "1996-01",
+          "value": 629
+        },
+        {
+          "t": "1996-02",
+          "value": 6449
+        },
+        {
+          "t": "1996-03",
+          "value": 11176
+        },
+        {
+          "t": "1996-04",
+          "value": 3153
+        },
+        {
+          "t": "1996-05",
+          "value": 2291
+        },
+        {
+          "t": "1996-06",
+          "value": 7316
+        },
+        {
+          "t": "1996-07",
+          "value": 5005
+        },
+        {
+          "t": "1996-08",
+          "value": 3474
+        },
+        {
+          "t": "1996-09",
+          "value": 7773
+        },
+        {
+          "t": "1996-10",
+          "value": 4621
+        },
+        {
+          "t": "1996-11",
+          "value": 6702
+        },
+        {
+          "t": "1996-12",
+          "value": 8789
+        },
+        {
+          "t": "1997-01",
+          "value": -245
+        },
+        {
+          "t": "1997-02",
+          "value": 6807
+        },
+        {
+          "t": "1997-03",
+          "value": 8002
+        },
+        {
+          "t": "1997-04",
+          "value": 8072
+        },
+        {
+          "t": "1997-05",
+          "value": 7320
+        },
+        {
+          "t": "1997-06",
+          "value": 9594
+        },
+        {
+          "t": "1997-07",
+          "value": 8391
+        },
+        {
+          "t": "1997-08",
+          "value": 7191
+        },
+        {
+          "t": "1997-09",
+          "value": 10635
+        },
+        {
+          "t": "1997-10",
+          "value": 11059
+        },
+        {
+          "t": "1997-11",
+          "value": 10626
+        },
+        {
+          "t": "1997-12",
+          "value": 12366
+        },
+        {
+          "t": "1998-01",
+          "value": 4066
+        },
+        {
+          "t": "1998-02",
+          "value": 12773
+        },
+        {
+          "t": "1998-03",
+          "value": 12405
+        },
+        {
+          "t": "1998-04",
+          "value": 12226
+        },
+        {
+          "t": "1998-05",
+          "value": 12181
+        },
+        {
+          "t": "1998-06",
+          "value": 12135
+        },
+        {
+          "t": "1998-07",
+          "value": 13102
+        },
+        {
+          "t": "1998-08",
+          "value": 8910
+        },
+        {
+          "t": "1998-09",
+          "value": 15416
+        },
+        {
+          "t": "1998-10",
+          "value": 13660
+        },
+        {
+          "t": "1998-11",
+          "value": 8902
+        },
+        {
+          "t": "1998-12",
+          "value": 14138
+        },
+        {
+          "t": "1999-01",
+          "value": 7540
+        },
+        {
+          "t": "1999-02",
+          "value": 9311
+        },
+        {
+          "t": "1999-03",
+          "value": 13035
+        },
+        {
+          "t": "1999-04",
+          "value": 10370
+        },
+        {
+          "t": "1999-05",
+          "value": 8201
+        },
+        {
+          "t": "1999-06",
+          "value": 11624
+        },
+        {
+          "t": "1999-07",
+          "value": 12425
+        },
+        {
+          "t": "1999-08",
+          "value": 6971
+        },
+        {
+          "t": "1999-09",
+          "value": 13749
+        },
+        {
+          "t": "1999-10",
+          "value": 11690
+        },
+        {
+          "t": "1999-11",
+          "value": 6633
+        },
+        {
+          "t": "1999-12",
+          "value": 11247
+        },
+        {
+          "t": "2000-01",
+          "value": 5205
+        },
+        {
+          "t": "2000-02",
+          "value": 11793
+        },
+        {
+          "t": "2000-03",
+          "value": 11053
+        },
+        {
+          "t": "2000-04",
+          "value": 11408
+        },
+        {
+          "t": "2000-05",
+          "value": 5750
+        },
+        {
+          "t": "2000-06",
+          "value": 11926
+        },
+        {
+          "t": "2000-07",
+          "value": 10005
+        },
+        {
+          "t": "2000-08",
+          "value": 6063
+        },
+        {
+          "t": "2000-09",
+          "value": 12931
+        },
+        {
+          "t": "2000-10",
+          "value": 6890
+        },
+        {
+          "t": "2000-11",
+          "value": 5956
+        },
+        {
+          "t": "2000-12",
+          "value": 8177
+        },
+        {
+          "t": "2001-01",
+          "value": -985
+        },
+        {
+          "t": "2001-02",
+          "value": 8757
+        },
+        {
+          "t": "2001-03",
+          "value": 9080
+        },
+        {
+          "t": "2001-04",
+          "value": 6609
+        },
+        {
+          "t": "2001-05",
+          "value": 760
+        },
+        {
+          "t": "2001-06",
+          "value": 7590
+        },
+        {
+          "t": "2001-07",
+          "value": 4171
+        },
+        {
+          "t": "2001-08",
+          "value": 3098
+        },
+        {
+          "t": "2001-09",
+          "value": 10430
+        },
+        {
+          "t": "2001-10",
+          "value": 4611
+        },
+        {
+          "t": "2001-11",
+          "value": 4922
+        },
+        {
+          "t": "2001-12",
+          "value": 6594
+        },
+        {
+          "t": "2002-01",
+          "value": 1700
+        },
+        {
+          "t": "2002-02",
+          "value": 7773
+        },
+        {
+          "t": "2002-03",
+          "value": 12579
+        },
+        {
+          "t": "2002-04",
+          "value": 8272
+        },
+        {
+          "t": "2002-05",
+          "value": 6172
+        },
+        {
+          "t": "2002-06",
+          "value": 12209
+        },
+        {
+          "t": "2002-07",
+          "value": 7449
+        },
+        {
+          "t": "2002-08",
+          "value": 6392
+        },
+        {
+          "t": "2002-09",
+          "value": 10510
+        },
+        {
+          "t": "2002-10",
+          "value": 8919
+        },
+        {
+          "t": "2002-11",
+          "value": 8896
+        },
+        {
+          "t": "2002-12",
+          "value": 7942
+        },
+        {
+          "t": "2003-01",
+          "value": 961
+        },
+        {
+          "t": "2003-02",
+          "value": 9272
+        },
+        {
+          "t": "2003-03",
+          "value": 9604
+        },
+        {
+          "t": "2003-04",
+          "value": 8285
+        },
+        {
+          "t": "2003-05",
+          "value": 6893
+        },
+        {
+          "t": "2003-06",
+          "value": 8378
+        },
+        {
+          "t": "2003-07",
+          "value": 7892
+        },
+        {
+          "t": "2003-08",
+          "value": 7785
+        },
+        {
+          "t": "2003-09",
+          "value": 10978
+        },
+        {
+          "t": "2003-10",
+          "value": 10696
+        },
+        {
+          "t": "2003-11",
+          "value": 9899
+        },
+        {
+          "t": "2003-12",
+          "value": 11221
+        },
+        {
+          "t": "2004-01",
+          "value": 4883
+        },
+        {
+          "t": "2004-02",
+          "value": 13957
+        },
+        {
+          "t": "2004-03",
+          "value": 11186
+        },
+        {
+          "t": "2004-04",
+          "value": 10747
+        },
+        {
+          "t": "2004-05",
+          "value": 9361
+        },
+        {
+          "t": "2004-06",
+          "value": 11406
+        },
+        {
+          "t": "2004-07",
+          "value": 11286
+        },
+        {
+          "t": "2004-08",
+          "value": 5729
+        },
+        {
+          "t": "2004-09",
+          "value": 12132
+        },
+        {
+          "t": "2004-10",
+          "value": 11541
+        },
+        {
+          "t": "2004-11",
+          "value": 5973
+        },
+        {
+          "t": "2004-12",
+          "value": 11332
+        },
+        {
+          "t": "2005-01",
+          "value": 1882
+        },
+        {
+          "t": "2005-02",
+          "value": 10841
+        },
+        {
+          "t": "2005-03",
+          "value": 11106
+        },
+        {
+          "t": "2005-04",
+          "value": 9475
+        },
+        {
+          "t": "2005-05",
+          "value": 2847
+        },
+        {
+          "t": "2005-06",
+          "value": 8583
+        },
+        {
+          "t": "2005-07",
+          "value": 8620
+        },
+        {
+          "t": "2005-08",
+          "value": 1026
+        },
+        {
+          "t": "2005-09",
+          "value": 9486
+        },
+        {
+          "t": "2005-10",
+          "value": 8179
+        },
+        {
+          "t": "2005-11",
+          "value": 5944
+        },
+        {
+          "t": "2005-12",
+          "value": 9083
+        },
+        {
+          "t": "2006-01",
+          "value": -3944
+        },
+        {
+          "t": "2006-02",
+          "value": 9098
+        },
+        {
+          "t": "2006-03",
+          "value": 9392
+        },
+        {
+          "t": "2006-04",
+          "value": 6106
+        },
+        {
+          "t": "2006-05",
+          "value": 3563
+        },
+        {
+          "t": "2006-06",
+          "value": 7997
+        },
+        {
+          "t": "2006-07",
+          "value": 8511
+        },
+        {
+          "t": "2006-08",
+          "value": 1918
+        },
+        {
+          "t": "2006-09",
+          "value": 10068
+        },
+        {
+          "t": "2006-10",
+          "value": 6134
+        },
+        {
+          "t": "2006-11",
+          "value": 9080
+        },
+        {
+          "t": "2006-12",
+          "value": 11097
+        },
+        {
+          "t": "2007-01",
+          "value": 18
+        },
+        {
+          "t": "2007-02",
+          "value": 9615
+        },
+        {
+          "t": "2007-03",
+          "value": 16026
+        },
+        {
+          "t": "2007-04",
+          "value": 9031
+        },
+        {
+          "t": "2007-05",
+          "value": 3955
+        },
+        {
+          "t": "2007-06",
+          "value": 12460
+        },
+        {
+          "t": "2007-07",
+          "value": 6820
+        },
+        {
+          "t": "2007-08",
+          "value": 7436
+        },
+        {
+          "t": "2007-09",
+          "value": 16087
+        },
+        {
+          "t": "2007-10",
+          "value": 9994
+        },
+        {
+          "t": "2007-11",
+          "value": 7844
+        },
+        {
+          "t": "2007-12",
+          "value": 8669
+        },
+        {
+          "t": "2008-01",
+          "value": -1063
+        },
+        {
+          "t": "2008-02",
+          "value": 9358
+        },
+        {
+          "t": "2008-03",
+          "value": 10962
+        },
+        {
+          "t": "2008-04",
+          "value": 4587
+        },
+        {
+          "t": "2008-05",
+          "value": 3411
+        },
+        {
+          "t": "2008-06",
+          "value": 1041
+        },
+        {
+          "t": "2008-07",
+          "value": 819
+        },
+        {
+          "t": "2008-08",
+          "value": -3142
+        },
+        {
+          "t": "2008-09",
+          "value": 910
+        },
+        {
+          "t": "2008-10",
+          "value": -752
+        },
+        {
+          "t": "2008-11",
+          "value": -2275
+        },
+        {
+          "t": "2008-12",
+          "value": -3222
+        },
+        {
+          "t": "2009-01",
+          "value": -9679
+        },
+        {
+          "t": "2009-02",
+          "value": 708
+        },
+        {
+          "t": "2009-03",
+          "value": -54
+        },
+        {
+          "t": "2009-04",
+          "value": 490
+        },
+        {
+          "t": "2009-05",
+          "value": 2814
+        },
+        {
+          "t": "2009-06",
+          "value": 4870
+        },
+        {
+          "t": "2009-07",
+          "value": 3657
+        },
+        {
+          "t": "2009-08",
+          "value": 1652
+        },
+        {
+          "t": "2009-09",
+          "value": 5176
+        },
+        {
+          "t": "2009-10",
+          "value": 8001
+        },
+        {
+          "t": "2009-11",
+          "value": 3653
+        },
+        {
+          "t": "2009-12",
+          "value": 5425
+        },
+        {
+          "t": "2010-01",
+          "value": 431
+        },
+        {
+          "t": "2010-02",
+          "value": 6383
+        },
+        {
+          "t": "2010-03",
+          "value": 9319
+        },
+        {
+          "t": "2010-04",
+          "value": 7292
+        },
+        {
+          "t": "2010-05",
+          "value": 3091
+        },
+        {
+          "t": "2010-06",
+          "value": 6705
+        },
+        {
+          "t": "2010-07",
+          "value": 7846
+        },
+        {
+          "t": "2010-08",
+          "value": 638
+        },
+        {
+          "t": "2010-09",
+          "value": 7743
+        },
+        {
+          "t": "2010-10",
+          "value": 8126
+        },
+        {
+          "t": "2010-11",
+          "value": 1576
+        },
+        {
+          "t": "2010-12",
+          "value": 7196
+        },
+        {
+          "t": "2011-01",
+          "value": -4972
+        },
+        {
+          "t": "2011-02",
+          "value": 6370
+        },
+        {
+          "t": "2011-03",
+          "value": 1709
+        },
+        {
+          "t": "2011-04",
+          "value": -4777
+        },
+        {
+          "t": "2011-05",
+          "value": -8607
+        },
+        {
+          "t": "2011-06",
+          "value": 645
+        },
+        {
+          "t": "2011-07",
+          "value": 697
+        },
+        {
+          "t": "2011-08",
+          "value": -7775
+        },
+        {
+          "t": "2011-09",
+          "value": 2888
+        },
+        {
+          "t": "2011-10",
+          "value": -2830
+        },
+        {
+          "t": "2011-11",
+          "value": -6912
+        },
+        {
+          "t": "2011-12",
+          "value": -2083
+        },
+        {
+          "t": "2012-01",
+          "value": -14907
+        },
+        {
+          "t": "2012-02",
+          "value": 259
+        },
+        {
+          "t": "2012-03",
+          "value": -818
+        },
+        {
+          "t": "2012-04",
+          "value": -5184
+        },
+        {
+          "t": "2012-05",
+          "value": -9079
+        },
+        {
+          "t": "2012-06",
+          "value": 561
+        },
+        {
+          "t": "2012-07",
+          "value": -5286
+        },
+        {
+          "t": "2012-08",
+          "value": -7684
+        },
+        {
+          "t": "2012-09",
+          "value": -5682
+        },
+        {
+          "t": "2012-10",
+          "value": -5562
+        },
+        {
+          "t": "2012-11",
+          "value": -9570
+        },
+        {
+          "t": "2012-12",
+          "value": -6457
+        },
+        {
+          "t": "2013-01",
+          "value": -16331
+        },
+        {
+          "t": "2013-02",
+          "value": -7733
+        },
+        {
+          "t": "2013-03",
+          "value": -3569
+        },
+        {
+          "t": "2013-04",
+          "value": -8774
+        },
+        {
+          "t": "2013-05",
+          "value": -9913
+        },
+        {
+          "t": "2013-06",
+          "value": -1805
+        },
+        {
+          "t": "2013-07",
+          "value": -10325
+        },
+        {
+          "t": "2013-08",
+          "value": -9714
+        },
+        {
+          "t": "2013-09",
+          "value": -9432
+        },
+        {
+          "t": "2013-10",
+          "value": -11004
+        },
+        {
+          "t": "2013-11",
+          "value": -13011
+        },
+        {
+          "t": "2013-12",
+          "value": -13072
+        },
+        {
+          "t": "2014-01",
+          "value": -27951
+        },
+        {
+          "t": "2014-02",
+          "value": -8061
+        },
+        {
+          "t": "2014-03",
+          "value": -14501
+        },
+        {
+          "t": "2014-04",
+          "value": -8255
+        },
+        {
+          "t": "2014-05",
+          "value": -9172
+        },
+        {
+          "t": "2014-06",
+          "value": -8341
+        },
+        {
+          "t": "2014-07",
+          "value": -9665
+        },
+        {
+          "t": "2014-08",
+          "value": -9532
+        },
+        {
+          "t": "2014-09",
+          "value": -9620
+        },
+        {
+          "t": "2014-10",
+          "value": -7418
+        },
+        {
+          "t": "2014-11",
+          "value": -8988
+        },
+        {
+          "t": "2014-12",
+          "value": -6656
+        },
+        {
+          "t": "2015-01",
+          "value": -11605
+        },
+        {
+          "t": "2015-02",
+          "value": -4260
+        },
+        {
+          "t": "2015-03",
+          "value": 2235
+        },
+        {
+          "t": "2015-04",
+          "value": -583
+        },
+        {
+          "t": "2015-05",
+          "value": -2154
+        },
+        {
+          "t": "2015-06",
+          "value": -609
+        },
+        {
+          "t": "2015-07",
+          "value": -2614
+        },
+        {
+          "t": "2015-08",
+          "value": -5675
+        },
+        {
+          "t": "2015-09",
+          "value": -1213
+        },
+        {
+          "t": "2015-10",
+          "value": 1048
+        },
+        {
+          "t": "2015-11",
+          "value": -3875
+        },
+        {
+          "t": "2015-12",
+          "value": 1389
+        },
+        {
+          "t": "2016-01",
+          "value": -6570
+        },
+        {
+          "t": "2016-02",
+          "value": 2355
+        },
+        {
+          "t": "2016-03",
+          "value": 7449
+        },
+        {
+          "t": "2016-04",
+          "value": 8113
+        },
+        {
+          "t": "2016-05",
+          "value": -473
+        },
+        {
+          "t": "2016-06",
+          "value": 6865
+        },
+        {
+          "t": "2016-07",
+          "value": 5045
+        },
+        {
+          "t": "2016-08",
+          "value": -346
+        },
+        {
+          "t": "2016-09",
+          "value": 4866
+        },
+        {
+          "t": "2016-10",
+          "value": 4812
+        },
+        {
+          "t": "2016-11",
+          "value": 1465
+        },
+        {
+          "t": "2016-12",
+          "value": 6359
+        },
+        {
+          "t": "2017-01",
+          "value": -11050
+        },
+        {
+          "t": "2017-02",
+          "value": 8045
+        },
+        {
+          "t": "2017-03",
+          "value": 6035
+        },
+        {
+          "t": "2017-04",
+          "value": 4783
+        },
+        {
+          "t": "2017-05",
+          "value": -2044
+        },
+        {
+          "t": "2017-06",
+          "value": 4332
+        },
+        {
+          "t": "2017-07",
+          "value": 4066
+        },
+        {
+          "t": "2017-08",
+          "value": 968
+        },
+        {
+          "t": "2017-09",
+          "value": 6538
+        },
+        {
+          "t": "2017-10",
+          "value": 2786
+        },
+        {
+          "t": "2017-11",
+          "value": 1052
+        },
+        {
+          "t": "2017-12",
+          "value": 3562
+        },
+        {
+          "t": "2018-01",
+          "value": -9638
+        },
+        {
+          "t": "2018-02",
+          "value": -139
+        },
+        {
+          "t": "2018-03",
+          "value": 7842
+        },
+        {
+          "t": "2018-04",
+          "value": 6210
+        },
+        {
+          "t": "2018-05",
+          "value": -5774
+        },
+        {
+          "t": "2018-06",
+          "value": 7278
+        },
+        {
+          "t": "2018-07",
+          "value": -2274
+        },
+        {
+          "t": "2018-08",
+          "value": -4481
+        },
+        {
+          "t": "2018-09",
+          "value": 1241
+        },
+        {
+          "t": "2018-10",
+          "value": -4563
+        },
+        {
+          "t": "2018-11",
+          "value": -7391
+        },
+        {
+          "t": "2018-12",
+          "value": -557
+        },
+        {
+          "t": "2019-01",
+          "value": -14241
+        },
+        {
+          "t": "2019-02",
+          "value": 3288
+        },
+        {
+          "t": "2019-03",
+          "value": 5173
+        },
+        {
+          "t": "2019-04",
+          "value": 590
+        },
+        {
+          "t": "2019-05",
+          "value": -9654
+        },
+        {
+          "t": "2019-06",
+          "value": 5881
+        },
+        {
+          "t": "2019-07",
+          "value": -2539
+        },
+        {
+          "t": "2019-08",
+          "value": -1522
+        },
+        {
+          "t": "2019-09",
+          "value": -1291
+        },
+        {
+          "t": "2019-10",
+          "value": 112
+        },
+        {
+          "t": "2019-11",
+          "value": -884
+        },
+        {
+          "t": "2019-12",
+          "value": -1591
+        },
+        {
+          "t": "2020-01",
+          "value": -13154
+        },
+        {
+          "t": "2020-02",
+          "value": 11097
+        },
+        {
+          "t": "2020-03",
+          "value": 19
+        },
+        {
+          "t": "2020-04",
+          "value": -9455
+        },
+        {
+          "t": "2020-05",
+          "value": -8698
+        },
+        {
+          "t": "2020-06",
+          "value": -3032
+        },
+        {
+          "t": "2020-07",
+          "value": -327
+        },
+        {
+          "t": "2020-08",
+          "value": 2161
+        },
+        {
+          "t": "2020-09",
+          "value": 6523
+        },
+        {
+          "t": "2020-10",
+          "value": 8408
+        },
+        {
+          "t": "2020-11",
+          "value": 3259
+        },
+        {
+          "t": "2020-12",
+          "value": 7083
+        },
+        {
+          "t": "2021-01",
+          "value": -3707
+        },
+        {
+          "t": "2021-02",
+          "value": 1673
+        },
+        {
+          "t": "2021-03",
+          "value": 6098
+        },
+        {
+          "t": "2021-04",
+          "value": 2179
+        },
+        {
+          "t": "2021-05",
+          "value": -2179
+        },
+        {
+          "t": "2021-06",
+          "value": 3612
+        },
+        {
+          "t": "2021-07",
+          "value": 4284
+        },
+        {
+          "t": "2021-08",
+          "value": -6634
+        },
+        {
+          "t": "2021-09",
+          "value": -6489
+        },
+        {
+          "t": "2021-10",
+          "value": -907
+        },
+        {
+          "t": "2021-11",
+          "value": -9736
+        },
+        {
+          "t": "2021-12",
+          "value": -6031
+        },
+        {
+          "t": "2022-01",
+          "value": -22497
+        },
+        {
+          "t": "2022-02",
+          "value": -7376
+        },
+        {
+          "t": "2022-03",
+          "value": -4920
+        },
+        {
+          "t": "2022-04",
+          "value": -8882
+        },
+        {
+          "t": "2022-05",
+          "value": -24032
+        },
+        {
+          "t": "2022-06",
+          "value": -14010
+        },
+        {
+          "t": "2022-07",
+          "value": -14798
+        },
+        {
+          "t": "2022-08",
+          "value": -27911
+        },
+        {
+          "t": "2022-09",
+          "value": -21253
+        },
+        {
+          "t": "2022-10",
+          "value": -22059
+        },
+        {
+          "t": "2022-11",
+          "value": -20576
+        },
+        {
+          "t": "2022-12",
+          "value": -14979
+        },
+        {
+          "t": "2023-01",
+          "value": -35389
+        },
+        {
+          "t": "2023-02",
+          "value": -9417
+        },
+        {
+          "t": "2023-03",
+          "value": -7552
+        },
+        {
+          "t": "2023-04",
+          "value": -4621
+        },
+        {
+          "t": "2023-05",
+          "value": -13881
+        },
+        {
+          "t": "2023-06",
+          "value": 354
+        },
+        {
+          "t": "2023-07",
+          "value": -680
+        },
+        {
+          "t": "2023-08",
+          "value": -9522
+        },
+        {
+          "t": "2023-09",
+          "value": 331
+        },
+        {
+          "t": "2023-10",
+          "value": -7029
+        },
+        {
+          "t": "2023-11",
+          "value": -8139
+        },
+        {
+          "t": "2023-12",
+          "value": 324
+        },
+        {
+          "t": "2024-01",
+          "value": -17922
+        },
+        {
+          "t": "2024-02",
+          "value": -4302
+        },
+        {
+          "t": "2024-03",
+          "value": 3439
+        },
+        {
+          "t": "2024-04",
+          "value": -5154
+        },
+        {
+          "t": "2024-05",
+          "value": -12299
+        },
+        {
+          "t": "2024-06",
+          "value": 2154
+        },
+        {
+          "t": "2024-07",
+          "value": -6405
+        },
+        {
+          "t": "2024-08",
+          "value": -7456
+        },
+        {
+          "t": "2024-09",
+          "value": -3336
+        },
+        {
+          "t": "2024-10",
+          "value": -5000
+        },
+        {
+          "t": "2024-11",
+          "value": -1208
+        },
+        {
+          "t": "2024-12",
+          "value": 1203
+        },
+        {
+          "t": "2025-01",
+          "value": -27587
+        },
+        {
+          "t": "2025-02",
+          "value": 5592
+        },
+        {
+          "t": "2025-03",
+          "value": 5298
+        },
+        {
+          "t": "2025-04",
+          "value": -1495
+        },
+        {
+          "t": "2025-05",
+          "value": -6625
+        },
+        {
+          "t": "2025-06",
+          "value": 1223
+        },
+        {
+          "t": "2025-07",
+          "value": -1563
+        },
+        {
+          "t": "2025-08",
+          "value": -2941
+        },
+        {
+          "t": "2025-09",
+          "value": -2777
+        },
+        {
+          "t": "2025-10",
+          "value": -2429
+        },
+        {
+          "t": "2025-11",
+          "value": 3060
+        },
+        {
+          "t": "2025-12",
+          "value": 947
+        },
+        {
+          "t": "2026-01",
+          "value": -11658
+        },
+        {
+          "t": "2026-02",
+          "value": 366
+        },
+        {
+          "t": "2026-03",
+          "value": 6312
+        },
+        {
+          "t": "2026-04",
+          "value": 2823
+        },
+        {
+          "t": "2026-05",
+          "value": -3951
+        },
+        {
+          "t": "2026-06",
+          "value": -4123
+        },
+        {
+          "t": "2026-07",
+          "value": -6449
+        },
+        {
+          "t": "2026-08",
+          "value": -11119,
+          "provisional": true
+        }
+      ]
+    },
+    {
+      "id": "cpi_total_yoy",
+      "name": "消費者物価指数（総合・前年同月比）",
+      "shortName": "CPI（総合）",
+      "category": "物価",
+      "unit": "%",
+      "unitLabel": "前年同月比 %",
+      "frequency": "monthly",
+      "seasonalAdjustment": "原数値",
+      "betterWhen": "neutral",
+      "importance": 5,
+      "description": "総務省統計局が公表する、全国の消費者物価指数のうち、生鮮食品を含むすべての品目をまとめた『総合』の前年同月比。ニュースで『物価上昇率』として最初に報じられるのがこの数字。日銀が重視するコアCPI（生鮮食品を除く）との差で、野菜・魚・果物など天候で動く価格の影響が分かる。",
+      "judgment": {
+        "summary": "日本銀行は『物価安定の目標』として2%を掲げている（目標の対象はコアCPI）。総合は生鮮食品の天候要因で振れるため、コアCPIと合わせて基調を見る。",
+        "goodWhen": "2%前後で安定的に推移している状態（賃金上昇を伴っていればなお望ましい）。",
+        "badWhen": "0%以下（デフレ懸念）、または4%を超えるような急激な上昇（家計負担増・実質賃金の下押し）。",
+        "caveat": "生鮮食品・エネルギー価格や政府の物価対策（電気代補助等）で一時的に振れる。コアCPI・コアコアCPIとの差を見ると、一時的な要因かどうかが分かりやすい。"
+      },
+      "referenceLines": [
+        {
+          "value": 2,
+          "label": "日銀の物価目標 2%（コアCPI）",
+          "kind": "target"
+        },
+        {
+          "value": 0,
+          "label": "0%＝デフレとの分岐",
+          "kind": "neutral"
+        }
+      ],
+      "movingAverage": null,
+      "releaseSchedule": "総務省統計局が対象月の翌月中旬〜下旬に8:30発表（東京都区部の速報は対象月内に先行公表）。",
+      "nextRelease": "2026-10-20",
+      "nextReleaseKind": "estimate",
+      "source": {
+        "provider": "統計ダッシュボード（e-Stat）",
+        "statName": "消費者物価指数（総合）",
+        "indicatorCode": "0703010601010030000"
+      },
+      "summary": {
+        "latest": {
+          "t": "2026-08",
+          "value": 1.9,
+          "provisional": false
+        },
+        "changeFromPrev": 0,
+        "changeFromYearAgo": -0.8,
+        "min": {
+          "t": "2009-10",
+          "value": -2.5
+        },
+        "max": {
+          "t": "1974-02",
+          "value": 24.9
+        },
+        "count": 668,
+        "start": "1971-01"
+      },
+      "points": [
+        {
+          "t": "1971-01",
+          "value": 6.5
+        },
+        {
+          "t": "1971-02",
+          "value": 6
+        },
+        {
+          "t": "1971-03",
+          "value": 5.3
+        },
+        {
+          "t": "1971-04",
+          "value": 5.8
+        },
+        {
+          "t": "1971-05",
+          "value": 6.4
+        },
+        {
+          "t": "1971-06",
+          "value": 6.9
+        },
+        {
+          "t": "1971-07",
+          "value": 6.9
+        },
+        {
+          "t": "1971-08",
+          "value": 7
+        },
+        {
+          "t": "1971-09",
+          "value": 8
+        },
+        {
+          "t": "1971-10",
+          "value": 6.5
+        },
+        {
+          "t": "1971-11",
+          "value": 5.5
+        },
+        {
+          "t": "1971-12",
+          "value": 4.8
+        },
+        {
+          "t": "1972-01",
+          "value": 4.1
+        },
+        {
+          "t": "1972-02",
+          "value": 4.5
+        },
+        {
+          "t": "1972-03",
+          "value": 5.3
+        },
+        {
+          "t": "1972-04",
+          "value": 5
+        },
+        {
+          "t": "1972-05",
+          "value": 5.2
+        },
+        {
+          "t": "1972-06",
+          "value": 4.8
+        },
+        {
+          "t": "1972-07",
+          "value": 5
+        },
+        {
+          "t": "1972-08",
+          "value": 5.9
+        },
+        {
+          "t": "1972-09",
+          "value": 3.9
+        },
+        {
+          "t": "1972-10",
+          "value": 4.4
+        },
+        {
+          "t": "1972-11",
+          "value": 5.1
+        },
+        {
+          "t": "1972-12",
+          "value": 5.7
+        },
+        {
+          "t": "1973-01",
+          "value": 6.7
+        },
+        {
+          "t": "1973-02",
+          "value": 7
+        },
+        {
+          "t": "1973-03",
+          "value": 8.7
+        },
+        {
+          "t": "1973-04",
+          "value": 9.4
+        },
+        {
+          "t": "1973-05",
+          "value": 10.8
+        },
+        {
+          "t": "1973-06",
+          "value": 11
+        },
+        {
+          "t": "1973-07",
+          "value": 11.7
+        },
+        {
+          "t": "1973-08",
+          "value": 11.9
+        },
+        {
+          "t": "1973-09",
+          "value": 14.2
+        },
+        {
+          "t": "1973-10",
+          "value": 13.9
+        },
+        {
+          "t": "1973-11",
+          "value": 15.2
+        },
+        {
+          "t": "1973-12",
+          "value": 18.3
+        },
+        {
+          "t": "1974-01",
+          "value": 21.9
+        },
+        {
+          "t": "1974-02",
+          "value": 24.9
+        },
+        {
+          "t": "1974-03",
+          "value": 22.8
+        },
+        {
+          "t": "1974-04",
+          "value": 23.7
+        },
+        {
+          "t": "1974-05",
+          "value": 22
+        },
+        {
+          "t": "1974-06",
+          "value": 22.3
+        },
+        {
+          "t": "1974-07",
+          "value": 23.8
+        },
+        {
+          "t": "1974-08",
+          "value": 23.9
+        },
+        {
+          "t": "1974-09",
+          "value": 22.5
+        },
+        {
+          "t": "1974-10",
+          "value": 24.8
+        },
+        {
+          "t": "1974-11",
+          "value": 24.5
+        },
+        {
+          "t": "1974-12",
+          "value": 21
+        },
+        {
+          "t": "1975-01",
+          "value": 16.8
+        },
+        {
+          "t": "1975-02",
+          "value": 13.6
+        },
+        {
+          "t": "1975-03",
+          "value": 13.9
+        },
+        {
+          "t": "1975-04",
+          "value": 13.4
+        },
+        {
+          "t": "1975-05",
+          "value": 14
+        },
+        {
+          "t": "1975-06",
+          "value": 13.4
+        },
+        {
+          "t": "1975-07",
+          "value": 11.4
+        },
+        {
+          "t": "1975-08",
+          "value": 10.2
+        },
+        {
+          "t": "1975-09",
+          "value": 10.4
+        },
+        {
+          "t": "1975-10",
+          "value": 9.7
+        },
+        {
+          "t": "1975-11",
+          "value": 8.3
+        },
+        {
+          "t": "1975-12",
+          "value": 7.8
+        },
+        {
+          "t": "1976-01",
+          "value": 8.7
+        },
+        {
+          "t": "1976-02",
+          "value": 9.3
+        },
+        {
+          "t": "1976-03",
+          "value": 8.7
+        },
+        {
+          "t": "1976-04",
+          "value": 9.4
+        },
+        {
+          "t": "1976-05",
+          "value": 9.2
+        },
+        {
+          "t": "1976-06",
+          "value": 9.6
+        },
+        {
+          "t": "1976-07",
+          "value": 9.9
+        },
+        {
+          "t": "1976-08",
+          "value": 9.4
+        },
+        {
+          "t": "1976-09",
+          "value": 9.8
+        },
+        {
+          "t": "1976-10",
+          "value": 8.7
+        },
+        {
+          "t": "1976-11",
+          "value": 9.2
+        },
+        {
+          "t": "1976-12",
+          "value": 10.5
+        },
+        {
+          "t": "1977-01",
+          "value": 9.4
+        },
+        {
+          "t": "1977-02",
+          "value": 9.3
+        },
+        {
+          "t": "1977-03",
+          "value": 9.5
+        },
+        {
+          "t": "1977-04",
+          "value": 8.8
+        },
+        {
+          "t": "1977-05",
+          "value": 9.4
+        },
+        {
+          "t": "1977-06",
+          "value": 8.6
+        },
+        {
+          "t": "1977-07",
+          "value": 7.7
+        },
+        {
+          "t": "1977-08",
+          "value": 8.6
+        },
+        {
+          "t": "1977-09",
+          "value": 7.7
+        },
+        {
+          "t": "1977-10",
+          "value": 7.6
+        },
+        {
+          "t": "1977-11",
+          "value": 6.5
+        },
+        {
+          "t": "1977-12",
+          "value": 5
+        },
+        {
+          "t": "1978-01",
+          "value": 4.5
+        },
+        {
+          "t": "1978-02",
+          "value": 4.5
+        },
+        {
+          "t": "1978-03",
+          "value": 4.8
+        },
+        {
+          "t": "1978-04",
+          "value": 4.2
+        },
+        {
+          "t": "1978-05",
+          "value": 3.9
+        },
+        {
+          "t": "1978-06",
+          "value": 3.9
+        },
+        {
+          "t": "1978-07",
+          "value": 4.6
+        },
+        {
+          "t": "1978-08",
+          "value": 4.6
+        },
+        {
+          "t": "1978-09",
+          "value": 4.1
+        },
+        {
+          "t": "1978-10",
+          "value": 3.7
+        },
+        {
+          "t": "1978-11",
+          "value": 3.8
+        },
+        {
+          "t": "1978-12",
+          "value": 3.9
+        },
+        {
+          "t": "1979-01",
+          "value": 3.6
+        },
+        {
+          "t": "1979-02",
+          "value": 2.8
+        },
+        {
+          "t": "1979-03",
+          "value": 2.7
+        },
+        {
+          "t": "1979-04",
+          "value": 2.9
+        },
+        {
+          "t": "1979-05",
+          "value": 3.2
+        },
+        {
+          "t": "1979-06",
+          "value": 3.8
+        },
+        {
+          "t": "1979-07",
+          "value": 4.3
+        },
+        {
+          "t": "1979-08",
+          "value": 3.1
+        },
+        {
+          "t": "1979-09",
+          "value": 3.2
+        },
+        {
+          "t": "1979-10",
+          "value": 4.2
+        },
+        {
+          "t": "1979-11",
+          "value": 5
+        },
+        {
+          "t": "1979-12",
+          "value": 5.6
+        },
+        {
+          "t": "1980-01",
+          "value": 6.4
+        },
+        {
+          "t": "1980-02",
+          "value": 7.7
+        },
+        {
+          "t": "1980-03",
+          "value": 7.7
+        },
+        {
+          "t": "1980-04",
+          "value": 8.1
+        },
+        {
+          "t": "1980-05",
+          "value": 8
+        },
+        {
+          "t": "1980-06",
+          "value": 8.2
+        },
+        {
+          "t": "1980-07",
+          "value": 7.5
+        },
+        {
+          "t": "1980-08",
+          "value": 8.4
+        },
+        {
+          "t": "1980-09",
+          "value": 8.7
+        },
+        {
+          "t": "1980-10",
+          "value": 7.5
+        },
+        {
+          "t": "1980-11",
+          "value": 8
+        },
+        {
+          "t": "1980-12",
+          "value": 6.9
+        },
+        {
+          "t": "1981-01",
+          "value": 7.2
+        },
+        {
+          "t": "1981-02",
+          "value": 6.3
+        },
+        {
+          "t": "1981-03",
+          "value": 6.1
+        },
+        {
+          "t": "1981-04",
+          "value": 5
+        },
+        {
+          "t": "1981-05",
+          "value": 5
+        },
+        {
+          "t": "1981-06",
+          "value": 4.8
+        },
+        {
+          "t": "1981-07",
+          "value": 4.4
+        },
+        {
+          "t": "1981-08",
+          "value": 4.2
+        },
+        {
+          "t": "1981-09",
+          "value": 4
+        },
+        {
+          "t": "1981-10",
+          "value": 4.2
+        },
+        {
+          "t": "1981-11",
+          "value": 3.8
+        },
+        {
+          "t": "1981-12",
+          "value": 4.3
+        },
+        {
+          "t": "1982-01",
+          "value": 3.3
+        },
+        {
+          "t": "1982-02",
+          "value": 3.2
+        },
+        {
+          "t": "1982-03",
+          "value": 3
+        },
+        {
+          "t": "1982-04",
+          "value": 3
+        },
+        {
+          "t": "1982-05",
+          "value": 2.5
+        },
+        {
+          "t": "1982-06",
+          "value": 2.3
+        },
+        {
+          "t": "1982-07",
+          "value": 1.9
+        },
+        {
+          "t": "1982-08",
+          "value": 3.2
+        },
+        {
+          "t": "1982-09",
+          "value": 3.2
+        },
+        {
+          "t": "1982-10",
+          "value": 3.1
+        },
+        {
+          "t": "1982-11",
+          "value": 2.3
+        },
+        {
+          "t": "1982-12",
+          "value": 2
+        },
+        {
+          "t": "1983-01",
+          "value": 2.1
+        },
+        {
+          "t": "1983-02",
+          "value": 2
+        },
+        {
+          "t": "1983-03",
+          "value": 2.3
+        },
+        {
+          "t": "1983-04",
+          "value": 2.1
+        },
+        {
+          "t": "1983-05",
+          "value": 2.7
+        },
+        {
+          "t": "1983-06",
+          "value": 2
+        },
+        {
+          "t": "1983-07",
+          "value": 2.3
+        },
+        {
+          "t": "1983-08",
+          "value": 1.3
+        },
+        {
+          "t": "1983-09",
+          "value": 0.9
+        },
+        {
+          "t": "1983-10",
+          "value": 1.5
+        },
+        {
+          "t": "1983-11",
+          "value": 1.9
+        },
+        {
+          "t": "1983-12",
+          "value": 1.7
+        },
+        {
+          "t": "1984-01",
+          "value": 1.9
+        },
+        {
+          "t": "1984-02",
+          "value": 2.9
+        },
+        {
+          "t": "1984-03",
+          "value": 2.5
+        },
+        {
+          "t": "1984-04",
+          "value": 2.3
+        },
+        {
+          "t": "1984-05",
+          "value": 2
+        },
+        {
+          "t": "1984-06",
+          "value": 1.9
+        },
+        {
+          "t": "1984-07",
+          "value": 2.5
+        },
+        {
+          "t": "1984-08",
+          "value": 1.9
+        },
+        {
+          "t": "1984-09",
+          "value": 2.3
+        },
+        {
+          "t": "1984-10",
+          "value": 2.2
+        },
+        {
+          "t": "1984-11",
+          "value": 2.2
+        },
+        {
+          "t": "1984-12",
+          "value": 2.6
+        },
+        {
+          "t": "1985-01",
+          "value": 2.9
+        },
+        {
+          "t": "1985-02",
+          "value": 1.5
+        },
+        {
+          "t": "1985-03",
+          "value": 1.8
+        },
+        {
+          "t": "1985-04",
+          "value": 2
+        },
+        {
+          "t": "1985-05",
+          "value": 1.8
+        },
+        {
+          "t": "1985-06",
+          "value": 2.5
+        },
+        {
+          "t": "1985-07",
+          "value": 2.4
+        },
+        {
+          "t": "1985-08",
+          "value": 2.3
+        },
+        {
+          "t": "1985-09",
+          "value": 1.7
+        },
+        {
+          "t": "1985-10",
+          "value": 2.3
+        },
+        {
+          "t": "1985-11",
+          "value": 1.9
+        },
+        {
+          "t": "1985-12",
+          "value": 1.9
+        },
+        {
+          "t": "1986-01",
+          "value": 1.5
+        },
+        {
+          "t": "1986-02",
+          "value": 1.8
+        },
+        {
+          "t": "1986-03",
+          "value": 1.3
+        },
+        {
+          "t": "1986-04",
+          "value": 1
+        },
+        {
+          "t": "1986-05",
+          "value": 1.1
+        },
+        {
+          "t": "1986-06",
+          "value": 0.6
+        },
+        {
+          "t": "1986-07",
+          "value": 0.1
+        },
+        {
+          "t": "1986-08",
+          "value": 0.1
+        },
+        {
+          "t": "1986-09",
+          "value": 0.5
+        },
+        {
+          "t": "1986-10",
+          "value": -0.3
+        },
+        {
+          "t": "1986-11",
+          "value": 0
+        },
+        {
+          "t": "1986-12",
+          "value": -0.3
+        },
+        {
+          "t": "1987-01",
+          "value": -1.1
+        },
+        {
+          "t": "1987-02",
+          "value": -1
+        },
+        {
+          "t": "1987-03",
+          "value": -0.5
+        },
+        {
+          "t": "1987-04",
+          "value": 0.1
+        },
+        {
+          "t": "1987-05",
+          "value": 0
+        },
+        {
+          "t": "1987-06",
+          "value": 0.3
+        },
+        {
+          "t": "1987-07",
+          "value": 0.1
+        },
+        {
+          "t": "1987-08",
+          "value": 0.4
+        },
+        {
+          "t": "1987-09",
+          "value": 0.8
+        },
+        {
+          "t": "1987-10",
+          "value": 0.7
+        },
+        {
+          "t": "1987-11",
+          "value": 0.7
+        },
+        {
+          "t": "1987-12",
+          "value": 0.8
+        },
+        {
+          "t": "1988-01",
+          "value": 0.9
+        },
+        {
+          "t": "1988-02",
+          "value": 0.7
+        },
+        {
+          "t": "1988-03",
+          "value": 0.7
+        },
+        {
+          "t": "1988-04",
+          "value": 0.3
+        },
+        {
+          "t": "1988-05",
+          "value": 0.2
+        },
+        {
+          "t": "1988-06",
+          "value": 0.2
+        },
+        {
+          "t": "1988-07",
+          "value": 0.5
+        },
+        {
+          "t": "1988-08",
+          "value": 0.7
+        },
+        {
+          "t": "1988-09",
+          "value": 0.6
+        },
+        {
+          "t": "1988-10",
+          "value": 1.1
+        },
+        {
+          "t": "1988-11",
+          "value": 1.2
+        },
+        {
+          "t": "1988-12",
+          "value": 1
+        },
+        {
+          "t": "1989-01",
+          "value": 1.1
+        },
+        {
+          "t": "1989-02",
+          "value": 1
+        },
+        {
+          "t": "1989-03",
+          "value": 1.1
+        },
+        {
+          "t": "1989-04",
+          "value": 2.4
+        },
+        {
+          "t": "1989-05",
+          "value": 2.9
+        },
+        {
+          "t": "1989-06",
+          "value": 3
+        },
+        {
+          "t": "1989-07",
+          "value": 3
+        },
+        {
+          "t": "1989-08",
+          "value": 2.6
+        },
+        {
+          "t": "1989-09",
+          "value": 2.6
+        },
+        {
+          "t": "1989-10",
+          "value": 2.9
+        },
+        {
+          "t": "1989-11",
+          "value": 2.3
+        },
+        {
+          "t": "1989-12",
+          "value": 2.6
+        },
+        {
+          "t": "1990-01",
+          "value": 3
+        },
+        {
+          "t": "1990-02",
+          "value": 3.6
+        },
+        {
+          "t": "1990-03",
+          "value": 3.5
+        },
+        {
+          "t": "1990-04",
+          "value": 2.5
+        },
+        {
+          "t": "1990-05",
+          "value": 2.7
+        },
+        {
+          "t": "1990-06",
+          "value": 2.2
+        },
+        {
+          "t": "1990-07",
+          "value": 2.3
+        },
+        {
+          "t": "1990-08",
+          "value": 2.9
+        },
+        {
+          "t": "1990-09",
+          "value": 3
+        },
+        {
+          "t": "1990-10",
+          "value": 3.5
+        },
+        {
+          "t": "1990-11",
+          "value": 4.2
+        },
+        {
+          "t": "1990-12",
+          "value": 3.8
+        },
+        {
+          "t": "1991-01",
+          "value": 4
+        },
+        {
+          "t": "1991-02",
+          "value": 3.6
+        },
+        {
+          "t": "1991-03",
+          "value": 3.6
+        },
+        {
+          "t": "1991-04",
+          "value": 3.4
+        },
+        {
+          "t": "1991-05",
+          "value": 3.4
+        },
+        {
+          "t": "1991-06",
+          "value": 3.4
+        },
+        {
+          "t": "1991-07",
+          "value": 3.5
+        },
+        {
+          "t": "1991-08",
+          "value": 3.3
+        },
+        {
+          "t": "1991-09",
+          "value": 2.7
+        },
+        {
+          "t": "1991-10",
+          "value": 2.7
+        },
+        {
+          "t": "1991-11",
+          "value": 3.1
+        },
+        {
+          "t": "1991-12",
+          "value": 2.7
+        },
+        {
+          "t": "1992-01",
+          "value": 1.8
+        },
+        {
+          "t": "1992-02",
+          "value": 2
+        },
+        {
+          "t": "1992-03",
+          "value": 2
+        },
+        {
+          "t": "1992-04",
+          "value": 2.4
+        },
+        {
+          "t": "1992-05",
+          "value": 2
+        },
+        {
+          "t": "1992-06",
+          "value": 2.3
+        },
+        {
+          "t": "1992-07",
+          "value": 1.7
+        },
+        {
+          "t": "1992-08",
+          "value": 1.7
+        },
+        {
+          "t": "1992-09",
+          "value": 2
+        },
+        {
+          "t": "1992-10",
+          "value": 1.1
+        },
+        {
+          "t": "1992-11",
+          "value": 0.7
+        },
+        {
+          "t": "1992-12",
+          "value": 1.2
+        },
+        {
+          "t": "1993-01",
+          "value": 1.3
+        },
+        {
+          "t": "1993-02",
+          "value": 1.4
+        },
+        {
+          "t": "1993-03",
+          "value": 1.2
+        },
+        {
+          "t": "1993-04",
+          "value": 0.9
+        },
+        {
+          "t": "1993-05",
+          "value": 0.9
+        },
+        {
+          "t": "1993-06",
+          "value": 0.9
+        },
+        {
+          "t": "1993-07",
+          "value": 1.9
+        },
+        {
+          "t": "1993-08",
+          "value": 1.9
+        },
+        {
+          "t": "1993-09",
+          "value": 1.5
+        },
+        {
+          "t": "1993-10",
+          "value": 1.3
+        },
+        {
+          "t": "1993-11",
+          "value": 0.9
+        },
+        {
+          "t": "1993-12",
+          "value": 1
+        },
+        {
+          "t": "1994-01",
+          "value": 1.2
+        },
+        {
+          "t": "1994-02",
+          "value": 1.1
+        },
+        {
+          "t": "1994-03",
+          "value": 1.3
+        },
+        {
+          "t": "1994-04",
+          "value": 0.8
+        },
+        {
+          "t": "1994-05",
+          "value": 0.8
+        },
+        {
+          "t": "1994-06",
+          "value": 0.6
+        },
+        {
+          "t": "1994-07",
+          "value": -0.2
+        },
+        {
+          "t": "1994-08",
+          "value": 0
+        },
+        {
+          "t": "1994-09",
+          "value": 0.2
+        },
+        {
+          "t": "1994-10",
+          "value": 0.7
+        },
+        {
+          "t": "1994-11",
+          "value": 1
+        },
+        {
+          "t": "1994-12",
+          "value": 0.7
+        },
+        {
+          "t": "1995-01",
+          "value": 0.6
+        },
+        {
+          "t": "1995-02",
+          "value": 0.2
+        },
+        {
+          "t": "1995-03",
+          "value": -0.4
+        },
+        {
+          "t": "1995-04",
+          "value": -0.2
+        },
+        {
+          "t": "1995-05",
+          "value": 0
+        },
+        {
+          "t": "1995-06",
+          "value": 0.3
+        },
+        {
+          "t": "1995-07",
+          "value": 0.1
+        },
+        {
+          "t": "1995-08",
+          "value": -0.2
+        },
+        {
+          "t": "1995-09",
+          "value": 0.2
+        },
+        {
+          "t": "1995-10",
+          "value": -0.6
+        },
+        {
+          "t": "1995-11",
+          "value": -0.7
+        },
+        {
+          "t": "1995-12",
+          "value": -0.3
+        },
+        {
+          "t": "1996-01",
+          "value": -0.5
+        },
+        {
+          "t": "1996-02",
+          "value": -0.4
+        },
+        {
+          "t": "1996-03",
+          "value": -0.1
+        },
+        {
+          "t": "1996-04",
+          "value": 0.2
+        },
+        {
+          "t": "1996-05",
+          "value": 0.2
+        },
+        {
+          "t": "1996-06",
+          "value": 0
+        },
+        {
+          "t": "1996-07",
+          "value": 0.4
+        },
+        {
+          "t": "1996-08",
+          "value": 0.2
+        },
+        {
+          "t": "1996-09",
+          "value": 0
+        },
+        {
+          "t": "1996-10",
+          "value": 0.5
+        },
+        {
+          "t": "1996-11",
+          "value": 0.5
+        },
+        {
+          "t": "1996-12",
+          "value": 0.6
+        },
+        {
+          "t": "1997-01",
+          "value": 0.6
+        },
+        {
+          "t": "1997-02",
+          "value": 0.6
+        },
+        {
+          "t": "1997-03",
+          "value": 0.5
+        },
+        {
+          "t": "1997-04",
+          "value": 1.9
+        },
+        {
+          "t": "1997-05",
+          "value": 1.9
+        },
+        {
+          "t": "1997-06",
+          "value": 2.2
+        },
+        {
+          "t": "1997-07",
+          "value": 1.9
+        },
+        {
+          "t": "1997-08",
+          "value": 2.1
+        },
+        {
+          "t": "1997-09",
+          "value": 2.4
+        },
+        {
+          "t": "1997-10",
+          "value": 2.5
+        },
+        {
+          "t": "1997-11",
+          "value": 2.1
+        },
+        {
+          "t": "1997-12",
+          "value": 1.8
+        },
+        {
+          "t": "1998-01",
+          "value": 1.8
+        },
+        {
+          "t": "1998-02",
+          "value": 1.9
+        },
+        {
+          "t": "1998-03",
+          "value": 2.2
+        },
+        {
+          "t": "1998-04",
+          "value": 0.4
+        },
+        {
+          "t": "1998-05",
+          "value": 0.5
+        },
+        {
+          "t": "1998-06",
+          "value": 0.1
+        },
+        {
+          "t": "1998-07",
+          "value": -0.1
+        },
+        {
+          "t": "1998-08",
+          "value": -0.3
+        },
+        {
+          "t": "1998-09",
+          "value": -0.2
+        },
+        {
+          "t": "1998-10",
+          "value": 0.2
+        },
+        {
+          "t": "1998-11",
+          "value": 0.8
+        },
+        {
+          "t": "1998-12",
+          "value": 0.6
+        },
+        {
+          "t": "1999-01",
+          "value": 0.2
+        },
+        {
+          "t": "1999-02",
+          "value": -0.1
+        },
+        {
+          "t": "1999-03",
+          "value": -0.4
+        },
+        {
+          "t": "1999-04",
+          "value": -0.1
+        },
+        {
+          "t": "1999-05",
+          "value": -0.4
+        },
+        {
+          "t": "1999-06",
+          "value": -0.3
+        },
+        {
+          "t": "1999-07",
+          "value": -0.1
+        },
+        {
+          "t": "1999-08",
+          "value": 0.3
+        },
+        {
+          "t": "1999-09",
+          "value": -0.2
+        },
+        {
+          "t": "1999-10",
+          "value": -0.7
+        },
+        {
+          "t": "1999-11",
+          "value": -1.2
+        },
+        {
+          "t": "1999-12",
+          "value": -1.1
+        },
+        {
+          "t": "2000-01",
+          "value": -0.9
+        },
+        {
+          "t": "2000-02",
+          "value": -0.6
+        },
+        {
+          "t": "2000-03",
+          "value": -0.5
+        },
+        {
+          "t": "2000-04",
+          "value": -0.8
+        },
+        {
+          "t": "2000-05",
+          "value": -0.7
+        },
+        {
+          "t": "2000-06",
+          "value": -0.7
+        },
+        {
+          "t": "2000-07",
+          "value": -0.5
+        },
+        {
+          "t": "2000-08",
+          "value": -0.8
+        },
+        {
+          "t": "2000-09",
+          "value": -0.8
+        },
+        {
+          "t": "2000-10",
+          "value": -0.9
+        },
+        {
+          "t": "2000-11",
+          "value": -0.5
+        },
+        {
+          "t": "2000-12",
+          "value": -0.2
+        },
+        {
+          "t": "2001-01",
+          "value": -0.3
+        },
+        {
+          "t": "2001-02",
+          "value": -0.3
+        },
+        {
+          "t": "2001-03",
+          "value": -0.7
+        },
+        {
+          "t": "2001-04",
+          "value": -0.7
+        },
+        {
+          "t": "2001-05",
+          "value": -0.7
+        },
+        {
+          "t": "2001-06",
+          "value": -0.8
+        },
+        {
+          "t": "2001-07",
+          "value": -0.8
+        },
+        {
+          "t": "2001-08",
+          "value": -0.7
+        },
+        {
+          "t": "2001-09",
+          "value": -0.8
+        },
+        {
+          "t": "2001-10",
+          "value": -0.8
+        },
+        {
+          "t": "2001-11",
+          "value": -1
+        },
+        {
+          "t": "2001-12",
+          "value": -1.2
+        },
+        {
+          "t": "2002-01",
+          "value": -1.4
+        },
+        {
+          "t": "2002-02",
+          "value": -1.6
+        },
+        {
+          "t": "2002-03",
+          "value": -1.2
+        },
+        {
+          "t": "2002-04",
+          "value": -1.1
+        },
+        {
+          "t": "2002-05",
+          "value": -0.9
+        },
+        {
+          "t": "2002-06",
+          "value": -0.7
+        },
+        {
+          "t": "2002-07",
+          "value": -0.8
+        },
+        {
+          "t": "2002-08",
+          "value": -0.9
+        },
+        {
+          "t": "2002-09",
+          "value": -0.7
+        },
+        {
+          "t": "2002-10",
+          "value": -0.9
+        },
+        {
+          "t": "2002-11",
+          "value": -0.4
+        },
+        {
+          "t": "2002-12",
+          "value": -0.3
+        },
+        {
+          "t": "2003-01",
+          "value": -0.4
+        },
+        {
+          "t": "2003-02",
+          "value": -0.2
+        },
+        {
+          "t": "2003-03",
+          "value": -0.1
+        },
+        {
+          "t": "2003-04",
+          "value": -0.1
+        },
+        {
+          "t": "2003-05",
+          "value": -0.2
+        },
+        {
+          "t": "2003-06",
+          "value": -0.4
+        },
+        {
+          "t": "2003-07",
+          "value": -0.2
+        },
+        {
+          "t": "2003-08",
+          "value": -0.3
+        },
+        {
+          "t": "2003-09",
+          "value": -0.2
+        },
+        {
+          "t": "2003-10",
+          "value": 0
+        },
+        {
+          "t": "2003-11",
+          "value": -0.5
+        },
+        {
+          "t": "2003-12",
+          "value": -0.4
+        },
+        {
+          "t": "2004-01",
+          "value": -0.3
+        },
+        {
+          "t": "2004-02",
+          "value": 0
+        },
+        {
+          "t": "2004-03",
+          "value": -0.1
+        },
+        {
+          "t": "2004-04",
+          "value": -0.4
+        },
+        {
+          "t": "2004-05",
+          "value": -0.5
+        },
+        {
+          "t": "2004-06",
+          "value": 0
+        },
+        {
+          "t": "2004-07",
+          "value": -0.1
+        },
+        {
+          "t": "2004-08",
+          "value": -0.2
+        },
+        {
+          "t": "2004-09",
+          "value": 0
+        },
+        {
+          "t": "2004-10",
+          "value": 0.5
+        },
+        {
+          "t": "2004-11",
+          "value": 0.8
+        },
+        {
+          "t": "2004-12",
+          "value": 0.2
+        },
+        {
+          "t": "2005-01",
+          "value": -0.1
+        },
+        {
+          "t": "2005-02",
+          "value": -0.3
+        },
+        {
+          "t": "2005-03",
+          "value": -0.2
+        },
+        {
+          "t": "2005-04",
+          "value": 0
+        },
+        {
+          "t": "2005-05",
+          "value": 0.2
+        },
+        {
+          "t": "2005-06",
+          "value": -0.5
+        },
+        {
+          "t": "2005-07",
+          "value": -0.3
+        },
+        {
+          "t": "2005-08",
+          "value": -0.3
+        },
+        {
+          "t": "2005-09",
+          "value": -0.3
+        },
+        {
+          "t": "2005-10",
+          "value": -0.7
+        },
+        {
+          "t": "2005-11",
+          "value": -0.8
+        },
+        {
+          "t": "2005-12",
+          "value": -0.1
+        },
+        {
+          "t": "2006-01",
+          "value": -0.1
+        },
+        {
+          "t": "2006-02",
+          "value": -0.1
+        },
+        {
+          "t": "2006-03",
+          "value": -0.2
+        },
+        {
+          "t": "2006-04",
+          "value": -0.1
+        },
+        {
+          "t": "2006-05",
+          "value": 0.1
+        },
+        {
+          "t": "2006-06",
+          "value": 0.5
+        },
+        {
+          "t": "2006-07",
+          "value": 0.3
+        },
+        {
+          "t": "2006-08",
+          "value": 0.9
+        },
+        {
+          "t": "2006-09",
+          "value": 0.6
+        },
+        {
+          "t": "2006-10",
+          "value": 0.4
+        },
+        {
+          "t": "2006-11",
+          "value": 0.3
+        },
+        {
+          "t": "2006-12",
+          "value": 0.3
+        },
+        {
+          "t": "2007-01",
+          "value": 0
+        },
+        {
+          "t": "2007-02",
+          "value": -0.2
+        },
+        {
+          "t": "2007-03",
+          "value": -0.1
+        },
+        {
+          "t": "2007-04",
+          "value": 0
+        },
+        {
+          "t": "2007-05",
+          "value": 0
+        },
+        {
+          "t": "2007-06",
+          "value": -0.2
+        },
+        {
+          "t": "2007-07",
+          "value": 0
+        },
+        {
+          "t": "2007-08",
+          "value": -0.2
+        },
+        {
+          "t": "2007-09",
+          "value": -0.2
+        },
+        {
+          "t": "2007-10",
+          "value": 0.3
+        },
+        {
+          "t": "2007-11",
+          "value": 0.6
+        },
+        {
+          "t": "2007-12",
+          "value": 0.7
+        },
+        {
+          "t": "2008-01",
+          "value": 0.7
+        },
+        {
+          "t": "2008-02",
+          "value": 1
+        },
+        {
+          "t": "2008-03",
+          "value": 1.2
+        },
+        {
+          "t": "2008-04",
+          "value": 0.8
+        },
+        {
+          "t": "2008-05",
+          "value": 1.3
+        },
+        {
+          "t": "2008-06",
+          "value": 2
+        },
+        {
+          "t": "2008-07",
+          "value": 2.3
+        },
+        {
+          "t": "2008-08",
+          "value": 2.1
+        },
+        {
+          "t": "2008-09",
+          "value": 2.1
+        },
+        {
+          "t": "2008-10",
+          "value": 1.7
+        },
+        {
+          "t": "2008-11",
+          "value": 1
+        },
+        {
+          "t": "2008-12",
+          "value": 0.4
+        },
+        {
+          "t": "2009-01",
+          "value": 0
+        },
+        {
+          "t": "2009-02",
+          "value": -0.1
+        },
+        {
+          "t": "2009-03",
+          "value": -0.3
+        },
+        {
+          "t": "2009-04",
+          "value": -0.1
+        },
+        {
+          "t": "2009-05",
+          "value": -1.1
+        },
+        {
+          "t": "2009-06",
+          "value": -1.8
+        },
+        {
+          "t": "2009-07",
+          "value": -2.2
+        },
+        {
+          "t": "2009-08",
+          "value": -2.2
+        },
+        {
+          "t": "2009-09",
+          "value": -2.2
+        },
+        {
+          "t": "2009-10",
+          "value": -2.5
+        },
+        {
+          "t": "2009-11",
+          "value": -1.9
+        },
+        {
+          "t": "2009-12",
+          "value": -1.7
+        },
+        {
+          "t": "2010-01",
+          "value": -1.3
+        },
+        {
+          "t": "2010-02",
+          "value": -1.1
+        },
+        {
+          "t": "2010-03",
+          "value": -1.1
+        },
+        {
+          "t": "2010-04",
+          "value": -1.2
+        },
+        {
+          "t": "2010-05",
+          "value": -0.9
+        },
+        {
+          "t": "2010-06",
+          "value": -0.7
+        },
+        {
+          "t": "2010-07",
+          "value": -0.9
+        },
+        {
+          "t": "2010-08",
+          "value": -0.9
+        },
+        {
+          "t": "2010-09",
+          "value": -0.6
+        },
+        {
+          "t": "2010-10",
+          "value": 0.2
+        },
+        {
+          "t": "2010-11",
+          "value": 0.1
+        },
+        {
+          "t": "2010-12",
+          "value": 0
+        },
+        {
+          "t": "2011-01",
+          "value": -0.6
+        },
+        {
+          "t": "2011-02",
+          "value": -0.5
+        },
+        {
+          "t": "2011-03",
+          "value": -0.5
+        },
+        {
+          "t": "2011-04",
+          "value": -0.4
+        },
+        {
+          "t": "2011-05",
+          "value": -0.4
+        },
+        {
+          "t": "2011-06",
+          "value": -0.4
+        },
+        {
+          "t": "2011-07",
+          "value": 0.2
+        },
+        {
+          "t": "2011-08",
+          "value": 0.2
+        },
+        {
+          "t": "2011-09",
+          "value": 0
+        },
+        {
+          "t": "2011-10",
+          "value": -0.2
+        },
+        {
+          "t": "2011-11",
+          "value": -0.5
+        },
+        {
+          "t": "2011-12",
+          "value": -0.2
+        },
+        {
+          "t": "2012-01",
+          "value": 0.1
+        },
+        {
+          "t": "2012-02",
+          "value": 0.3
+        },
+        {
+          "t": "2012-03",
+          "value": 0.5
+        },
+        {
+          "t": "2012-04",
+          "value": 0.4
+        },
+        {
+          "t": "2012-05",
+          "value": 0.2
+        },
+        {
+          "t": "2012-06",
+          "value": -0.2
+        },
+        {
+          "t": "2012-07",
+          "value": -0.4
+        },
+        {
+          "t": "2012-08",
+          "value": -0.4
+        },
+        {
+          "t": "2012-09",
+          "value": -0.3
+        },
+        {
+          "t": "2012-10",
+          "value": -0.4
+        },
+        {
+          "t": "2012-11",
+          "value": -0.2
+        },
+        {
+          "t": "2012-12",
+          "value": -0.1
+        },
+        {
+          "t": "2013-01",
+          "value": -0.3
+        },
+        {
+          "t": "2013-02",
+          "value": -0.7
+        },
+        {
+          "t": "2013-03",
+          "value": -0.9
+        },
+        {
+          "t": "2013-04",
+          "value": -0.7
+        },
+        {
+          "t": "2013-05",
+          "value": -0.3
+        },
+        {
+          "t": "2013-06",
+          "value": 0.2
+        },
+        {
+          "t": "2013-07",
+          "value": 0.7
+        },
+        {
+          "t": "2013-08",
+          "value": 0.9
+        },
+        {
+          "t": "2013-09",
+          "value": 1.1
+        },
+        {
+          "t": "2013-10",
+          "value": 1.1
+        },
+        {
+          "t": "2013-11",
+          "value": 1.5
+        },
+        {
+          "t": "2013-12",
+          "value": 1.6
+        },
+        {
+          "t": "2014-01",
+          "value": 1.4
+        },
+        {
+          "t": "2014-02",
+          "value": 1.5
+        },
+        {
+          "t": "2014-03",
+          "value": 1.6
+        },
+        {
+          "t": "2014-04",
+          "value": 3.4
+        },
+        {
+          "t": "2014-05",
+          "value": 3.7
+        },
+        {
+          "t": "2014-06",
+          "value": 3.6
+        },
+        {
+          "t": "2014-07",
+          "value": 3.4
+        },
+        {
+          "t": "2014-08",
+          "value": 3.3
+        },
+        {
+          "t": "2014-09",
+          "value": 3.2
+        },
+        {
+          "t": "2014-10",
+          "value": 2.9
+        },
+        {
+          "t": "2014-11",
+          "value": 2.4
+        },
+        {
+          "t": "2014-12",
+          "value": 2.4
+        },
+        {
+          "t": "2015-01",
+          "value": 2.4
+        },
+        {
+          "t": "2015-02",
+          "value": 2.2
+        },
+        {
+          "t": "2015-03",
+          "value": 2.3
+        },
+        {
+          "t": "2015-04",
+          "value": 0.6
+        },
+        {
+          "t": "2015-05",
+          "value": 0.5
+        },
+        {
+          "t": "2015-06",
+          "value": 0.4
+        },
+        {
+          "t": "2015-07",
+          "value": 0.2
+        },
+        {
+          "t": "2015-08",
+          "value": 0.2
+        },
+        {
+          "t": "2015-09",
+          "value": 0
+        },
+        {
+          "t": "2015-10",
+          "value": 0.3
+        },
+        {
+          "t": "2015-11",
+          "value": 0.3
+        },
+        {
+          "t": "2015-12",
+          "value": 0.2
+        },
+        {
+          "t": "2016-01",
+          "value": -0.1
+        },
+        {
+          "t": "2016-02",
+          "value": 0.2
+        },
+        {
+          "t": "2016-03",
+          "value": 0
+        },
+        {
+          "t": "2016-04",
+          "value": -0.3
+        },
+        {
+          "t": "2016-05",
+          "value": -0.5
+        },
+        {
+          "t": "2016-06",
+          "value": -0.4
+        },
+        {
+          "t": "2016-07",
+          "value": -0.4
+        },
+        {
+          "t": "2016-08",
+          "value": -0.5
+        },
+        {
+          "t": "2016-09",
+          "value": -0.5
+        },
+        {
+          "t": "2016-10",
+          "value": 0.1
+        },
+        {
+          "t": "2016-11",
+          "value": 0.5
+        },
+        {
+          "t": "2016-12",
+          "value": 0.3
+        },
+        {
+          "t": "2017-01",
+          "value": 0.4
+        },
+        {
+          "t": "2017-02",
+          "value": 0.3
+        },
+        {
+          "t": "2017-03",
+          "value": 0.2
+        },
+        {
+          "t": "2017-04",
+          "value": 0.4
+        },
+        {
+          "t": "2017-05",
+          "value": 0.4
+        },
+        {
+          "t": "2017-06",
+          "value": 0.4
+        },
+        {
+          "t": "2017-07",
+          "value": 0.4
+        },
+        {
+          "t": "2017-08",
+          "value": 0.7
+        },
+        {
+          "t": "2017-09",
+          "value": 0.7
+        },
+        {
+          "t": "2017-10",
+          "value": 0.2
+        },
+        {
+          "t": "2017-11",
+          "value": 0.6
+        },
+        {
+          "t": "2017-12",
+          "value": 1
+        },
+        {
+          "t": "2018-01",
+          "value": 1.4
+        },
+        {
+          "t": "2018-02",
+          "value": 1.5
+        },
+        {
+          "t": "2018-03",
+          "value": 1.1
+        },
+        {
+          "t": "2018-04",
+          "value": 0.6
+        },
+        {
+          "t": "2018-05",
+          "value": 0.7
+        },
+        {
+          "t": "2018-06",
+          "value": 0.7
+        },
+        {
+          "t": "2018-07",
+          "value": 0.9
+        },
+        {
+          "t": "2018-08",
+          "value": 1.3
+        },
+        {
+          "t": "2018-09",
+          "value": 1.2
+        },
+        {
+          "t": "2018-10",
+          "value": 1.4
+        },
+        {
+          "t": "2018-11",
+          "value": 0.8
+        },
+        {
+          "t": "2018-12",
+          "value": 0.3
+        },
+        {
+          "t": "2019-01",
+          "value": 0.2
+        },
+        {
+          "t": "2019-02",
+          "value": 0.2
+        },
+        {
+          "t": "2019-03",
+          "value": 0.5
+        },
+        {
+          "t": "2019-04",
+          "value": 0.9
+        },
+        {
+          "t": "2019-05",
+          "value": 0.7
+        },
+        {
+          "t": "2019-06",
+          "value": 0.7
+        },
+        {
+          "t": "2019-07",
+          "value": 0.5
+        },
+        {
+          "t": "2019-08",
+          "value": 0.3
+        },
+        {
+          "t": "2019-09",
+          "value": 0.2
+        },
+        {
+          "t": "2019-10",
+          "value": 0.2
+        },
+        {
+          "t": "2019-11",
+          "value": 0.5
+        },
+        {
+          "t": "2019-12",
+          "value": 0.8
+        },
+        {
+          "t": "2020-01",
+          "value": 0.7
+        },
+        {
+          "t": "2020-02",
+          "value": 0.4
+        },
+        {
+          "t": "2020-03",
+          "value": 0.4
+        },
+        {
+          "t": "2020-04",
+          "value": 0.1
+        },
+        {
+          "t": "2020-05",
+          "value": 0.1
+        },
+        {
+          "t": "2020-06",
+          "value": 0.1
+        },
+        {
+          "t": "2020-07",
+          "value": 0.3
+        },
+        {
+          "t": "2020-08",
+          "value": 0.2
+        },
+        {
+          "t": "2020-09",
+          "value": 0
+        },
+        {
+          "t": "2020-10",
+          "value": -0.4
+        },
+        {
+          "t": "2020-11",
+          "value": -0.9
+        },
+        {
+          "t": "2020-12",
+          "value": -1.2
+        },
+        {
+          "t": "2021-01",
+          "value": -0.7
+        },
+        {
+          "t": "2021-02",
+          "value": -0.5
+        },
+        {
+          "t": "2021-03",
+          "value": -0.4
+        },
+        {
+          "t": "2021-04",
+          "value": -1.1
+        },
+        {
+          "t": "2021-05",
+          "value": -0.8
+        },
+        {
+          "t": "2021-06",
+          "value": -0.5
+        },
+        {
+          "t": "2021-07",
+          "value": -0.3
+        },
+        {
+          "t": "2021-08",
+          "value": -0.4
+        },
+        {
+          "t": "2021-09",
+          "value": 0.2
+        },
+        {
+          "t": "2021-10",
+          "value": 0.1
+        },
+        {
+          "t": "2021-11",
+          "value": 0.6
+        },
+        {
+          "t": "2021-12",
+          "value": 0.8
+        },
+        {
+          "t": "2022-01",
+          "value": 0.5
+        },
+        {
+          "t": "2022-02",
+          "value": 0.9
+        },
+        {
+          "t": "2022-03",
+          "value": 1.2
+        },
+        {
+          "t": "2022-04",
+          "value": 2.5
+        },
+        {
+          "t": "2022-05",
+          "value": 2.5
+        },
+        {
+          "t": "2022-06",
+          "value": 2.4
+        },
+        {
+          "t": "2022-07",
+          "value": 2.6
+        },
+        {
+          "t": "2022-08",
+          "value": 3
+        },
+        {
+          "t": "2022-09",
+          "value": 3
+        },
+        {
+          "t": "2022-10",
+          "value": 3.7
+        },
+        {
+          "t": "2022-11",
+          "value": 3.8
+        },
+        {
+          "t": "2022-12",
+          "value": 4
+        },
+        {
+          "t": "2023-01",
+          "value": 4.3
+        },
+        {
+          "t": "2023-02",
+          "value": 3.3
+        },
+        {
+          "t": "2023-03",
+          "value": 3.2
+        },
+        {
+          "t": "2023-04",
+          "value": 3.5
+        },
+        {
+          "t": "2023-05",
+          "value": 3.2
+        },
+        {
+          "t": "2023-06",
+          "value": 3.3
+        },
+        {
+          "t": "2023-07",
+          "value": 3.3
+        },
+        {
+          "t": "2023-08",
+          "value": 3.2
+        },
+        {
+          "t": "2023-09",
+          "value": 3
+        },
+        {
+          "t": "2023-10",
+          "value": 3.3
+        },
+        {
+          "t": "2023-11",
+          "value": 2.8
+        },
+        {
+          "t": "2023-12",
+          "value": 2.6
+        },
+        {
+          "t": "2024-01",
+          "value": 2.2
+        },
+        {
+          "t": "2024-02",
+          "value": 2.8
+        },
+        {
+          "t": "2024-03",
+          "value": 2.7
+        },
+        {
+          "t": "2024-04",
+          "value": 2.5
+        },
+        {
+          "t": "2024-05",
+          "value": 2.8
+        },
+        {
+          "t": "2024-06",
+          "value": 2.8
+        },
+        {
+          "t": "2024-07",
+          "value": 2.8
+        },
+        {
+          "t": "2024-08",
+          "value": 3
+        },
+        {
+          "t": "2024-09",
+          "value": 2.5
+        },
+        {
+          "t": "2024-10",
+          "value": 2.3
+        },
+        {
+          "t": "2024-11",
+          "value": 2.9
+        },
+        {
+          "t": "2024-12",
+          "value": 3.6
+        },
+        {
+          "t": "2025-01",
+          "value": 4
+        },
+        {
+          "t": "2025-02",
+          "value": 3.7
+        },
+        {
+          "t": "2025-03",
+          "value": 3.6
+        },
+        {
+          "t": "2025-04",
+          "value": 3.6
+        },
+        {
+          "t": "2025-05",
+          "value": 3.5
+        },
+        {
+          "t": "2025-06",
+          "value": 3.3
+        },
+        {
+          "t": "2025-07",
+          "value": 3.1
+        },
+        {
+          "t": "2025-08",
+          "value": 2.7
+        },
+        {
+          "t": "2025-09",
+          "value": 2.9
+        },
+        {
+          "t": "2025-10",
+          "value": 3
+        },
+        {
+          "t": "2025-11",
+          "value": 2.9
+        },
+        {
+          "t": "2025-12",
+          "value": 2.1
+        },
+        {
+          "t": "2026-01",
+          "value": 1.5
+        },
+        {
+          "t": "2026-02",
+          "value": 1.3
+        },
+        {
+          "t": "2026-03",
+          "value": 1.5
+        },
+        {
+          "t": "2026-04",
+          "value": 1.4
+        },
+        {
+          "t": "2026-05",
+          "value": 1.5
+        },
+        {
+          "t": "2026-06",
+          "value": 1.6
+        },
+        {
+          "t": "2026-07",
+          "value": 1.9
+        },
+        {
+          "t": "2026-08",
+          "value": 1.9
+        }
+      ]
+    },
+    {
+      "id": "machinery_orders_mom",
+      "name": "機械受注（船舶・電力除く民需・前月比）",
+      "shortName": "機械受注（前月比）",
+      "category": "景気",
+      "unit": "%",
+      "unitLabel": "前月比 %（季節調整値）",
+      "frequency": "monthly",
+      "seasonalAdjustment": "季節調整値",
+      "betterWhen": "up",
+      "importance": 4,
+      "description": "機械メーカーが受注した設備投資向け機械の金額（船舶・電力を除く民需分）の前月比。内閣府が公表し、報道や市場で最も注目されるのがこの前月比。企業は半年〜1年先を見据えて発注するため、設備投資の動きを半年ほど先取りする代表的な先行指標とされる。金額そのものは別カード「機械受注（船舶・電力除く民需）」にある。",
+      "judgment": {
+        "summary": "単月の増減は振れが大きいため、内閣府自身も3か月移動平均や3か月連続の前月比で基調を判断している。",
+        "goodWhen": "3か月連続で前月比プラス、または3か月移動平均が上向き（設備投資意欲の高まり）。",
+        "badWhen": "3か月連続で前月比マイナス（内閣府の基調判断で『減少』とされる典型的な目安）。",
+        "caveat": "月によっては大型受注1件で前月比が±10%を超えることもあるほど振れ幅が大きい。単月の増減だけで判断しない。前月比は本ツールが金額の系列から計算している。"
+      },
+      "referenceLines": [
+        {
+          "value": 0,
+          "label": "0＝増加・減少の分岐",
+          "kind": "neutral"
+        }
+      ],
+      "movingAverage": {
+        "window": 3,
+        "label": "3か月移動平均"
+      },
+      "releaseSchedule": "内閣府が対象月の翌々月上旬ごろ8:50に公表。",
+      "nextRelease": "2026-10-08",
+      "nextReleaseKind": "estimate",
+      "source": {
+        "provider": "統計ダッシュボード（e-Stat）",
+        "statName": "機械受注統計調査（船舶・電力を除く民需。前月比は本ツールで金額から計算）",
+        "indicatorCode": "0701030000000010010"
+      },
+      "summary": {
+        "latest": {
+          "t": "2026-07",
+          "value": -3.68,
+          "provisional": false
+        },
+        "changeFromPrev": -13.43,
+        "changeFromYearAgo": -0.51,
+        "min": {
+          "t": "2018-09",
+          "value": -16.1
+        },
+        "max": {
+          "t": "2008-01",
+          "value": 16.45
+        },
+        "count": 255,
+        "start": "2005-05"
+      },
+      "points": [
+        {
+          "t": "2005-05",
+          "value": -1.87
+        },
+        {
+          "t": "2005-06",
+          "value": -0.19
+        },
+        {
+          "t": "2005-07",
+          "value": 5.18
+        },
+        {
+          "t": "2005-08",
+          "value": 3.19
+        },
+        {
+          "t": "2005-09",
+          "value": -0.02
+        },
+        {
+          "t": "2005-10",
+          "value": 1.44
+        },
+        {
+          "t": "2005-11",
+          "value": 0.75
+        },
+        {
+          "t": "2005-12",
+          "value": 0.05
+        },
+        {
+          "t": "2006-01",
+          "value": -4.95
+        },
+        {
+          "t": "2006-02",
+          "value": 2.75
+        },
+        {
+          "t": "2006-03",
+          "value": 0.88
+        },
+        {
+          "t": "2006-04",
+          "value": 3.89
+        },
+        {
+          "t": "2006-05",
+          "value": 1.8
+        },
+        {
+          "t": "2006-06",
+          "value": 4.42
+        },
+        {
+          "t": "2006-07",
+          "value": -9.26
+        },
+        {
+          "t": "2006-08",
+          "value": -1.27
+        },
+        {
+          "t": "2006-09",
+          "value": 0.85
+        },
+        {
+          "t": "2006-10",
+          "value": -2.52
+        },
+        {
+          "t": "2006-11",
+          "value": 6.76
+        },
+        {
+          "t": "2006-12",
+          "value": -4.74
+        },
+        {
+          "t": "2007-01",
+          "value": 4.02
+        },
+        {
+          "t": "2007-02",
+          "value": -4.36
+        },
+        {
+          "t": "2007-03",
+          "value": -1.46
+        },
+        {
+          "t": "2007-04",
+          "value": -0.27
+        },
+        {
+          "t": "2007-05",
+          "value": 2.13
+        },
+        {
+          "t": "2007-06",
+          "value": -6.98
+        },
+        {
+          "t": "2007-07",
+          "value": 7.99
+        },
+        {
+          "t": "2007-08",
+          "value": -2.21
+        },
+        {
+          "t": "2007-09",
+          "value": 1.16
+        },
+        {
+          "t": "2007-10",
+          "value": 3.7
+        },
+        {
+          "t": "2007-11",
+          "value": -1.52
+        },
+        {
+          "t": "2007-12",
+          "value": -2.79
+        },
+        {
+          "t": "2008-01",
+          "value": 16.45
+        },
+        {
+          "t": "2008-02",
+          "value": -11.75
+        },
+        {
+          "t": "2008-03",
+          "value": -7.34
+        },
+        {
+          "t": "2008-04",
+          "value": 1.93
+        },
+        {
+          "t": "2008-05",
+          "value": 8.48
+        },
+        {
+          "t": "2008-06",
+          "value": -1.91
+        },
+        {
+          "t": "2008-07",
+          "value": -5.75
+        },
+        {
+          "t": "2008-08",
+          "value": -3.73
+        },
+        {
+          "t": "2008-09",
+          "value": -0.2
+        },
+        {
+          "t": "2008-10",
+          "value": -4.99
+        },
+        {
+          "t": "2008-11",
+          "value": -10.88
+        },
+        {
+          "t": "2008-12",
+          "value": -4.58
+        },
+        {
+          "t": "2009-01",
+          "value": -9.41
+        },
+        {
+          "t": "2009-02",
+          "value": 6.67
+        },
+        {
+          "t": "2009-03",
+          "value": -0.28
+        },
+        {
+          "t": "2009-04",
+          "value": -5.99
+        },
+        {
+          "t": "2009-05",
+          "value": -3.58
+        },
+        {
+          "t": "2009-06",
+          "value": 4.84
+        },
+        {
+          "t": "2009-07",
+          "value": -8.74
+        },
+        {
+          "t": "2009-08",
+          "value": 8.12
+        },
+        {
+          "t": "2009-09",
+          "value": 5.16
+        },
+        {
+          "t": "2009-10",
+          "value": -1.03
+        },
+        {
+          "t": "2009-11",
+          "value": -6.99
+        },
+        {
+          "t": "2009-12",
+          "value": 11.16
+        },
+        {
+          "t": "2010-01",
+          "value": -2.35
+        },
+        {
+          "t": "2010-02",
+          "value": -2.07
+        },
+        {
+          "t": "2010-03",
+          "value": 3.23
+        },
+        {
+          "t": "2010-04",
+          "value": 5.27
+        },
+        {
+          "t": "2010-05",
+          "value": -6.24
+        },
+        {
+          "t": "2010-06",
+          "value": -0.8
+        },
+        {
+          "t": "2010-07",
+          "value": 6.73
+        },
+        {
+          "t": "2010-08",
+          "value": 6.73
+        },
+        {
+          "t": "2010-09",
+          "value": -8.47
+        },
+        {
+          "t": "2010-10",
+          "value": 4.24
+        },
+        {
+          "t": "2010-11",
+          "value": -5.86
+        },
+        {
+          "t": "2010-12",
+          "value": 1.8
+        },
+        {
+          "t": "2011-01",
+          "value": 4.36
+        },
+        {
+          "t": "2011-02",
+          "value": 1.71
+        },
+        {
+          "t": "2011-03",
+          "value": -1.58
+        },
+        {
+          "t": "2011-04",
+          "value": -2.48
+        },
+        {
+          "t": "2011-05",
+          "value": 5.02
+        },
+        {
+          "t": "2011-06",
+          "value": 7.57
+        },
+        {
+          "t": "2011-07",
+          "value": -5.54
+        },
+        {
+          "t": "2011-08",
+          "value": 0.64
+        },
+        {
+          "t": "2011-09",
+          "value": -0.13
+        },
+        {
+          "t": "2011-10",
+          "value": -1.2
+        },
+        {
+          "t": "2011-11",
+          "value": 1.68
+        },
+        {
+          "t": "2011-12",
+          "value": -3.53
+        },
+        {
+          "t": "2012-01",
+          "value": 3.21
+        },
+        {
+          "t": "2012-02",
+          "value": 3.19
+        },
+        {
+          "t": "2012-03",
+          "value": -7.12
+        },
+        {
+          "t": "2012-04",
+          "value": 5.73
+        },
+        {
+          "t": "2012-05",
+          "value": -4.65
+        },
+        {
+          "t": "2012-06",
+          "value": -0.23
+        },
+        {
+          "t": "2012-07",
+          "value": 3.94
+        },
+        {
+          "t": "2012-08",
+          "value": -2.43
+        },
+        {
+          "t": "2012-09",
+          "value": -3.83
+        },
+        {
+          "t": "2012-10",
+          "value": 0.33
+        },
+        {
+          "t": "2012-11",
+          "value": 5.68
+        },
+        {
+          "t": "2012-12",
+          "value": -4.03
+        },
+        {
+          "t": "2013-01",
+          "value": -6.6
+        },
+        {
+          "t": "2013-02",
+          "value": 5.38
+        },
+        {
+          "t": "2013-03",
+          "value": 5.33
+        },
+        {
+          "t": "2013-04",
+          "value": -2.83
+        },
+        {
+          "t": "2013-05",
+          "value": 12.89
+        },
+        {
+          "t": "2013-06",
+          "value": -3.88
+        },
+        {
+          "t": "2013-07",
+          "value": -0.46
+        },
+        {
+          "t": "2013-08",
+          "value": 5.15
+        },
+        {
+          "t": "2013-09",
+          "value": -1.71
+        },
+        {
+          "t": "2013-10",
+          "value": 1.46
+        },
+        {
+          "t": "2013-11",
+          "value": 8.24
+        },
+        {
+          "t": "2013-12",
+          "value": -13.69
+        },
+        {
+          "t": "2014-01",
+          "value": 8.95
+        },
+        {
+          "t": "2014-02",
+          "value": -5.96
+        },
+        {
+          "t": "2014-03",
+          "value": 11.92
+        },
+        {
+          "t": "2014-04",
+          "value": -5.37
+        },
+        {
+          "t": "2014-05",
+          "value": -13.88
+        },
+        {
+          "t": "2014-06",
+          "value": 6.99
+        },
+        {
+          "t": "2014-07",
+          "value": 1.47
+        },
+        {
+          "t": "2014-08",
+          "value": 3.95
+        },
+        {
+          "t": "2014-09",
+          "value": 4.53
+        },
+        {
+          "t": "2014-10",
+          "value": -7.2
+        },
+        {
+          "t": "2014-11",
+          "value": 1.02
+        },
+        {
+          "t": "2014-12",
+          "value": 8.91
+        },
+        {
+          "t": "2015-01",
+          "value": -2.11
+        },
+        {
+          "t": "2015-02",
+          "value": -1.49
+        },
+        {
+          "t": "2015-03",
+          "value": 2.15
+        },
+        {
+          "t": "2015-04",
+          "value": 3.93
+        },
+        {
+          "t": "2015-05",
+          "value": 3.52
+        },
+        {
+          "t": "2015-06",
+          "value": -4.66
+        },
+        {
+          "t": "2015-07",
+          "value": -7.89
+        },
+        {
+          "t": "2015-08",
+          "value": -3.06
+        },
+        {
+          "t": "2015-09",
+          "value": 8.77
+        },
+        {
+          "t": "2015-10",
+          "value": 3.78
+        },
+        {
+          "t": "2015-11",
+          "value": -9.85
+        },
+        {
+          "t": "2015-12",
+          "value": 3.44
+        },
+        {
+          "t": "2016-01",
+          "value": 11.01
+        },
+        {
+          "t": "2016-02",
+          "value": -7.74
+        },
+        {
+          "t": "2016-03",
+          "value": 2.96
+        },
+        {
+          "t": "2016-04",
+          "value": -7.73
+        },
+        {
+          "t": "2016-05",
+          "value": 0.41
+        },
+        {
+          "t": "2016-06",
+          "value": 8.57
+        },
+        {
+          "t": "2016-07",
+          "value": 0.92
+        },
+        {
+          "t": "2016-08",
+          "value": -5.63
+        },
+        {
+          "t": "2016-09",
+          "value": 5.84
+        },
+        {
+          "t": "2016-10",
+          "value": -1.66
+        },
+        {
+          "t": "2016-11",
+          "value": -4.12
+        },
+        {
+          "t": "2016-12",
+          "value": 5.4
+        },
+        {
+          "t": "2017-01",
+          "value": -3.06
+        },
+        {
+          "t": "2017-02",
+          "value": 1.26
+        },
+        {
+          "t": "2017-03",
+          "value": 0.94
+        },
+        {
+          "t": "2017-04",
+          "value": -5.28
+        },
+        {
+          "t": "2017-05",
+          "value": -0.8
+        },
+        {
+          "t": "2017-06",
+          "value": 1.82
+        },
+        {
+          "t": "2017-07",
+          "value": 0.14
+        },
+        {
+          "t": "2017-08",
+          "value": 5.94
+        },
+        {
+          "t": "2017-09",
+          "value": -3.33
+        },
+        {
+          "t": "2017-10",
+          "value": 0.34
+        },
+        {
+          "t": "2017-11",
+          "value": 2.39
+        },
+        {
+          "t": "2017-12",
+          "value": -8.18
+        },
+        {
+          "t": "2018-01",
+          "value": 8.92
+        },
+        {
+          "t": "2018-02",
+          "value": 3.23
+        },
+        {
+          "t": "2018-03",
+          "value": -4.31
+        },
+        {
+          "t": "2018-04",
+          "value": 6.08
+        },
+        {
+          "t": "2018-05",
+          "value": -0.16
+        },
+        {
+          "t": "2018-06",
+          "value": -7.36
+        },
+        {
+          "t": "2018-07",
+          "value": 7.76
+        },
+        {
+          "t": "2018-08",
+          "value": 9.63
+        },
+        {
+          "t": "2018-09",
+          "value": -16.1
+        },
+        {
+          "t": "2018-10",
+          "value": 3.68
+        },
+        {
+          "t": "2018-11",
+          "value": -1.91
+        },
+        {
+          "t": "2018-12",
+          "value": -0.82
+        },
+        {
+          "t": "2019-01",
+          "value": -1.22
+        },
+        {
+          "t": "2019-02",
+          "value": 1.56
+        },
+        {
+          "t": "2019-03",
+          "value": 3.01
+        },
+        {
+          "t": "2019-04",
+          "value": 5.75
+        },
+        {
+          "t": "2019-05",
+          "value": -3.83
+        },
+        {
+          "t": "2019-06",
+          "value": 10.1
+        },
+        {
+          "t": "2019-07",
+          "value": -9.07
+        },
+        {
+          "t": "2019-08",
+          "value": 0.31
+        },
+        {
+          "t": "2019-09",
+          "value": -0.57
+        },
+        {
+          "t": "2019-10",
+          "value": -7.2
+        },
+        {
+          "t": "2019-11",
+          "value": 10.49
+        },
+        {
+          "t": "2019-12",
+          "value": -13.09
+        },
+        {
+          "t": "2020-01",
+          "value": 6.38
+        },
+        {
+          "t": "2020-02",
+          "value": 2.26
+        },
+        {
+          "t": "2020-03",
+          "value": -0.12
+        },
+        {
+          "t": "2020-04",
+          "value": -12
+        },
+        {
+          "t": "2020-05",
+          "value": 2.19
+        },
+        {
+          "t": "2020-06",
+          "value": -5.33
+        },
+        {
+          "t": "2020-07",
+          "value": 3.35
+        },
+        {
+          "t": "2020-08",
+          "value": 1.8
+        },
+        {
+          "t": "2020-09",
+          "value": -1.81
+        },
+        {
+          "t": "2020-10",
+          "value": 9.29
+        },
+        {
+          "t": "2020-11",
+          "value": 1.91
+        },
+        {
+          "t": "2020-12",
+          "value": 4.06
+        },
+        {
+          "t": "2021-01",
+          "value": -3.48
+        },
+        {
+          "t": "2021-02",
+          "value": -7.05
+        },
+        {
+          "t": "2021-03",
+          "value": 2.37
+        },
+        {
+          "t": "2021-04",
+          "value": -0.98
+        },
+        {
+          "t": "2021-05",
+          "value": 8.41
+        },
+        {
+          "t": "2021-06",
+          "value": -1.01
+        },
+        {
+          "t": "2021-07",
+          "value": -0.17
+        },
+        {
+          "t": "2021-08",
+          "value": 0.04
+        },
+        {
+          "t": "2021-09",
+          "value": 1.82
+        },
+        {
+          "t": "2021-10",
+          "value": -0.35
+        },
+        {
+          "t": "2021-11",
+          "value": 4.54
+        },
+        {
+          "t": "2021-12",
+          "value": 2.12
+        },
+        {
+          "t": "2022-01",
+          "value": -1.76
+        },
+        {
+          "t": "2022-02",
+          "value": -9.65
+        },
+        {
+          "t": "2022-03",
+          "value": 6.46
+        },
+        {
+          "t": "2022-04",
+          "value": 7.32
+        },
+        {
+          "t": "2022-05",
+          "value": -1.89
+        },
+        {
+          "t": "2022-06",
+          "value": 0.2
+        },
+        {
+          "t": "2022-07",
+          "value": 4.09
+        },
+        {
+          "t": "2022-08",
+          "value": -3.96
+        },
+        {
+          "t": "2022-09",
+          "value": -3.05
+        },
+        {
+          "t": "2022-10",
+          "value": 1.73
+        },
+        {
+          "t": "2022-11",
+          "value": -5.56
+        },
+        {
+          "t": "2022-12",
+          "value": -0.32
+        },
+        {
+          "t": "2023-01",
+          "value": 10.01
+        },
+        {
+          "t": "2023-02",
+          "value": -6.49
+        },
+        {
+          "t": "2023-03",
+          "value": -3.7
+        },
+        {
+          "t": "2023-04",
+          "value": 4.44
+        },
+        {
+          "t": "2023-05",
+          "value": -4.57
+        },
+        {
+          "t": "2023-06",
+          "value": 1.88
+        },
+        {
+          "t": "2023-07",
+          "value": -0.84
+        },
+        {
+          "t": "2023-08",
+          "value": 1.13
+        },
+        {
+          "t": "2023-09",
+          "value": 0.78
+        },
+        {
+          "t": "2023-10",
+          "value": -1.2
+        },
+        {
+          "t": "2023-11",
+          "value": -3.35
+        },
+        {
+          "t": "2023-12",
+          "value": 1.35
+        },
+        {
+          "t": "2024-01",
+          "value": -0.05
+        },
+        {
+          "t": "2024-02",
+          "value": 5.42
+        },
+        {
+          "t": "2024-03",
+          "value": 1.62
+        },
+        {
+          "t": "2024-04",
+          "value": -2.22
+        },
+        {
+          "t": "2024-05",
+          "value": -1.76
+        },
+        {
+          "t": "2024-06",
+          "value": 1.66
+        },
+        {
+          "t": "2024-07",
+          "value": 0.2
+        },
+        {
+          "t": "2024-08",
+          "value": -0.5
+        },
+        {
+          "t": "2024-09",
+          "value": -1
+        },
+        {
+          "t": "2024-10",
+          "value": 0.88
+        },
+        {
+          "t": "2024-11",
+          "value": 3.72
+        },
+        {
+          "t": "2024-12",
+          "value": -1.99
+        },
+        {
+          "t": "2025-01",
+          "value": -2
+        },
+        {
+          "t": "2025-02",
+          "value": 3.18
+        },
+        {
+          "t": "2025-03",
+          "value": 10.55
+        },
+        {
+          "t": "2025-04",
+          "value": -7.28
+        },
+        {
+          "t": "2025-05",
+          "value": -0.23
+        },
+        {
+          "t": "2025-06",
+          "value": 2.27
+        },
+        {
+          "t": "2025-07",
+          "value": -3.17
+        },
+        {
+          "t": "2025-08",
+          "value": -0.36
+        },
+        {
+          "t": "2025-09",
+          "value": 3.17
+        },
+        {
+          "t": "2025-10",
+          "value": 5.81
+        },
+        {
+          "t": "2025-11",
+          "value": -9.16
+        },
+        {
+          "t": "2025-12",
+          "value": 16.11
+        },
+        {
+          "t": "2026-01",
+          "value": -5.53
+        },
+        {
+          "t": "2026-02",
+          "value": 13.58
+        },
+        {
+          "t": "2026-03",
+          "value": -9.41
+        },
+        {
+          "t": "2026-04",
+          "value": 8.67
+        },
+        {
+          "t": "2026-05",
+          "value": -12.43
+        },
+        {
+          "t": "2026-06",
+          "value": 9.75
+        },
+        {
+          "t": "2026-07",
+          "value": -3.68
         }
       ]
     }

@@ -340,7 +340,7 @@ export const INDICATORS = [
     seasonalAdjustment: "季節調整値",
     betterWhen: "up",
     description:
-      "モノの輸出額から輸入額を差し引いた収支。財務省『貿易統計』による。資源価格（原油等）や為替レート、海外景気の影響を強く受ける。",
+      "モノの輸出額から輸入額を差し引いた収支。財務省・日本銀行『国際収支統計』（国際収支ベース、季節調整値）による。通関ベースの『貿易統計』を使った別カード「貿易収支（通関ベース）」より約1か月遅れて公表される。資源価格（原油等）や為替レート、海外景気の影響を強く受ける。",
     judgment: {
       summary:
         "黒字（プラス）か赤字（マイナス）かだけでなく、なぜそうなっているか（輸出が伸びているのか、資源高で輸入が膨らんでいるのか）を合わせて見る必要がある。",
@@ -349,8 +349,8 @@ export const INDICATORS = [
       caveat: "円安は輸出企業の円建て収益を押し上げる一方、輸入コストも増やすため、『円安＝黒字化』とは一概に言えない。",
     },
     referenceLines: [{ value: 0, label: "0＝黒字・赤字の分岐", kind: "neutral" }],
-    releaseSchedule: "財務省が対象月の翌月20日ごろ8:50に公表。",
-    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 20 },
+    releaseSchedule: "財務省・日本銀行が対象月の翌々月上旬ごろ8:50に公表（経常収支と同時）。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 38 },
     api: { indicatorCode: "1601010101000010020", cycle: "1", rank: "2", sa: "2", statName: "国際収支統計" },
   },
   {
@@ -793,6 +793,195 @@ export const INDICATORS = [
     releaseSchedule: "経済産業省が対象月の翌々月中旬ごろに公表。",
     nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 45 },
     api: { indicatorCode: "0603100300000090010", cycle: "1", rank: "2", sa: "2", statName: "第3次産業活動指数" },
+  },
+  {
+    id: "tankan_large_mfg_outlook",
+    importance: 4,
+    name: "日銀短観 業況判断DI・先行き（大企業・製造業）",
+    shortName: "短観・先行き（大企業製造業）",
+    category: "景気",
+    unit: "ポイント",
+    unitLabel: "DI（先行き＝次の四半期の見通し、%ポイント）",
+    frequency: "quarterly",
+    seasonalAdjustment: "原数値",
+    betterWhen: "up",
+    description:
+      "日銀短観の同じ調査で、大企業・製造業に『3か月後（次の四半期）の業況はどうなりそうか』を聞いた見通しの" +
+      "業況判断DI。現在の景況感（実績）に対して、企業が先行きをどう見ているかを示す。市場では実績よりも先行きの" +
+      "ほうが注目されることが多い。表示は調査月に合わせてあり、『2026 Q3』は9月調査で答えた12月時点の見通し。",
+    judgment: {
+      summary: "先行きが現在の実績を上回れば企業は改善を見込み、下回れば悪化を見込んでいる。実績カードと並べて、その差と変化を見る。",
+      goodWhen: "プラス圏で、実績と同程度かそれ以上の水準（企業が先行きにも自信を持っている）。",
+      badWhen: "実績を大きく下回る、またはマイナス圏に入る状態（企業が今後の悪化を見込んでいる）。",
+      caveat: "先行きは慎重な回答になりやすく、実績より低めに出る傾向がある。水準そのものより、前回調査からの変化や実績との差で見る。表示の「Q1〜Q4」は3・6・9・12月調査にあたる。",
+    },
+    referenceLines: [{ value: 0, label: "0＝「良い」と「悪い」が同数", kind: "neutral" }],
+    releaseSchedule: "日本銀行が年4回、3・6・9月調査は翌月1日ごろ（4月・7月・10月）、12月調査は12月中旬に公表（実績と同時）。",
+    nextReleaseRule: { type: "annualDates", dates: ["04-01", "07-01", "10-01", "12-15"] },
+    api: {
+      provider: "boj-tankan",
+      seriesCode: "TK99F1000601GCQ11000",
+      forecast: true,
+      statName: "全国企業短期経済観測調査 業況判断D.I.／大企業／製造業／先行き（予測）",
+      sourceUrl: "https://www.stat-search.boj.or.jp/",
+    },
+  },
+  {
+    id: "tankan_large_nonmfg_outlook",
+    importance: 4,
+    name: "日銀短観 業況判断DI・先行き（大企業・非製造業）",
+    shortName: "短観・先行き（大企業非製造業）",
+    category: "景気",
+    unit: "ポイント",
+    unitLabel: "DI（先行き＝次の四半期の見通し、%ポイント）",
+    frequency: "quarterly",
+    seasonalAdjustment: "原数値",
+    betterWhen: "up",
+    description:
+      "日銀短観の同じ調査で、大企業・非製造業（小売・サービス・建設・運輸・不動産など）に『3か月後（次の四半期）の" +
+      "業況はどうなりそうか』を聞いた見通しの業況判断DI。内需の見通しを映す。表示は調査月に合わせてあり、" +
+      "『2026 Q3』は9月調査で答えた12月時点の見通し。",
+    judgment: {
+      summary: "先行きが現在の実績を上回れば企業は改善を見込み、下回れば悪化を見込んでいる。実績カードと並べて、その差と変化を見る。",
+      goodWhen: "プラス圏で、実績と同程度かそれ以上の水準（企業が先行きにも自信を持っている）。",
+      badWhen: "実績を大きく下回る、またはマイナス圏に入る状態（企業が今後の悪化を見込んでいる）。",
+      caveat: "先行きは慎重な回答になりやすく、実績より低めに出る傾向がある。水準そのものより、前回調査からの変化や実績との差で見る。表示の「Q1〜Q4」は3・6・9・12月調査にあたる。",
+    },
+    referenceLines: [{ value: 0, label: "0＝「良い」と「悪い」が同数", kind: "neutral" }],
+    releaseSchedule: "日本銀行が年4回、3・6・9月調査は翌月1日ごろ（4月・7月・10月）、12月調査は12月中旬に公表（実績と同時）。",
+    nextReleaseRule: { type: "annualDates", dates: ["04-01", "07-01", "10-01", "12-15"] },
+    api: {
+      provider: "boj-tankan",
+      seriesCode: "TK99F2000601GCQ11000",
+      forecast: true,
+      statName: "全国企業短期経済観測調査 業況判断D.I.／大企業／非製造業／先行き（予測）",
+      sourceUrl: "https://www.stat-search.boj.or.jp/",
+    },
+  },
+  {
+    id: "tankan_capex_large_all",
+    importance: 4,
+    name: "日銀短観 設備投資計画（大企業・全産業・当年度）",
+    shortName: "短観・設備投資計画",
+    category: "景気",
+    unit: "%",
+    unitLabel: "前年度比 %（当年度計画、土地投資額を含む）",
+    frequency: "quarterly",
+    seasonalAdjustment: "原数値",
+    betterWhen: "neutral",
+    noSurprise: true,
+    description:
+      "日銀短観で、大企業・全産業に『今年度（4月〜翌3月）に設備投資をいくら予定しているか』を聞き、前年度の" +
+      "実績に対する伸び率にしたもの。3・6・9・12月の調査ごとに、同じ年度の計画が見直されて更新される。" +
+      "企業の投資意欲をつかむ材料として、短観の中でも市場の注目度が高い項目。",
+    judgment: {
+      summary: "同じ年度の計画は調査のたびに修正される。近年は3月調査で3〜4%台と低めに出て、6月調査で11〜13%台へ大きく上方修正される年が続いている。前回調査との差ではなく、前年の同じ調査月と比べて見る。",
+      goodWhen: "前年の同じ調査月より高い水準にある状態（企業の投資意欲が強い）。",
+      badWhen: "前年の同じ調査月より大きく低い、または年度の途中で計画が下方修正されていく状態（投資を控える動き）。",
+      caveat: "3月→6月で大きく上がるのは毎年繰り返される傾向（3月時点では計画が固まっていない）で、景気の改善を意味するとは限らない。そのためカード・詳細の「前期比」は参考程度にし、「前年比」（前年の同じ調査月との差）を見る。変化の大きさ（⚡）や改善・悪化の自動集計の対象にはしていない。表示の「Q1〜Q4」は3・6・9・12月調査にあたる。",
+    },
+    referenceLines: [{ value: 0, label: "0＝前年度と同じ投資額", kind: "neutral" }],
+    releaseSchedule: "日本銀行が年4回、3・6・9月調査は翌月1日ごろ（4月・7月・10月）、12月調査は12月中旬に公表。",
+    nextReleaseRule: { type: "annualDates", dates: ["04-01", "07-01", "10-01", "12-15"] },
+    api: {
+      provider: "boj-tankan-capex",
+      statName: "全国企業短期経済観測調査 設備投資額（含む土地投資額）／前年比・年度／大企業／全産業（3・6・9・12月調査の当年度計画）",
+      sourceUrl: "https://www.stat-search.boj.or.jp/",
+    },
+  },
+  {
+    id: "trade_balance_customs",
+    importance: 4,
+    name: "貿易収支（通関ベース）",
+    shortName: "貿易収支（通関）",
+    category: "対外",
+    unit: "億円",
+    unitLabel: "億円（輸出額−輸入額、季節調整なし）",
+    frequency: "monthly",
+    seasonalAdjustment: "原数値",
+    betterWhen: "up",
+    description:
+      "財務省が毎月公表する『貿易統計』（税関を通った貨物の金額）にもとづく、輸出額から輸入額を引いた収支。" +
+      "国際収支統計の貿易収支（本ツールの「貿易収支」）より約1か月早く出るため、貿易の最新の動きを最も早く" +
+      "確認できる。国際収支ベースとは運賃・保険料の扱い（輸入額）などが違い、金額は一致しない。",
+    judgment: {
+      summary: "黒字（プラス）か赤字（マイナス）かだけでなく、輸出が伸びているのか、資源高や円安で輸入が膨らんでいるのかを合わせて見る。",
+      goodWhen: "輸出の増加を伴う黒字拡大（海外需要の強さを反映）。",
+      badWhen: "資源価格高騰や円安による輸入額急増を主因とする赤字拡大。",
+      caveat: "季節調整をしていない原数値のため、1月は赤字になりやすいなど月ごとの季節要因が出る。前月との比較ではなく、前年の同じ月との比較（カードの「前年比」）で見る。最新月は速報値で、翌月に確報へ修正される。",
+    },
+    referenceLines: [{ value: 0, label: "0＝黒字・赤字の分岐", kind: "neutral" }],
+    releaseSchedule: "財務省が対象月の翌月中旬〜下旬（17〜22日ごろ）8:50に速報を公表。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 20 },
+    api: {
+      provider: "mof-customs",
+      statName: "貿易統計（通関ベース）世界 月別 輸出額−輸入額",
+      sourceUrl: "https://www.customs.go.jp/toukei/suii/html/time_e.htm",
+    },
+  },
+  {
+    id: "cpi_total_yoy",
+    importance: 5,
+    name: "消費者物価指数（総合・前年同月比）",
+    shortName: "CPI（総合）",
+    category: "物価",
+    unit: "%",
+    unitLabel: "前年同月比 %",
+    frequency: "monthly",
+    seasonalAdjustment: "原数値",
+    betterWhen: "neutral",
+    description:
+      "総務省統計局が公表する、全国の消費者物価指数のうち、生鮮食品を含むすべての品目をまとめた『総合』の" +
+      "前年同月比。ニュースで『物価上昇率』として最初に報じられるのがこの数字。日銀が重視するコアCPI（生鮮食品を除く）" +
+      "との差で、野菜・魚・果物など天候で動く価格の影響が分かる。",
+    judgment: {
+      summary:
+        "日本銀行は『物価安定の目標』として2%を掲げている（目標の対象はコアCPI）。総合は生鮮食品の天候要因で振れるため、コアCPIと合わせて基調を見る。",
+      goodWhen: "2%前後で安定的に推移している状態（賃金上昇を伴っていればなお望ましい）。",
+      badWhen: "0%以下（デフレ懸念）、または4%を超えるような急激な上昇（家計負担増・実質賃金の下押し）。",
+      caveat: "生鮮食品・エネルギー価格や政府の物価対策（電気代補助等）で一時的に振れる。コアCPI・コアコアCPIとの差を見ると、一時的な要因かどうかが分かりやすい。",
+    },
+    referenceLines: [
+      { value: 2, label: "日銀の物価目標 2%（コアCPI）", kind: "target" },
+      { value: 0, label: "0%＝デフレとの分岐", kind: "neutral" },
+    ],
+    releaseSchedule: "総務省統計局が対象月の翌月中旬〜下旬に8:30発表（東京都区部の速報は対象月内に先行公表）。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 20 },
+    api: { indicatorCode: "0703010601010030000", cycle: "1", rank: "2", sa: "1", statName: "消費者物価指数（総合）" },
+  },
+  {
+    id: "machinery_orders_mom",
+    importance: 4,
+    name: "機械受注（船舶・電力除く民需・前月比）",
+    shortName: "機械受注（前月比）",
+    category: "景気",
+    unit: "%",
+    unitLabel: "前月比 %（季節調整値）",
+    frequency: "monthly",
+    seasonalAdjustment: "季節調整値",
+    betterWhen: "up",
+    description:
+      "機械メーカーが受注した設備投資向け機械の金額（船舶・電力を除く民需分）の前月比。内閣府が公表し、" +
+      "報道や市場で最も注目されるのがこの前月比。企業は半年〜1年先を見据えて発注するため、設備投資の動きを" +
+      "半年ほど先取りする代表的な先行指標とされる。金額そのものは別カード「機械受注（船舶・電力除く民需）」にある。",
+    judgment: {
+      summary: "単月の増減は振れが大きいため、内閣府自身も3か月移動平均や3か月連続の前月比で基調を判断している。",
+      goodWhen: "3か月連続で前月比プラス、または3か月移動平均が上向き（設備投資意欲の高まり）。",
+      badWhen: "3か月連続で前月比マイナス（内閣府の基調判断で『減少』とされる典型的な目安）。",
+      caveat: "月によっては大型受注1件で前月比が±10%を超えることもあるほど振れ幅が大きい。単月の増減だけで判断しない。前月比は本ツールが金額の系列から計算している。",
+    },
+    referenceLines: [{ value: 0, label: "0＝増加・減少の分岐", kind: "neutral" }],
+    movingAverage: { window: 3, label: "3か月移動平均" },
+    releaseSchedule: "内閣府が対象月の翌々月上旬ごろ8:50に公表。",
+    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 38 },
+    api: {
+      indicatorCode: "0701030000000010010",
+      cycle: "1",
+      rank: "2",
+      sa: "2",
+      transform: "mom_pct",
+      statName: "機械受注統計調査（船舶・電力を除く民需。前月比は本ツールで金額から計算）",
+    },
   },
 ];
 
