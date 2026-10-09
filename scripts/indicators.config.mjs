@@ -614,7 +614,7 @@ export const INDICATORS = [
     referenceLines: [{ value: 0, label: "0＝買い越し・売り越しの分岐", kind: "neutral" }],
     releaseSchedule:
       "東京証券取引所（JPX）が翌月初旬（前月最終週の週間発表と同日、毎月第4営業日ごろ）15:30に月間データを公表。" +
-      "※JPXは2026年10月8日公表分からファイル形式を変更予定のため、本ツールの取得ロジックは将来的な追随が必要。",
+      "※2026年9月分（10月8日公表）からファイル形式が変わったが、新旧どちらの形式も読み取れる。",
     nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 6 },
     api: {
       provider: "jpx-investor-type",
