@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T13:55:50.578Z",
+  "generatedAt": "2026-10-09T13:40:07.572Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 27,
@@ -67,15 +67,15 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-10-08T13:55:50.582Z",
+    "generatedAt": "2026-10-09T13:40:07.577Z",
     "stats": {
       "total": 27,
-      "improving": 6,
-      "worsening": 13,
+      "improving": 7,
+      "worsening": 12,
       "neutral": 8,
-      "surpriseCount": 2
+      "surpriseCount": 1
     },
-    "headline": "27指標中、改善傾向が6件、悪化傾向が13件、横ばい・中立が8件です。",
+    "headline": "27指標中、改善傾向が7件、悪化傾向が12件、横ばい・中立が8件です。",
     "improvingList": [
       {
         "id": "current_account",
@@ -116,6 +116,15 @@
       {
         "id": "consumer_confidence_jp",
         "name": "消費者信頼感（OECD総合指標・日本）",
+        "category": "景気",
+        "period": {
+          "from": "2026-07",
+          "to": "2026-08"
+        }
+      },
+      {
+        "id": "household_spending_yoy",
+        "name": "家計調査 実質消費支出（二人以上の世帯・前年同月比）",
         "category": "景気",
         "period": {
           "from": "2026-07",
@@ -219,8 +228,8 @@
         "name": "日経平均株価",
         "category": "為替・市場",
         "period": {
-          "from": "2026-10-07",
-          "to": "2026-10-08"
+          "from": "2026-10-08",
+          "to": "2026-10-09"
         }
       },
       {
@@ -239,15 +248,6 @@
         "period": {
           "from": "2026 Q2",
           "to": "2026 Q3"
-        }
-      },
-      {
-        "id": "household_spending_yoy",
-        "name": "家計調査 実質消費支出（二人以上の世帯・前年同月比）",
-        "category": "景気",
-        "period": {
-          "from": "2026-06",
-          "to": "2026-07"
         }
       }
     ],
@@ -311,8 +311,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-10-05",
-          "to": "2026-10-06"
+          "from": "2026-10-06",
+          "to": "2026-10-07"
         }
       },
       {
@@ -326,6 +326,15 @@
       }
     ],
     "continuingImprovingList": [
+      {
+        "id": "nikkei225",
+        "name": "日経平均株価",
+        "category": "為替・市場",
+        "period": {
+          "from": "2026-09-28",
+          "to": "2026-10-09"
+        }
+      },
       {
         "id": "topix",
         "name": "TOPIX（東証株価指数）",
@@ -522,7 +531,7 @@
         "reference": {
           "label": "0%＝前年と同水準",
           "value": 0,
-          "current": -3.6
+          "current": -3.1
         }
       }
     ],
@@ -663,15 +672,6 @@
     ],
     "surpriseFindings": [
       {
-        "id": "nikkei225",
-        "name": "日経平均株価",
-        "category": "為替・市場",
-        "z": -2.1,
-        "level": "mid",
-        "detail": "やや大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=-2.1）。",
-        "text": "日経平均株価でやや大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=-2.1）。"
-      },
-      {
         "id": "topix",
         "name": "TOPIX（東証株価指数）",
         "category": "為替・市場",
@@ -803,26 +803,6 @@
         "text": "経常収支は、直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。"
       },
       {
-        "id": "nikkei225",
-        "name": "日経平均株価",
-        "category": "為替・市場",
-        "favorable": true,
-        "flipped": true,
-        "proximity": 100,
-        "period": {
-          "recent": {
-            "from": "2026-09-25",
-            "to": "2026-10-08"
-          },
-          "prior": {
-            "from": "2026-09-08",
-            "to": "2026-09-24"
-          }
-        },
-        "detail": "直近（2026-09-25〜2026-10-08）の傾向が、その前（2026-09-08〜2026-09-24）から改善方向に転じました（転換点を通過）。",
-        "text": "日経平均株価は、直近（2026-09-25〜2026-10-08）の傾向が、その前（2026-09-08〜2026-09-24）から改善方向に転じました（転換点を通過）。"
-      },
-      {
         "id": "tankan_large_nonmfg",
         "name": "日銀短観 業況判断DI（大企業・非製造業）",
         "category": "景気",
@@ -891,16 +871,16 @@
         "proximity": 100,
         "period": {
           "recent": {
-            "from": "2026-05",
-            "to": "2026-07"
+            "from": "2026-06",
+            "to": "2026-08"
           },
           "prior": {
-            "from": "2026-02",
-            "to": "2026-04"
+            "from": "2026-03",
+            "to": "2026-05"
           }
         },
-        "detail": "直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から悪化方向に転じました（転換点を通過）。",
-        "text": "家計調査 実質消費支出（二人以上の世帯・前年同月比）は、直近（2026-05〜2026-07）の傾向が、その前（2026-02〜2026-04）から悪化方向に転じました（転換点を通過）。"
+        "detail": "直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。",
+        "text": "家計調査 実質消費支出（二人以上の世帯・前年同月比）は、直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。"
       },
       {
         "id": "tertiary_industry_activity",
@@ -31875,7 +31855,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-10-09",
+      "nextRelease": "2026-10-12",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -31884,12 +31864,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-10-06",
-          "value": 158.12,
+          "t": "2026-10-07",
+          "value": 158.11,
           "provisional": false
         },
-        "changeFromPrev": 0.46,
-        "changeFromYearAgo": 8.1,
+        "changeFromPrev": -0.01,
+        "changeFromYearAgo": 7.48,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -31898,7 +31878,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2628,
+        "count": 2629,
         "start": "2016-01-04"
       },
       "points": [
@@ -42413,6 +42393,10 @@
         {
           "t": "2026-10-06",
           "value": 158.12
+        },
+        {
+          "t": "2026-10-07",
+          "value": 158.11
         }
       ]
     },
@@ -42437,7 +42421,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "取引時間中は常時更新。日次終値を翌営業日にかけてFRED経由で取得・反映。",
-      "nextRelease": "2026-10-09",
+      "nextRelease": "2026-10-14",
       "nextReleaseKind": "official",
       "source": {
         "provider": "FRED（セントルイス連邦準備銀行）",
@@ -42446,12 +42430,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-10-08",
-          "value": 69042.11,
+          "t": "2026-10-09",
+          "value": 69030.92,
           "provisional": false
         },
-        "changeFromPrev": -993.6,
-        "changeFromYearAgo": 21307.12,
+        "changeFromPrev": -11.19,
+        "changeFromYearAgo": 20450.48,
         "min": {
           "t": "2016-06-24",
           "value": 14952.02
@@ -42460,7 +42444,7 @@
           "t": "2026-06-25",
           "value": 72366.34
         },
-        "count": 2630,
+        "count": 2631,
         "start": "2016-01-04"
       },
       "points": [
@@ -52983,6 +52967,10 @@
         {
           "t": "2026-10-08",
           "value": 69042.11
+        },
+        {
+          "t": "2026-10-09",
+          "value": 69030.92
         }
       ]
     },
@@ -58022,7 +58010,7 @@
       ],
       "movingAverage": null,
       "releaseSchedule": "総務省が対象月の翌々月上旬（月初の金曜日ごろ）8:30に公表。",
-      "nextRelease": "2026-10-08",
+      "nextRelease": "2026-11-09",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -58031,12 +58019,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-07",
-          "value": -3.6,
+          "t": "2026-08",
+          "value": -3.1,
           "provisional": false
         },
-        "changeFromPrev": -0.3,
-        "changeFromYearAgo": -5,
+        "changeFromPrev": 0.5,
+        "changeFromYearAgo": -5.4,
         "min": {
           "t": "2020-05",
           "value": -16.2
@@ -58045,7 +58033,7 @@
           "t": "2021-04",
           "value": 13.9
         },
-        "count": 307,
+        "count": 308,
         "start": "2001-01"
       },
       "points": [
@@ -59276,6 +59264,10 @@
         {
           "t": "2026-07",
           "value": -3.6
+        },
+        {
+          "t": "2026-08",
+          "value": -3.1
         }
       ]
     },
