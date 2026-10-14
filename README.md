@@ -186,7 +186,7 @@ npm run preview   # ビルド結果を確認
    **GitHub Actions** にする。
 3. [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) が
    - `push`（main）… ビルドして公開
-   - 平日毎日 15:30 JST／手動実行 … API からデータを取り直し、変化があればコミット → 公開
+   - 平日毎日 15:30 JST＋火〜土 翌0:30 JST（日経平均の前営業日分の反映後）／手動実行 … API からデータを取り直し、変化があればコミット → 公開
    を自動で行う。
 
 サブパス（`https://<user>.github.io/<repo>/`）配信に対応するため、
