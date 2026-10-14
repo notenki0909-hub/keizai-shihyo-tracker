@@ -960,7 +960,9 @@ function openDetail(id) {
   const ind = state.data.indicators.find((i) => i.id === id);
   if (!ind) return;
   currentInd = ind;
-  currentRange = "10y";
+  // 日次の系列は10年だと1pxあたり数日分の点になり、カーソルを合わせたときの数値が数日おきに飛ぶ。
+  // 初期表示は1年（1日ごとに合わせられる密度）にし、長い期間はボタンで切り替える。
+  currentRange = ind.frequency === "daily" ? "1y" : "10y";
   compareInd = null;
 
   const compareSelect = document.getElementById("d-compare");
