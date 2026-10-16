@@ -554,7 +554,7 @@ function renderCategoryGuide() {
             const links = (it.ids || [])
               .map(findInd)
               .filter(Boolean)
-              .map((ind) => `<button class="category-guide__link" data-id="${ind.id}">${ind.shortName ?? ind.name}</button>`)
+              .map((ind) => `<button class="category-guide__link" data-id="${ind.id}">${ind.shortName ?? ind.name}　${starsText(ind.importance)}</button>`)
               .join("");
             const ext = it.external
               ? `<a class="category-guide__ext" href="${it.external.url}" target="_blank" rel="noopener">${it.external.label} ↗</a>`
@@ -583,8 +583,37 @@ function renderCategoryGuide() {
       </div>`;
   };
 
+  // ②が byStars 形式の場合：①に載せていない同カテゴリの指標を、★（重要度）の多い順に並べる
+  const starredSecond = (second) => {
+    const shown = new Set((guide.first?.groups ?? []).flatMap((g) => g.items.flatMap((it) => it.ids || [])));
+    const rest = state.data.indicators
+      .filter((i) => i.category === state.category && !shown.has(i.id))
+      .sort((a, b) => b.importance - a.importance); // 同じ★の中は元の並びを保つ（安定ソート）
+    if (!rest.length) return "";
+    const items = rest
+      .map(
+        (ind) => `
+          <div class="category-guide__item category-guide__item--simple">
+            <div class="category-guide__body">
+              <button class="category-guide__link" data-id="${ind.id}">${ind.name}　${starsText(ind.importance)}</button>
+              <p>${ind.judgment?.summary ?? ""}</p>
+            </div>
+          </div>`
+      )
+      .join("");
+    return `
+      <div class="category-guide__row category-guide__row--grouped">
+        <span class="category-guide__badge category-guide__badge--second">② 次に見る（★の多い順）</span>
+        <div class="category-guide__body">
+          <p class="category-guide__intro">${second.intro ?? ""}</p>
+          ${items}
+        </div>
+      </div>`;
+  };
+
   const firstHtml = guide.first?.groups ? groupedFirst(guide.first) : row("① まず見る", "category-guide__badge--first", guide.first);
-  el.innerHTML = firstHtml + row("② 次に見る（補完）", "category-guide__badge--second", guide.second);
+  const secondHtml = guide.second?.byStars ? starredSecond(guide.second) : row("② 次に見る（補完）", "category-guide__badge--second", guide.second);
+  el.innerHTML = firstHtml + secondHtml;
   el.hidden = false;
   el.querySelectorAll(".category-guide__link").forEach((btn) => {
     btn.addEventListener("click", () => openDetail(btn.dataset.id));

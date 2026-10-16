@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T12:35:17.622Z",
+  "generatedAt": "2026-10-16T12:40:03.621Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 33,
@@ -60,8 +60,8 @@
         ]
       },
       "second": {
-        "id": "coincident_ci",
-        "reason": "①の指標を毎月まとめて確認する補完。景気動向指数CI一致指数は、生産・雇用などの動きを毎月合成した指数で、GDPの発表（四半期に1度）までの『空白期間』の景気動向も追える。"
+        "byStars": true,
+        "intro": "①を補う景気の指標を、重要度（★の数）の多い順に並べている。各指標の見方（一言）も添えている。"
       }
     },
     "物価": {
@@ -116,7 +116,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-10-16T12:35:17.629Z",
+    "generatedAt": "2026-10-16T12:40:03.628Z",
     "stats": {
       "total": 33,
       "improving": 12,

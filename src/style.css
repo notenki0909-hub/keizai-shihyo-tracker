@@ -2410,3 +2410,11 @@ a {
   font-size: 0.84rem;
   color: var(--accent);
 }
+
+.category-guide__item--simple {
+  padding: 6px 0;
+}
+
+.category-guide__item--simple .category-guide__body {
+  width: 100%;
+}
