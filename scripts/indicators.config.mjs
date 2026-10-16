@@ -1070,46 +1070,6 @@ export const INDICATORS = [
     nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 20 },
     api: { indicatorCode: "0703010601010030040", cycle: "1", rank: "2", sa: "1", statName: "消費者物価指数（生鮮食品及びエネルギーを除く総合）" },
   },
-  {
-    id: "cpi_us_style_core_yoy",
-    importance: 3,
-    name: "米国型コアCPI（食料・エネルギーを除く総合）",
-    shortName: "米国型コアCPI",
-    category: "物価",
-    unit: "%",
-    unitLabel: "前年同月比 %（食料（酒類を除く）及びエネルギーを除く）",
-    frequency: "monthly",
-    seasonalAdjustment: "原数値",
-    betterWhen: "neutral",
-    description:
-      "食料（酒類を除く）とエネルギーの両方を除いた消費者物価指数の前年同月比。米国の『コアCPI』（食品・エネルギー除く）と" +
-      "同じ考え方で作られるため、『米国型コア』とも呼ばれる。食料品全体（生鮮食品を含む）の値上がりの影響も除くため、" +
-      "食料品の価格動向に左右されない物価の基調を見られる。なお本ツールで『コアコアCPI』と表示しているのは、" +
-      "生鮮食品とエネルギーを除いた指標（別カード）で、こちらは食料全体を除く点が異なる。",
-    // 波及ルート（代表例）：詳細画面の説明欄の下に表示する。一般的な教科書的な流れの例で、必ずそうなるとは限らない
-    ripple: {
-      trigger: "日本のCPIが上昇",
-      route: "日銀の利上げ観測が高まる → 国内金利が上昇 → 円高圧力・借入コストの上昇",
-      sectors: "銀行・保険（プラスになり得る）／不動産・REIT（マイナスになり得る）",
-    },
-    judgment: {
-      summary:
-        "コアコアCPI（生鮮食品及びエネルギーを除く）との差が、食料品（生鮮食品以外の加工食品・外食を含む）の値上がりの影響の大きさを表す。" +
-        "食料品の値上がりが大きい局面では、この指標はコアコアより低く出る（逆に食料品が落ち着けば差は縮まる）。",
-      goodWhen: "2%前後で、賃上げを伴って安定的に推移している状態。",
-      badWhen: "0%近辺（デフレ懸念）、または食料・エネルギー以外のサービスなども含めて急激に上昇している状態。",
-      caveat:
-        "食料品とエネルギーという、家計が日々の買い物で最も実感しやすい品目を除くため、体感の物価とは差が出やすい。" +
-        "米国の『コアCPI』と比べるときの目安として使い、総合CPI・コアCPI・コアコアCPIと並べて見る。",
-    },
-    referenceLines: [
-      { value: 2, label: "物価2%の目安（日銀の目標）", kind: "target" },
-      { value: 0, label: "0%＝デフレとの分岐", kind: "neutral" },
-    ],
-    releaseSchedule: "総務省統計局が対象月の翌月中旬〜下旬に8:30発表（コアCPI・総合CPIと同時）。",
-    nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 20 },
-    api: { indicatorCode: "0703010601010030020", cycle: "1", rank: "2", sa: "1", statName: "消費者物価指数（食料（酒類を除く）及びエネルギーを除く総合）" },
-  },
 ];
 
 export const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "為替・市場"];
