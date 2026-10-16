@@ -886,6 +886,25 @@ function renderRipple(ind) {
     <p class="detail__ripple-note">代表的な流れの一例で、必ずこのとおりになるとは限りません。市場の反応は、市場予想との差やその時の環境で変わります（投資助言ではありません）。</p>`;
 }
 
+/** 詳細画面に、似た別のデータ（例：トップのボードの日次値）との「違いと使い分け」を表で出す（指標に compare がある場合のみ） */
+function renderVersus(ind) {
+  const el = document.getElementById("d-versus");
+  if (!el) return;
+  const c = ind.compare;
+  if (!c) {
+    el.hidden = true;
+    el.innerHTML = "";
+    return;
+  }
+  el.hidden = false;
+  const head = c.headers.map((h) => `<th>${h}</th>`).join("");
+  const rows = c.rows.map((r) => `<tr><th scope="row">${r[0]}</th>${r.slice(1).map((v) => `<td>${v}</td>`).join("")}</tr>`).join("");
+  el.innerHTML = `
+    <b class="detail__versus-title">🔀 ${c.title}</b>
+    <div class="detail__versus-scroll"><table><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="detail__versus-note">${c.note ?? ""}</p>`;
+}
+
 /** 詳細画面の説明欄の下に、「この指標が動くと何が起きるか（経済 → 市場 → 家計への波及）」を出す */
 function renderImpact(ind) {
   const el = document.getElementById("d-impact");
@@ -1211,6 +1230,7 @@ function openDetail(id) {
   document.getElementById("d-name").textContent = ind.name;
   document.getElementById("d-desc").textContent = ind.description;
   renderRipple(ind);
+  renderVersus(ind);
   renderImpact(ind);
 
   const f = (v) => {

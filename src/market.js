@@ -70,7 +70,7 @@ export function marketBoardHtml(market, hasIndicator) {
           it.reference
             ? `<span class="mb-ref" title="${it.reference.note}。時点・算出方法が違うため、上の公式値と数銭〜数十銭ずれることがあります。">参考：${it.reference.label} <b>${fmtNum(it.reference.value, it.digits)}</b> ${it.unit}（${fmtMd(it.reference.t)}）</span>`
             : ""
-        }`;
+        }${detailId && it.note ? `<span class="mb-note">ℹ️ ${it.note}</span>` : ""}`;
       return detailId
         ? `<button type="button" class="mb-item mb-item--link" data-id="${detailId}" title="${it.label}の推移を見る">${inner}</button>`
         : `<div class="mb-item">${inner}</div>`;

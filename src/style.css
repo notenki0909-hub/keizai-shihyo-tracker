@@ -2484,3 +2484,62 @@ a {
   color: var(--neg);
   font-weight: 700;
 }
+
+/* ---------- 違いと使い分け（指標詳細：似た別データとの比較表） ---------- */
+.detail__versus {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--ref-target);
+  border-radius: 8px;
+}
+
+.detail__versus-title {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.detail__versus-scroll {
+  overflow-x: auto;
+}
+
+.detail__versus table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+}
+
+.detail__versus th,
+.detail__versus td {
+  padding: 5px 8px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.detail__versus thead th {
+  font-size: 0.74rem;
+  color: var(--text-dim);
+}
+
+.detail__versus tbody th {
+  width: 7.5em;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.detail__versus-note {
+  margin: 8px 0 0;
+  font-size: 0.76rem;
+  color: var(--text-dim);
+}
+
+.mb-note {
+  margin-top: 3px;
+  font-size: 0.66rem;
+  line-height: 1.5;
+  color: var(--text-faint);
+}

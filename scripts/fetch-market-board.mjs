@@ -156,7 +156,17 @@ const ITEMS = [
     getReference: async () => ({ label: "ECB換算", note: "欧州中央銀行の参考レート（14:15時点）から換算", points: await fetchEcbUsdJpy() }),
   },
   { id: "us10y", label: "米10年国債利回り", unit: "%", digits: 2, change: "pt", detailIds: ["treasury_10y_us"], source: "米財務省（日次イールドカーブ）", get: fetchUs10y },
-  { id: "jgb10y", label: "日本10年国債利回り", unit: "%", digits: 3, change: "pt", detailIds: [], source: "財務省", get: fetchJgb10y },
+  {
+    id: "jgb10y",
+    label: "日本10年国債利回り",
+    unit: "%",
+    digits: 3,
+    change: "pt",
+    detailIds: ["jgb_10y_yield"], // 日本版のみ：月次の指標カード（日本銀行・新発10年国債）を開く
+    note: "月ごとの推移は指標カード「新発10年国債利回り」（日本銀行・月末値）で確認できます。出典・算出方法が違うため、少しずれることがあります。",
+    source: "財務省",
+    get: fetchJgb10y,
+  },
   { id: "wti", label: "WTI原油", unit: "ドル", digits: 2, change: "pct", detailIds: ["wti_oil_us"], source: "FRED（EIA）", get: () => fetchFred("DCOILWTICO") },
   { id: "sp500", label: "S&P500", unit: "", digits: 2, change: "pct", detailIds: ["sp500_us"], source: "FRED（S&P Dow Jones Indices）", get: () => fetchFred("SP500") },
   { id: "nikkei225", label: "日経平均株価", unit: "円", digits: 2, change: "pct", detailIds: ["nikkei225"], source: "FRED（日本経済新聞社）", get: () => fetchFred("NIKKEI225") },
