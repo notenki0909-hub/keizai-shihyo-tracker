@@ -1110,11 +1110,8 @@ export const CATEGORY_GUIDES = {
             },
             {
               name: "PMI（購買担当者景気指数）",
-              externals: [
-                { url: "https://www.pmi.spglobal.com/", label: "日本のPMI：S&P Global（公式）" },
-                { url: "https://jp.investing.com/economic-calendar/ism-manufacturing-pmi-173", label: "米国ISM製造業景況指数：Investing.com 日本版" },
-                { url: "https://jp.investing.com/economic-calendar/ism-non-manufacturing-pmi-176", label: "米国ISM非製造業景況指数：Investing.com 日本版" },
-              ],
+              // ISMのリンクは米国版の「②次に見る」（鉱工業生産指数の右隣）に掲載しているため、日本版には載せない
+              externals: [{ url: "https://www.pmi.spglobal.com/", label: "日本のPMI：S&P Global（公式）" }],
               notes: "このツールには未収録（外部リンクのみ）",
               // ISMとPMIの違い：①の項目の下に表で表示する（compare形式）
               compare: {
@@ -1130,7 +1127,7 @@ export const CATEGORY_GUIDES = {
                 note: "どちらも「購買担当者景気指数（PMI）」の仲間で、ISMの製造業指数は「ISM製造業PMI」とも呼ばれます。ただし、作成機関・調査対象の企業・集計方法が違うため、数値は単純に比べられません。日本の景気を直接見るなら日本のPMI、米国・世界の景気を知りたいならISMと使い分けます（米国にもS&P Globalの「米国PMI」があり、ISMとは別の指数です）。",
               },
               reason:
-                "企業の購買担当者に、新規受注・生産などの動きを毎月聞くアンケート（50が拡大・縮小の分かれ目）。短観より早く月次で出る先行指標。日本のPMIは民間のS&P Global（au じぶん銀行日本製造業PMI）が提供するデータで、無料での再配布が認められていないため、このツールには収録せず、公式ページへのリンクのみ載せている。あわせて、世界景気の方向を見る参考として、米国のISM製造業・非製造業景況指数（同じ50が分かれ目の指数）の外部ページ（Investing.com 日本版）へのリンクも載せている（米国の指標で、日本のPMIではない）。",
+                "企業の購買担当者に、新規受注・生産などの動きを毎月聞くアンケート（50が拡大・縮小の分かれ目）。短観より早く月次で出る先行指標。日本のPMIは民間のS&P Global（au じぶん銀行日本製造業PMI）が提供するデータで、無料での再配布が認められていないため、このツールには収録せず、公式ページへのリンクのみ載せている。なお、米国のISM景況指数（同じ50が分かれ目）は日本のPMIとは別の指数で、米国版で外部リンクを案内している（違いは下の表を参照）。",
             },
           ],
         },
