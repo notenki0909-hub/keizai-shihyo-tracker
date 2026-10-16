@@ -615,8 +615,66 @@ function renderCategoryGuide() {
   const secondHtml = guide.second?.byStars ? starredSecond(guide.second) : row("② 次に見る（補完）", "category-guide__badge--second", guide.second);
   el.innerHTML = firstHtml + secondHtml;
   el.hidden = false;
+  makeGuideCollapsible(el);
   el.querySelectorAll(".category-guide__link").forEach((btn) => {
     btn.addEventListener("click", () => openDetail(btn.dataset.id));
+  });
+}
+
+/**
+ * 「①まず見る」「②次に見る」の各ブロックを、クリックで開閉できる <details> にする。
+ * 閉じているときは見出しの横に中身の要約（指標名など）を出す。開閉の状態は localStorage に保存する（初期は開く）。
+ */
+function guideOpenKey(key) {
+  return "keizai-tracker-guide-" + key;
+}
+function loadGuideOpen(key) {
+  try {
+    return localStorage.getItem(guideOpenKey(key)) !== "closed";
+  } catch {
+    return true;
+  }
+}
+function saveGuideOpen(key, open) {
+  try {
+    localStorage.setItem(guideOpenKey(key), open ? "open" : "closed");
+  } catch {
+    // 保存できなくても表示自体には影響しない
+  }
+}
+function makeGuideCollapsible(el) {
+  const keys = ["first", "second"];
+  [...el.querySelectorAll(":scope > .category-guide__row")].forEach((rowEl, i) => {
+    const badge = rowEl.querySelector(".category-guide__badge");
+    const body = rowEl.querySelector(".category-guide__body");
+    if (!badge || !body) return;
+    const heads = [...body.querySelectorAll(".category-guide__itemhead b")].map((b) => b.textContent.replace(/（[^）]*）/g, ""));
+    const simple = body.querySelectorAll(".category-guide__item--simple").length;
+    const preview = heads.length
+      ? heads.join("・")
+      : simple
+        ? `${simple}指標（★の多い順）`
+        : (body.querySelector(".category-guide__link")?.textContent ?? "").replace(/　.*$/, "");
+
+    const details = document.createElement("details");
+    details.className = "category-guide__section";
+    details.dataset.key = keys[i] ?? String(i);
+    details.open = loadGuideOpen(details.dataset.key);
+
+    const summary = document.createElement("summary");
+    summary.appendChild(badge);
+    const hint = document.createElement("span");
+    hint.className = "category-guide__preview";
+    hint.textContent = preview;
+    summary.appendChild(hint);
+
+    const inner = document.createElement("div");
+    inner.className = "category-guide__sectionbody";
+    inner.appendChild(body);
+
+    details.append(summary, inner);
+    details.addEventListener("toggle", () => saveGuideOpen(details.dataset.key, details.open));
+    rowEl.replaceWith(details);
   });
 }
 
