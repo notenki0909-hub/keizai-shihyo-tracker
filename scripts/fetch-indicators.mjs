@@ -791,6 +791,7 @@ async function main() {
         judgment: ind.judgment,
         referenceLines: ind.referenceLines ?? [],
         movingAverage: ind.movingAverage ?? null,
+        ripple: ind.ripple ?? undefined,
         noSurprise: ind.noSurprise === true ? true : undefined,
         releaseSchedule: ind.releaseSchedule,
         nextRelease, // "YYYY-MM-DD" または null。nextReleaseKindが null の指標では常にnull（掲載対象外）

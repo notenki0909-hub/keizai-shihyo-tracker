@@ -2213,3 +2213,52 @@ a {
   color: var(--text);
   font-variant-numeric: tabular-nums;
 }
+
+/* ---------- 波及ルート（指標詳細の説明欄の下） ---------- */
+.detail__ripple {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+}
+
+.detail__ripple-title {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.detail__ripple dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 2px 10px;
+  margin: 0;
+}
+
+.detail__ripple dt {
+  font-weight: 700;
+  color: var(--text-dim);
+}
+
+.detail__ripple dd {
+  margin: 0;
+}
+
+.detail__ripple-note {
+  margin: 6px 0 0;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
+
+@media (max-width: 640px) {
+  .detail__ripple dl {
+    grid-template-columns: 1fr;
+  }
+  .detail__ripple dt {
+    margin-top: 4px;
+  }
+}

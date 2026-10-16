@@ -737,6 +737,27 @@ function shiftMonth(d, delta) {
   return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + delta, 1));
 }
 
+/** 詳細画面の説明欄の下に、その指標が関わる「波及ルート（代表例）」を出す（指標に ripple がある場合のみ） */
+function renderRipple(ind) {
+  const el = document.getElementById("d-ripple");
+  if (!el) return;
+  const r = ind.ripple;
+  if (!r) {
+    el.hidden = true;
+    el.innerHTML = "";
+    return;
+  }
+  el.hidden = false;
+  el.innerHTML = `
+    <b class="detail__ripple-title">📌 この指標が動いたときの波及ルート（代表例）</b>
+    <dl>
+      <dt>きっかけ</dt><dd>${r.trigger}</dd>
+      <dt>主な波及経路</dt><dd>${r.route}</dd>
+      <dt>影響を受けやすい業界の例</dt><dd>${r.sectors}</dd>
+    </dl>
+    <p class="detail__ripple-note">代表的な流れの一例で、必ずこのとおりになるとは限りません。市場の反応は、市場予想との差やその時の環境で変わります（投資助言ではありません）。</p>`;
+}
+
 /** 発表履歴の対象期間の表示：月次は「2026年9月」、四半期は「2026年Q3」、週次・日次はそのまま */
 function fmtReleasePeriod(t, ind) {
   let m = /^(\d{4})-(\d{2})(?:-\d{2})?$/.exec(t);
@@ -1038,6 +1059,7 @@ function openDetail(id) {
   updateDetailFavButton();
   document.getElementById("d-name").textContent = ind.name;
   document.getElementById("d-desc").textContent = ind.description;
+  renderRipple(ind);
 
   const f = (v) => {
     const { num, unit } = fmtValue(v, ind);
