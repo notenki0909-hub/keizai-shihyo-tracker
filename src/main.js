@@ -681,6 +681,57 @@ function makeGuideCollapsible(el) {
 
 /* ---------- 経済状況サマリー（ルールベース、AI不使用） ---------- */
 
+/**
+ * 経済状況サマリーの「現在の指標の状況」の上に出す、「日本株に影響を与える米国の指標」の紹介。
+ * 米国の指標はこのツール（日本版）には収録していないため、指標名は文字のみとし、
+ * 詳細は米国版で確認するよう案内する（米国版にも同じ内容の紹介があり、指標名から各カードを開ける）。
+ */
+const US_SITE_URL = "https://notenki0909-hub.github.io/us-economic-tracker/";
+
+function usIntroHtml() {
+  const rows = [
+    {
+      title: "雇用統計",
+      names: ["非農業部門雇用者数", "失業率", "平均時給"],
+      effect:
+        "米国の雇用の強さを示す、市場が最も注目する指標。強いと米景気への自信から米金利・ドルが上がり、円安方向に動きやすい。弱いと景気減速への懸念で株安・円高方向になりやすい。ただし強すぎると、利下げ観測が後退して株価の重荷になることもある。",
+      when: "毎月第1金曜日 8:30（米東部時間）。日本時間では夜〜深夜",
+    },
+    {
+      title: "PCE・CPI（米国の物価）",
+      names: ["コアPCE物価指数", "消費者物価指数（CPI）", "コアCPI"],
+      effect:
+        "物価が上振れると、FRBの利下げ観測が後退し、米金利の上昇・ドル高・米ハイテク株安につながりやすく、日本の半導体・成長株にも波及する。下振れはその逆。FRBが政策判断で重視するのはコアPCE、発表時の市場の反応が大きいのはCPI。",
+      when: "CPIは毎月中旬ごろ、PCEは毎月下旬ごろ（いずれも8:30 ET）",
+    },
+    {
+      title: "FOMC（米連邦公開市場委員会）",
+      names: ["FF金利（政策金利）"],
+      effect:
+        "FRBが政策金利を決める会合。利上げ・利下げの決定、声明、経済見通し、議長の会見が、米金利・ドル円・世界の株価を動かす。日米の金利差の変化は円相場を通じて、輸出株をはじめ日本株全体に影響する。",
+      when: "年8回。日程は米国版の発表予定カレンダーの🏛️イベントで確認",
+    },
+  ];
+  const items = rows
+    .map(
+      (r) => `
+        <div class="us-intro__row">
+          <div class="us-intro__head"><b>${r.title}</b><span class="us-intro__names">${r.names.join("・")}</span></div>
+          <p>${r.effect}</p>
+          <p class="us-intro__when">📅 ${r.when}</p>
+        </div>`
+    )
+    .join("");
+  return `
+    <details class="us-intro" open>
+      <summary>🇺🇸 日本株に影響を与える米国の指標</summary>
+      <p class="us-intro__lead">日本株は、米国の景気・物価・金利の動きの影響を受けやすいとされます。特に注目される3つを紹介します。</p>
+      ${items}
+      <p class="us-intro__see">👉 これらの米国の指標の推移グラフ・発表日・波及の説明は、<a class="us-intro__link" href="${US_SITE_URL}" target="_blank" rel="noopener">米国版（米国経済指標トラッカー）↗</a>で確認できます。米国版では、上の指標名をクリックすると各指標のカードが開きます。</p>
+      <p class="us-intro__note">一般的な見方の紹介で、必ずこのとおりになるとは限りません。投資助言ではありません。</p>
+    </details>`;
+}
+
 function renderEconSummary() {
   const el = document.getElementById("econ-summary");
   const sum = state.data?.econSummary;
@@ -829,6 +880,7 @@ function renderEconSummary() {
     </div>
     ${marketBoardHtml(state.market, (id) => state.data.indicators.some((i) => i.id === id))}
     <p class="econ-summary__headline">${sum.headline}</p>
+    ${usIntroHtml()}
     <h3 class="econ-summary__section-title">📍 現在の指標の状況</h3>
     <div class="econ-summary__groups">
       ${group("好転位置", sum.currentFavorableList, "up", "（目安ラインとの比較）")}

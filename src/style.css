@@ -2543,3 +2543,74 @@ a {
   line-height: 1.5;
   color: var(--text-faint);
 }
+
+/* ---------- 日本株に影響を与える米国の指標（経済状況サマリーの「現在の指標の状況」の上） ---------- */
+.us-intro {
+  margin: 4px 0 14px;
+  padding: 10px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+.us-intro > summary {
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.us-intro__lead {
+  margin: 6px 0 4px;
+  color: var(--text-dim);
+}
+
+.us-intro__row {
+  padding: 8px 0;
+  border-top: 1px dashed var(--border);
+}
+
+.us-intro__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+
+.us-intro__names {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+.us-intro__row p {
+  margin: 3px 0 0;
+}
+
+.us-intro__when {
+  font-size: 0.78rem;
+  color: var(--text-faint);
+}
+
+.us-intro__see {
+  margin: 6px 0 0;
+  padding: 7px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.us-intro__link {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.us-intro a {
+  color: var(--accent);
+}
+
+.us-intro__note {
+  margin: 6px 0 0;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
