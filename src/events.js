@@ -68,6 +68,21 @@ export async function loadEvents() {
   }
 }
 
+/**
+ * 経済指標の発表履歴（過去1年分）。data/releases.json（scripts/release-history.mjs が自動更新のたびに蓄積）。
+ * 指標id → [{ date, t, value, prev?, kind: "official"|"detected", provisional? }]。失敗時は空。
+ */
+export async function loadReleases() {
+  try {
+    const res = await fetch(import.meta.env.BASE_URL + "data/releases.json", { cache: "no-cache" });
+    if (!res.ok) return {};
+    const json = await res.json();
+    return json.releases && typeof json.releases === "object" ? json.releases : {};
+  } catch {
+    return {};
+  }
+}
+
 /** 日付文字列("YYYY-MM-DD") → イベント配列 のMap */
 export function groupEventsByDate(events) {
   const map = new Map();

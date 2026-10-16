@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T18:01:11.615Z",
+  "generatedAt": "2026-10-16T11:18:31.138Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 33,
@@ -67,15 +67,15 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-10-15T18:01:11.622Z",
+    "generatedAt": "2026-10-16T11:18:31.143Z",
     "stats": {
       "total": 33,
-      "improving": 12,
-      "worsening": 11,
+      "improving": 11,
+      "worsening": 12,
       "neutral": 10,
       "surpriseCount": 2
     },
-    "headline": "33指標中、改善傾向が12件、悪化傾向が11件、横ばい・中立が10件です。",
+    "headline": "33指標中、改善傾向が11件、悪化傾向が12件、横ばい・中立が10件です。",
     "improvingList": [
       {
         "id": "machinery_orders",
@@ -129,15 +129,6 @@
         "period": {
           "from": "2026-08",
           "to": "2026-09"
-        }
-      },
-      {
-        "id": "consumer_confidence_jp",
-        "name": "消費者信頼感（OECD総合指標・日本）",
-        "category": "景気",
-        "period": {
-          "from": "2026-07",
-          "to": "2026-08"
         }
       },
       {
@@ -278,6 +269,15 @@
         }
       },
       {
+        "id": "consumer_confidence_jp",
+        "name": "消費者信頼感（OECD総合指標・日本）",
+        "category": "景気",
+        "period": {
+          "from": "2026-08",
+          "to": "2026-09"
+        }
+      },
+      {
         "id": "trade_balance_customs",
         "name": "貿易収支（通関ベース）",
         "category": "対外",
@@ -347,8 +347,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-10-09",
-          "to": "2026-10-13"
+          "from": "2026-10-13",
+          "to": "2026-10-14"
         }
       },
       {
@@ -405,6 +405,15 @@
         "period": {
           "from": "2026 Q2",
           "to": "2026 Q3"
+        }
+      },
+      {
+        "id": "consumer_confidence_jp",
+        "name": "消費者信頼感（OECD総合指標・日本）",
+        "category": "景気",
+        "period": {
+          "from": "2026-07",
+          "to": "2026-09"
         }
       },
       {
@@ -1020,26 +1029,6 @@
         },
         "detail": "直近（2026-07〜2026-09）の傾向が、その前（2026-04〜2026-06）から改善方向に転じました（転換点を通過）。",
         "text": "景気ウォッチャー調査（現状判断DI・全国）は、直近（2026-07〜2026-09）の傾向が、その前（2026-04〜2026-06）から改善方向に転じました（転換点を通過）。"
-      },
-      {
-        "id": "consumer_confidence_jp",
-        "name": "消費者信頼感（OECD総合指標・日本）",
-        "category": "景気",
-        "favorable": true,
-        "flipped": true,
-        "proximity": 100,
-        "period": {
-          "recent": {
-            "from": "2026-06",
-            "to": "2026-08"
-          },
-          "prior": {
-            "from": "2026-03",
-            "to": "2026-05"
-          }
-        },
-        "detail": "直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から改善方向に転じました（転換点を通過）。",
-        "text": "消費者信頼感（OECD総合指標・日本）は、直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から改善方向に転じました（転換点を通過）。"
       },
       {
         "id": "household_spending_yoy",
@@ -32061,7 +32050,7 @@
       "referenceLines": [],
       "movingAverage": null,
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-10-16",
+      "nextRelease": "2026-10-19",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -32070,12 +32059,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-10-13",
-          "value": 158.22,
+          "t": "2026-10-14",
+          "value": 158.35,
           "provisional": false
         },
-        "changeFromPrev": -0.12,
-        "changeFromYearAgo": 5.37,
+        "changeFromPrev": 0.13,
+        "changeFromYearAgo": 6.38,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -32084,7 +32073,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2632,
+        "count": 2633,
         "start": "2016-01-04"
       },
       "points": [
@@ -42615,6 +42604,10 @@
         {
           "t": "2026-10-13",
           "value": 158.22
+        },
+        {
+          "t": "2026-10-14",
+          "value": 158.35
         }
       ]
     },
@@ -57685,12 +57678,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-08",
-          "value": 35.5,
+          "t": "2026-09",
+          "value": 35.4,
           "provisional": false
         },
-        "changeFromPrev": 0.6,
-        "changeFromYearAgo": 0.6,
+        "changeFromPrev": -0.1,
+        "changeFromYearAgo": 0,
         "min": {
           "t": "2020-04",
           "value": 21.9
@@ -57699,7 +57692,7 @@
           "t": "2017-10",
           "value": 44.6
         },
-        "count": 128,
+        "count": 129,
         "start": "2016-01"
       },
       "points": [
@@ -58214,6 +58207,10 @@
         {
           "t": "2026-08",
           "value": 35.5
+        },
+        {
+          "t": "2026-09",
+          "value": 35.4
         }
       ]
     },

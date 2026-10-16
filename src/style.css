@@ -2010,3 +2010,73 @@ a {
     height: 280px;
   }
 }
+
+/* ---------- 発表履歴（発表済みピル・詳細の履歴） ---------- */
+.calendar__pill--released {
+  background: transparent;
+  border-style: dashed;
+  opacity: 0.8;
+}
+
+.calendar__pill--released:hover {
+  opacity: 1;
+}
+
+.release-history {
+  margin-top: 8px;
+  font-size: 0.82rem;
+}
+
+.release-history summary {
+  cursor: pointer;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.release-history ul {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.release-history li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  padding: 5px 9px;
+  border-bottom: 1px solid var(--border);
+}
+
+.release-history li:last-child {
+  border-bottom: 0;
+}
+
+.rh-date {
+  min-width: 8.5em;
+  color: var(--text-dim);
+}
+
+.rh-t,
+.rh-prev,
+.rh-note {
+  color: var(--text-faint);
+  font-size: 0.74rem;
+}
+
+.rh-note {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0 6px;
+}
+
+.release-history__foot {
+  margin: 6px 0 0;
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: var(--text-faint);
+}

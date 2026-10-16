@@ -1,0 +1,180 @@
+{
+ "generatedAt": "2026-10-16T11:14:15.777Z",
+ "retentionDays": 365,
+ "releases": {
+  "ppi_yoy": [
+   {
+    "date": "2026-09-11",
+    "t": "2026-08",
+    "value": 7.6,
+    "kind": "detected",
+    "prev": 7.7,
+    "provisional": true
+   },
+   {
+    "date": "2026-10-13",
+    "t": "2026-09",
+    "value": 6.8,
+    "kind": "detected",
+    "prev": 7.6,
+    "provisional": true
+   }
+  ],
+  "machinery_orders": [
+   {
+    "date": "2026-09-16",
+    "t": "2026-07",
+    "value": 1016877,
+    "kind": "detected",
+    "prev": 1055762
+   },
+   {
+    "date": "2026-10-15",
+    "t": "2026-08",
+    "value": 1069779,
+    "kind": "detected",
+    "prev": 1016877
+   }
+  ],
+  "cpi_core_yoy": [
+   {
+    "date": "2026-09-18",
+    "t": "2026-08",
+    "value": 1.7,
+    "kind": "detected",
+    "prev": 1.8
+   }
+  ],
+  "industrial_production": [
+   {
+    "date": "2026-09-30",
+    "t": "2026-08",
+    "value": 102.6,
+    "kind": "detected",
+    "prev": 104.4,
+    "provisional": true
+   }
+  ],
+  "housing_starts": [
+   {
+    "date": "2026-09-30",
+    "t": "2026-08",
+    "value": 62759,
+    "kind": "detected",
+    "prev": 64493
+   }
+  ],
+  "unemployment_rate": [
+   {
+    "date": "2026-10-02",
+    "t": "2026-08",
+    "value": 2.5,
+    "kind": "detected",
+    "prev": 2.4
+   }
+  ],
+  "jobs_to_applicants_ratio": [
+   {
+    "date": "2026-10-02",
+    "t": "2026-08",
+    "value": 1.18,
+    "kind": "detected",
+    "prev": 1.18
+   }
+  ],
+  "new_job_openings_ratio": [
+   {
+    "date": "2026-10-02",
+    "t": "2026-08",
+    "value": 2.06,
+    "kind": "detected",
+    "prev": 2.1
+   }
+  ],
+  "monetary_base_yoy": [
+   {
+    "date": "2026-10-02",
+    "t": "2026-09",
+    "value": -15.2,
+    "kind": "detected",
+    "prev": -15.7
+   }
+  ],
+  "coincident_ci": [
+   {
+    "date": "2026-10-07",
+    "t": "2026-08",
+    "value": 118.7,
+    "kind": "detected",
+    "prev": 120.6,
+    "provisional": true
+   }
+  ],
+  "real_wage_index_yoy": [
+   {
+    "date": "2026-10-07",
+    "t": "2026-08",
+    "value": 1.5,
+    "kind": "detected",
+    "prev": 2,
+    "provisional": true
+   }
+  ],
+  "trade_balance": [
+   {
+    "date": "2026-10-08",
+    "t": "2026-08",
+    "value": -4852,
+    "kind": "detected",
+    "prev": -4294,
+    "provisional": true
+   }
+  ],
+  "current_account": [
+   {
+    "date": "2026-10-08",
+    "t": "2026-08",
+    "value": 29794,
+    "kind": "detected",
+    "prev": 25231,
+    "provisional": true
+   }
+  ],
+  "economy_watchers": [
+   {
+    "date": "2026-10-08",
+    "t": "2026-09",
+    "value": 46.4,
+    "kind": "detected",
+    "prev": 46.2
+   }
+  ],
+  "household_spending_yoy": [
+   {
+    "date": "2026-10-09",
+    "t": "2026-08",
+    "value": -3.1,
+    "kind": "detected",
+    "prev": -3.6
+   }
+  ],
+  "foreign_investor_flow": [
+   {
+    "date": "2026-10-09",
+    "t": "2026-09",
+    "value": 6914.77,
+    "kind": "detected",
+    "prev": -7541.87
+   }
+  ],
+  "machinery_orders_mom": [
+   {
+    "date": "2026-10-15",
+    "t": "2026-08",
+    "value": 5.2,
+    "kind": "detected",
+    "prev": -3.68
+   }
+  ]
+ }
+}

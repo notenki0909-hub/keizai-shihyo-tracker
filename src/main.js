@@ -8,7 +8,7 @@ import { isFavorite, toggleFavorite, getFavorites } from "./favorites.js";
 
 Chart.register(annotationPlugin, zoomPlugin);
 
-import { loadEvents, groupEventsByDate, eventPillHtml, renderEventDetail } from "./events.js";
+import { loadEvents, loadReleases, groupEventsByDate, eventPillHtml, renderEventDetail } from "./events.js";
 
 const DATA_URL = import.meta.env.BASE_URL + "data/indicators.json";
 const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "為替・市場"];
@@ -89,6 +89,7 @@ const state = {
   calMonth: new Date(Date.UTC(now.getFullYear(), now.getMonth(), 1)),
   favoritesOnly: false,
   events: [], // 経済指標以外のイベント（events.json）。読み込みに失敗しても空配列のまま動く
+  releases: {}, // 指標の発表履歴（releases.json）。指標id → [{date, t, value, prev, kind}]。失敗しても空のまま動く
   calShowIndicators: loadCalPref("indicators"),
   calShowEvents: loadCalPref("events"),
 };
@@ -733,6 +734,43 @@ function shiftMonth(d, delta) {
   return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + delta, 1));
 }
 
+/** 発表履歴の対象期間の表示：月次は「2026年9月」、四半期は「2026年Q3」、週次・日次はそのまま */
+function fmtReleasePeriod(t, ind) {
+  let m = /^(\d{4})-(\d{2})(?:-\d{2})?$/.exec(t);
+  if (m && ind.frequency === "monthly") return `${m[1]}年${Number(m[2])}月`;
+  if (m && ind.frequency === "quarterly") return `${m[1]}年Q${Math.floor((Number(m[2]) - 1) / 3) + 1}`;
+  m = /^(\d{4}) Q(\d)$/.exec(t);
+  if (m) return `${m[1]}年Q${m[2]}`;
+  return t;
+}
+
+/** 発表済みの指標のカレンダー用ピル。kind が detected の日付は「データの反映日」（実際の発表日と数日ずれうる） */
+function releasedPillHtml({ ind, r }) {
+  const color = catColor(ind.category);
+  const { num, unit } = fmtValue(r.value, ind);
+  const note = r.kind === "detected" ? "（データ反映日）" : "";
+  const title = `${ind.name}　発表済み${note}：${fmtReleasePeriod(r.t, ind)}分 ${num} ${unit}${r.provisional ? "（速報）" : ""}`;
+  return `<button type="button" class="calendar__pill calendar__pill--released" style="color:${color};border-color:${color}55" data-id="${ind.id}" title="${title}">✓ ${ind.shortName}</button>`;
+}
+
+/** 指標の詳細に出す発表履歴（過去1年分、新しい順） */
+function releaseHistoryHtml(ind) {
+  const list = (state.releases[ind.id] || []).slice().reverse();
+  if (!list.length) return "";
+  const rows = list
+    .map((r) => {
+      const v = fmtValue(r.value, ind);
+      const prev = r.prev != null ? fmtValue(r.prev, ind) : null;
+      return `<li><span class="rh-date">${fmtJpDateWithWeekday(r.date)}</span><span class="rh-t">${fmtReleasePeriod(r.t, ind)}分</span><b>${v.num} ${v.unit}</b>${
+        r.provisional ? `<span class="rh-note">速報</span>` : ""
+      }${prev ? `<span class="rh-prev">前回 ${prev.num} ${prev.unit}</span>` : ""}${
+        r.kind === "detected" ? `<span class="rh-note">反映日</span>` : ""
+      }</li>`;
+    })
+    .join("");
+  return `<details class="release-history"><summary>🗓 発表履歴（過去1年・${list.length}件）</summary><ul>${rows}</ul><p class="release-history__foot">「反映日」は、データがこのツールに反映された日です（実際の発表日と数日ずれることがあります）。履歴は自動更新のたびに蓄積しており、2026年9月11日より前の分は記録がありません。</p></details>`;
+}
+
 function renderCalendar() {
   const el = document.getElementById("release-calendar");
   if (!el || !state.data) return;
@@ -744,6 +782,16 @@ function renderCalendar() {
     if (!byDate.has(ind.nextRelease)) byDate.set(ind.nextRelease, []);
     byDate.get(ind.nextRelease).push(ind);
   });
+  // 発表済み（過去1年分の履歴）。次回発表予定日は発表後に次回へ切り替わるため、履歴から別に表示する
+  const releasedByDate = new Map();
+  if (state.calShowIndicators) {
+    state.data.indicators.forEach((ind) => {
+      (state.releases[ind.id] || []).forEach((r) => {
+        if (!releasedByDate.has(r.date)) releasedByDate.set(r.date, []);
+        releasedByDate.get(r.date).push({ ind, r });
+      });
+    });
+  }
 
   const year = state.calMonth.getUTCFullYear();
   const month = state.calMonth.getUTCMonth();
@@ -759,13 +807,14 @@ function renderCalendar() {
       dateStr,
       inMonth: d.getUTCMonth() === month,
       items: byDate.get(dateStr) || [],
+      released: releasedByDate.get(dateStr) || [],
       events: eventsByDate.get(dateStr) || [],
     });
   }
   // 最終週が丸ごと翌月かつ発表予定もなければ間引く（5週で収まる月がほとんどのため）
   while (cells.length > 35) {
     const lastWeek = cells.slice(-7);
-    if (lastWeek.some((c) => c.inMonth || c.items.length || c.events.length)) break;
+    if (lastWeek.some((c) => c.inMonth || c.items.length || c.released.length || c.events.length)) break;
     cells.length -= 7;
   }
 
@@ -793,7 +842,7 @@ function renderCalendar() {
       return `
         <div class="${cls}">
           <span class="calendar__daynum">${c.d.getUTCDate()}</span>
-          <div class="calendar__pills">${eventPills}${pills}</div>
+          <div class="calendar__pills">${eventPills}${pills}${c.released.map(releasedPillHtml).join("")}</div>
         </div>`;
     })
     .join("");
@@ -813,7 +862,8 @@ function renderCalendar() {
     </div>
     <div class="calendar__weekdays">${weekdayHtml}</div>
     <div class="calendar__grid">${cellsHtml}</div>
-    <p class="calendar__note">※ 日経平均株価以外はFREDのような公式メタデータがないため、発表スケジュールの目安からの推定日です。詳しくは<a href="./guide.html">このツールの見方</a>を参照。</p>`;
+    <p class="calendar__note">※ 日経平均株価以外はFREDのような公式メタデータがないため、発表スケジュールの目安からの推定日です。詳しくは<a href="./guide.html">このツールの見方</a>を参照。</p>
+    <p class="calendar__note">✓ は発表済みの指標です（過去1年分の履歴。2026年9月11日以降の分から蓄積）。日付は「データがこのツールに反映された日」で、実際の発表日と数日ずれることがあります。</p>`;
 
   el.querySelectorAll(".calendar__pill").forEach((btn) => {
     btn.addEventListener("click", () => openDetail(btn.dataset.id));
@@ -1036,7 +1086,7 @@ function openDetail(id) {
   if (ind.releaseSchedule) {
     releaseParts.push(`<p class="detail__release-note">発表スケジュールの目安：${ind.releaseSchedule}</p>`);
   }
-  document.getElementById("d-release").innerHTML = releaseParts.join("");
+  document.getElementById("d-release").innerHTML = releaseParts.join("") + releaseHistoryHtml(ind);
 
   document.getElementById("d-ranges").innerHTML = RANGES.map(
     (r) => `<button class="range-btn" data-range="${r.key}" aria-pressed="${r.key === currentRange}">${r.label}</button>`
@@ -1450,6 +1500,7 @@ async function init() {
   });
 
   const eventsPromise = loadEvents(); // 指標データと並行して取得（失敗しても指標表示には影響しない）
+  const releasesPromise = loadReleases();
 
   try {
     const res = await fetch(DATA_URL, { cache: "no-cache" });
@@ -1467,6 +1518,7 @@ async function init() {
     `最終更新 ${genStr}　／　${state.data.indicatorCount} 指標　／　毎回 API から全期間を再取得`;
 
   state.events = await eventsPromise;
+  state.releases = await releasesPromise;
   renderGrid();
   renderCategoryGuide();
   renderCalendar();

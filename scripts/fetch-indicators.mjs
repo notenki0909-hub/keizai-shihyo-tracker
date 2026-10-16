@@ -7,7 +7,7 @@
  * 毎回全期間を取り直すため「蓄積」は不要（速報値の改定にも自動追従）。
  * 変更履歴は git の差分で追える。
  */
-import { writeFile, mkdir } from "node:fs/promises";
+import { writeFile, mkdir, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { INDICATORS, CATEGORY_GUIDES } from "./indicators.config.mjs";
@@ -18,6 +18,7 @@ import { fetchNextReleaseDate } from "./fetch-fred-release-date.mjs";
 import { fetchTankanDi, fetchTankanCapexPlan } from "./fetch-boj-tankan.mjs";
 import { fetchCustomsTradeBalance } from "./fetch-mof-customs.mjs";
 import { fetchWatchersDi } from "./fetch-cao-watchers.mjs";
+import { updateReleaseHistory, dateInTz } from "./release-history.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = resolve(__dirname, "../public/data");
@@ -698,6 +699,13 @@ function buildEconSummary(indicators) {
 
 async function main() {
   await mkdir(OUT_DIR, { recursive: true });
+  // 発表履歴の検出用に、上書きする前の指標データを読んでおく（無ければ履歴の追記は行わない）
+  let prevIndicators = null;
+  try {
+    prevIndicators = JSON.parse(await readFile(resolve(OUT_DIR, "indicators.json"), "utf8")).indicators;
+  } catch {
+    // 初回など
+  }
   const out = [];
   const failures = [];
 
@@ -818,6 +826,20 @@ async function main() {
 
   const file = resolve(OUT_DIR, "indicators.json");
   await writeFile(file, JSON.stringify(payload, null, 2) + "\n", "utf8");
+
+  // 発表履歴（過去1年分）の更新。失敗しても指標データの更新は止めない
+  try {
+    const added = await updateReleaseHistory({
+      file: resolve(OUT_DIR, "releases.json"),
+      prevIndicators,
+      newIndicators: out,
+      runDate: dateInTz(new Date(), 9), // 日本時間の日付
+      isOfficial: (ind) => ind.nextReleaseKind === "official",
+    });
+    console.log(`発表履歴: ${added}件を追記`);
+  } catch (err) {
+    console.log(`発表履歴の更新に失敗（指標データには影響なし）: ${err.message}`);
+  }
   console.log(`\n書き出し: ${file}`);
   console.log(`成功 ${out.length} / ${INDICATORS.length} 指標`);
   if (failures.length) {
