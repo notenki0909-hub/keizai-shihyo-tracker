@@ -15,6 +15,8 @@ on:
     # これまでは GitHub Actions の実行遅れ（実測6〜9時間）のおかげで偶然間に合っていたため、
     # 確実に取り込める時刻でもう1回取り直す。変更がなければコミットしない。
     - cron: "0 14 * * 1-5"
+    # 01:30 UTC（日本時間 10:30）火〜土：マーケットボードの S&P500（当日終値が 00:01 UTC ごろに反映）・米10年国債利回りを取り込む。
+    - cron: "30 1 * * 2-6"
 
 permissions:
   contents: write
@@ -48,6 +50,12 @@ jobs:
         if: github.event_name != 'push'
         continue-on-error: true
         run: npm run fetch:events
+
+      # 経済状況サマリー最上部のマーケットボード（主要6銘柄）。失敗しても指標データの更新・公開は止めない
+      - name: マーケットボードのデータを取得
+        if: github.event_name != 'push'
+        continue-on-error: true
+        run: npm run fetch:market
 
       - name: 変更があればコミット
         if: github.event_name != 'push'

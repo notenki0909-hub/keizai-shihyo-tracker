@@ -2080,3 +2080,122 @@ a {
   line-height: 1.6;
   color: var(--text-faint);
 }
+
+/* ---------- マーケットボード（経済状況サマリー最上部） ---------- */
+.market-board {
+  margin: 4px 0 14px;
+}
+
+.market-board__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+}
+
+.mb-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 9px 11px;
+  text-align: left;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.mb-item--link {
+  cursor: pointer;
+}
+
+.mb-item--link:hover {
+  border-color: var(--accent);
+}
+
+.mb-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+
+.mb-value {
+  font-size: 1.28rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.mb-value small {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+.mb-change {
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.mb-change--up {
+  color: var(--pos);
+}
+
+.mb-change--down {
+  color: var(--neg);
+}
+
+.mb-change--flat {
+  color: var(--neutral);
+}
+
+.mb-spark {
+  width: 100%;
+  height: 26px;
+  margin: 3px 0 1px;
+}
+
+.mb-spark polyline {
+  stroke: var(--neutral);
+}
+
+.mb-spark--up polyline {
+  stroke: var(--pos);
+}
+
+.mb-spark--down polyline {
+  stroke: var(--neg);
+}
+
+.mb-meta {
+  font-size: 0.66rem;
+  line-height: 1.45;
+  color: var(--text-faint);
+}
+
+.mb-stale {
+  margin-left: 6px;
+  padding: 0 5px;
+  border: 1px solid var(--neg);
+  border-radius: 999px;
+  color: var(--neg);
+}
+
+.market-board__note {
+  margin: 8px 0 0;
+  font-size: 0.7rem;
+  line-height: 1.6;
+  color: var(--text-faint);
+}
+
+@media (max-width: 640px) {
+  .market-board__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .mb-value {
+    font-size: 1.02rem;
+  }
+}

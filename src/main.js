@@ -9,6 +9,7 @@ import { isFavorite, toggleFavorite, getFavorites } from "./favorites.js";
 Chart.register(annotationPlugin, zoomPlugin);
 
 import { loadEvents, loadReleases, groupEventsByDate, eventPillHtml, renderEventDetail } from "./events.js";
+import { loadMarket, marketBoardHtml } from "./market.js";
 
 const DATA_URL = import.meta.env.BASE_URL + "data/indicators.json";
 const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "為替・市場"];
@@ -89,6 +90,7 @@ const state = {
   calMonth: new Date(Date.UTC(now.getFullYear(), now.getMonth(), 1)),
   favoritesOnly: false,
   events: [], // 経済指標以外のイベント（events.json）。読み込みに失敗しても空配列のまま動く
+  market: { items: [] }, // マーケットボード（market.json）。失敗しても空のまま動く
   releases: {}, // 指標の発表履歴（releases.json）。指標id → [{date, t, value, prev, kind}]。失敗しても空のまま動く
   calShowIndicators: loadCalPref("indicators"),
   calShowEvents: loadCalPref("events"),
@@ -697,6 +699,7 @@ function renderEconSummary() {
       <h2>📊 現在の経済状況サマリー</h2>
       <span class="econ-summary__updated">最終更新：${genStr}</span>
     </div>
+    ${marketBoardHtml(state.market, (id) => state.data.indicators.some((i) => i.id === id))}
     <p class="econ-summary__headline">${sum.headline}</p>
     <h3 class="econ-summary__section-title">📍 現在の指標の状況</h3>
     <div class="econ-summary__groups">
@@ -723,7 +726,7 @@ function renderEconSummary() {
       （AIによる分析ではありません）。因果関係の解説や将来予測、投資助言ではない点にご注意ください。
     </p>`;
 
-  el.querySelectorAll(".econ-summary__link, .econ-summary__name-chip, .econ-summary__combo-chip").forEach((btn) => {
+  el.querySelectorAll(".econ-summary__link, .econ-summary__name-chip, .econ-summary__combo-chip, .mb-item--link").forEach((btn) => {
     btn.addEventListener("click", () => openDetail(btn.dataset.id));
   });
 }
@@ -1501,6 +1504,7 @@ async function init() {
 
   const eventsPromise = loadEvents(); // 指標データと並行して取得（失敗しても指標表示には影響しない）
   const releasesPromise = loadReleases();
+  const marketPromise = loadMarket();
 
   try {
     const res = await fetch(DATA_URL, { cache: "no-cache" });
@@ -1519,6 +1523,7 @@ async function init() {
 
   state.events = await eventsPromise;
   state.releases = await releasesPromise;
+  state.market = await marketPromise;
   renderGrid();
   renderCategoryGuide();
   renderCalendar();
