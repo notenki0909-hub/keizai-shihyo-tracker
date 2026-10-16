@@ -2614,3 +2614,51 @@ a {
   font-size: 0.72rem;
   color: var(--text-faint);
 }
+
+/* ---------- ①まず見る：項目の下の比較表（例：ISMとPMIの違い） ---------- */
+.category-guide__compare {
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.82rem;
+}
+
+.category-guide__compare > summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.category-guide__table {
+  width: 100%;
+  min-width: 560px;
+  margin-top: 6px;
+  border-collapse: collapse;
+}
+
+.category-guide__table th,
+.category-guide__table td {
+  padding: 5px 8px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.55;
+}
+
+.category-guide__table thead th {
+  font-size: 0.74rem;
+  color: var(--text-dim);
+}
+
+.category-guide__table tbody th {
+  width: 7.5em;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.category-guide .category-guide__comparenote {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}

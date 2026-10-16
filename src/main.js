@@ -557,10 +557,23 @@ function renderCategoryGuide() {
               .filter(Boolean)
               .map((ind) => `<button class="category-guide__link" data-id="${ind.id}">${ind.shortName ?? ind.name}　${starsText(ind.importance)}</button>`)
               .join("");
-            const ext = it.external
-              ? `<a class="category-guide__ext" href="${it.external.url}" target="_blank" rel="noopener">${it.external.label} ↗</a>`
-              : "";
+            // 外部リンク（データを収録しない指標用）。複数ある場合は externals、1件のみなら external
+            const exts = it.externals ?? (it.external ? [it.external] : []);
+            const ext = exts
+              .map((e) => `<a class="category-guide__ext" href="${e.url}" target="_blank" rel="noopener">${e.label} ↗</a>`)
+              .join("");
             const notes = it.notes ? `<span class="category-guide__note">${it.notes}</span>` : "";
+            // 項目の下に出す比較表（例：ISMとPMIの違い）
+            const cmp = it.compare
+              ? `<details class="category-guide__compare" open>
+                  <summary>🔀 ${it.compare.title}</summary>
+                  <div class="detail__versus-scroll"><table class="category-guide__table">
+                    <thead><tr>${it.compare.headers.map((h) => `<th>${h}</th>`).join("")}</tr></thead>
+                    <tbody>${it.compare.rows.map((r) => `<tr><th scope="row">${r[0]}</th>${r.slice(1).map((v) => `<td>${v}</td>`).join("")}</tr>`).join("")}</tbody>
+                  </table></div>
+                  <p class="category-guide__comparenote">${it.compare.note ?? ""}</p>
+                </details>`
+              : "";
             return `
               <div class="category-guide__item">
                 <span class="category-guide__kind category-guide__kind--${kindCls[g.label] ?? "lead"}">${g.label}</span>
@@ -568,6 +581,7 @@ function renderCategoryGuide() {
                   <div class="category-guide__itemhead"><b>${it.name}</b>${notes}</div>
                   <div class="category-guide__links">${links}${ext}</div>
                   <p>${it.reason}</p>
+                  ${cmp}
                 </div>
               </div>`;
           })
