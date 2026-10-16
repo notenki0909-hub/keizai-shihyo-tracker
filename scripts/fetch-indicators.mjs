@@ -19,6 +19,7 @@ import { fetchTankanDi, fetchTankanCapexPlan } from "./fetch-boj-tankan.mjs";
 import { fetchCustomsTradeBalance } from "./fetch-mof-customs.mjs";
 import { fetchWatchersDi } from "./fetch-cao-watchers.mjs";
 import { updateReleaseHistory, dateInTz } from "./release-history.mjs";
+import { IMPACT } from "./impact.config.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = resolve(__dirname, "../public/data");
@@ -792,6 +793,7 @@ async function main() {
         referenceLines: ind.referenceLines ?? [],
         movingAverage: ind.movingAverage ?? null,
         ripple: ind.ripple ?? undefined,
+        impact: IMPACT[ind.id] ?? undefined,
         noSurprise: ind.noSurprise === true ? true : undefined,
         releaseSchedule: ind.releaseSchedule,
         nextRelease, // "YYYY-MM-DD" または null。nextReleaseKindが null の指標では常にnull（掲載対象外）

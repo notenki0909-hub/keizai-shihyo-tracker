@@ -758,6 +758,29 @@ function renderRipple(ind) {
     <p class="detail__ripple-note">代表的な流れの一例で、必ずこのとおりになるとは限りません。市場の反応は、市場予想との差やその時の環境で変わります（投資助言ではありません）。</p>`;
 }
 
+/** 詳細画面の説明欄の下に、「この指標が動くと何が起きるか（経済 → 市場 → 家計への波及）」を出す */
+function renderImpact(ind) {
+  const el = document.getElementById("d-impact");
+  if (!el) return;
+  const m = ind.impact;
+  if (!m) {
+    el.hidden = true;
+    el.innerHTML = "";
+    return;
+  }
+  el.hidden = false;
+  el.open = true;
+  el.innerHTML = `
+    <summary>🔗 この指標が動くと何が起きる？（経済全体 → 家計への波及）</summary>
+    <p class="impact__flow"><b>典型的な流れ</b>${m.flow}</p>
+    <div class="impact__cols">
+      <div class="impact__col impact__col--up"><h4>▲ 上がる・強まるとき</h4><p>${m.up}</p></div>
+      <div class="impact__col impact__col--down"><h4>▼ 下がる・弱まるとき</h4><p>${m.down}</p></div>
+    </div>
+    <p class="impact__home"><b>🏠 家計への届き方</b>${m.home}</p>
+    <p class="impact__note">日本銀行・内閣府・各国中央銀行や民間シンクタンクの解説にもとづく、一般的な波及の考え方の整理です（AIによる予測・分析ではありません）。実際の動きは時期や他の要因で変わり、時間差もあります。出典は<a href="./guide.html#sec-impact">使い方ガイド</a>を参照。</p>`;
+}
+
 /** 発表履歴の対象期間の表示：月次は「2026年9月」、四半期は「2026年Q3」、週次・日次はそのまま */
 function fmtReleasePeriod(t, ind) {
   let m = /^(\d{4})-(\d{2})(?:-\d{2})?$/.exec(t);
@@ -1060,6 +1083,7 @@ function openDetail(id) {
   document.getElementById("d-name").textContent = ind.name;
   document.getElementById("d-desc").textContent = ind.description;
   renderRipple(ind);
+  renderImpact(ind);
 
   const f = (v) => {
     const { num, unit } = fmtValue(v, ind);

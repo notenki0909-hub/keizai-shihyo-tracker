@@ -2262,3 +2262,77 @@ a {
     margin-top: 4px;
   }
 }
+
+/* ---------- 波及の説明（指標詳細：経済全体 → 家計） ---------- */
+.detail__impact {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.detail__impact > summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.impact__flow,
+.impact__home {
+  margin: 8px 0 0;
+}
+
+.impact__flow b,
+.impact__home b {
+  display: block;
+  margin-bottom: 1px;
+  font-size: 0.74rem;
+  color: var(--text-dim);
+}
+
+.impact__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.impact__col {
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  border-top: 3px solid var(--neutral);
+}
+
+.impact__col--up {
+  border-top-color: var(--pos);
+}
+
+.impact__col--down {
+  border-top-color: var(--neg);
+}
+
+.impact__col h4 {
+  margin: 0 0 3px;
+  font-size: 0.76rem;
+}
+
+.impact__col p {
+  margin: 0;
+}
+
+.impact__note {
+  margin: 8px 0 0;
+  font-size: 0.7rem;
+  line-height: 1.6;
+  color: var(--text-faint);
+}
+
+@media (max-width: 640px) {
+  .impact__cols {
+    grid-template-columns: 1fr;
+  }
+}
