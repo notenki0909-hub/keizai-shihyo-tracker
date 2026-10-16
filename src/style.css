@@ -2471,3 +2471,16 @@ a {
     padding-left: 0;
   }
 }
+}
+
+/* ---------- 自動更新の最終チェック表示（ヘッダー） ---------- */
+.fetch-status__ok {
+  color: var(--pos);
+  font-weight: 700;
+  cursor: help;
+}
+
+.fetch-status__ng {
+  color: var(--neg);
+  font-weight: 700;
+}

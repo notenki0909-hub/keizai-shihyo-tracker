@@ -10,6 +10,7 @@ Chart.register(annotationPlugin, zoomPlugin);
 
 import { loadEvents, loadReleases, groupEventsByDate, eventPillHtml, renderEventDetail } from "./events.js";
 import { loadMarket, marketBoardHtml } from "./market.js";
+import { showFetchStatus } from "./fetch-status.js";
 
 const DATA_URL = import.meta.env.BASE_URL + "data/indicators.json";
 const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "為替・市場"];
@@ -1690,9 +1691,12 @@ async function init() {
   }
 
   const gen = new Date(state.data.generatedAt);
-  const genStr = `${gen.getFullYear()}年${gen.getMonth() + 1}月${gen.getDate()}日`;
-  document.getElementById("meta-line").textContent =
-    `最終更新 ${genStr}　／　${state.data.indicatorCount} 指標　／　毎回 API から全期間を再取得`;
+  const genStr = `${gen.getFullYear()}年${gen.getMonth() + 1}月${gen.getDate()}日 ${gen.getHours()}:${String(gen.getMinutes()).padStart(2, "0")}`;
+  // 「データの最終更新」＝データが実際に変わった時刻。変化がない回は書き換えないため、取得は毎回しているが時刻は進まない。
+  // 取得（チェック）自体を毎回行っていることは、自動更新の最終実行時刻（#fetch-status）で示す。
+  document.getElementById("meta-line").innerHTML =
+    `データの最終更新 ${genStr}　／　${state.data.indicatorCount} 指標　／　毎回 API から全期間を再取得<span id="fetch-status"></span>`;
+  showFetchStatus("keizai-shihyo-tracker");
 
   state.events = await eventsPromise;
   state.releases = await releasesPromise;
