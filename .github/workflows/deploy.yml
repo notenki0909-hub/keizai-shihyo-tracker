@@ -30,6 +30,8 @@ concurrency:
 jobs:
   update-data:
     runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
     steps:
       - uses: actions/checkout@v5
 
@@ -58,6 +60,7 @@ jobs:
         run: npm run fetch:market
 
       - name: 変更があればコミット
+        id: commit
         if: github.event_name != 'push'
         run: |
           git add public/data/*.json
@@ -66,12 +69,16 @@ jobs:
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git commit -m "chore(data): 経済指標データを更新 ($(date -u +%Y-%m-%d))"
             git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "データに変更なし"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
   build-deploy:
     needs: update-data
+    # 定期実行でデータに変化がなかった回は、ビルド・再公開を省く（push・手動実行のときは常に公開する）
+    if: github.event_name != 'schedule' || needs.update-data.outputs.changed == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

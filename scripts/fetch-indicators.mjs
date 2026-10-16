@@ -20,6 +20,7 @@ import { fetchCustomsTradeBalance } from "./fetch-mof-customs.mjs";
 import { fetchWatchersDi } from "./fetch-cao-watchers.mjs";
 import { updateReleaseHistory, dateInTz } from "./release-history.mjs";
 import { IMPACT } from "./impact.config.mjs";
+import { writeJsonIfChanged } from "./write-json-if-changed.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = resolve(__dirname, "../public/data");
@@ -113,6 +114,11 @@ function estimateNextRelease(ind, latestT) {
     // （祝日までは考慮していないため、あくまで目安）
     if (release.getUTCDay() === 6) release = addDays(release, 2);
     if (release.getUTCDay() === 0) release = addDays(release, 1);
+    // 推定日を過ぎてもまだデータが更新されていない（公表の遅れ・取り込みの遅れ）場合は、過去の日付を
+    // 「次回」として残さず、翌営業日にずらす（カレンダーに過去日の予定が居座らないように）
+    const nowUtc = new Date();
+    const todayMs = Date.UTC(nowUtc.getUTCFullYear(), nowUtc.getUTCMonth(), nowUtc.getUTCDate());
+    if (release.getTime() < todayMs) return toISO(nextBusinessDayFromToday());
     return toISO(release);
   }
 
@@ -828,7 +834,7 @@ async function main() {
   };
 
   const file = resolve(OUT_DIR, "indicators.json");
-  await writeFile(file, JSON.stringify(payload, null, 2) + "\n", "utf8");
+  const wrote = await writeJsonIfChanged(file, payload, 2); // 内容に変化がなければ書き換えない（generatedAtのみの差は変化なし）
 
   // 発表履歴（過去1年分）の更新。失敗しても指標データの更新は止めない
   try {
@@ -843,7 +849,7 @@ async function main() {
   } catch (err) {
     console.log(`発表履歴の更新に失敗（指標データには影響なし）: ${err.message}`);
   }
-  console.log(`\n書き出し: ${file}`);
+  console.log(wrote ? `\n書き出し: ${file}` : "\n変更なし（indicators.json は書き換えない）");
   console.log(`成功 ${out.length} / ${INDICATORS.length} 指標`);
   if (failures.length) {
     console.log(`失敗: ${failures.map((f) => f.id).join(", ")}`);

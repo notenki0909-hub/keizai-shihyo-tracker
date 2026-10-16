@@ -11,6 +11,7 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildBojEvents } from "./fetch-boj-events.mjs";
 import { isoDate, addDays } from "./events-util.mjs";
+import { writeJsonIfChanged } from "./write-json-if-changed.mjs";
 
 const OUT_DIR = resolve(dirname(fileURLToPath(import.meta.url)), "../public/data");
 const OUT_FILE = resolve(OUT_DIR, "events.json");
@@ -55,9 +56,9 @@ async function main() {
     eventCount: events.length,
     events,
   };
-  await writeFile(OUT_FILE, JSON.stringify(payload, null, 1) + "\n", "utf8");
+  const wrote = await writeJsonIfChanged(OUT_FILE, payload, 1);
   const byType = events.reduce((acc, e) => ((acc[e.type] = (acc[e.type] ?? 0) + 1), acc), {});
-  console.log(`書き出し: ${OUT_FILE}`);
+  console.log(wrote ? `書き出し: ${OUT_FILE}` : "変更なし（events.json は書き換えない）");
   console.log(`イベント ${events.length} 件:`, byType);
 }
 
