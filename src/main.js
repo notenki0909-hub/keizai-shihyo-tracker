@@ -544,7 +544,47 @@ function renderCategoryGuide() {
       </div>`;
   };
 
-  el.innerHTML = row("① まず見る", "category-guide__badge--first", guide.first) + row("② 次に見る（補完）", "category-guide__badge--second", guide.second);
+  // ①が「先行／一致／遅行」のグループ形式（groups）の場合の描画
+  const groupedFirst = (first) => {
+    const kindCls = { 先行: "lead", 一致: "coincident", 遅行: "lag" };
+    const items = first.groups
+      .map((g) =>
+        g.items
+          .map((it) => {
+            const links = (it.ids || [])
+              .map(findInd)
+              .filter(Boolean)
+              .map((ind) => `<button class="category-guide__link" data-id="${ind.id}">${ind.shortName ?? ind.name}</button>`)
+              .join("");
+            const ext = it.external
+              ? `<a class="category-guide__ext" href="${it.external.url}" target="_blank" rel="noopener">${it.external.label} ↗</a>`
+              : "";
+            const notes = it.notes ? `<span class="category-guide__note">${it.notes}</span>` : "";
+            return `
+              <div class="category-guide__item">
+                <span class="category-guide__kind category-guide__kind--${kindCls[g.label] ?? "lead"}">${g.label}</span>
+                <div class="category-guide__body">
+                  <div class="category-guide__itemhead"><b>${it.name}</b>${notes}</div>
+                  <div class="category-guide__links">${links}${ext}</div>
+                  <p>${it.reason}</p>
+                </div>
+              </div>`;
+          })
+          .join("")
+      )
+      .join("");
+    return `
+      <div class="category-guide__row category-guide__row--grouped">
+        <span class="category-guide__badge category-guide__badge--first">① まず見る</span>
+        <div class="category-guide__body">
+          <p class="category-guide__intro">${first.intro ?? ""}</p>
+          ${items}
+        </div>
+      </div>`;
+  };
+
+  const firstHtml = guide.first?.groups ? groupedFirst(guide.first) : row("① まず見る", "category-guide__badge--first", guide.first);
+  el.innerHTML = firstHtml + row("② 次に見る（補完）", "category-guide__badge--second", guide.second);
   el.hidden = false;
   el.querySelectorAll(".category-guide__link").forEach((btn) => {
     btn.addEventListener("click", () => openDetail(btn.dataset.id));

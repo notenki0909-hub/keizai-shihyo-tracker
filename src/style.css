@@ -2336,3 +2336,77 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- ①まず見る：先行／一致／遅行のグループ表示（景気） ---------- */
+.category-guide__row--grouped {
+  flex-direction: column;
+  gap: 8px;
+}
+
+.category-guide__row--grouped > .category-guide__body {
+  width: 100%;
+}
+
+.category-guide__intro {
+  margin: 0 0 8px;
+}
+
+.category-guide__item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-top: 1px dashed var(--border);
+}
+
+.category-guide__kind {
+  flex: none;
+  min-width: 2.8em;
+  text-align: center;
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  border-radius: 6px;
+  border: 1px solid currentColor;
+}
+
+.category-guide__kind--lead {
+  color: var(--cat-景気);
+}
+
+.category-guide__kind--coincident {
+  color: var(--pos);
+}
+
+.category-guide__kind--lag {
+  color: var(--ref-target);
+}
+
+.category-guide__itemhead b {
+  font-size: 0.92rem;
+}
+
+.category-guide__note {
+  margin-left: 8px;
+  padding: 0 7px;
+  font-size: 0.68rem;
+  color: var(--text-faint);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.category-guide__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+  margin-top: 2px;
+}
+
+.category-guide__links .category-guide__link {
+  font-size: 0.84rem;
+}
+
+.category-guide__ext {
+  font-size: 0.84rem;
+  color: var(--accent);
+}
