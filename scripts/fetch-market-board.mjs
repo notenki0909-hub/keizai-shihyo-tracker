@@ -7,8 +7,10 @@
  *
  * 指標カード用のデータ（indicators.json）とは独立に、直近の値だけを軽く取り直す（毎回の自動更新で実行）。
  * 取得元（いずれも登録・APIキー不要）：
- *   ドル円         日本銀行 時系列統計データ検索サイト（東京17時、fetch-boj-fx-daily.mjs）
- *   米10年国債利回り / WTI原油 / S&P500 / 日経平均株価   FRED（DGS10 / DCOILWTICO / SP500 / NIKKEI225）
+ *   ドル円         日本銀行 時系列統計データ検索サイト（東京17時、fetch-boj-fx-daily.mjs。約2営業日遅れ）
+ *                  ＋「参考」として ECB参考レートからの換算値（1営業日新しい。時点・方法が違うため併記のみ）
+ *   米10年国債利回り  米財務省の日次イールドカーブCSV（取れなければFREDのDGS10＝1営業日遅れに切り替え）
+ *   WTI原油 / S&P500 / 日経平均株価   FRED（DCOILWTICO / SP500 / NIKKEI225）
  *   日本10年国債利回り  財務省「国債金利情報」CSV（当月の jgbcm.csv ＋ 前月までの data/jgbcm_all.csv）
  * 銘柄ごとに失敗しても他は更新し、失敗した銘柄は前回の値をそのまま残す。
  * 各銘柄は「最新値・前営業日の値・直近30営業日の推移」を持つ。表示用の単位・桁数・変化の出し方もここで定義する。
@@ -71,30 +73,115 @@ async function fetchJgb10y() {
 }
 
 /**
+ * 米財務省の日次イールドカーブ（米10年国債利回り）。FRED(DGS10)はこの値を翌営業日に写すため、1営業日早い。
+ * CSVは当年分（日付は MM/DD/YYYY、新しい順）。年初で点が足りないときは前年分も取る。
+ */
+async function fetchTreasury10y() {
+  const year = new Date().getUTCFullYear();
+  const fetchYear = async (y) => {
+    const url =
+      `https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/${y}/all` +
+      `?type=daily_treasury_yield_curve&field_tdr_date_value=${y}&page&_format=csv`;
+    const res = await fetch(url, { headers: UA, signal: AbortSignal.timeout(60000) });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const lines = (await res.text()).trim().split(/\r?\n/);
+    const header = lines[0].split(",").map((h) => h.replace(/"/g, "").trim());
+    const col = header.indexOf("10 Yr");
+    if (col < 0) throw new Error("財務省CSV：10 Yr の列が見つかりません");
+    const points = [];
+    for (const line of lines.slice(1)) {
+      const cells = line.split(",");
+      const m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec((cells[0] ?? "").replace(/"/g, "").trim());
+      const value = Number(cells[col]);
+      if (m && cells[col] && Number.isFinite(value)) points.push({ t: `${m[3]}-${m[1]}-${m[2]}`, value });
+    }
+    return points;
+  };
+  let points = await fetchYear(year);
+  if (points.length < SPARK_POINTS + 1) points = [...(await fetchYear(year - 1)), ...points];
+  return { points, source: "米財務省（日次イールドカーブ）" };
+}
+
+/** 米10年国債利回り：財務省が取れなければ従来どおりFRED（1営業日遅れ）に戻す */
+async function fetchUs10y() {
+  try {
+    return await fetchTreasury10y();
+  } catch (err) {
+    console.log(`    財務省の取得に失敗、FREDに切り替え: ${err.message}`);
+    return { points: await fetchFred("DGS10"), source: "FRED（米財務省）" };
+  }
+}
+
+/**
+ * ドル円の参考値：ECBの参考レート（EUR基準）から ドル円＝EUR/JPY ÷ EUR/USD で換算する（欧州中央銀行14:15時点、欧州の営業日のみ）。
+ * 日銀の東京17時の値とは時点・算出方法が違うため、あくまで「参考」として併記する。直近90日のXMLを使う
+ * （同名のCSV eurofxref-hist-90d.csv は存在しない。eurofxref-hist.csv は全期間で重い）。
+ */
+async function fetchEcbUsdJpy() {
+  const res = await fetch("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml", { headers: UA, signal: AbortSignal.timeout(60000) });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const xml = await res.text();
+  // <Cube time="2026-10-15"><Cube currency="USD" rate="1.1208"/><Cube currency="JPY" rate="177.06"/>…</Cube> の繰り返し
+  const rateOf = (block, cur) => {
+    const i = block.indexOf(`currency="${cur}" rate="`);
+    if (i < 0) return NaN;
+    const start = i + `currency="${cur}" rate="`.length;
+    return Number(block.slice(start, block.indexOf('"', start)));
+  };
+  const points = [];
+  for (const block of xml.split('<Cube time="').slice(1)) {
+    const t = block.slice(0, 10);
+    const usd = rateOf(block, "USD");
+    const jpy = rateOf(block, "JPY");
+    if (usd > 0 && jpy > 0) points.push({ t, value: jpy / usd });
+  }
+  if (points.length < 2) throw new Error("ECB XML：値が2点以上取得できませんでした");
+  return points.sort((a, b) => a.t.localeCompare(b.t));
+}
+
+/**
  * change：変化の出し方。"pct"＝前営業日比の変化額と変化率（%）、"pt"＝変化額のみ（利回りは%ポイント）。
  * detailIds：クリックで開く指標詳細（サイトに存在するもののうち最初のもの。無ければ押せない表示）。
  */
 const ITEMS = [
-  { id: "usdjpy", label: "ドル円", unit: "円", digits: 2, change: "pct", detailIds: ["usdjpy"], source: "日本銀行（東京17時）", get: fetchUsdJpyDaily },
-  { id: "us10y", label: "米10年国債利回り", unit: "%", digits: 2, change: "pt", detailIds: ["treasury_10y_us"], source: "FRED（米財務省）", get: () => fetchFred("DGS10") },
+  {
+    id: "usdjpy",
+    label: "ドル円",
+    unit: "円",
+    digits: 2,
+    change: "pct",
+    detailIds: ["usdjpy"],
+    source: "日本銀行（東京17時）",
+    get: fetchUsdJpyDaily,
+    getReference: async () => ({ label: "ECB換算", note: "欧州中央銀行の参考レート（14:15時点）から換算", points: await fetchEcbUsdJpy() }),
+  },
+  { id: "us10y", label: "米10年国債利回り", unit: "%", digits: 2, change: "pt", detailIds: ["treasury_10y_us"], source: "米財務省（日次イールドカーブ）", get: fetchUs10y },
   { id: "jgb10y", label: "日本10年国債利回り", unit: "%", digits: 3, change: "pt", detailIds: [], source: "財務省", get: fetchJgb10y },
   { id: "wti", label: "WTI原油", unit: "ドル", digits: 2, change: "pct", detailIds: ["wti_oil_us"], source: "FRED（EIA）", get: () => fetchFred("DCOILWTICO") },
   { id: "sp500", label: "S&P500", unit: "", digits: 2, change: "pct", detailIds: ["sp500_us"], source: "FRED（S&P Dow Jones Indices）", get: () => fetchFred("SP500") },
   { id: "nikkei225", label: "日経平均株価", unit: "円", digits: 2, change: "pct", detailIds: ["nikkei225"], source: "FRED（日本経済新聞社）", get: () => fetchFred("NIKKEI225") },
 ];
 
-function toItem(def, points) {
-  const pts = points.filter((p) => Number.isFinite(p.value)).sort((a, b) => a.t.localeCompare(b.t));
+/** got は点の配列、または { points, source }（取得元が状況で変わる銘柄用） */
+function toItem(def, got, reference) {
+  const raw = Array.isArray(got) ? got : got.points;
+  const pts = raw.filter((p) => Number.isFinite(p.value)).sort((a, b) => a.t.localeCompare(b.t));
   if (pts.length < 2) throw new Error("値が2点以上取得できませんでした");
   const latest = pts.at(-1);
   const prev = pts.at(-2);
-  const { get, ...meta } = def;
-  return {
+  const { get, getReference, ...meta } = def;
+  const item = {
     ...meta,
+    ...(!Array.isArray(got) && got.source ? { source: got.source } : {}),
     latest: { t: latest.t, value: latest.value },
     prev: { t: prev.t, value: prev.value },
     spark: pts.slice(-SPARK_POINTS).map((p) => p.value),
   };
+  if (reference) {
+    const r = reference.points.at(-1);
+    item.reference = { label: reference.label, note: reference.note, t: r.t, value: r.value };
+  }
+  return item;
 }
 
 async function main() {
@@ -109,7 +196,15 @@ async function main() {
   let failed = 0;
   for (const def of ITEMS) {
     try {
-      const item = toItem(def, await def.get());
+      let reference = null;
+      if (def.getReference) {
+        try {
+          reference = await def.getReference();
+        } catch (err) {
+          console.log(`    参考値（${def.id}）の取得に失敗、併記なし: ${err.message}`); // 参考値が取れなくても本体は更新する
+        }
+      }
+      const item = toItem(def, await def.get(), reference);
       items.push(item);
       console.log(`- ${def.id} ... OK (${item.latest.t} = ${item.latest.value})`);
     } catch (err) {

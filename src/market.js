@@ -66,7 +66,11 @@ export function marketBoardHtml(market, hasIndicator) {
         <span class="mb-value">${fmtNum(it.latest.value, it.digits)}<small>${it.unit ? " " + it.unit : ""}</small></span>
         <span class="mb-change mb-change--${dir}">${arrow} ${changeText}</span>
         ${sparkSvg(it.spark, dir)}
-        <span class="mb-meta">${fmtMd(it.latest.t)}時点（前営業日比）${stale}<br>${it.source}</span>`;
+        <span class="mb-meta">${fmtMd(it.latest.t)}時点（前営業日比）${stale}<br>${it.source}</span>${
+          it.reference
+            ? `<span class="mb-ref" title="${it.reference.note}。時点・算出方法が違うため、上の公式値と数銭〜数十銭ずれることがあります。">参考：${it.reference.label} <b>${fmtNum(it.reference.value, it.digits)}</b> ${it.unit}（${fmtMd(it.reference.t)}）</span>`
+            : ""
+        }`;
       return detailId
         ? `<button type="button" class="mb-item mb-item--link" data-id="${detailId}" title="${it.label}の推移を見る">${inner}</button>`
         : `<div class="mb-item">${inner}</div>`;
@@ -76,6 +80,6 @@ export function marketBoardHtml(market, hasIndicator) {
   return `
     <div class="market-board" aria-label="主要マーケット">
       <div class="market-board__grid">${cards}</div>
-      <p class="market-board__note">緑＝前営業日より上昇、赤＝下落（値動きの向きで、良し悪しの評価ではありません）。各データの最新の営業日の値で、自動更新のたびに取り直しています。為替・利回り・原油は元データの公表が1〜2営業日遅れることがあります。</p>
+      <p class="market-board__note">緑＝前営業日より上昇、赤＝下落（値動きの向きで、良し悪しの評価ではありません）。各データの最新の営業日の値で、自動更新のたびに取り直しています。ドル円・原油は元データの公表が1〜2営業日遅れます。ドル円の「参考」は、欧州中央銀行（ECB）のユーロ/円・ユーロ/ドルからの換算値で、日銀の東京17時の値より1営業日新しい一方、時点が違うため数銭〜数十銭ずれることがあります。米10年国債利回りは米財務省の日次データのため、詳細グラフ（FRED経由）より1営業日早く反映されます。</p>
     </div>`;
 }

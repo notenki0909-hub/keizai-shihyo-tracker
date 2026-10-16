@@ -2199,3 +2199,17 @@ a {
     font-size: 1.02rem;
   }
 }
+
+.mb-ref {
+  margin-top: 3px;
+  padding-top: 3px;
+  border-top: 1px dashed var(--border);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  cursor: help;
+}
+
+.mb-ref b {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
