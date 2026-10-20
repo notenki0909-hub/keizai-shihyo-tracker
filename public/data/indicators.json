@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T13:51:54.191Z",
+  "generatedAt": "2026-10-20T06:10:28.856Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 34,
@@ -118,7 +118,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-10-19T13:51:54.196Z",
+    "generatedAt": "2026-10-20T06:10:28.861Z",
     "stats": {
       "total": 34,
       "improving": 10,
@@ -398,8 +398,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-10-14",
-          "to": "2026-10-15"
+          "from": "2026-10-15",
+          "to": "2026-10-16"
         }
       },
       {
@@ -32257,7 +32257,7 @@
         "home": "食料品・電気代・ガソリン、海外旅行の費用。企業はコスト増の一部を吸収するため、物価への転嫁は部分的になる。"
       },
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-10-20",
+      "nextRelease": "2026-10-21",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -32266,12 +32266,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-10-15",
-          "value": 157.87,
+          "t": "2026-10-16",
+          "value": 158.01,
           "provisional": false
         },
-        "changeFromPrev": -0.48,
-        "changeFromYearAgo": 6.62,
+        "changeFromPrev": 0.14,
+        "changeFromYearAgo": 6.77,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -32280,7 +32280,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2634,
+        "count": 2635,
         "start": "2016-01-04"
       },
       "points": [
@@ -42819,6 +42819,10 @@
         {
           "t": "2026-10-15",
           "value": 157.87
+        },
+        {
+          "t": "2026-10-16",
+          "value": 158.01
         }
       ]
     },
