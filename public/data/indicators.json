@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T12:15:59.825Z",
+  "generatedAt": "2026-10-22T06:12:20.065Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 34,
@@ -118,7 +118,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-10-21T12:15:59.830Z",
+    "generatedAt": "2026-10-22T06:12:20.070Z",
     "stats": {
       "total": 34,
       "improving": 10,
@@ -398,8 +398,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-10-16",
-          "to": "2026-10-19"
+          "from": "2026-10-19",
+          "to": "2026-10-20"
         }
       },
       {
@@ -9587,7 +9587,7 @@
         "home": "食料品・光熱費など日々の支出が増える。賃上げが物価に追いつくかが家計の分かれ目。"
       },
       "releaseSchedule": "総務省統計局が対象月の翌月中旬〜下旬に8:30発表（東京都区部の速報は対象月内に先行公表）。",
-      "nextRelease": "2026-10-22",
+      "nextRelease": "2026-10-23",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -32258,7 +32258,7 @@
         "home": "食料品・電気代・ガソリン、海外旅行の費用。企業はコスト増の一部を吸収するため、物価への転嫁は部分的になる。"
       },
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-10-22",
+      "nextRelease": "2026-10-23",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -32267,12 +32267,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-10-19",
-          "value": 158.17,
+          "t": "2026-10-20",
+          "value": 158.08,
           "provisional": false
         },
-        "changeFromPrev": 0.16,
-        "changeFromYearAgo": 8.46,
+        "changeFromPrev": -0.09,
+        "changeFromYearAgo": 7.33,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -32281,7 +32281,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2636,
+        "count": 2637,
         "start": "2016-01-04"
       },
       "points": [
@@ -42828,6 +42828,10 @@
         {
           "t": "2026-10-19",
           "value": 158.17
+        },
+        {
+          "t": "2026-10-20",
+          "value": 158.08
         }
       ]
     },
@@ -62748,7 +62752,7 @@
         "home": "ガソリン・食料品・電気代など、輸入に頼る品の価格に表れる。季節調整なしのため、月ごとの季節要因が出る。"
       },
       "releaseSchedule": "財務省が対象月の翌月中旬〜下旬（17〜22日ごろ）8:50に速報を公表。",
-      "nextRelease": "2026-10-22",
+      "nextRelease": "2026-10-23",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "財務省 貿易統計",
@@ -65109,7 +65113,7 @@
         "home": "食料品・光熱費など日々の支出が増える。賃上げが物価に追いつくかが家計の分かれ目。"
       },
       "releaseSchedule": "総務省統計局が対象月の翌月中旬〜下旬に8:30発表（東京都区部の速報は対象月内に先行公表）。",
-      "nextRelease": "2026-10-22",
+      "nextRelease": "2026-10-23",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -68947,7 +68951,7 @@
         "home": "電気・ガソリンを除く、食料品（外食含む）・サービス・日用品などの値上がり。賃上げが続く値上がりに追いつくかが家計の分かれ目。エネルギー代の負担は含まれない。"
       },
       "releaseSchedule": "総務省統計局が対象月の翌月中旬〜下旬に8:30発表（コアCPI・総合CPIと同時）。",
-      "nextRelease": "2026-10-22",
+      "nextRelease": "2026-10-23",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
