@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T12:17:58.595Z",
+  "generatedAt": "2026-10-23T06:07:52.591Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 34,
@@ -118,7 +118,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-10-22T12:17:58.603Z",
+    "generatedAt": "2026-10-23T06:07:52.594Z",
     "stats": {
       "total": 34,
       "improving": 9,
@@ -344,8 +344,8 @@
         "name": "コアCPI（生鮮食品除く総合）",
         "category": "物価",
         "period": {
-          "from": "2026-07",
-          "to": "2026-08"
+          "from": "2026-08",
+          "to": "2026-09"
         }
       },
       {
@@ -398,8 +398,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-10-19",
-          "to": "2026-10-20"
+          "from": "2026-10-20",
+          "to": "2026-10-21"
         }
       },
       {
@@ -425,8 +425,8 @@
         "name": "消費者物価指数（総合・前年同月比）",
         "category": "物価",
         "period": {
-          "from": "2026-07",
-          "to": "2026-08"
+          "from": "2026-08",
+          "to": "2026-09"
         }
       },
       {
@@ -434,8 +434,8 @@
         "name": "コアコアCPI（生鮮食品及びエネルギーを除く総合）",
         "category": "物価",
         "period": {
-          "from": "2026-07",
-          "to": "2026-08"
+          "from": "2026-08",
+          "to": "2026-09"
         }
       }
     ],
@@ -513,6 +513,12 @@
       {
         "id": "unemployment_rate",
         "name": "完全失業率",
+        "category": "雇用・所得",
+        "period": null
+      },
+      {
+        "id": "real_wage_index_yoy",
+        "name": "実質賃金指数（現金給与総額）",
         "category": "雇用・所得",
         "period": null
       },
@@ -599,7 +605,7 @@
         "reference": {
           "label": "0%＝実質増減の分岐",
           "value": 0,
-          "current": 1.5
+          "current": 1.6
         }
       },
       {
@@ -1169,26 +1175,6 @@
         },
         "detail": "直近（2026-06〜2026-08）は改善方向ですが、その前（2026-03〜2026-05）と比べて勢いが24%まで弱まっています。改善の勢いが鈍化しており、今後の反転に注意が必要です。",
         "text": "景気動向指数 CI一致指数は直近（2026-06〜2026-08）改善方向ですが、その前（2026-03〜2026-05）と比べて勢いが24%まで弱まっています。改善の勢いが鈍化しており、今後の反転に注意が必要です。"
-      },
-      {
-        "id": "real_wage_index_yoy",
-        "name": "実質賃金指数（現金給与総額）",
-        "category": "雇用・所得",
-        "favorable": false,
-        "flipped": false,
-        "proximity": 75,
-        "period": {
-          "recent": {
-            "from": "2026-06",
-            "to": "2026-08"
-          },
-          "prior": {
-            "from": "2026-03",
-            "to": "2026-05"
-          }
-        },
-        "detail": "直近（2026-06〜2026-08）は悪化方向ですが、その前（2026-03〜2026-05）と比べて勢いが25%まで弱まっています。悪化の勢いが鈍化しており、改善に転じる兆しの可能性があります。",
-        "text": "実質賃金指数（現金給与総額）は直近（2026-06〜2026-08）悪化方向ですが、その前（2026-03〜2026-05）と比べて勢いが25%まで弱まっています。悪化の勢いが鈍化しており、改善に転じる兆しの可能性があります。"
       },
       {
         "id": "gdp_real_growth",
@@ -9597,7 +9583,7 @@
         "home": "食料品・光熱費など日々の支出が増える。賃上げが物価に追いつくかが家計の分かれ目。"
       },
       "releaseSchedule": "総務省統計局が対象月の翌月中旬〜下旬に8:30発表（東京都区部の速報は対象月内に先行公表）。",
-      "nextRelease": "2026-10-23",
+      "nextRelease": "2026-11-20",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -9606,12 +9592,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-08",
-          "value": 1.7,
+          "t": "2026-09",
+          "value": 2.1,
           "provisional": false
         },
-        "changeFromPrev": -0.1,
-        "changeFromYearAgo": -1,
+        "changeFromPrev": 0.4,
+        "changeFromYearAgo": -0.8,
         "min": {
           "t": "2009-08",
           "value": -2.4
@@ -9620,7 +9606,7 @@
           "t": "1974-10",
           "value": 24.7
         },
-        "count": 668,
+        "count": 669,
         "start": "1971-01"
       },
       "points": [
@@ -12295,6 +12281,10 @@
         {
           "t": "2026-08",
           "value": 1.7
+        },
+        {
+          "t": "2026-09",
+          "value": 2.1
         }
       ]
     },
@@ -23526,11 +23516,11 @@
       "summary": {
         "latest": {
           "t": "2026-08",
-          "value": 1.5,
-          "provisional": true
+          "value": 1.6,
+          "provisional": false
         },
-        "changeFromPrev": -0.5,
-        "changeFromYearAgo": 3.2,
+        "changeFromPrev": -0.4,
+        "changeFromYearAgo": 3.3,
         "min": {
           "t": "2014-05",
           "value": -4.1
@@ -24197,8 +24187,7 @@
         },
         {
           "t": "2026-08",
-          "value": 1.5,
-          "provisional": true
+          "value": 1.6
         }
       ]
     },
@@ -32268,7 +32257,7 @@
         "home": "食料品・電気代・ガソリン、海外旅行の費用。企業はコスト増の一部を吸収するため、物価への転嫁は部分的になる。"
       },
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-10-23",
+      "nextRelease": "2026-10-26",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -32277,12 +32266,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-10-20",
-          "value": 158.08,
+          "t": "2026-10-21",
+          "value": 158.13,
           "provisional": false
         },
-        "changeFromPrev": -0.09,
-        "changeFromYearAgo": 7.33,
+        "changeFromPrev": 0.05,
+        "changeFromYearAgo": 6.97,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -32291,7 +32280,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2637,
+        "count": 2638,
         "start": "2016-01-04"
       },
       "points": [
@@ -42842,6 +42831,10 @@
         {
           "t": "2026-10-20",
           "value": 158.08
+        },
+        {
+          "t": "2026-10-21",
+          "value": 158.13
         }
       ]
     },
@@ -62766,7 +62759,7 @@
         "home": "ガソリン・食料品・電気代など、輸入に頼る品の価格に表れる。季節調整なしのため、月ごとの季節要因が出る。"
       },
       "releaseSchedule": "財務省が対象月の翌月中旬〜下旬（17〜22日ごろ）8:50に速報を公表。",
-      "nextRelease": "2026-10-23",
+      "nextRelease": "2026-10-26",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "財務省 貿易統計",
@@ -65127,7 +65120,7 @@
         "home": "食料品・光熱費など日々の支出が増える。賃上げが物価に追いつくかが家計の分かれ目。"
       },
       "releaseSchedule": "総務省統計局が対象月の翌月中旬〜下旬に8:30発表（東京都区部の速報は対象月内に先行公表）。",
-      "nextRelease": "2026-10-23",
+      "nextRelease": "2026-11-20",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -65136,11 +65129,11 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-08",
-          "value": 1.9,
+          "t": "2026-09",
+          "value": 2.1,
           "provisional": false
         },
-        "changeFromPrev": 0,
+        "changeFromPrev": 0.2,
         "changeFromYearAgo": -0.8,
         "min": {
           "t": "2009-10",
@@ -65150,7 +65143,7 @@
           "t": "1974-02",
           "value": 24.9
         },
-        "count": 668,
+        "count": 669,
         "start": "1971-01"
       },
       "points": [
@@ -67825,6 +67818,10 @@
         {
           "t": "2026-08",
           "value": 1.9
+        },
+        {
+          "t": "2026-09",
+          "value": 2.1
         }
       ]
     },
@@ -68965,7 +68962,7 @@
         "home": "電気・ガソリンを除く、食料品（外食含む）・サービス・日用品などの値上がり。賃上げが続く値上がりに追いつくかが家計の分かれ目。エネルギー代の負担は含まれない。"
       },
       "releaseSchedule": "総務省統計局が対象月の翌月中旬〜下旬に8:30発表（コアCPI・総合CPIと同時）。",
-      "nextRelease": "2026-10-23",
+      "nextRelease": "2026-11-20",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -68974,12 +68971,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-08",
-          "value": 1.9,
+          "t": "2026-09",
+          "value": 2.4,
           "provisional": false
         },
-        "changeFromPrev": 0,
-        "changeFromYearAgo": -1.4,
+        "changeFromPrev": 0.5,
+        "changeFromYearAgo": -0.6,
         "min": {
           "t": "2010-05",
           "value": -1.7
@@ -68988,7 +68985,7 @@
           "t": "1974-10",
           "value": 23.9
         },
-        "count": 668,
+        "count": 669,
         "start": "1971-01"
       },
       "points": [
@@ -71663,6 +71660,10 @@
         {
           "t": "2026-08",
           "value": 1.9
+        },
+        {
+          "t": "2026-09",
+          "value": 2.4
         }
       ]
     }

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-19T13:51:54.233Z",
+ "generatedAt": "2026-10-23T06:07:52.616Z",
  "retentionDays": 365,
  "releases": {
   "ppi_yoy": [
@@ -43,6 +43,13 @@
     "value": 1.7,
     "kind": "detected",
     "prev": 1.8
+   },
+   {
+    "date": "2026-10-23",
+    "t": "2026-09",
+    "value": 2.1,
+    "kind": "detected",
+    "prev": 1.7
    }
   ],
   "industrial_production": [
@@ -184,6 +191,24 @@
     "kind": "detected",
     "prev": 106.9,
     "provisional": true
+   }
+  ],
+  "cpi_total_yoy": [
+   {
+    "date": "2026-10-23",
+    "t": "2026-09",
+    "value": 2.1,
+    "kind": "detected",
+    "prev": 1.9
+   }
+  ],
+  "cpi_corecore_yoy": [
+   {
+    "date": "2026-10-23",
+    "t": "2026-09",
+    "value": 2.4,
+    "kind": "detected",
+    "prev": 1.9
    }
   ]
  }
