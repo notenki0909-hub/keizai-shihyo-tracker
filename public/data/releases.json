@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-23T06:07:52.616Z",
+ "generatedAt": "2026-10-29T07:17:10.897Z",
  "retentionDays": 365,
  "releases": {
   "ppi_yoy": [
@@ -209,6 +209,16 @@
     "value": 2.4,
     "kind": "detected",
     "prev": 1.9
+   }
+  ],
+  "trade_balance_customs": [
+   {
+    "date": "2026-10-29",
+    "t": "2026-09",
+    "value": -5565,
+    "kind": "detected",
+    "prev": -11206,
+    "provisional": true
    }
   ]
  }
