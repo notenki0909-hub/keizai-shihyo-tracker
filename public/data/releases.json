@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-29T07:17:10.897Z",
+ "generatedAt": "2026-10-30T07:20:24.451Z",
  "retentionDays": 365,
  "releases": {
   "ppi_yoy": [
@@ -60,6 +60,14 @@
     "kind": "detected",
     "prev": 104.4,
     "provisional": true
+   },
+   {
+    "date": "2026-10-30",
+    "t": "2026-09",
+    "value": 104.1,
+    "kind": "detected",
+    "prev": 101.9,
+    "provisional": true
    }
   ],
   "housing_starts": [
@@ -69,6 +77,13 @@
     "value": 62759,
     "kind": "detected",
     "prev": 64493
+   },
+   {
+    "date": "2026-10-30",
+    "t": "2026-09",
+    "value": 59482,
+    "kind": "detected",
+    "prev": 62759
    }
   ],
   "unemployment_rate": [
@@ -78,6 +93,13 @@
     "value": 2.5,
     "kind": "detected",
     "prev": 2.4
+   },
+   {
+    "date": "2026-10-30",
+    "t": "2026-09",
+    "value": 2.4,
+    "kind": "detected",
+    "prev": 2.5
    }
   ],
   "jobs_to_applicants_ratio": [
@@ -85,6 +107,13 @@
     "date": "2026-10-02",
     "t": "2026-08",
     "value": 1.18,
+    "kind": "detected",
+    "prev": 1.18
+   },
+   {
+    "date": "2026-10-30",
+    "t": "2026-09",
+    "value": 1.19,
     "kind": "detected",
     "prev": 1.18
    }
@@ -96,6 +125,13 @@
     "value": 2.06,
     "kind": "detected",
     "prev": 2.1
+   },
+   {
+    "date": "2026-10-30",
+    "t": "2026-09",
+    "value": 2.19,
+    "kind": "detected",
+    "prev": 2.06
    }
   ],
   "monetary_base_yoy": [
