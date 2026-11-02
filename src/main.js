@@ -995,9 +995,19 @@ function renderImpact(ind) {
   }
   el.hidden = false;
   el.open = true;
+  // 「A → B → C」を、番号付きのチップを矢印でつないだ流れ図にして目立たせる
+  const flowSteps = m.flow
+    .split("→")
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map((s) => `<li><span class="impact__step">${s}</span></li>`)
+    .join("");
   el.innerHTML = `
     <summary>🔗 この指標が動くと何が起きる？（経済全体 → 家計への波及）</summary>
-    <p class="impact__flow"><b>典型的な流れ</b>${m.flow}</p>
+    <div class="impact__flow">
+      <b class="impact__flow-title">🔄 典型的な流れ</b>
+      <ol class="impact__steps">${flowSteps}</ol>
+    </div>
     <div class="impact__cols">
       <div class="impact__col impact__col--up"><h4>▲ 上がる・強まるとき</h4><p>${m.up}</p></div>
       <div class="impact__col impact__col--down"><h4>▼ 下がる・弱まるとき</h4><p>${m.down}</p></div>

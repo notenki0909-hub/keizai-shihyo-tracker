@@ -2280,17 +2280,87 @@ a {
   color: var(--text);
 }
 
-.impact__flow,
 .impact__home {
   margin: 8px 0 0;
 }
 
-.impact__flow b,
 .impact__home b {
   display: block;
   margin-bottom: 1px;
   font-size: 0.74rem;
   color: var(--text-dim);
+}
+
+/* 典型的な流れ：番号付きのチップを矢印でつないだ流れ図（詳細画面の波及の説明で最も目立たせる） */
+.impact__flow {
+  margin: 10px 0 0;
+  padding: 10px 12px 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border));
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+
+.impact__flow .impact__flow-title {
+  display: block;
+  margin: 0 0 8px;
+  font-size: 0.92rem;
+  color: var(--accent);
+}
+
+.impact__steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: impact-step;
+}
+
+.impact__steps li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  counter-increment: impact-step;
+}
+
+.impact__steps li:not(:last-child)::after {
+  content: "→";
+  flex: none;
+  color: var(--accent);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.impact__step {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 6px 11px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.5;
+  /* 1文字だけの折り返し（「上／昇」など）を避ける */
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+
+.impact__step::before {
+  content: counter(impact-step);
+  flex: none;
+  min-width: 1.45em;
+  height: 1.45em;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--surface);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.45em;
+  text-align: center;
 }
 
 .impact__cols {
@@ -2334,6 +2404,25 @@ a {
 @media (max-width: 640px) {
   .impact__cols {
     grid-template-columns: 1fr;
+  }
+
+  /* 狭い画面では縦に並べ、矢印を下向きにする */
+  .impact__steps {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .impact__steps li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .impact__steps li:not(:last-child)::after {
+    content: "↓";
+    margin-left: 14px;
+    line-height: 1;
   }
 }
 
