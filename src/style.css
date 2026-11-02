@@ -2662,3 +2662,100 @@ a {
   font-size: 0.78rem;
   color: var(--text-dim);
 }
+
+/* ---------- 見出しクリックで開く説明（経済状況サマリー・発表予定カレンダー） ---------- */
+
+.help-heading__btn {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.help-heading__chip {
+  flex: none;
+  padding: 1px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-faint);
+  font-size: 0.68rem;
+  font-weight: 400;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.help-heading__btn:hover .help-heading__chip,
+.help-heading__btn:focus-visible .help-heading__chip,
+.help-heading__btn[aria-expanded="true"] .help-heading__chip {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.help-heading__btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.help-panel {
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  background: var(--surface-2);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  line-height: 1.75;
+}
+
+.help-panel[hidden] {
+  display: none;
+}
+
+.help-panel .help-panel__what {
+  margin: 0 0 6px;
+  color: var(--text);
+}
+
+.help-panel ul.help-panel__list {
+  display: block;
+  margin: 0 0 4px;
+  padding-left: 1.3em;
+  list-style: disc;
+}
+
+.help-panel .help-panel__list li {
+  margin: 2px 0;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+.help-panel__warn {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--ref-target) 45%, var(--border));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ref-target) 10%, var(--surface));
+  color: var(--text);
+}
+
+.help-panel__warn > b {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--ref-target);
+}
+
+.help-panel__warn ul.help-panel__list {
+  margin-bottom: 0;
+}

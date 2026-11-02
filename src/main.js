@@ -11,6 +11,7 @@ Chart.register(annotationPlugin, zoomPlugin);
 import { loadEvents, loadReleases, groupEventsByDate, eventPillHtml, renderEventDetail } from "./events.js";
 import { loadMarket, marketBoardHtml } from "./market.js";
 import { showFetchStatus } from "./fetch-status.js";
+import { helpHeading, helpPanel, bindHelp } from "./help.js";
 
 const DATA_URL = import.meta.env.BASE_URL + "data/indicators.json";
 const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "為替・市場"];
@@ -785,16 +786,21 @@ function renderEconSummary() {
       </div>
     </div>`;
 
+  // 見出しをクリックすると、直下に説明（見方と受け取り方の注意）が開く
+  const helpCtx = { site: "jp", n: state.data.indicators.length };
+
   const statusHtml = sum.statusFindings.length
     ? `<div class="econ-summary__block">
-        <h3>⚠️ 注目ポイント（目安ラインとの比較）</h3>
+        ${helpHeading("attention", "⚠️ 注目ポイント（目安ラインとの比較）")}
+        ${helpPanel("attention", helpCtx)}
         <ul>${sum.statusFindings.map(findingRow).join("")}</ul>
       </div>`
     : "";
 
   const surpriseHtml = sum.surpriseFindings.length
     ? `<div class="econ-summary__block">
-        <h3>⚡ 直近の大きな変化</h3>
+        ${helpHeading("surprise", "⚡ 直近の大きな変化")}
+        ${helpPanel("surprise", helpCtx)}
         <ul>${sum.surpriseFindings.map(findingRow).join("")}</ul>
       </div>`
     : "";
@@ -813,7 +819,8 @@ function renderEconSummary() {
 
   const continuingHtml = sum.continuingImprovingList
     ? `<div class="econ-summary__block">
-        <h3>🔁 トレンドの向き（継続中）</h3>
+        ${helpHeading("trend", "🔁 トレンドの向き（継続中）")}
+        ${helpPanel("trend", helpCtx)}
         <div class="econ-summary__groups">
           ${group("改善継続", sum.continuingImprovingList, "up", "（直近複数期間の平均的な傾向）")}
           ${group("悪化継続", sum.continuingWorseningList, "down", "（直近複数期間の平均的な傾向）")}
@@ -836,7 +843,8 @@ function renderEconSummary() {
             </details>`
           : "";
         return `<div class="econ-summary__block">
-          <h3>🔄 トレンド転換シグナル <span class="econ-summary__group-basis">（直近複数期間の平均的な傾向）</span></h3>
+          ${helpHeading("turning", `🔄 トレンド転換シグナル <span class="econ-summary__group-basis">（直近複数期間の平均的な傾向）</span>`)}
+          ${helpPanel("turning", helpCtx)}
           <ul class="econ-summary__momentum-list">${visible.map(turningSignalRow).join("")}</ul>
           ${restHtml}
         </div>`;
@@ -889,13 +897,15 @@ function renderEconSummary() {
 
   el.innerHTML = `
     <div class="econ-summary__head">
-      <h2>📊 現在の経済状況サマリー</h2>
+      ${helpHeading("summary", "📊 現在の経済状況サマリー", { tag: "h2" })}
       <span class="econ-summary__updated">最終更新：${genStr}</span>
     </div>
+    ${helpPanel("summary", helpCtx)}
     ${marketBoardHtml(state.market, (id) => state.data.indicators.some((i) => i.id === id))}
     <p class="econ-summary__headline">${sum.headline}</p>
     ${usIntroHtml()}
-    <h3 class="econ-summary__section-title">📍 現在の指標の状況</h3>
+    ${helpHeading("status", "📍 現在の指標の状況", { className: "econ-summary__section-title" })}
+    ${helpPanel("status", helpCtx)}
     <div class="econ-summary__groups">
       ${group("好転位置", sum.currentFavorableList, "up", "（目安ラインとの比較）")}
       ${group("逆転位置", sum.currentUnfavorableList, "down", "（目安ラインとの比較）")}
@@ -904,7 +914,8 @@ function renderEconSummary() {
     ${statusHtml}
     ${continuingHtml}
     ${turningSignalHtml}
-    <h3 class="econ-summary__section-title">前回数値との比較</h3>
+    ${helpHeading("compare", "前回数値との比較", { className: "econ-summary__section-title" })}
+    ${helpPanel("compare", helpCtx)}
     <div class="econ-summary__groups">
       ${group("改善傾向", sum.improvingList, "up", "（前回の数値と比べて）")}
       ${group("悪化傾向", sum.worseningList, "down", "（前回の数値と比べて）")}
@@ -923,6 +934,7 @@ function renderEconSummary() {
   el.querySelectorAll(".econ-summary__link, .econ-summary__name-chip, .econ-summary__combo-chip, .mb-item--link").forEach((btn) => {
     btn.addEventListener("click", () => openDetail(btn.dataset.id));
   });
+  bindHelp(el);
 }
 
 /* ---------- release calendar ---------- */
@@ -1109,13 +1121,14 @@ function renderCalendar() {
 
   el.innerHTML = `
     <div class="calendar__head">
-      <h2 class="calendar__title">📅 発表予定カレンダー</h2>
+      ${helpHeading("calendar", "📅 発表予定カレンダー", { tag: "h2", className: "calendar__title" })}
       <div class="calendar__nav">
         <button type="button" class="calendar__navbtn" id="cal-prev" aria-label="前月">←</button>
         <span class="calendar__month">${year}年${month + 1}月</span>
         <button type="button" class="calendar__navbtn" id="cal-next" aria-label="次月">→</button>
       </div>
     </div>
+    ${helpPanel("calendar", { site: "jp" })}
     <div class="calendar__filters" role="group" aria-label="カレンダーの表示内容">
       <button type="button" class="calendar__toggle" id="cal-toggle-ind" aria-pressed="${state.calShowIndicators}">📊 経済指標</button>
       <button type="button" class="calendar__toggle calendar__toggle--event" id="cal-toggle-ev" aria-pressed="${state.calShowEvents}">🏦 イベント（日銀会合など）</button>
@@ -1149,6 +1162,7 @@ function renderCalendar() {
     state.calMonth = shiftMonth(state.calMonth, 1);
     renderCalendar();
   });
+  bindHelp(el);
 }
 
 function openEventDetail(id) {
