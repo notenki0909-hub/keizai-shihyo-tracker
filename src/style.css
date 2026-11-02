@@ -2814,11 +2814,19 @@ a {
 
 /* ---------- 見出しクリックで開く説明（経済状況サマリー・発表予定カレンダー） ---------- */
 
-.help-heading__btn {
-  display: inline-flex;
-  align-items: baseline;
+/* 見出し：文字（折りたたみの見出しはクリックで中身を開閉）と、横の「説明を見る」ボタン（クリックで説明を開閉） */
+.help-heading {
+  display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
   gap: 4px 10px;
+}
+
+.help-heading__toggle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
   max-width: 100%;
   margin: 0;
   padding: 0;
@@ -2830,6 +2838,34 @@ a {
   cursor: pointer;
 }
 
+.help-heading__toggle::before {
+  content: "▶";
+  flex: none;
+  font-size: 0.7em;
+  color: var(--text-faint);
+}
+
+.help-heading__toggle[aria-expanded="true"]::before {
+  content: "▼";
+}
+
+.help-heading__toggle:hover::before {
+  color: var(--accent);
+}
+
+.help-heading__hint {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-faint);
+}
+
+.help-heading__toggle:focus-visible,
+.help-heading__chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 .help-heading__chip {
   flex: none;
   padding: 1px 8px;
@@ -2837,23 +2873,22 @@ a {
   border-radius: 999px;
   background: var(--surface);
   color: var(--text-faint);
+  font: inherit;
   font-size: 0.68rem;
   font-weight: 400;
   line-height: 1.6;
   white-space: nowrap;
+  cursor: pointer;
 }
 
-.help-heading__btn:hover .help-heading__chip,
-.help-heading__btn:focus-visible .help-heading__chip,
-.help-heading__btn[aria-expanded="true"] .help-heading__chip {
+.help-heading__chip:hover,
+.help-heading__chip[aria-expanded="true"] {
   border-color: var(--accent);
   color: var(--accent);
 }
 
-.help-heading__btn:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 4px;
+.help-collapsible[hidden] {
+  display: none;
 }
 
 .help-panel {

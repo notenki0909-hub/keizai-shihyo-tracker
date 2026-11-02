@@ -11,7 +11,7 @@ Chart.register(annotationPlugin, zoomPlugin);
 import { loadEvents, loadReleases, groupEventsByDate, eventPillHtml, renderEventDetail } from "./events.js";
 import { loadMarket, marketBoardHtml } from "./market.js";
 import { showFetchStatus } from "./fetch-status.js";
-import { helpHeading, helpPanel, bindHelp } from "./help.js";
+import { helpHeading, helpPanel, bindHelp, collapsibleBody } from "./help.js";
 import { quickRefHtml, bindQuickRef } from "./quickref.js";
 
 const DATA_URL = import.meta.env.BASE_URL + "data/indicators.json";
@@ -761,6 +761,9 @@ function jpEconomyHtml() {
  */
 const US_SITE_URL = "https://notenki0909-hub.github.io/us-economic-tracker/";
 
+// 「日本株に影響を与える米国の指標」は普段は折りたたむ。開いたら、再描画しても開いたままにする
+let usIntroOpen = false;
+
 function usIntroHtml() {
   const rows = [
     {
@@ -796,7 +799,7 @@ function usIntroHtml() {
     )
     .join("");
   return `
-    <details class="us-intro" open>
+    <details class="us-intro"${usIntroOpen ? " open" : ""}>
       <summary>🇺🇸 日本株に影響を与える米国の指標</summary>
       <p class="us-intro__lead">日本株は、米国の景気・物価・金利の動きの影響を受けやすいとされます。特に注目される3つを紹介します。</p>
       ${items}
@@ -877,13 +880,19 @@ function renderEconSummary() {
 
   const continuingHtml = sum.continuingImprovingList
     ? `<div class="econ-summary__block">
-        ${helpHeading("trend", "🔁 トレンドの向き（継続中）")}
+        ${helpHeading("trend", "🔁 トレンドの向き（継続中）", {
+          collapsible: true,
+          hint: `（改善継続${sum.continuingImprovingList.length}・悪化継続${sum.continuingWorseningList.length}）`,
+        })}
         ${helpPanel("trend", helpCtx)}
-        <div class="econ-summary__groups">
+        ${collapsibleBody(
+          "trend",
+          `<div class="econ-summary__groups">
           ${group("改善継続", sum.continuingImprovingList, "up", "（直近複数期間の平均的な傾向）")}
           ${group("悪化継続", sum.continuingWorseningList, "down", "（直近複数期間の平均的な傾向）")}
           ${group("横ばい・中立", sum.continuingNeutralList, "neutral", "（前回から不変、または良し悪しの方向がない指標）")}
-        </div>
+        </div>`
+        )}
       </div>`
     : "";
 
@@ -901,10 +910,16 @@ function renderEconSummary() {
             </details>`
           : "";
         return `<div class="econ-summary__block">
-          ${helpHeading("turning", `🔄 トレンド転換シグナル <span class="econ-summary__group-basis">（直近複数期間の平均的な傾向）</span>`)}
+          ${helpHeading("turning", `🔄 トレンド転換シグナル <span class="econ-summary__group-basis">（直近複数期間の平均的な傾向）</span>`, {
+            collapsible: true,
+            hint: `（${sum.turningSignalFindings.length}件）`,
+          })}
           ${helpPanel("turning", helpCtx)}
-          <ul class="econ-summary__momentum-list">${visible.map(turningSignalRow).join("")}</ul>
-          ${restHtml}
+          ${collapsibleBody(
+            "turning",
+            `<ul class="econ-summary__momentum-list">${visible.map(turningSignalRow).join("")}</ul>
+          ${restHtml}`
+          )}
         </div>`;
       })()
     : "";
@@ -964,23 +979,37 @@ function renderEconSummary() {
     ${jpEconomyHtml()}
     ${quickRefHtml({ site: "jp", has: (id) => state.data.indicators.some((i) => i.id === id), indicators: state.data.indicators })}
     ${usIntroHtml()}
-    ${helpHeading("status", "📍 現在の指標の状況", { className: "econ-summary__section-title" })}
+    ${helpHeading("status", "📍 現在の指標の状況", {
+      className: "econ-summary__section-title",
+      collapsible: true,
+      hint: `（好転${sum.currentFavorableList.length}・逆転${sum.currentUnfavorableList.length}）`,
+    })}
     ${helpPanel("status", helpCtx)}
-    <div class="econ-summary__groups">
+    ${collapsibleBody(
+      "status",
+      `<div class="econ-summary__groups">
       ${group("好転位置", sum.currentFavorableList, "up", "（目安ラインとの比較）")}
       ${group("逆転位置", sum.currentUnfavorableList, "down", "（目安ラインとの比較）")}
       ${group("該当なし", sum.currentNoRefList, "neutral", "（目安ラインを持たない、または良し悪しの方向がない指標）")}
-    </div>
+    </div>`
+    )}
     ${statusHtml}
     ${continuingHtml}
     ${turningSignalHtml}
-    ${helpHeading("compare", "前回数値との比較", { className: "econ-summary__section-title" })}
+    ${helpHeading("compare", "前回数値との比較", {
+      className: "econ-summary__section-title",
+      collapsible: true,
+      hint: `（改善傾向${sum.improvingList.length}・悪化傾向${sum.worseningList.length}）`,
+    })}
     ${helpPanel("compare", helpCtx)}
-    <div class="econ-summary__groups">
+    ${collapsibleBody(
+      "compare",
+      `<div class="econ-summary__groups">
       ${group("改善傾向", sum.improvingList, "up", "（前回の数値と比べて）")}
       ${group("悪化傾向", sum.worseningList, "down", "（前回の数値と比べて）")}
       ${group("横ばい・中立", sum.neutralList, "neutral", "（前回から不変、または良し悪しの方向がない指標）")}
-    </div>
+    </div>`
+    )}
     ${surpriseHtml}
     ${recoveryHtml}
     ${recessionHtml}
@@ -996,6 +1025,10 @@ function renderEconSummary() {
   });
   bindHelp(el);
   bindQuickRef(el, openDetail);
+  const introEl = el.querySelector(".us-intro");
+  introEl?.addEventListener("toggle", () => {
+    usIntroOpen = introEl.open;
+  });
 }
 
 /* ---------- release calendar ---------- */

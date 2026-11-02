@@ -1,6 +1,6 @@
 /**
- * 経済状況サマリー・発表予定カレンダーの各見出しに付ける「クリックすると説明が出る」機能。
- * 見出しをボタンにして、その直下に説明パネルを開く。説明は、各ブロックが何を集計しているか（見方）と、
+ * 経済状況サマリー・発表予定カレンダーの各見出しに付ける「説明を見る」機能。
+ * 見出しの横の「説明を見る」ボタンをクリックすると、その直下に説明パネルが開く。説明は、各ブロックが何を集計しているか（見方）と、
  * 数値の受け取り方を間違えないための注意で構成する。日米共通のファイル（site で例と注記だけ切り替える）。
  *
  * 説明の根拠は scripts/fetch-indicators.mjs の buildEconSummary（判定ロジック）。
@@ -9,6 +9,8 @@
 
 // 再描画（月の切り替えなど）しても開いたままにするため、開いている見出しを覚えておく
 const opened = new Set();
+// 折りたたみの見出しのうち、開いているもの（初期は折りたたみ）
+const openSecs = new Set();
 
 const list = (items) => `<ul class="help-panel__list">${items.map((t) => `<li>${t}</li>`).join("")}</ul>`;
 
@@ -26,7 +28,8 @@ const HELP = {
     panel({
       what: `このツールが追いかけている全${n}指標を、毎日機械的に集計して、いまの景気の「位置」「向き」「変わり目」「直近の動き」をひと目で見られるようにしたまとめです。上から順に、①今の水準 → ②傾向 → ③変わり目 → ④直近の大きな動き → ⑤発表予定、の順で見られます。`,
       points: [
-        "各見出しをクリックすると、そのブロックの説明が開きます。",
+        "各見出しの横の「説明を見る」を押すと、そのブロックの説明が開きます（もう一度押すと閉じます）。",
+        "「現在の指標の状況」「トレンドの向き」「トレンド転換シグナル」「前回数値との比較」は、普段は折りたたんであります。見出しの文字をクリックすると、中身が開きます。",
         "丸いボタン（指標名）をクリックすると、その指標のグラフと解説が開きます。",
       ],
       warns: [
@@ -165,10 +168,19 @@ const HELP = {
     }),
 };
 
-/** 見出し（クリックで説明が開閉する）。labelHtml は見出しの中身、tag は h2 / h3 */
-export function helpHeading(key, labelHtml, { tag = "h3", className = "" } = {}) {
-  const open = opened.has(key);
-  return `<${tag} class="help-heading ${className}"><button type="button" class="help-heading__btn" data-help="${key}" aria-expanded="${open}" aria-controls="help-${key}"><span class="help-heading__label">${labelHtml}</span><span class="help-heading__chip" aria-hidden="true">${open ? "説明を閉じる ▲" : "説明を見る ▼"}</span></button></${tag}>`;
+/**
+ * 見出し。説明は、見出しの横の「説明を見る」ボタンをクリックしたときだけ開閉する（見出しの文字では開かない）。
+ * labelHtml は見出しの中身、tag は h2 / h3。
+ * collapsible: true のときは、見出しの文字をクリックすると、直後の collapsibleBody を開閉する（初期は折りたたみ）。
+ * hint は、折りたたみの見出しの横に出す一言（件数など）。
+ */
+export function helpHeading(key, labelHtml, { tag = "h3", className = "", collapsible = false, hint = "" } = {}) {
+  const helpOpen = opened.has(key);
+  const label = collapsible
+    ? `<button type="button" class="help-heading__toggle" data-sec="${key}" aria-expanded="${openSecs.has(key)}" aria-controls="sec-${key}">${labelHtml}${hint ? `<small class="help-heading__hint">${hint}</small>` : ""}</button>`
+    : `<span class="help-heading__label">${labelHtml}</span>`;
+  const chip = `<button type="button" class="help-heading__chip" data-help="${key}" aria-expanded="${helpOpen}" aria-controls="help-${key}">${helpOpen ? "説明を閉じる ▲" : "説明を見る ▼"}</button>`;
+  return `<${tag} class="help-heading ${className}">${label}${chip}</${tag}>`;
 }
 
 /** 見出しの直下に置く説明パネル。ctx: { site: "us" | "jp", n: 指標数 } */
@@ -176,9 +188,14 @@ export function helpPanel(key, ctx) {
   return `<div class="help-panel" id="help-${key}"${opened.has(key) ? "" : " hidden"}>${HELP[key](ctx)}</div>`;
 }
 
-/** innerHTML を差し替えたあとに呼ぶ。root 内の見出しボタンにクリックを結び付ける */
+/** 折りたたみの見出し（collapsible: true）が開閉する本体。初期は折りたたみ */
+export function collapsibleBody(key, innerHtml) {
+  return `<div class="help-collapsible" id="sec-${key}"${openSecs.has(key) ? "" : " hidden"}>${innerHtml}</div>`;
+}
+
+/** innerHTML を差し替えたあとに呼ぶ。「説明を見る」ボタンと、折りたたみの見出しにクリックを結び付ける */
 export function bindHelp(root) {
-  root.querySelectorAll(".help-heading__btn").forEach((btn) => {
+  root.querySelectorAll(".help-heading__chip").forEach((btn) => {
     btn.addEventListener("click", () => {
       const key = btn.dataset.help;
       const panelEl = document.getElementById(`help-${key}`);
@@ -186,9 +203,21 @@ export function bindHelp(root) {
       const willOpen = panelEl.hidden;
       panelEl.hidden = !willOpen;
       btn.setAttribute("aria-expanded", String(willOpen));
-      btn.querySelector(".help-heading__chip").textContent = willOpen ? "説明を閉じる ▲" : "説明を見る ▼";
+      btn.textContent = willOpen ? "説明を閉じる ▲" : "説明を見る ▼";
       if (willOpen) opened.add(key);
       else opened.delete(key);
+    });
+  });
+  root.querySelectorAll(".help-heading__toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const key = btn.dataset.sec;
+      const bodyEl = document.getElementById(`sec-${key}`);
+      if (!bodyEl) return;
+      const willOpen = bodyEl.hidden;
+      bodyEl.hidden = !willOpen;
+      btn.setAttribute("aria-expanded", String(willOpen));
+      if (willOpen) openSecs.add(key);
+      else openSecs.delete(key);
     });
   });
 }
