@@ -1255,3 +1255,14 @@ export const CATEGORY_GUIDES = {
     },
   },
 };
+
+// 追加の波及ルート（ripple-extra.config.mjs）を、ripple がまだない指標に取り込む
+import { EXTRA_RIPPLES } from "./ripple-extra.config.mjs";
+for (const { ids, ...ripple } of EXTRA_RIPPLES) {
+  for (const id of ids) {
+    const ind = INDICATORS.find((i) => i.id === id);
+    if (!ind) throw new Error(`ripple-extra.config.mjs に、indicators.config.mjs にない指標があります: ${id}`);
+    if (ind.ripple) throw new Error(`波及ルートが重複しています（indicators.config.mjs にすでにある）: ${id}`);
+    ind.ripple = ripple;
+  }
+}
