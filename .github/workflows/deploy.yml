@@ -43,8 +43,12 @@ jobs:
       - run: npm ci
 
       # push 以外（定期実行 / 手動）のときだけ API から取り直してコミット
+      # 取得元（e-Stat など）の障害で一部の指標だけ失敗しても、取得できた分は更新・公開する
+      # （失敗した指標は前回の値を維持する）。失敗は最後のステップで実行結果に反映する
       - name: 経済指標データを取得
+        id: fetch
         if: github.event_name != 'push'
+        continue-on-error: true
         run: npm run fetch
 
       # 日銀の金融政策決定会合などのイベント。日銀ページの構造変更等で失敗しても、指標データの更新・公開は止めない
@@ -75,10 +79,21 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
+      # 一部の指標が取得できなかった場合は、コミット後にここで失敗させる（サイトの「自動更新の最終チェック」に反映される）
+      - name: 取得に失敗した指標があれば実行を失敗扱いにする
+        if: steps.fetch.outcome == 'failure'
+        run: |
+          echo "::error::一部の指標の取得に失敗しました（取得できた分は更新済み）。「経済指標データを取得」のログを確認してください"
+          exit 1
+
   build-deploy:
     needs: update-data
-    # 定期実行でデータに変化がなかった回は、ビルド・再公開を省く（push・手動実行のときは常に公開する）
-    if: github.event_name != 'schedule' || needs.update-data.outputs.changed == 'true'
+    # 定期実行でデータに変化がなかった回は、ビルド・再公開を省く（push・手動実行のときは常に公開する）。
+    # 一部の指標の取得失敗で update-data が失敗扱いになっても、コミット済み（changed=true）なら公開する
+    if: >-
+      ${{ !cancelled()
+      && (needs.update-data.result == 'success' || needs.update-data.outputs.changed == 'true')
+      && (github.event_name != 'schedule' || needs.update-data.outputs.changed == 'true') }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages

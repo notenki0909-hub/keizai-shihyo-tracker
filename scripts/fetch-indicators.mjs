@@ -715,6 +715,9 @@ async function main() {
   }
   const out = [];
   const failures = [];
+  // 取得に失敗した指標は、前回の値をそのまま残す（取得元の障害で他の指標の更新まで止めないため）
+  const prevById = new Map((prevIndicators ?? []).map((p) => [p.id, p]));
+  let fetchedCount = 0;
 
   for (const ind of INDICATORS) {
     process.stdout.write(`- ${ind.id} ... `);
@@ -810,15 +813,18 @@ async function main() {
         // date は t（"2026-07" / "2026 Q2"）から復元できるため出力では省く
         points: points.map((p) => (p.provisional ? { t: p.t, value: p.value, provisional: true } : { t: p.t, value: p.value })),
       });
+      fetchedCount++;
       console.log(`OK (${points.length}点, 最新 ${points.at(-1).t}=${points.at(-1).value})`);
     } catch (err) {
-      console.log(`失敗: ${err.message}`);
-      failures.push({ id: ind.id, error: err.message });
+      const prev = prevById.get(ind.id);
+      console.log(`失敗: ${err.message}${prev ? "（前回の値を維持）" : ""}`);
+      failures.push({ id: ind.id, error: err.message, keptPrevious: Boolean(prev) });
+      if (prev) out.push(prev);
     }
     await sleep(400);
   }
 
-  if (!out.length) {
+  if (!fetchedCount) {
     console.error("\n全指標の取得に失敗しました。既存の JSON は変更しません。");
     process.exit(1);
   }
@@ -851,9 +857,11 @@ async function main() {
     console.log(`発表履歴の更新に失敗（指標データには影響なし）: ${err.message}`);
   }
   console.log(wrote ? `\n書き出し: ${file}` : "\n変更なし（indicators.json は書き換えない）");
-  console.log(`成功 ${out.length} / ${INDICATORS.length} 指標`);
+  console.log(`成功 ${fetchedCount} / ${INDICATORS.length} 指標`);
   if (failures.length) {
-    console.log(`失敗: ${failures.map((f) => f.id).join(", ")}`);
+    const kept = failures.filter((f) => f.keptPrevious).length;
+    console.log(`失敗: ${failures.map((f) => f.id).join(", ")}（うち前回の値を維持 ${kept} 件）`);
+    // 一部だけ失敗した場合も、取得できた分はコミット・公開される。失敗は GitHub Actions 上で検知できるよう終了コードで残す
     process.exitCode = 1;
   }
 }
