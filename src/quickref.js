@@ -13,6 +13,14 @@
 
 // 再描画（カレンダーの月切り替えなど）しても、開いたままにする
 let isOpen = false;
+const openSubs = new Set(); // 開いている小見出し（"routes" / "themes"）。初期は折りたたみ
+
+/** クリックで開閉する小見出し（初期は折りたたみ）。key は開閉状態の記憶に使う */
+const subDetails = (key, title, sub, inner) => `
+    <details class="quickref__sub" data-sub="${key}"${openSubs.has(key) ? " open" : ""}>
+      <summary>${title}<span>${sub}</span></summary>
+      ${inner}
+    </details>`;
 
 const I = (label, dir, ids = {}, note = "") => ({ label, dir, ids, note });
 
@@ -243,11 +251,12 @@ function routesHtml(indicators) {
         </div>`;
     })
     .join("");
-  return `
-    <section class="quickref__section">
-      <h3>代表的な波及ルート<span>各指標カードの「波及ルート」の一覧</span></h3>
-      <div class="quickref__routes">${cards}</div>
-    </section>`;
+  return subDetails(
+    "routes",
+    "代表的な波及ルート",
+    `各指標カードの「波及ルート」の一覧（${groups.size}ルート）。クリックで開く`,
+    `<div class="quickref__routes">${cards}</div>`
+  );
 }
 
 /** @param {{site: "us"|"jp", has: (id: string) => boolean, indicators: object[]}} ctx */
@@ -298,11 +307,13 @@ export function quickRefHtml({ site, has, indicators = [] }) {
         <p class="quickref__flow-note">経済指標が動くと、中央銀行の判断が変わり、金利・為替を通じて企業の業績へ、そして業界ごとの明暗へと広がります。株価は、結果そのものより「期待と、すでに織り込まれた予想とのズレ」で動くことがあります（良い指標でも下がることがあるのはこのためです）。実際は、順番が入れ替わったり同時に起きたりする、大きな見取り図です。</p>
       </section>
       ${routesHtml(indicators)}
-      <section class="quickref__section">
-        <h3>金利・ドル円・景気・原材料費が動いたら<span>有利・不利になりやすい業種と、関係する指標</span></h3>
-        <p class="quickref__lead">4つのテーマが<b>上がったとき／下がったとき</b>に、有利・不利になりやすい業種と、そのとき同時に動きやすい指標（<b>↑上がる／↓下がる</b>）をまとめました。指標名をクリックすると詳細が開きます。</p>
-        ${themes}
-      </section>
+      ${subDetails(
+        "themes",
+        "金利・ドル円・景気・原材料費が動いたら",
+        "有利・不利になりやすい業種と、関係する指標。クリックで開く",
+        `<p class="quickref__lead">4つのテーマが<b>上がったとき／下がったとき</b>に、有利・不利になりやすい業種と、そのとき同時に動きやすい指標（<b>↑上がる／↓下がる</b>）をまとめました。指標名をクリックすると詳細が開きます。</p>
+        ${themes}`
+      )}
       <p class="quickref__note">※ 一般に説明される典型的な傾向の整理です（AIによる予測・分析ではありません）。同じ業種でも企業によって逆になることがあり、時期や他の要因・時間差でも変わります。個別企業の業績や株価を示すものではなく、投資助言ではありません。業種ごとの理由は、各指標の詳細画面の「追い風／向かい風になりやすい業種」でも確認できます。</p>
     </details>`;
 }
@@ -312,6 +323,12 @@ export function bindQuickRef(root, openDetail) {
   const details = root.querySelector(".quickref");
   details?.addEventListener("toggle", () => {
     isOpen = details.open;
+  });
+  root.querySelectorAll(".quickref__sub").forEach((sub) => {
+    sub.addEventListener("toggle", () => {
+      if (sub.open) openSubs.add(sub.dataset.sub);
+      else openSubs.delete(sub.dataset.sub);
+    });
   });
   root.querySelectorAll(".quickref__ind-btn").forEach((btn) => {
     btn.addEventListener("click", () => openDetail(btn.dataset.id));

@@ -3126,6 +3126,30 @@ a {
   color: var(--text-faint);
 }
 
+/* クリックで開閉する小見出し（代表的な波及ルート／4テーマの早見表）。初期は折りたたみ */
+.quickref__sub {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+
+.quickref__sub > summary {
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.quickref__sub > summary span {
+  margin-left: 10px;
+  font-size: 0.74rem;
+  font-weight: 400;
+  color: var(--text-faint);
+}
+
+.quickref__sub[open] > summary {
+  margin-bottom: 8px;
+}
+
 /* 流れ図：番号付きのチップを矢印でつなぐ（全体の流れ・波及ルート共通） */
 .quickref__steps {
   display: flex;
