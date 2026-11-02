@@ -1009,11 +1009,27 @@ function renderImpact(ind) {
       <ol class="impact__steps">${flowSteps}</ol>
     </div>
     <div class="impact__cols">
-      <div class="impact__col impact__col--up"><h4>▲ 上がる・強まるとき</h4><p>${m.up}</p></div>
-      <div class="impact__col impact__col--down"><h4>▼ 下がる・弱まるとき</h4><p>${m.down}</p></div>
+      <div class="impact__col impact__col--up"><h4>▲ 上がる・強まるとき</h4><p>${m.up}</p>${impactSectorsHtml(m.sectors?.up)}</div>
+      <div class="impact__col impact__col--down"><h4>▼ 下がる・弱まるとき</h4><p>${m.down}</p>${impactSectorsHtml(m.sectors?.down)}</div>
     </div>
     <p class="impact__home"><b>🏠 家計への届き方</b>${m.home}</p>
-    <p class="impact__note">日本銀行・内閣府・各国中央銀行や民間シンクタンクの解説にもとづく、一般的な波及の考え方の整理です（AIによる予測・分析ではありません）。実際の動きは時期や他の要因で変わり、時間差もあります。出典は<a href="./guide.html#sec-impact">使い方ガイド</a>を参照。</p>`;
+    <p class="impact__note">日本銀行・内閣府・各国中央銀行や民間シンクタンクの解説にもとづく、一般的な波及の考え方の整理です（AIによる予測・分析ではありません）。実際の動きは時期や他の要因で変わり、時間差もあります。業種への影響も典型的な傾向で、同じ業種でも企業によって逆になることがあり、個別企業の業績や株価を示すものではありません（投資助言ではありません）。出典は<a href="./guide.html#sec-impact">使い方ガイド</a>を参照。</p>`;
+}
+
+/**
+ * 「上がる／下がるとき」の欄に出す、追い風・向かい風になりやすい業種と、その理由（売上・収益・コストへの働き）。
+ * sectors は { tail: [[業種, 理由], …], head: [[業種, 理由], …] }。どちらも空なら何も出さない
+ */
+function impactSectorsHtml(sectors) {
+  if (!sectors) return "";
+  const group = (list, kind, label) =>
+    list?.length
+      ? `<div class="impact__sectors-group impact__sectors-group--${kind}"><b>${label}</b><ul>${list
+          .map(([name, reason]) => `<li><span class="impact__sector-name">${name}</span>${reason}</li>`)
+          .join("")}</ul></div>`
+      : "";
+  const html = group(sectors.tail, "tail", "↗ 追い風になりやすい業種") + group(sectors.head, "head", "↘ 向かい風になりやすい業種");
+  return html ? `<div class="impact__sectors">${html}</div>` : "";
 }
 
 /** 発表履歴の対象期間の表示：月次は「2026年9月」、四半期は「2026年Q3」、週次・日次はそのまま */

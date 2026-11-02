@@ -831,7 +831,8 @@ async function main() {
       const prev = prevById.get(ind.id);
       console.log(`失敗: ${err.message}${prev ? "（前回の値を維持）" : ""}`);
       failures.push({ id: ind.id, error: err.message, keptPrevious: Boolean(prev) });
-      if (prev) out.push(prev);
+      // 値は前回のまま、説明文（波及の説明）だけは最新の設定に更新する（取得失敗が続いても説明の変更が反映されるように）
+      if (prev) out.push({ ...prev, impact: IMPACT[ind.id] ?? undefined });
     }
     await sleep(400);
   }

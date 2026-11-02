@@ -2394,6 +2394,63 @@ a {
   margin: 0;
 }
 
+/* 業種別：追い風（緑）・向かい風（赤）になりやすい業種と、その理由 */
+.impact__sectors {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+}
+
+.impact__sectors-group b {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 0.74rem;
+}
+
+.impact__sectors-group--tail b {
+  color: var(--pos);
+}
+
+.impact__sectors-group--head b {
+  color: var(--neg);
+}
+
+.impact__sectors-group ul {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.impact__sectors-group li {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.impact__sector-name {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 0 7px;
+  border-radius: 6px;
+  font-weight: 700;
+  color: var(--text);
+  background: color-mix(in srgb, var(--neutral) 14%, var(--surface));
+}
+
+.impact__sectors-group--tail .impact__sector-name {
+  background: color-mix(in srgb, var(--pos) 16%, var(--surface));
+}
+
+.impact__sectors-group--head .impact__sector-name {
+  background: color-mix(in srgb, var(--neg) 14%, var(--surface));
+}
+
 .impact__note {
   margin: 8px 0 0;
   font-size: 0.7rem;

@@ -42,6 +42,8 @@ const TRADE_JP = {
   home: "ガソリン・食料品・電気代など、輸入に頼る品の価格に表れる。",
 };
 
+import { SECTORS } from "./impact-sectors.config.mjs";
+
 export const IMPACT = {
   gdp_real_growth: {
     flow: "国内の生産・所得（GDP）が伸びる → 企業収益が増える → 賃上げ・採用・設備投資が増える → 家計の所得・消費が増える（逆の動きも同じ経路）",
@@ -201,3 +203,9 @@ export const IMPACT = {
     home: "日本経済の中心であるサービス業の動きで、暮らしに身近な仕事・売上に直結する。",
   },
 };
+
+// 業種ごとの追い風・向かい風（impact-sectors.config.mjs）を、各指標の impact.sectors として取り込む
+for (const [id, sectors] of Object.entries(SECTORS)) {
+  if (!IMPACT[id]) throw new Error(`impact-sectors.config.mjs に、impact.config.mjs にない指標があります: ${id}`);
+  IMPACT[id].sectors = sectors;
+}
