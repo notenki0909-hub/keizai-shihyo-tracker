@@ -2759,3 +2759,40 @@ a {
 .help-panel__warn ul.help-panel__list {
   margin-bottom: 0;
 }
+
+/* ---------- 使い方ガイドの用語集 ---------- */
+
+.guide-glossary {
+  margin: 0 0 16px;
+  padding: 0;
+}
+
+.guide-glossary > div {
+  display: grid;
+  grid-template-columns: 11em 1fr;
+  gap: 4px 16px;
+  padding: 9px 2px;
+  border-top: 1px solid var(--border);
+}
+
+.guide-glossary > div:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.guide-glossary dt {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.guide-glossary dd {
+  margin: 0;
+  color: var(--text-dim);
+  line-height: 1.75;
+}
+
+@media (max-width: 560px) {
+  .guide-glossary > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
