@@ -3460,7 +3460,8 @@ a {
 .econ-island .help-panel:not([hidden]),
 .econ-island .help-collapsible:not([hidden]),
 .econ-island .help-heading + ul,
-.econ-island .help-panel:not([hidden]) + ul {
+.econ-island .help-panel:not([hidden]) + ul,
+.econ-island .help-panel[hidden] + ul {
   margin-top: 8px;
 }
 
