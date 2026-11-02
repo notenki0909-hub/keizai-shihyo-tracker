@@ -12,6 +12,7 @@ import { loadEvents, loadReleases, groupEventsByDate, eventPillHtml, renderEvent
 import { loadMarket, marketBoardHtml } from "./market.js";
 import { showFetchStatus } from "./fetch-status.js";
 import { helpHeading, helpPanel, bindHelp } from "./help.js";
+import { quickRefHtml, bindQuickRef } from "./quickref.js";
 
 const DATA_URL = import.meta.env.BASE_URL + "data/indicators.json";
 const CATEGORIES = ["景気", "物価", "雇用・所得", "対外", "金利", "為替・市場"];
@@ -903,6 +904,7 @@ function renderEconSummary() {
     ${helpPanel("summary", helpCtx)}
     ${marketBoardHtml(state.market, (id) => state.data.indicators.some((i) => i.id === id))}
     <p class="econ-summary__headline">${sum.headline}</p>
+    ${quickRefHtml({ site: "jp", has: (id) => state.data.indicators.some((i) => i.id === id) })}
     ${usIntroHtml()}
     ${helpHeading("status", "📍 現在の指標の状況", { className: "econ-summary__section-title" })}
     ${helpPanel("status", helpCtx)}
@@ -935,6 +937,7 @@ function renderEconSummary() {
     btn.addEventListener("click", () => openDetail(btn.dataset.id));
   });
   bindHelp(el);
+  bindQuickRef(el, openDetail);
 }
 
 /* ---------- release calendar ---------- */
