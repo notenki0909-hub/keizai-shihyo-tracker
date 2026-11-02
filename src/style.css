@@ -3429,3 +3429,41 @@ a {
   font-size: 0.72rem;
   color: var(--text-faint);
 }
+
+/* ---------- サマリーの「島」（現在の指標の状況・トレンドの向き・トレンド転換シグナル・直近の大きな変化） ----------
+ * 「日本株に影響を与える米国の指標」（.us-intro）と同じ、背景・枠線・左の青い線・角丸で囲んだパネル */
+.econ-island,
+.econ-summary__block.econ-island {
+  margin: 12px 0 14px;
+  padding: 10px 14px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+}
+
+/* 島の背景（surface-2）と同じ色だった中のグループは、白地＋枠線にして見分けられるようにする */
+.econ-island .econ-summary__group {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.econ-island .econ-summary__groups {
+  margin-bottom: 0;
+}
+
+/* 見出しの下の余白は、中身（説明・本体）が開いているときだけ付ける（折りたたみ時に余白が余らないように） */
+.econ-island .help-heading {
+  margin: 0;
+}
+
+.econ-island .help-panel:not([hidden]),
+.econ-island .help-collapsible:not([hidden]),
+.econ-island .help-heading + ul,
+.econ-island .help-panel:not([hidden]) + ul {
+  margin-top: 8px;
+}
+
+.econ-island .help-panel:not([hidden]) {
+  margin-bottom: 0;
+}
