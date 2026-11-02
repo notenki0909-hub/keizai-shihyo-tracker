@@ -3037,7 +3037,15 @@ a {
 }
 
 .quickref__row--ind > b {
-  color: var(--text-dim);
+  color: var(--accent);
+}
+
+/* 3つの見出し（有利になりやすい業種／不利になりやすい業種／関係する指標）にブレットを付ける（色は見出しと同じ） */
+.quickref__row > b::before {
+  content: "●";
+  margin-right: 0.45em;
+  font-size: 0.7em;
+  vertical-align: 0.12em;
 }
 
 .quickref__row ul {
