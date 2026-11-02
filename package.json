@@ -8,7 +8,7 @@
     "fetch": "node scripts/fetch-indicators.mjs",
     "fetch:events": "node scripts/fetch-events.mjs",
     "fetch:market": "node scripts/fetch-market-board.mjs",
-    "sync:impact": "node scripts/sync-impact.mjs",
+    "sync:static": "node scripts/sync-static.mjs",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"

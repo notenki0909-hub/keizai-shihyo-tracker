@@ -2528,6 +2528,10 @@ a {
   color: var(--ref-target);
 }
 
+.category-guide__kind--official {
+  color: var(--neutral);
+}
+
 .category-guide__itemhead b {
   font-size: 0.92rem;
 }
@@ -2976,7 +2980,7 @@ a {
   align-items: baseline;
   gap: 2px 10px;
   margin: 0 0 6px;
-  font-size: 0.98rem;
+  font-size: 1.1rem;
 }
 
 .quickref__theme h4 span {
@@ -3007,19 +3011,21 @@ a {
   border-top-color: var(--neg);
 }
 
+/* 見出しの大きさ：①「●●が上がったら」が最大、②「●●になりやすい業種」と③「関係する指標」は同じ大きさ */
 .quickref__cell h5 {
-  margin: 0 0 4px;
-  font-size: 0.84rem;
+  margin: 0 0 6px;
+  font-size: 1.25rem;
+  line-height: 1.4;
 }
 
 .quickref__row {
-  margin-top: 6px;
+  margin-top: 10px;
 }
 
 .quickref__row > b {
   display: block;
-  margin-bottom: 2px;
-  font-size: 0.72rem;
+  margin-bottom: 3px;
+  font-size: 1rem;
 }
 
 .quickref__row--tail > b {
@@ -3044,8 +3050,8 @@ a {
 }
 
 .quickref__row li {
-  font-size: 0.78rem;
-  line-height: 1.55;
+  font-size: 0.8rem;
+  line-height: 1.6;
   color: var(--text-dim);
 }
 
@@ -3090,6 +3096,142 @@ a {
   color: var(--text-faint);
 }
 
+/* 早見表の各パート（全体の流れ／波及ルート／4テーマ） */
+.quickref__section {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+
+.quickref__section > h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.quickref__section > h3 span {
+  font-size: 0.74rem;
+  font-weight: 400;
+  color: var(--text-faint);
+}
+
+/* 流れ図：番号付きのチップを矢印でつなぐ（全体の流れ・波及ルート共通） */
+.quickref__steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: quickref-step;
+}
+
+.quickref__steps li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  counter-increment: quickref-step;
+}
+
+.quickref__steps li:not(:last-child)::after {
+  content: "→";
+  flex: none;
+  color: var(--accent);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.quickref__step {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 6px;
+  padding: 6px 11px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.5;
+  word-break: auto-phrase;
+}
+
+.quickref__steps--flow .quickref__step::before {
+  content: counter(quickref-step);
+  flex: none;
+  min-width: 1.45em;
+  height: 1.45em;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--surface);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.45em;
+  text-align: center;
+}
+
+.quickref__step small {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-faint);
+}
+
+.quickref__step--trigger {
+  border-color: var(--ref-target);
+  background: color-mix(in srgb, var(--ref-target) 14%, var(--surface));
+}
+
+.quickref__step--trigger small {
+  font-weight: 700;
+  color: var(--ref-target);
+}
+
+.quickref__flow-note {
+  margin: 8px 0 0;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.quickref__routes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quickref__route {
+  padding: 8px 10px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.quickref__route-head {
+  margin-bottom: 6px;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+.quickref__route-head span {
+  margin-right: 8px;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
+
+.quickref__route-sectors {
+  margin: 8px 0 0;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.quickref__route-sectors b {
+  margin-right: 8px;
+  color: var(--text);
+}
+
 .quickref__note {
   margin: 10px 0 0;
   font-size: 0.72rem;
@@ -3100,4 +3242,123 @@ a {
   .quickref__grid {
     grid-template-columns: 1fr;
   }
+
+  .quickref__steps {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .quickref__steps li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .quickref__steps li:not(:last-child)::after {
+    content: "↓";
+    margin-left: 14px;
+    line-height: 1;
+  }
+}
+
+/* ---------- 日本の景気を見る（早見表の上。日銀短観・PMI・鉱工業生産・実質GDP） ---------- */
+.jp-economy {
+  margin: 4px 0 10px;
+  padding: 10px 14px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--cat-景気);
+  border-radius: 10px;
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+.jp-economy__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+}
+
+.jp-economy__title span {
+  font-size: 0.74rem;
+  font-weight: 400;
+  color: var(--text-faint);
+}
+
+.jp-economy__lead {
+  margin: 0 0 8px;
+  color: var(--text-dim);
+}
+
+.jp-economy__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 8px;
+}
+
+.jp-economy__card {
+  padding: 8px 10px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.jp-economy__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.jp-economy__card p {
+  margin: 4px 0 6px;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.jp-economy__vals {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jp-economy__vals li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  font-size: 0.8rem;
+}
+
+.jp-economy__val {
+  font-weight: 800;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.jp-economy__val small,
+.jp-economy__period,
+.jp-economy__ext small {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-faint);
+}
+
+.jp-economy__ext {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.jp-economy__note {
+  margin: 8px 0 0;
+  font-size: 0.72rem;
+  color: var(--text-faint);
 }

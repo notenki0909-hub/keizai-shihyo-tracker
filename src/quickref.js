@@ -1,7 +1,9 @@
 /**
- * 早見表：「金利」「ドル円」「景気」「原材料費」が上がったとき／下がったときに、有利・不利になりやすい業種と、
- * そのとき同時に動きやすい指標（↑上がる／↓下がる）をまとめる。経済状況サマリーの
- * 「日本株に影響を与える米国の指標」の上に、折りたたんだ状態で置く。日米共通のファイル。
+ * 早見表。経済状況サマリーの「日本株に影響を与える米国の指標」の上に、折りたたんだ状態で置く。日米共通のファイル。
+ *   1. 全体の流れ：経済指標 → 中央銀行 → 金利 → 為替 → 企業業績 → 業界 → 株価
+ *   2. 代表的な波及ルート：各指標カードの「波及ルート」を、同じルートの指標ごとにまとめた一覧（データから自動生成）
+ *   3. 「金利」「ドル円」「景気」「原材料費」が上がったとき／下がったときに、有利・不利になりやすい業種と、
+ *      そのとき同時に動きやすい指標（↑上がる／↓下がる）
  *
  * 方針：AIによる予測・分析ではなく、各指標の詳細画面の「追い風・向かい風になりやすい業種」
  * （scripts/impact-sectors.config.mjs）と同じ、一般に説明される典型的な傾向の整理。
@@ -197,10 +199,59 @@ const THEMES = [
   },
 ];
 
+// 全体の流れ（経済指標が動いてから、株価に表れるまでの大きな見取り図）
+const FLOW = [
+  ["経済指標", "物価・雇用・景気"],
+  ["中央銀行", "日銀・FRBの判断"],
+  ["金利", "政策金利・長期金利"],
+  ["為替", "日米金利差など"],
+  ["企業業績", "売上・コスト・利益"],
+  ["業界", "業界ごとの明暗"],
+  ["株価", "期待と織り込み"],
+];
+
 const DIR = { up: ["↑", "上がる"], down: ["↓", "下がる"] };
 
-/** @param {{site: "us"|"jp", has: (id: string) => boolean}} ctx */
-export function quickRefHtml({ site, has }) {
+/** 各指標カードの「波及ルート」を、同じ内容のものごとにまとめた一覧（データから自動生成） */
+function routesHtml(indicators) {
+  const groups = new Map();
+  for (const ind of indicators) {
+    if (!ind.ripple) continue;
+    const key = JSON.stringify(ind.ripple);
+    if (!groups.has(key)) groups.set(key, { ripple: ind.ripple, inds: [] });
+    groups.get(key).inds.push(ind);
+  }
+  if (!groups.size) return "";
+  const cards = [...groups.values()]
+    .map(({ ripple, inds }) => {
+      const names = inds
+        .map((i) => `<button type="button" class="quickref__ind-btn" data-id="${i.id}">${i.shortName ?? i.name}</button>`)
+        .join("・");
+      const steps = ripple.route
+        .split("→")
+        .map((x) => x.trim())
+        .filter(Boolean)
+        .map((x) => `<li><span class="quickref__step">${x}</span></li>`)
+        .join("");
+      return `
+        <div class="quickref__route">
+          <div class="quickref__route-head"><span>この波及ルートを載せている指標</span>${names}</div>
+          <ol class="quickref__steps quickref__steps--route">
+            <li><span class="quickref__step quickref__step--trigger"><small>きっかけ</small>${ripple.trigger}</span></li>${steps}
+          </ol>
+          <p class="quickref__route-sectors"><b>影響を受けやすい業界の例</b>${ripple.sectors}</p>
+        </div>`;
+    })
+    .join("");
+  return `
+    <section class="quickref__section">
+      <h3>代表的な波及ルート<span>各指標カードの「波及ルート」の一覧</span></h3>
+      <div class="quickref__routes">${cards}</div>
+    </section>`;
+}
+
+/** @param {{site: "us"|"jp", has: (id: string) => boolean, indicators: object[]}} ctx */
+export function quickRefHtml({ site, has, indicators = [] }) {
   const sectors = (list, kind, label) =>
     list.length
       ? `<div class="quickref__row quickref__row--${kind}"><b>${label}</b><ul>${list
@@ -208,7 +259,7 @@ export function quickRefHtml({ site, has }) {
           .join("")}</ul></div>`
       : "";
 
-  const indicators = (list) => {
+  const indicatorRows = (list) => {
     const chips = list
       .map(({ label, dir, ids, note }) => {
         const id = ids[site];
@@ -225,7 +276,7 @@ export function quickRefHtml({ site, has }) {
       <h5>${kind === "up" ? "▲" : "▼"} ${label}</h5>
       ${sectors(data.tail, "tail", "↗ 有利になりやすい業種")}
       ${sectors(data.head, "head", "↘ 不利になりやすい業種")}
-      ${indicators(data.ind)}
+      ${indicatorRows(data.ind)}
     </div>`;
 
   const themes = THEMES.map(
@@ -236,11 +287,22 @@ export function quickRefHtml({ site, has }) {
     </section>`
   ).join("");
 
+  const flow = FLOW.map(([title, sub]) => `<li><span class="quickref__step"><b>${title}</b><small>（${sub}）</small></span></li>`).join("");
+
   return `
     <details class="quickref"${isOpen ? " open" : ""}>
-      <summary>📋 早見表：金利・ドル円・景気・原材料費が動くと（有利・不利な業種と、関係する指標）</summary>
-      <p class="quickref__lead">4つのテーマが<b>上がったとき／下がったとき</b>に、有利・不利になりやすい業種と、そのとき同時に動きやすい指標（<b>↑上がる／↓下がる</b>）をまとめました。指標名をクリックすると詳細が開きます。</p>
-      ${themes}
+      <summary>📋 早見表：全体の流れ・波及ルート・金利／ドル円／景気／原材料費（有利・不利な業種と、関係する指標）</summary>
+      <section class="quickref__section">
+        <h3>全体の流れを見る<span>経済指標から株価まで</span></h3>
+        <ol class="quickref__steps quickref__steps--flow">${flow}</ol>
+        <p class="quickref__flow-note">経済指標が動くと、中央銀行の判断が変わり、金利・為替を通じて企業の業績へ、そして業界ごとの明暗へと広がります。株価は、結果そのものより「期待と、すでに織り込まれた予想とのズレ」で動くことがあります（良い指標でも下がることがあるのはこのためです）。実際は、順番が入れ替わったり同時に起きたりする、大きな見取り図です。</p>
+      </section>
+      ${routesHtml(indicators)}
+      <section class="quickref__section">
+        <h3>金利・ドル円・景気・原材料費が動いたら<span>有利・不利になりやすい業種と、関係する指標</span></h3>
+        <p class="quickref__lead">4つのテーマが<b>上がったとき／下がったとき</b>に、有利・不利になりやすい業種と、そのとき同時に動きやすい指標（<b>↑上がる／↓下がる</b>）をまとめました。指標名をクリックすると詳細が開きます。</p>
+        ${themes}
+      </section>
       <p class="quickref__note">※ 一般に説明される典型的な傾向の整理です（AIによる予測・分析ではありません）。同じ業種でも企業によって逆になることがあり、時期や他の要因・時間差でも変わります。個別企業の業績や株価を示すものではなく、投資助言ではありません。業種ごとの理由は、各指標の詳細画面の「追い風／向かい風になりやすい業種」でも確認できます。</p>
     </details>`;
 }

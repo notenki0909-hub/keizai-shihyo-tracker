@@ -547,10 +547,10 @@ function renderCategoryGuide() {
       </div>`;
   };
 
-  // ①が「先行／一致／遅行」のグループ形式（groups）の場合の描画
-  const groupedFirst = (first) => {
-    const kindCls = { 先行: "lead", 一致: "coincident", 遅行: "lag" };
-    const items = first.groups
+  // ①・②が「先行／一致／遅行」などのグループ形式（groups）の場合の描画
+  const groupedBlock = (block, badgeLabel, badgeCls) => {
+    const kindCls = { 先行: "lead", 一致: "coincident", 遅行: "lag", 政府判断: "official" };
+    const items = block.groups
       .map((g) =>
         g.items
           .map((it) => {
@@ -592,9 +592,9 @@ function renderCategoryGuide() {
       .join("");
     return `
       <div class="category-guide__row category-guide__row--grouped">
-        <span class="category-guide__badge category-guide__badge--first">① まず見る</span>
+        <span class="category-guide__badge ${badgeCls}">${badgeLabel}</span>
         <div class="category-guide__body">
-          <p class="category-guide__intro">${first.intro ?? ""}</p>
+          <p class="category-guide__intro">${block.intro ?? ""}</p>
           ${items}
         </div>
       </div>`;
@@ -628,8 +628,14 @@ function renderCategoryGuide() {
       </div>`;
   };
 
-  const firstHtml = guide.first?.groups ? groupedFirst(guide.first) : row("① まず見る", "category-guide__badge--first", guide.first);
-  const secondHtml = guide.second?.byStars ? starredSecond(guide.second) : row("② 次に見る（補完）", "category-guide__badge--second", guide.second);
+  const firstHtml = guide.first?.groups
+    ? groupedBlock(guide.first, "① まず見る", "category-guide__badge--first")
+    : row("① まず見る", "category-guide__badge--first", guide.first);
+  const secondHtml = guide.second?.groups
+    ? groupedBlock(guide.second, "② 次に見る", "category-guide__badge--second")
+    : guide.second?.byStars
+      ? starredSecond(guide.second)
+      : row("② 次に見る（補完）", "category-guide__badge--second", guide.second);
   el.innerHTML = firstHtml + secondHtml;
   el.hidden = false;
   makeGuideCollapsible(el);
@@ -696,6 +702,57 @@ function makeGuideCollapsible(el) {
 }
 
 /* ---------- 経済状況サマリー（ルールベース、AI不使用） ---------- */
+
+/**
+ * 「日本の景気を見る」：早見表の上に置く、日本の景気を見る4つの指標（日銀短観・PMI・鉱工業生産・実質GDP）。
+ * 定義は「景気」カテゴリの「①まず見る」（CATEGORY_GUIDES.景気.first）と同じものを使い、最新値と前回からの変化を出す。
+ * PMIは民間データで収録できないため、公式ページへのリンクのみ載せる。
+ */
+function jpEconomyHtml() {
+  const groups = state.data.categoryGuides?.景気?.first?.groups;
+  if (!groups) return "";
+  const findInd = (id) => state.data.indicators.find((i) => i.id === id);
+  const kindCls = { 先行: "lead", 一致: "coincident", 遅行: "lag" };
+  const cards = groups
+    .flatMap((g) => g.items.map((it) => ({ kind: g.label, it })))
+    .map(({ kind, it }) => {
+      const rows = (it.showIds ?? it.ids ?? [])
+        .map(findInd)
+        .filter(Boolean)
+        .map((ind) => {
+          const latest = ind.summary?.latest;
+          if (!latest) return "";
+          const v = fmtValue(latest.value, ind);
+          const d = fmtDelta(ind.summary.changeFromPrev, ind);
+          return `<li>
+            <button type="button" class="econ-summary__link" data-id="${ind.id}">${ind.shortName ?? ind.name}</button>
+            <span class="jp-economy__val">${v.num}<small>${v.unit}</small></span>
+            <span class="jp-economy__chg ${d.cls}">${d.text}</span>
+            <small class="jp-economy__period">${latest.t}${latest.provisional ? "（速報）" : ""}</small>
+          </li>`;
+        })
+        .join("");
+      const exts = (it.externals ?? [])
+        .map((e) => `<a class="category-guide__ext" href="${e.url}" target="_blank" rel="noopener">${e.label} ↗</a>`)
+        .join("");
+      const body = rows ? `<ul class="jp-economy__vals">${rows}</ul>` : "";
+      const ext = exts ? `<div class="jp-economy__ext">${exts}${it.notes ? `<small>${it.notes}</small>` : ""}</div>` : "";
+      return `
+        <div class="jp-economy__card">
+          <div class="jp-economy__head"><span class="category-guide__kind category-guide__kind--${kindCls[kind] ?? "lead"}">${kind}</span><b>${it.name.replace(/（[^）]*）/g, "")}</b></div>
+          <p>${it.brief ?? ""}</p>
+          ${body}${ext}
+        </div>`;
+    })
+    .join("");
+  return `
+    <section class="jp-economy">
+      <h3 class="jp-economy__title">🇯🇵 日本の景気を見る<span>先行 → 一致 → 遅行 の順に確認</span></h3>
+      <p class="jp-economy__lead">景気は、企業の心理（先行）→ 生産（一致）→ 国全体の成長率（遅行）の順に表れやすいため、この順に見ると、いまどの段階にあるかが分かります。指標名をクリックすると詳細が開きます。</p>
+      <div class="jp-economy__grid">${cards}</div>
+      <p class="jp-economy__note">※ 詳しい見方は、下の「景気」カテゴリの「①まず見る／②次に見る」にあります。数値は速報のことがあり、あとから改定されます（投資助言ではありません）。</p>
+    </section>`;
+}
 
 /**
  * 経済状況サマリーの「現在の指標の状況」の上に出す、「日本株に影響を与える米国の指標」の紹介。
@@ -904,7 +961,8 @@ function renderEconSummary() {
     ${helpPanel("summary", helpCtx)}
     ${marketBoardHtml(state.market, (id) => state.data.indicators.some((i) => i.id === id))}
     <p class="econ-summary__headline">${sum.headline}</p>
-    ${quickRefHtml({ site: "jp", has: (id) => state.data.indicators.some((i) => i.id === id) })}
+    ${jpEconomyHtml()}
+    ${quickRefHtml({ site: "jp", has: (id) => state.data.indicators.some((i) => i.id === id), indicators: state.data.indicators })}
     ${usIntroHtml()}
     ${helpHeading("status", "📍 現在の指標の状況", { className: "econ-summary__section-title" })}
     ${helpPanel("status", helpCtx)}
