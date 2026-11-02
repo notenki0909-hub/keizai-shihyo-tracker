@@ -14,6 +14,7 @@ import { INDICATORS, CATEGORY_GUIDES } from "./indicators.config.mjs";
 import { fetchForeignInvestorFlow } from "./fetch-jpx-investor-type.mjs";
 import { fetchUsdJpyDaily } from "./fetch-boj-fx-daily.mjs";
 import { fetchFredSeries } from "./fetch-fred-series.mjs";
+import { fetchFallbackSeries } from "./fetch-fallback-series.mjs";
 import { fetchNextReleaseDate } from "./fetch-fred-release-date.mjs";
 import { fetchTankanDi, fetchTankanCapexPlan } from "./fetch-boj-tankan.mjs";
 import { fetchCustomsTradeBalance } from "./fetch-mof-customs.mjs";
@@ -766,9 +767,20 @@ async function main() {
           break;
         }
         default:
-          points = await fetchSeries(ind);
-          if (ind.api.transform) points = applyTransform(points, ind.api.transform);
-          source = { provider: "統計ダッシュボード（e-Stat）", statName: ind.api.statName, indicatorCode: ind.api.indicatorCode };
+          try {
+            points = await fetchSeries(ind);
+            if (ind.api.transform) points = applyTransform(points, ind.api.transform);
+            source = { provider: "統計ダッシュボード（e-Stat）", statName: ind.api.statName, indicatorCode: ind.api.indicatorCode };
+          } catch (estatErr) {
+            if (!ind.fallback) throw estatErr;
+            // 統計ダッシュボードの障害時は、元の公表機関など予備の取得先から取る（予備も失敗したら通常の失敗扱い）
+            process.stdout.write(`統計ダッシュボード失敗（${estatErr.message}）→ 予備の取得先 `);
+            try {
+              ({ points, source } = await fetchFallbackSeries(ind.fallback, prevById.get(ind.id)?.points));
+            } catch (fbErr) {
+              throw new Error(`${estatErr.message}／予備の取得先も失敗: ${fbErr.message}`);
+            }
+          }
       }
 
       let nextRelease = null;

@@ -239,6 +239,8 @@ export const INDICATORS = [
     releaseSchedule: "日本銀行が対象月の翌月上旬（8営業日目ごろ）8:50に公表。",
     nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 12 },
     api: { indicatorCode: "0703040400000030010", cycle: "1", rank: "2", sa: "1", statName: "企業物価指数＜日本銀行＞" },
+    // 統計ダッシュボードが取得できないときの予備（日銀の公表元。2000-01以降の全期間で統計ダッシュボードと一致を確認済み）
+    fallback: { provider: "boj-stat", db: "PR01", code: "PRCG20_2200000000%", since: "200001", latestProvisional: true, statName: "企業物価指数＜日本銀行＞ 国内企業物価指数 総平均（前年比）", sourceUrl: "https://www.stat-search.boj.or.jp/" },
   },
   {
     id: "unemployment_rate",
@@ -429,6 +431,8 @@ export const INDICATORS = [
     referenceLines: [{ value: 0, label: "0%＝マイナス金利との分岐", kind: "neutral" }],
     releaseSchedule: "日本銀行が毎営業日、市場実勢レートを公表。金融政策決定会合（年8回）の翌日に、政策変更があれば大きく変動する。",
     api: { indicatorCode: "0702020300000010010", cycle: "1", rank: "2", sa: "1", statName: "コール市場統計＜日本銀行＞" },
+    // 統計ダッシュボードが取得できないときの予備（日銀の公表元。1985-07以降の全期間で統計ダッシュボードと一致を確認済み）
+    fallback: { provider: "boj-stat", db: "FM02", code: "STRACLUCON", since: "198507", statName: "コール市場統計＜日本銀行＞ 無担保コールレート・O/N 月平均", sourceUrl: "https://www.stat-search.boj.or.jp/" },
   },
   {
     id: "jgb_10y_yield",
@@ -466,6 +470,8 @@ export const INDICATORS = [
     referenceLines: [{ value: 0, label: "0%＝マイナス金利との分岐", kind: "neutral" }],
     releaseSchedule: "日々の市場取引で決まる。特定の公表時刻はなく随時更新され、本ツールは月末値を採用。",
     api: { indicatorCode: "0702020300000010020", cycle: "1", rank: "2", sa: "1", statName: "金融経済統計" },
+    // 統計ダッシュボードが取得できないときの予備（FRED。過去分の定義が少し違う月があるため、新しい月だけを足す）
+    fallback: { provider: "fred-csv", seriesId: "IRLTLT01JPM156N", appendOnly: true, statName: "Long-Term Government Bond Yields: 10-Year（OECD／配信：FRED）", sourceUrl: "https://fred.stlouisfed.org/series/IRLTLT01JPM156N" },
   },
   {
     id: "monetary_base_yoy",
@@ -492,6 +498,8 @@ export const INDICATORS = [
     releaseSchedule: "日本銀行が対象月終了後、翌月初旬に公表。",
     nextReleaseRule: { type: "periodLag", daysAfterPeriodEnd: 7 },
     api: { indicatorCode: "0702010102000030010", cycle: "1", rank: "2", sa: "1", statName: "マネタリーベース統計＜日本銀行＞" },
+    // 統計ダッシュボードが取得できないときの予備（日銀の公表元。1982-04以降の全期間で統計ダッシュボードと一致を確認済み）
+    fallback: { provider: "boj-stat", db: "MD01", code: "MABS1AN11@", since: "198204", statName: "マネタリーベース統計＜日本銀行＞ マネタリーベース平均残高（前年比）", sourceUrl: "https://www.stat-search.boj.or.jp/" },
   },
   {
     id: "usdjpy",
