@@ -1,97 +1,97 @@
 {
-  "generatedAt": "2026-11-03T08:05:02.379Z",
+  "generatedAt": "2026-11-04T07:39:37.101Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 34,
   "failures": [
     {
       "id": "gdp_real_growth",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "coincident_ci",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "industrial_production",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "machinery_orders",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "housing_starts",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "cpi_core_yoy",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "unemployment_rate",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "jobs_to_applicants_ratio",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "new_job_openings_ratio",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "real_wage_index_yoy",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "trade_balance",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "current_account",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "topix",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "household_spending_yoy",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "tertiary_industry_activity",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "cpi_total_yoy",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "machinery_orders_mom",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     },
     {
       "id": "cpi_corecore_yoy",
-      "error": "HTTP 502",
+      "error": "HTTP 403",
       "keptPrevious": true
     }
   ],
@@ -259,7 +259,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-11-03T08:05:02.383Z",
+    "generatedAt": "2026-11-04T07:39:37.107Z",
     "stats": {
       "total": 34,
       "improving": 14,
@@ -530,8 +530,8 @@
         "name": "マネタリーベース",
         "category": "金利",
         "period": {
-          "from": "2026-08",
-          "to": "2026-09"
+          "from": "2026-09",
+          "to": "2026-10"
         }
       },
       {
@@ -539,8 +539,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-10-28",
-          "to": "2026-10-29"
+          "from": "2026-10-29",
+          "to": "2026-10-30"
         }
       },
       {
@@ -30971,7 +30971,7 @@
         }
       },
       "releaseSchedule": "日本銀行が対象月終了後、翌月初旬に公表。",
-      "nextRelease": "2026-11-09",
+      "nextRelease": "2026-12-07",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -30980,12 +30980,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09",
-          "value": -15.2,
+          "t": "2026-10",
+          "value": -13.6,
           "provisional": false
         },
-        "changeFromPrev": 0.5,
-        "changeFromYearAgo": -9,
+        "changeFromPrev": 1.6,
+        "changeFromYearAgo": -5.8,
         "min": {
           "t": "2006-11",
           "value": -22.3
@@ -30994,7 +30994,7 @@
           "t": "2014-02",
           "value": 55.7
         },
-        "count": 534,
+        "count": 535,
         "start": "1982-04"
       },
       "points": [
@@ -33133,6 +33133,10 @@
         {
           "t": "2026-09",
           "value": -15.2
+        },
+        {
+          "t": "2026-10",
+          "value": -13.6
         }
       ]
     },
@@ -33214,7 +33218,7 @@
         }
       },
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-11-04",
+      "nextRelease": "2026-11-05",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -33223,12 +33227,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-10-29",
-          "value": 157.83,
+          "t": "2026-10-30",
+          "value": 157.56,
           "provisional": false
         },
-        "changeFromPrev": 0.04,
-        "changeFromYearAgo": 5.77,
+        "changeFromPrev": -0.27,
+        "changeFromYearAgo": 4.12,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -33237,7 +33241,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2644,
+        "count": 2645,
         "start": "2016-01-04"
       },
       "points": [
@@ -43816,6 +43820,10 @@
         {
           "t": "2026-10-29",
           "value": 157.83
+        },
+        {
+          "t": "2026-10-30",
+          "value": 157.56
         }
       ]
     },
