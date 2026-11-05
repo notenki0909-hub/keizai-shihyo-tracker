@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T14:51:41.818Z",
+  "generatedAt": "2026-11-05T08:01:33.823Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 34,
@@ -259,7 +259,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-11-04T14:51:41.821Z",
+    "generatedAt": "2026-11-05T08:01:33.827Z",
     "stats": {
       "total": 34,
       "improving": 14,
@@ -512,8 +512,8 @@
         "name": "無担保コールレート（政策金利）",
         "category": "金利",
         "period": {
-          "from": "2026-08",
-          "to": "2026-09"
+          "from": "2026-09",
+          "to": "2026-10"
         }
       },
       {
@@ -539,8 +539,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-10-29",
-          "to": "2026-10-30"
+          "from": "2026-10-30",
+          "to": "2026-11-02"
         }
       },
       {
@@ -28124,12 +28124,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09",
-          "value": 1.043,
+          "t": "2026-10",
+          "value": 1.227,
           "provisional": false
         },
-        "changeFromPrev": 0.066,
-        "changeFromYearAgo": 0.566,
+        "changeFromPrev": 0.184,
+        "changeFromYearAgo": 0.75,
         "min": {
           "t": "2018-06",
           "value": -0.071
@@ -28138,7 +28138,7 @@
           "t": "1991-03",
           "value": 8.27813
         },
-        "count": 495,
+        "count": 496,
         "start": "1985-07"
       },
       "points": [
@@ -30121,6 +30121,10 @@
         {
           "t": "2026-09",
           "value": 1.043
+        },
+        {
+          "t": "2026-10",
+          "value": 1.227
         }
       ]
     },
@@ -33227,7 +33231,7 @@
         }
       },
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-11-05",
+      "nextRelease": "2026-11-06",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -33236,12 +33240,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-10-30",
-          "value": 157.56,
+          "t": "2026-11-02",
+          "value": 157.75,
           "provisional": false
         },
-        "changeFromPrev": -0.27,
-        "changeFromYearAgo": 4.12,
+        "changeFromPrev": 0.19,
+        "changeFromYearAgo": 3.44,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -33250,7 +33254,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2645,
+        "count": 2646,
         "start": "2016-01-04"
       },
       "points": [
@@ -43833,6 +43837,10 @@
         {
           "t": "2026-10-30",
           "value": 157.56
+        },
+        {
+          "t": "2026-11-02",
+          "value": 157.75
         }
       ]
     },
