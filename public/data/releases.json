@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-04T07:39:37.147Z",
+ "generatedAt": "2026-11-06T08:03:09.070Z",
  "retentionDays": 365,
  "releases": {
   "ppi_yoy": [
@@ -168,6 +168,14 @@
     "kind": "detected",
     "prev": 2,
     "provisional": true
+   },
+   {
+    "date": "2026-11-06",
+    "t": "2026-09",
+    "value": 2.2,
+    "kind": "detected",
+    "prev": 1.6,
+    "provisional": true
    }
   ],
   "trade_balance": [
@@ -215,6 +223,13 @@
     "value": 6914.77,
     "kind": "detected",
     "prev": -7541.87
+   },
+   {
+    "date": "2026-11-06",
+    "t": "2026-10",
+    "value": 13407.75,
+    "kind": "detected",
+    "prev": 6914.77
    }
   ],
   "machinery_orders_mom": [

@@ -1,100 +1,9 @@
 {
-  "generatedAt": "2026-11-05T14:56:23.163Z",
+  "generatedAt": "2026-11-06T08:03:09.022Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 34,
-  "failures": [
-    {
-      "id": "gdp_real_growth",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "coincident_ci",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "industrial_production",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "machinery_orders",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "housing_starts",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "cpi_core_yoy",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "unemployment_rate",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "jobs_to_applicants_ratio",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "new_job_openings_ratio",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "real_wage_index_yoy",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "trade_balance",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "current_account",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "topix",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "household_spending_yoy",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "tertiary_industry_activity",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "cpi_total_yoy",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "machinery_orders_mom",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    },
-    {
-      "id": "cpi_corecore_yoy",
-      "error": "HTTP 403",
-      "keptPrevious": true
-    }
-  ],
+  "failures": [],
   "categoryGuides": {
     "景気": {
       "first": {
@@ -259,15 +168,15 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-11-05T14:56:23.167Z",
+    "generatedAt": "2026-11-06T08:03:09.027Z",
     "stats": {
       "total": 34,
-      "improving": 14,
-      "worsening": 10,
+      "improving": 15,
+      "worsening": 9,
       "neutral": 10,
-      "surpriseCount": 2
+      "surpriseCount": 3
     },
-    "headline": "34指標中、改善傾向が14件、悪化傾向が10件、横ばい・中立が10件です。",
+    "headline": "34指標中、改善傾向が15件、悪化傾向が9件、横ばい・中立が10件です。",
     "improvingList": [
       {
         "id": "industrial_production",
@@ -315,6 +224,15 @@
         }
       },
       {
+        "id": "real_wage_index_yoy",
+        "name": "実質賃金指数（現金給与総額）",
+        "category": "雇用・所得",
+        "period": {
+          "from": "2026-08",
+          "to": "2026-09"
+        }
+      },
+      {
         "id": "current_account",
         "name": "経常収支",
         "category": "対外",
@@ -328,8 +246,8 @@
         "name": "海外投資家 売買動向（東証プライム）",
         "category": "為替・市場",
         "period": {
-          "from": "2026-08",
-          "to": "2026-09"
+          "from": "2026-09",
+          "to": "2026-10"
         }
       },
       {
@@ -425,15 +343,6 @@
         }
       },
       {
-        "id": "real_wage_index_yoy",
-        "name": "実質賃金指数（現金給与総額）",
-        "category": "雇用・所得",
-        "period": {
-          "from": "2026-07",
-          "to": "2026-08"
-        }
-      },
-      {
         "id": "trade_balance",
         "name": "貿易収支",
         "category": "対外",
@@ -521,8 +430,8 @@
         "name": "新発10年国債利回り",
         "category": "金利",
         "period": {
-          "from": "2026-08",
-          "to": "2026-09"
+          "from": "2026-09",
+          "to": "2026-10"
         }
       },
       {
@@ -539,8 +448,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-10-30",
-          "to": "2026-11-02"
+          "from": "2026-11-02",
+          "to": "2026-11-04"
         }
       },
       {
@@ -585,15 +494,6 @@
         "id": "new_job_openings_ratio",
         "name": "新規求人倍率",
         "category": "雇用・所得",
-        "period": {
-          "from": "2026-07",
-          "to": "2026-09"
-        }
-      },
-      {
-        "id": "foreign_investor_flow",
-        "name": "海外投資家 売買動向（東証プライム）",
-        "category": "為替・市場",
         "period": {
           "from": "2026-07",
           "to": "2026-09"
@@ -755,7 +655,7 @@
         "reference": {
           "label": "0%＝実質増減の分岐",
           "value": 0,
-          "current": 1.6
+          "current": 2.2
         }
       },
       {
@@ -775,7 +675,7 @@
         "reference": {
           "label": "0＝買い越し・売り越しの分岐",
           "value": 0,
-          "current": 6914.77
+          "current": 13407.75
         }
       },
       {
@@ -1019,6 +919,15 @@
     ],
     "surpriseFindings": [
       {
+        "id": "jgb_10y_yield",
+        "name": "新発10年国債利回り",
+        "category": "金利",
+        "z": -3.7,
+        "level": "high",
+        "detail": "非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=-3.7）。",
+        "text": "新発10年国債利回りで非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=-3.7）。"
+      },
+      {
         "id": "new_job_openings_ratio",
         "name": "新規求人倍率",
         "category": "雇用・所得",
@@ -1137,6 +1046,26 @@
         },
         "detail": "直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。",
         "text": "経常収支は、直近（2026-06〜2026-08）の傾向が、その前（2026-03〜2026-05）から悪化方向に転じました（転換点を通過）。"
+      },
+      {
+        "id": "foreign_investor_flow",
+        "name": "海外投資家 売買動向（東証プライム）",
+        "category": "為替・市場",
+        "favorable": true,
+        "flipped": true,
+        "proximity": 100,
+        "period": {
+          "recent": {
+            "from": "2026-08",
+            "to": "2026-10"
+          },
+          "prior": {
+            "from": "2026-05",
+            "to": "2026-07"
+          }
+        },
+        "detail": "直近（2026-08〜2026-10）の傾向が、その前（2026-05〜2026-07）から改善方向に転じました（転換点を通過）。",
+        "text": "海外投資家 売買動向（東証プライム）は、直近（2026-08〜2026-10）の傾向が、その前（2026-05〜2026-07）から改善方向に転じました（転換点を通過）。"
       },
       {
         "id": "tankan_large_nonmfg",
@@ -1425,6 +1354,11 @@
         }
       ],
       "movingAverage": null,
+      "ripple": {
+        "trigger": "日本の景気が予想より強い（GDP・景気動向指数が上振れ）",
+        "route": "企業の利益・賃金が増える → 消費・設備投資が増える → 日銀の利上げ観測が強まる → 金利上昇・円高方向",
+        "sectors": "機械・小売・外食（プラスになり得る）／不動産・借入の多い企業（利上げ観測でマイナスになり得る）"
+      },
       "impact": {
         "flow": "国内の生産・所得（GDP）が伸びる → 企業収益が増える → 賃上げ・採用・設備投資が増える → 家計の所得・消費が増える（逆の動きも同じ経路）",
         "up": "企業収益への期待で株価にプラス。雇用・賃金が改善し、需要が強まって物価も上がりやすい。景気・物価が強いと、日銀の利上げ観測から円高・金利上昇に働くこともある。",
@@ -2037,12 +1971,7 @@
           "t": "2026 Q2",
           "value": 1.4
         }
-      ],
-      "ripple": {
-        "trigger": "日本の景気が予想より強い（GDP・景気動向指数が上振れ）",
-        "route": "企業の利益・賃金が増える → 消費・設備投資が増える → 日銀の利上げ観測が強まる → 金利上昇・円高方向",
-        "sectors": "機械・小売・外食（プラスになり得る）／不動産・借入の多い企業（利上げ観測でマイナスになり得る）"
-      }
+      ]
     },
     {
       "id": "coincident_ci",
@@ -2070,6 +1999,11 @@
         }
       ],
       "movingAverage": null,
+      "ripple": {
+        "trigger": "日本の景気が予想より強い（GDP・景気動向指数が上振れ）",
+        "route": "企業の利益・賃金が増える → 消費・設備投資が増える → 日銀の利上げ観測が強まる → 金利上昇・円高方向",
+        "sectors": "機械・小売・外食（プラスになり得る）／不動産・借入の多い企業（利上げ観測でマイナスになり得る）"
+      },
       "impact": {
         "flow": "生産・雇用・消費などを総合した景気の「いま」 → 企業の業績・家計の所得",
         "up": "景気の拡大局面。企業収益・雇用にプラスで、株価の支えになる。",
@@ -2114,7 +2048,7 @@
         }
       },
       "releaseSchedule": "内閣府が対象月の約5週間後、14:00ごろに速報を公表。翌月に改定値。",
-      "nextRelease": "2026-11-04",
+      "nextRelease": "2026-11-09",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -4141,12 +4075,7 @@
           "t": "2026-08",
           "value": 118.8
         }
-      ],
-      "ripple": {
-        "trigger": "日本の景気が予想より強い（GDP・景気動向指数が上振れ）",
-        "route": "企業の利益・賃金が増える → 消費・設備投資が増える → 日銀の利上げ観測が強まる → 金利上昇・円高方向",
-        "sectors": "機械・小売・外食（プラスになり得る）／不動産・借入の多い企業（利上げ観測でマイナスになり得る）"
-      }
+      ]
     },
     {
       "id": "industrial_production",
@@ -4174,6 +4103,11 @@
         }
       ],
       "movingAverage": null,
+      "ripple": {
+        "trigger": "鉱工業生産が増える（工場の稼働が上がる）",
+        "route": "輸出・国内向けの出荷が増える → 設備投資・残業・雇用が増える → 企業収益が改善する",
+        "sectors": "機械・素材・自動車・運輸（プラスになり得る）"
+      },
       "impact": {
         "flow": "工場の生産が増減 → 企業の売上・在庫 → 設備投資・採用 → 賃金・雇用",
         "up": "需要が強いサイン。輸出企業の業績・株価にプラス。製造業の雇用・残業が増えやすい。",
@@ -6590,12 +6524,7 @@
           "value": 104.1,
           "provisional": true
         }
-      ],
-      "ripple": {
-        "trigger": "鉱工業生産が増える（工場の稼働が上がる）",
-        "route": "輸出・国内向けの出荷が増える → 設備投資・残業・雇用が増える → 企業収益が改善する",
-        "sectors": "機械・素材・自動車・運輸（プラスになり得る）"
-      }
+      ]
     },
     {
       "id": "machinery_orders",
@@ -7745,6 +7674,11 @@
       },
       "referenceLines": [],
       "movingAverage": null,
+      "ripple": {
+        "trigger": "新設住宅着工が増える（住宅需要が強い）",
+        "route": "建設・住宅メーカーの受注が増える → 建材・家具・家電の需要が増える → 雇用・消費に波及する",
+        "sectors": "建設・建材・家具・家電（プラスになり得る）／（金利が上がると逆風）"
+      },
       "impact": {
         "flow": "住宅の着工 → 建設・建材・家具家電の需要 → 雇用・消費",
         "up": "住宅需要が強く、建設・不動産関連にプラス。関連消費（家具・家電）も増えやすい。",
@@ -9915,12 +9849,7 @@
           "t": "2026-09",
           "value": 59482
         }
-      ],
-      "ripple": {
-        "trigger": "新設住宅着工が増える（住宅需要が強い）",
-        "route": "建設・住宅メーカーの受注が増える → 建材・家具・家電の需要が増える → 雇用・消費に波及する",
-        "sectors": "建設・建材・家具・家電（プラスになり得る）／（金利が上がると逆風）"
-      }
+      ]
     },
     {
       "id": "cpi_core_yoy",
@@ -12804,9 +12733,9 @@
       "nextRelease": "2026-11-12",
       "nextReleaseKind": "estimate",
       "source": {
-        "provider": "日本銀行 時系列統計データ検索サイト",
-        "statName": "企業物価指数＜日本銀行＞ 国内企業物価指数 総平均（前年比）（統計ダッシュボードが取得できなかったため、こちらから取得）",
-        "sourceUrl": "https://www.stat-search.boj.or.jp/"
+        "provider": "統計ダッシュボード（e-Stat）",
+        "statName": "企業物価指数＜日本銀行＞",
+        "indicatorCode": "0703040400000030010"
       },
       "summary": {
         "latest": {
@@ -14141,6 +14070,11 @@
         }
       ],
       "movingAverage": null,
+      "ripple": {
+        "trigger": "人手不足が深刻化（失業率の低下・求人倍率の上昇）",
+        "route": "賃上げ圧力が強まる → 家計の所得・物価が上昇 → 日銀の利上げ観測が高まる",
+        "sectors": "人材サービス（プラスになり得る）／外食・小売・運輸・介護（人件費の上昇でマイナスになり得る）"
+      },
       "impact": {
         "flow": "失業が増える → 所得が減る → 消費が減る → 企業の売上が減る → さらに採用が減る",
         "up": "景気悪化のサイン。消費が弱まり企業収益・株価に逆風。賃金の伸びも鈍る。",
@@ -17773,12 +17707,7 @@
           "t": "2026-09",
           "value": 2.4
         }
-      ],
-      "ripple": {
-        "trigger": "人手不足が深刻化（失業率の低下・求人倍率の上昇）",
-        "route": "賃上げ圧力が強まる → 家計の所得・物価が上昇 → 日銀の利上げ観測が高まる",
-        "sectors": "人材サービス（プラスになり得る）／外食・小売・運輸・介護（人件費の上昇でマイナスになり得る）"
-      }
+      ]
     },
     {
       "id": "jobs_to_applicants_ratio",
@@ -17806,6 +17735,11 @@
         }
       ],
       "movingAverage": null,
+      "ripple": {
+        "trigger": "人手不足が深刻化（失業率の低下・求人倍率の上昇）",
+        "route": "賃上げ圧力が強まる → 家計の所得・物価が上昇 → 日銀の利上げ観測が高まる",
+        "sectors": "人材サービス（プラスになり得る）／外食・小売・運輸・介護（人件費の上昇でマイナスになり得る）"
+      },
       "impact": {
         "flow": "求人が求職者を上回る → 人手不足 → 賃上げ・採用競争 → 家計の所得増 → 消費 → 物価",
         "up": "人手不足が賃金上昇を促し、賃金と物価の好循環（日銀が重視）に働く。日銀の利上げ観測にもつながる。",
@@ -20942,12 +20876,7 @@
           "t": "2026-09",
           "value": 1.19
         }
-      ],
-      "ripple": {
-        "trigger": "人手不足が深刻化（失業率の低下・求人倍率の上昇）",
-        "route": "賃上げ圧力が強まる → 家計の所得・物価が上昇 → 日銀の利上げ観測が高まる",
-        "sectors": "人材サービス（プラスになり得る）／外食・小売・運輸・介護（人件費の上昇でマイナスになり得る）"
-      }
+      ]
     },
     {
       "id": "new_job_openings_ratio",
@@ -20969,6 +20898,11 @@
       },
       "referenceLines": [],
       "movingAverage": null,
+      "ripple": {
+        "trigger": "人手不足が深刻化（失業率の低下・求人倍率の上昇）",
+        "route": "賃上げ圧力が強まる → 家計の所得・物価が上昇 → 日銀の利上げ観測が高まる",
+        "sectors": "人材サービス（プラスになり得る）／外食・小売・運輸・介護（人件費の上昇でマイナスになり得る）"
+      },
       "impact": {
         "flow": "新規の求人の増減 → 採用・賃上げの動き（有効求人倍率より早く動く傾向）→ 家計の所得・消費",
         "up": "企業の採用意欲が強い。賃上げ・雇用の改善に先行して表れやすい。",
@@ -24105,12 +24039,7 @@
           "t": "2026-09",
           "value": 2.19
         }
-      ],
-      "ripple": {
-        "trigger": "人手不足が深刻化（失業率の低下・求人倍率の上昇）",
-        "route": "賃上げ圧力が強まる → 家計の所得・物価が上昇 → 日銀の利上げ観測が高まる",
-        "sectors": "人材サービス（プラスになり得る）／外食・小売・運輸・介護（人件費の上昇でマイナスになり得る）"
-      }
+      ]
     },
     {
       "id": "real_wage_index_yoy",
@@ -24138,6 +24067,11 @@
         }
       ],
       "movingAverage": null,
+      "ripple": {
+        "trigger": "実質賃金がプラスに転じる（賃金が物価を上回る）",
+        "route": "家計の購買力が高まる → 消費が増える → 企業の売上が増える → 賃金と物価の好循環",
+        "sectors": "小売・外食・観光（プラスになり得る）"
+      },
       "impact": {
         "flow": "名目賃金−物価 → 実質的な購買力 → 個人消費 → 企業の売上",
         "up": "家計の購買力が増え、消費・企業の売上にプラス。賃金と物価の好循環が確認されれば、日銀の利上げ判断を後押しする。",
@@ -24183,7 +24117,7 @@
         }
       },
       "releaseSchedule": "厚生労働省が対象月の翌々月上旬ごろ8:30に速報を公表。",
-      "nextRelease": "2026-11-09",
+      "nextRelease": "2026-12-08",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -24192,12 +24126,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-08",
-          "value": 1.6,
-          "provisional": false
+          "t": "2026-09",
+          "value": 2.2,
+          "provisional": true
         },
-        "changeFromPrev": -0.4,
-        "changeFromYearAgo": 3.3,
+        "changeFromPrev": 0.6,
+        "changeFromYearAgo": 3.5,
         "min": {
           "t": "2014-05",
           "value": -4.1
@@ -24206,7 +24140,7 @@
           "t": "2021-05",
           "value": 3.1
         },
-        "count": 164,
+        "count": 165,
         "start": "2013-01"
       },
       "points": [
@@ -24865,13 +24799,13 @@
         {
           "t": "2026-08",
           "value": 1.6
+        },
+        {
+          "t": "2026-09",
+          "value": 2.2,
+          "provisional": true
         }
-      ],
-      "ripple": {
-        "trigger": "実質賃金がプラスに転じる（賃金が物価を上回る）",
-        "route": "家計の購買力が高まる → 消費が増える → 企業の売上が増える → 賃金と物価の好循環",
-        "sectors": "小売・外食・観光（プラスになり得る）"
-      }
+      ]
     },
     {
       "id": "trade_balance",
@@ -24899,6 +24833,11 @@
         }
       ],
       "movingAverage": null,
+      "ripple": {
+        "trigger": "貿易収支・経常収支の黒字が拡大",
+        "route": "海外から円を買う動きが強まる → 円高方向 → 輸入コストが下がる一方、輸出企業の円換算の利益が目減りする",
+        "sectors": "食品・電力・航空（プラスになり得る）／輸出企業（マイナスになり得る）"
+      },
       "impact": {
         "flow": "輸出−輸入 → 貿易の黒字・赤字 → 円の需給（赤字は円売り要因）→ 為替・輸入物価 → 家計の物価",
         "up": "黒字拡大（輸出が強い・輸入が少ない）は、円の買い需要になり円高方向。輸出企業の業績にもプラス。",
@@ -26445,12 +26384,7 @@
           "value": -4852,
           "provisional": true
         }
-      ],
-      "ripple": {
-        "trigger": "貿易収支・経常収支の黒字が拡大",
-        "route": "海外から円を買う動きが強まる → 円高方向 → 輸入コストが下がる一方、輸出企業の円換算の利益が目減りする",
-        "sectors": "食品・電力・航空（プラスになり得る）／輸出企業（マイナスになり得る）"
-      }
+      ]
     },
     {
       "id": "current_account",
@@ -26478,6 +26412,11 @@
         }
       ],
       "movingAverage": null,
+      "ripple": {
+        "trigger": "貿易収支・経常収支の黒字が拡大",
+        "route": "海外から円を買う動きが強まる → 円高方向 → 輸入コストが下がる一方、輸出企業の円換算の利益が目減りする",
+        "sectors": "食品・電力・航空（プラスになり得る）／輸出企業（マイナスになり得る）"
+      },
       "impact": {
         "flow": "貿易＋サービス＋海外からの所得 → 対外的な稼ぎ → 円の需給 → 為替",
         "up": "黒字拡大は円の買い需要になる。ただし海外投資の配当・利子は海外に再投資されることが多く、円買いに戻りにくい。",
@@ -28016,12 +27955,7 @@
           "value": 29794,
           "provisional": true
         }
-      ],
-      "ripple": {
-        "trigger": "貿易収支・経常収支の黒字が拡大",
-        "route": "海外から円を買う動きが強まる → 円高方向 → 輸入コストが下がる一方、輸出企業の円換算の利益が目減りする",
-        "sectors": "食品・電力・航空（プラスになり得る）／輸出企業（マイナスになり得る）"
-      }
+      ]
     },
     {
       "id": "call_rate",
@@ -28118,9 +28052,9 @@
       "nextRelease": null,
       "nextReleaseKind": null,
       "source": {
-        "provider": "日本銀行 時系列統計データ検索サイト",
-        "statName": "コール市場統計＜日本銀行＞ 無担保コールレート・O/N 月平均（統計ダッシュボードが取得できなかったため、こちらから取得）",
-        "sourceUrl": "https://www.stat-search.boj.or.jp/"
+        "provider": "統計ダッシュボード（e-Stat）",
+        "statName": "コール市場統計＜日本銀行＞",
+        "indicatorCode": "0702020300000010010"
       },
       "summary": {
         "latest": {
@@ -30258,18 +30192,18 @@
       "nextRelease": null,
       "nextReleaseKind": null,
       "source": {
-        "provider": "FRED（セントルイス連邦準備銀行）",
-        "statName": "Long-Term Government Bond Yields: 10-Year（OECD／配信：FRED）（統計ダッシュボードが取得できなかったため、こちらから取得）",
-        "sourceUrl": "https://fred.stlouisfed.org/series/IRLTLT01JPM156N"
+        "provider": "統計ダッシュボード（e-Stat）",
+        "statName": "金融経済統計",
+        "indicatorCode": "0702020300000010020"
       },
       "summary": {
         "latest": {
-          "t": "2026-09",
-          "value": 3.05,
+          "t": "2026-10",
+          "value": 2.755,
           "provisional": false
         },
-        "changeFromPrev": 0.11,
-        "changeFromYearAgo": 1.405,
+        "changeFromPrev": -0.295,
+        "changeFromYearAgo": 1.1,
         "min": {
           "t": "2019-08",
           "value": -0.28
@@ -30278,7 +30212,7 @@
           "t": "2026-09",
           "value": 3.05
         },
-        "count": 156,
+        "count": 157,
         "start": "2013-10"
       },
       "points": [
@@ -30905,6 +30839,10 @@
         {
           "t": "2026-09",
           "value": 3.05
+        },
+        {
+          "t": "2026-10",
+          "value": 2.755
         }
       ]
     },
@@ -30987,9 +30925,9 @@
       "nextRelease": "2026-12-07",
       "nextReleaseKind": "estimate",
       "source": {
-        "provider": "日本銀行 時系列統計データ検索サイト",
-        "statName": "マネタリーベース統計＜日本銀行＞ マネタリーベース平均残高（前年比）（統計ダッシュボードが取得できなかったため、こちらから取得）",
-        "sourceUrl": "https://www.stat-search.boj.or.jp/"
+        "provider": "統計ダッシュボード（e-Stat）",
+        "statName": "マネタリーベース統計＜日本銀行＞",
+        "indicatorCode": "0702010102000030010"
       },
       "summary": {
         "latest": {
@@ -33231,7 +33169,7 @@
         }
       },
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-11-06",
+      "nextRelease": "2026-11-09",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -33240,12 +33178,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-11-02",
-          "value": 157.75,
+          "t": "2026-11-04",
+          "value": 158.08,
           "provisional": false
         },
-        "changeFromPrev": 0.19,
-        "changeFromYearAgo": 3.44,
+        "changeFromPrev": 0.33,
+        "changeFromYearAgo": 4.49,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -33254,7 +33192,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2646,
+        "count": 2647,
         "start": "2016-01-04"
       },
       "points": [
@@ -43841,6 +43779,10 @@
         {
           "t": "2026-11-02",
           "value": 157.75
+        },
+        {
+          "t": "2026-11-04",
+          "value": 158.08
         }
       ]
     },
@@ -54554,6 +54496,11 @@
       },
       "referenceLines": [],
       "movingAverage": null,
+      "ripple": {
+        "trigger": "日本株が大きく下落（海外投資家の売り越しなど）",
+        "route": "リスクを避ける動きが広がる → 企業の資金調達・景況感が悪化 → 投資・採用が慎重になる（日本は株安による消費の逆資産効果は限定的）",
+        "sectors": "証券・輸出株（マイナスになり得る）／医薬・食品・電力（ディフェンシブ）（プラスになり得る）"
+      },
       "impact": {
         "flow": "株価が上がる → 株を持つ家計の資産・消費が増える／企業は資金調達・投資がしやすくなる",
         "up": "市場全体に資金が向かう健全な上昇は、企業の景況感・消費マインドにプラス。",
@@ -55569,12 +55516,7 @@
           "t": "2026-09",
           "value": 4108.65
         }
-      ],
-      "ripple": {
-        "trigger": "日本株が大きく下落（海外投資家の売り越しなど）",
-        "route": "リスクを避ける動きが広がる → 企業の資金調達・景況感が悪化 → 投資・採用が慎重になる（日本は株安による消費の逆資産効果は限定的）",
-        "sectors": "証券・輸出株（マイナスになり得る）／医薬・食品・電力（ディフェンシブ）（プラスになり得る）"
-      }
+      ]
     },
     {
       "id": "nt_ratio",
@@ -56248,7 +56190,7 @@
         }
       },
       "releaseSchedule": "東京証券取引所（JPX）が翌月初旬（前月最終週の週間発表と同日、毎月第4営業日ごろ）15:30に月間データを公表。※2026年9月分（10月8日公表）からファイル形式が変わったが、新旧どちらの形式も読み取れる。",
-      "nextRelease": "2026-11-06",
+      "nextRelease": "2026-12-07",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "投資部門別売買状況（JPX）",
@@ -56257,12 +56199,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09",
-          "value": 6914.77,
+          "t": "2026-10",
+          "value": 13407.75,
           "provisional": false
         },
-        "changeFromPrev": 14456.64,
-        "changeFromYearAgo": 20022.23,
+        "changeFromPrev": 6492.98,
+        "changeFromYearAgo": -22145.55,
         "min": {
           "t": "2024-09",
           "value": -29449.56
@@ -56271,7 +56213,7 @@
           "t": "2026-04",
           "value": 57446.66
         },
-        "count": 54,
+        "count": 55,
         "start": "2022-04"
       },
       "points": [
@@ -56490,6 +56432,10 @@
         {
           "t": "2026-09",
           "value": 6914.77
+        },
+        {
+          "t": "2026-10",
+          "value": 13407.75
         }
       ]
     },
@@ -59923,6 +59869,11 @@
         }
       ],
       "movingAverage": null,
+      "ripple": {
+        "trigger": "家計の消費が強まる（街角景気・消費者マインド・消費支出の改善）",
+        "route": "小売・飲食・観光の売上が増える → 企業収益・雇用が改善する → 賃金・物価の好循環につながる",
+        "sectors": "小売・百貨店・外食・観光（プラスになり得る）"
+      },
       "impact": {
         "flow": "家計の実質消費 → 企業の売上 → 雇用・賃上げ → 家計の所得（循環）",
         "up": "消費が強く、小売・サービスの企業収益、株価の支えになる。",
@@ -61238,12 +61189,7 @@
           "t": "2026-08",
           "value": -3.1
         }
-      ],
-      "ripple": {
-        "trigger": "家計の消費が強まる（街角景気・消費者マインド・消費支出の改善）",
-        "route": "小売・飲食・観光の売上が増える → 企業収益・雇用が改善する → 賃金・物価の好循環につながる",
-        "sectors": "小売・百貨店・外食・観光（プラスになり得る）"
-      }
+      ]
     },
     {
       "id": "tertiary_industry_activity",
@@ -61271,6 +61217,11 @@
         }
       ],
       "movingAverage": null,
+      "ripple": {
+        "trigger": "日本の景気が予想より強い（GDP・景気動向指数が上振れ）",
+        "route": "企業の利益・賃金が増える → 消費・設備投資が増える → 日銀の利上げ観測が強まる → 金利上昇・円高方向",
+        "sectors": "機械・小売・外食（プラスになり得る）／不動産・借入の多い企業（利上げ観測でマイナスになり得る）"
+      },
       "impact": {
         "flow": "サービス業（小売・運輸・飲食・医療など）の活動 → 雇用・所得 → 家計の消費",
         "up": "サービス業の活動が活発で、内需・雇用にプラス。個人消費の底堅さを映す。",
@@ -62230,12 +62181,7 @@
           "value": 106.8,
           "provisional": true
         }
-      ],
-      "ripple": {
-        "trigger": "日本の景気が予想より強い（GDP・景気動向指数が上振れ）",
-        "route": "企業の利益・賃金が増える → 消費・設備投資が増える → 日銀の利上げ観測が強まる → 金利上昇・円高方向",
-        "sectors": "機械・小売・外食（プラスになり得る）／不動産・借入の多い企業（利上げ観測でマイナスになり得る）"
-      }
+      ]
     },
     {
       "id": "tankan_large_mfg_outlook",
