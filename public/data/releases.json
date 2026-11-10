@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-09T16:47:35.506Z",
+ "generatedAt": "2026-11-10T08:31:16.088Z",
  "retentionDays": 365,
  "releases": {
   "ppi_yoy": [
@@ -194,6 +194,14 @@
     "kind": "detected",
     "prev": -4294,
     "provisional": true
+   },
+   {
+    "date": "2026-11-10",
+    "t": "2026-09",
+    "value": -7019,
+    "kind": "detected",
+    "prev": -4852,
+    "provisional": true
    }
   ],
   "current_account": [
@@ -203,6 +211,14 @@
     "value": 29794,
     "kind": "detected",
     "prev": 25231,
+    "provisional": true
+   },
+   {
+    "date": "2026-11-10",
+    "t": "2026-09",
+    "value": 18177,
+    "kind": "detected",
+    "prev": 29105,
     "provisional": true
    }
   ],
@@ -222,6 +238,13 @@
     "value": -3.1,
     "kind": "detected",
     "prev": -3.6
+   },
+   {
+    "date": "2026-11-10",
+    "t": "2026-09",
+    "value": -6.8,
+    "kind": "detected",
+    "prev": -3.1
    }
   ],
   "foreign_investor_flow": [
