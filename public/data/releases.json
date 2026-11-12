@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-10T08:31:16.088Z",
+ "generatedAt": "2026-11-12T08:28:41.076Z",
  "retentionDays": 365,
  "releases": {
   "ppi_yoy": [
@@ -17,6 +17,14 @@
     "value": 6.8,
     "kind": "detected",
     "prev": 7.6,
+    "provisional": true
+   },
+   {
+    "date": "2026-11-12",
+    "t": "2026-10",
+    "value": 7.1,
+    "kind": "detected",
+    "prev": 6.8,
     "provisional": true
    }
   ],

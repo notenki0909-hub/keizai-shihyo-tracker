@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T14:41:19.877Z",
+  "generatedAt": "2026-11-12T08:28:41.029Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 34,
@@ -168,7 +168,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-11-11T14:41:19.884Z",
+    "generatedAt": "2026-11-12T08:28:41.037Z",
     "stats": {
       "total": 34,
       "improving": 15,
@@ -412,8 +412,8 @@
         "name": "国内企業物価指数（PPI）",
         "category": "物価",
         "period": {
-          "from": "2026-08",
-          "to": "2026-09"
+          "from": "2026-09",
+          "to": "2026-10"
         }
       },
       {
@@ -448,8 +448,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-11-06",
-          "to": "2026-11-09"
+          "from": "2026-11-09",
+          "to": "2026-11-10"
         }
       },
       {
@@ -6601,7 +6601,7 @@
         }
       },
       "releaseSchedule": "内閣府が対象月の翌々月上旬ごろ8:50に公表。",
-      "nextRelease": "2026-11-12",
+      "nextRelease": "2026-11-13",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -12734,7 +12734,7 @@
         }
       },
       "releaseSchedule": "日本銀行が対象月の翌月上旬（8営業日目ごろ）8:50に公表。",
-      "nextRelease": "2026-11-12",
+      "nextRelease": "2026-12-14",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -12743,12 +12743,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09",
-          "value": 6.8,
+          "t": "2026-10",
+          "value": 7.1,
           "provisional": true
         },
-        "changeFromPrev": -0.8,
-        "changeFromYearAgo": 4,
+        "changeFromPrev": 0.3,
+        "changeFromYearAgo": 4.3,
         "min": {
           "t": "2009-08",
           "value": -8.5
@@ -12757,7 +12757,7 @@
           "t": "2022-12",
           "value": 10.6
         },
-        "count": 321,
+        "count": 322,
         "start": "2000-01"
       },
       "points": [
@@ -14043,7 +14043,11 @@
         },
         {
           "t": "2026-09",
-          "value": 6.8,
+          "value": 6.8
+        },
+        {
+          "t": "2026-10",
+          "value": 7.1,
           "provisional": true
         }
       ]
@@ -33182,7 +33186,7 @@
         }
       },
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-11-12",
+      "nextRelease": "2026-11-13",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -33191,12 +33195,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-11-09",
-          "value": 157.96,
+          "t": "2026-11-10",
+          "value": 158.02,
           "provisional": false
         },
-        "changeFromPrev": 0.01,
-        "changeFromYearAgo": 4.57,
+        "changeFromPrev": 0.06,
+        "changeFromYearAgo": 3.97,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -33205,7 +33209,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2650,
+        "count": 2651,
         "start": "2016-01-04"
       },
       "points": [
@@ -43808,6 +43812,10 @@
         {
           "t": "2026-11-09",
           "value": 157.96
+        },
+        {
+          "t": "2026-11-10",
+          "value": 158.02
         }
       ]
     },
@@ -57953,7 +57961,7 @@
         }
       },
       "releaseSchedule": "内閣府が毎月、調査月の翌月上旬（8日前後）に公表。",
-      "nextRelease": "2026-11-12",
+      "nextRelease": "2026-11-13",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "内閣府 景気ウォッチャー調査",
@@ -64396,7 +64404,7 @@
           "provisional": true
         },
         "changeFromPrev": 5641,
-        "changeFromYearAgo": -2788,
+        "changeFromYearAgo": -2452,
         "min": {
           "t": "2023-01",
           "value": -35389
@@ -66619,51 +66627,51 @@
         },
         {
           "t": "2025-01",
-          "value": -27587
+          "value": -27619
         },
         {
           "t": "2025-02",
-          "value": 5592
+          "value": 5455
         },
         {
           "t": "2025-03",
-          "value": 5298
+          "value": 5261
         },
         {
           "t": "2025-04",
-          "value": -1495
+          "value": -1528
         },
         {
           "t": "2025-05",
-          "value": -6625
+          "value": -6735
         },
         {
           "t": "2025-06",
-          "value": 1223
+          "value": 1172
         },
         {
           "t": "2025-07",
-          "value": -1563
+          "value": -1676
         },
         {
           "t": "2025-08",
-          "value": -2941
+          "value": -3089
         },
         {
           "t": "2025-09",
-          "value": -2777
+          "value": -3113
         },
         {
           "t": "2025-10",
-          "value": -2429
+          "value": -3019
         },
         {
           "t": "2025-11",
-          "value": 3060
+          "value": 2612
         },
         {
           "t": "2025-12",
-          "value": 947
+          "value": 536
         },
         {
           "t": "2026-01",
@@ -69579,7 +69587,7 @@
         }
       },
       "releaseSchedule": "内閣府が対象月の翌々月上旬ごろ8:50に公表。",
-      "nextRelease": "2026-11-12",
+      "nextRelease": "2026-11-13",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",

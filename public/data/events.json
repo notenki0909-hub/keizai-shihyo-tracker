@@ -1,7 +1,7 @@
 {
- "generatedAt": "2026-11-10T08:31:17.253Z",
+ "generatedAt": "2026-11-12T08:28:41.666Z",
  "source": "日本銀行の公式ページ（金融政策決定会合）",
- "eventCount": 68,
+ "eventCount": 71,
  "events": [
   {
    "id": "boj-20260123",
@@ -1869,6 +1869,30 @@
    "links": []
   },
   {
+   "id": "boj-20271217",
+   "src": "boj",
+   "type": "boj",
+   "date": "2027-12-17",
+   "title": "日銀 金融政策決定会合（政策金利の決定）",
+   "short": "日銀会合",
+   "subtitle": "12/16–12/17の2日間会合。決定は最終日に公表",
+   "time": "",
+   "status": "scheduled",
+   "links": []
+  },
+  {
+   "id": "boj-press-20271217",
+   "src": "boj",
+   "type": "boj_press",
+   "date": "2027-12-17",
+   "title": "日銀総裁 定例記者会見",
+   "short": "日銀総裁会見",
+   "subtitle": "12/16–12/17会合分。会見の記録は後日公表",
+   "time": "",
+   "status": "scheduled",
+   "links": []
+  },
+  {
    "id": "boj-minutes-20271029",
    "src": "boj",
    "type": "boj_minutes",
@@ -1876,6 +1900,18 @@
    "title": "日銀 金融政策決定会合 議事要旨",
    "short": "日銀 議事要旨",
    "subtitle": "10/28–10/29会合分。次回会合後に承認・公表される議事要旨",
+   "time": "08:50 JST",
+   "status": "scheduled",
+   "links": []
+  },
+  {
+   "id": "boj-opinion-20271217",
+   "src": "boj",
+   "type": "boj_opinion",
+   "date": "2027-12-27",
+   "title": "日銀 金融政策決定会合における主な意見",
+   "short": "日銀 主な意見",
+   "subtitle": "12/16–12/17会合分。政策委員の主な意見の要約",
    "time": "08:50 JST",
    "status": "scheduled",
    "links": []
