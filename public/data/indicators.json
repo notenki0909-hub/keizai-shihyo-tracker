@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T14:51:41.578Z",
+  "generatedAt": "2026-11-16T16:19:42.523Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 34,
@@ -174,15 +174,15 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-11-13T14:51:41.581Z",
+    "generatedAt": "2026-11-16T16:19:42.528Z",
     "stats": {
       "total": 34,
-      "improving": 15,
-      "worsening": 9,
+      "improving": 14,
+      "worsening": 10,
       "neutral": 10,
-      "surpriseCount": 3
+      "surpriseCount": 4
     },
-    "headline": "34指標中、改善傾向が15件、悪化傾向が9件、横ばい・中立が10件です。",
+    "headline": "34指標中、改善傾向が14件、悪化傾向が10件、横ばい・中立が10件です。",
     "improvingList": [
       {
         "id": "coincident_ci",
@@ -245,15 +245,6 @@
         "period": {
           "from": "2026-08",
           "to": "2026-09"
-        }
-      },
-      {
-        "id": "nikkei225",
-        "name": "日経平均株価",
-        "category": "為替・市場",
-        "period": {
-          "from": "2026-11-12",
-          "to": "2026-11-13"
         }
       },
       {
@@ -326,8 +317,8 @@
         "name": "実質GDP成長率",
         "category": "景気",
         "period": {
-          "from": "2026 Q1",
-          "to": "2026 Q2"
+          "from": "2026 Q2",
+          "to": "2026 Q3"
         }
       },
       {
@@ -355,6 +346,15 @@
         "period": {
           "from": "2026-08",
           "to": "2026-09"
+        }
+      },
+      {
+        "id": "nikkei225",
+        "name": "日経平均株価",
+        "category": "為替・市場",
+        "period": {
+          "from": "2026-11-13",
+          "to": "2026-11-16"
         }
       },
       {
@@ -454,8 +454,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-11-10",
-          "to": "2026-11-11"
+          "from": "2026-11-11",
+          "to": "2026-11-12"
         }
       },
       {
@@ -543,6 +543,15 @@
       }
     ],
     "continuingWorseningList": [
+      {
+        "id": "nikkei225",
+        "name": "日経平均株価",
+        "category": "為替・市場",
+        "period": {
+          "from": "2026-11-02",
+          "to": "2026-11-16"
+        }
+      },
       {
         "id": "household_spending_yoy",
         "name": "家計調査 実質消費支出（二人以上の世帯・前年同月比）",
@@ -634,16 +643,6 @@
       }
     ],
     "currentFavorableList": [
-      {
-        "id": "gdp_real_growth",
-        "name": "実質GDP成長率",
-        "category": "景気",
-        "reference": {
-          "label": "0%＝拡大・縮小の分岐",
-          "value": 0,
-          "current": 1.4
-        }
-      },
       {
         "id": "unemployment_rate",
         "name": "完全失業率",
@@ -746,6 +745,16 @@
       }
     ],
     "currentUnfavorableList": [
+      {
+        "id": "gdp_real_growth",
+        "name": "実質GDP成長率",
+        "category": "景気",
+        "reference": {
+          "label": "0%＝拡大・縮小の分岐",
+          "value": 0,
+          "current": -0.1
+        }
+      },
       {
         "id": "trade_balance",
         "name": "貿易収支",
@@ -905,6 +914,13 @@
     ],
     "statusFindings": [
       {
+        "id": "gdp_real_growth",
+        "name": "実質GDP成長率",
+        "category": "景気",
+        "detail": "目安「0%＝拡大・縮小の分岐」を下回っており、注意が必要な水準です。",
+        "text": "実質GDP成長率は現在、目安「0%＝拡大・縮小の分岐」を下回っており、注意が必要な水準です。"
+      },
+      {
         "id": "trade_balance",
         "name": "貿易収支",
         "category": "対外",
@@ -944,6 +960,15 @@
         "text": "新発10年国債利回りで非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=-3.7）。"
       },
       {
+        "id": "nikkei225",
+        "name": "日経平均株価",
+        "category": "為替・市場",
+        "z": -3.1,
+        "level": "high",
+        "detail": "非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=-3.1）。",
+        "text": "日経平均株価で非常に大きな変化が見られました（過去の変動幅と比べて統計的に珍しい動き、z=-3.1）。"
+      },
+      {
         "id": "current_account",
         "name": "経常収支",
         "category": "対外",
@@ -963,6 +988,26 @@
       }
     ],
     "turningSignalFindings": [
+      {
+        "id": "gdp_real_growth",
+        "name": "実質GDP成長率",
+        "category": "景気",
+        "favorable": false,
+        "flipped": true,
+        "proximity": 100,
+        "period": {
+          "recent": {
+            "from": "2026 Q2",
+            "to": "2026 Q3"
+          },
+          "prior": {
+            "from": "2025 Q4",
+            "to": "2026 Q1"
+          }
+        },
+        "detail": "直近（2026 Q2〜2026 Q3）の傾向が、その前（2025 Q4〜2026 Q1）から悪化方向に転じました（転換点を通過）。",
+        "text": "実質GDP成長率は、直近（2026 Q2〜2026 Q3）の傾向が、その前（2025 Q4〜2026 Q1）から悪化方向に転じました（転換点を通過）。"
+      },
       {
         "id": "industrial_production",
         "name": "鉱工業生産指数",
@@ -1042,26 +1087,6 @@
         },
         "detail": "直近（2026-07〜2026-09）の傾向が、その前（2026-04〜2026-06）から改善方向に転じました（転換点を通過）。",
         "text": "経常収支は、直近（2026-07〜2026-09）の傾向が、その前（2026-04〜2026-06）から改善方向に転じました（転換点を通過）。"
-      },
-      {
-        "id": "nikkei225",
-        "name": "日経平均株価",
-        "category": "為替・市場",
-        "favorable": false,
-        "flipped": true,
-        "proximity": 100,
-        "period": {
-          "recent": {
-            "from": "2026-10-30",
-            "to": "2026-11-13"
-          },
-          "prior": {
-            "from": "2026-10-16",
-            "to": "2026-10-29"
-          }
-        },
-        "detail": "直近（2026-10-30〜2026-11-13）の傾向が、その前（2026-10-16〜2026-10-29）から悪化方向に転じました（転換点を通過）。",
-        "text": "日経平均株価は、直近（2026-10-30〜2026-11-13）の傾向が、その前（2026-10-16〜2026-10-29）から悪化方向に転じました（転換点を通過）。"
       },
       {
         "id": "foreign_investor_flow",
@@ -1222,26 +1247,6 @@
         },
         "detail": "直近（2026-07〜2026-09）は改善方向ですが、その前（2026-04〜2026-06）と比べて勢いが32%まで弱まっています。改善の勢いが鈍化しており、今後の反転に注意が必要です。",
         "text": "景気動向指数 CI一致指数は直近（2026-07〜2026-09）改善方向ですが、その前（2026-04〜2026-06）と比べて勢いが32%まで弱まっています。改善の勢いが鈍化しており、今後の反転に注意が必要です。"
-      },
-      {
-        "id": "gdp_real_growth",
-        "name": "実質GDP成長率",
-        "category": "景気",
-        "favorable": true,
-        "flipped": false,
-        "proximity": 50,
-        "period": {
-          "recent": {
-            "from": "2026 Q1",
-            "to": "2026 Q2"
-          },
-          "prior": {
-            "from": "2025 Q3",
-            "to": "2025 Q4"
-          }
-        },
-        "detail": "直近（2026 Q1〜2026 Q2）は改善方向ですが、その前（2025 Q3〜2025 Q4）と比べて勢いが50%まで弱まっています。改善の勢いが鈍化しており、今後の反転に注意が必要です。",
-        "text": "実質GDP成長率は直近（2026 Q1〜2026 Q2）改善方向ですが、その前（2025 Q3〜2025 Q4）と比べて勢いが50%まで弱まっています。改善の勢いが鈍化しており、今後の反転に注意が必要です。"
       },
       {
         "id": "unemployment_rate",
@@ -1424,7 +1429,7 @@
         }
       },
       "releaseSchedule": "内閣府が四半期終了の約1.5か月後（2月・5月・8月・11月の中旬ごろ）8:50に速報を公表。1か月後をめどに改定値。",
-      "nextRelease": "2026-11-16",
+      "nextRelease": "2027-02-15",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -1433,12 +1438,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026 Q2",
-          "value": 1.4,
+          "t": "2026 Q3",
+          "value": -0.1,
           "provisional": false
         },
-        "changeFromPrev": -0.5,
-        "changeFromYearAgo": 0.9,
+        "changeFromPrev": -1.8,
+        "changeFromYearAgo": 1.4,
         "min": {
           "t": "2020 Q2",
           "value": -25.8
@@ -1447,7 +1452,7 @@
           "t": "2020 Q3",
           "value": 21.7
         },
-        "count": 129,
+        "count": 130,
         "start": "1994 Q2"
       },
       "points": [
@@ -1633,7 +1638,7 @@
         },
         {
           "t": "2005 Q3",
-          "value": 3.7
+          "value": 3.6
         },
         {
           "t": "2005 Q4",
@@ -1721,15 +1726,15 @@
         },
         {
           "t": "2011 Q1",
-          "value": -5.6
+          "value": -5.7
         },
         {
           "t": "2011 Q2",
-          "value": -2.5
+          "value": -2.4
         },
         {
           "t": "2011 Q3",
-          "value": 10
+          "value": 9.9
         },
         {
           "t": "2011 Q4",
@@ -1741,11 +1746,11 @@
         },
         {
           "t": "2012 Q2",
-          "value": -3.6
+          "value": -3.5
         },
         {
           "t": "2012 Q3",
-          "value": -1.5
+          "value": -1.6
         },
         {
           "t": "2012 Q4",
@@ -1753,15 +1758,15 @@
         },
         {
           "t": "2013 Q1",
-          "value": 5.1
+          "value": 5
         },
         {
           "t": "2013 Q2",
-          "value": 4.3
+          "value": 4.5
         },
         {
           "t": "2013 Q3",
-          "value": 3.9
+          "value": 3.8
         },
         {
           "t": "2013 Q4",
@@ -1769,15 +1774,15 @@
         },
         {
           "t": "2014 Q1",
-          "value": 4.1
+          "value": 4
         },
         {
           "t": "2014 Q2",
-          "value": -5.4
+          "value": -5.3
         },
         {
           "t": "2014 Q3",
-          "value": 0.8
+          "value": 0.6
         },
         {
           "t": "2014 Q4",
@@ -1789,11 +1794,11 @@
         },
         {
           "t": "2015 Q2",
-          "value": 0.4
+          "value": 0.6
         },
         {
           "t": "2015 Q3",
-          "value": 0.6
+          "value": 0.5
         },
         {
           "t": "2015 Q4",
@@ -1825,11 +1830,11 @@
         },
         {
           "t": "2017 Q3",
-          "value": 4.7
+          "value": 4.8
         },
         {
           "t": "2017 Q4",
-          "value": 0.6
+          "value": 0.5
         },
         {
           "t": "2018 Q1",
@@ -1837,31 +1842,31 @@
         },
         {
           "t": "2018 Q2",
-          "value": 2.6
+          "value": 2.4
         },
         {
           "t": "2018 Q3",
-          "value": -1.9
+          "value": -1.7
         },
         {
           "t": "2018 Q4",
-          "value": 0.3
+          "value": 0.2
         },
         {
           "t": "2019 Q1",
-          "value": 0.3
+          "value": 0.4
         },
         {
           "t": "2019 Q2",
-          "value": 1.7
+          "value": 1.6
         },
         {
           "t": "2019 Q3",
-          "value": 0.3
+          "value": 0.5
         },
         {
           "t": "2019 Q4",
-          "value": -11
+          "value": -11.1
         },
         {
           "t": "2020 Q1",
@@ -1889,7 +1894,7 @@
         },
         {
           "t": "2021 Q3",
-          "value": -0.8
+          "value": -0.7
         },
         {
           "t": "2021 Q4",
@@ -1897,7 +1902,7 @@
         },
         {
           "t": "2022 Q1",
-          "value": -1.7
+          "value": -1.8
         },
         {
           "t": "2022 Q2",
@@ -1905,11 +1910,11 @@
         },
         {
           "t": "2022 Q3",
-          "value": -1.1
+          "value": -1
         },
         {
           "t": "2022 Q4",
-          "value": 2
+          "value": 1.9
         },
         {
           "t": "2023 Q1",
@@ -1921,35 +1926,35 @@
         },
         {
           "t": "2023 Q3",
-          "value": -4.9
+          "value": -4.7
         },
         {
           "t": "2023 Q4",
-          "value": 1.9
-        },
-        {
-          "t": "2024 Q1",
-          "value": -0.4
-        },
-        {
-          "t": "2024 Q2",
-          "value": -0.5
-        },
-        {
-          "t": "2024 Q3",
-          "value": 3.4
-        },
-        {
-          "t": "2024 Q4",
           "value": 1.6
         },
         {
+          "t": "2024 Q1",
+          "value": -0.3
+        },
+        {
+          "t": "2024 Q2",
+          "value": -0.3
+        },
+        {
+          "t": "2024 Q3",
+          "value": 3.5
+        },
+        {
+          "t": "2024 Q4",
+          "value": 1.2
+        },
+        {
           "t": "2025 Q1",
-          "value": 2
+          "value": 2.1
         },
         {
           "t": "2025 Q2",
-          "value": 0.5
+          "value": 0.8
         },
         {
           "t": "2025 Q3",
@@ -1965,7 +1970,11 @@
         },
         {
           "t": "2026 Q2",
-          "value": 1.4
+          "value": 1.7
+        },
+        {
+          "t": "2026 Q3",
+          "value": -0.1
         }
       ]
     },
@@ -4167,11 +4176,11 @@
       "summary": {
         "latest": {
           "t": "2026-09",
-          "value": 104.1,
-          "provisional": true
+          "value": 103.9,
+          "provisional": false
         },
-        "changeFromPrev": 2.2,
-        "changeFromYearAgo": 3.1,
+        "changeFromPrev": 2,
+        "changeFromYearAgo": 2.9,
         "min": {
           "t": "1978-02",
           "value": 69
@@ -6522,8 +6531,7 @@
         },
         {
           "t": "2026-09",
-          "value": 104.1,
-          "provisional": true
+          "value": 103.9
         }
       ]
     },
@@ -6598,7 +6606,7 @@
         }
       },
       "releaseSchedule": "内閣府が対象月の翌々月上旬ごろ8:50に公表。",
-      "nextRelease": "2026-11-16",
+      "nextRelease": "2026-11-17",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -33183,7 +33191,7 @@
         }
       },
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-11-16",
+      "nextRelease": "2026-11-17",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -33192,12 +33200,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-11-11",
-          "value": 158.88,
+          "t": "2026-11-12",
+          "value": 159.71,
           "provisional": false
         },
-        "changeFromPrev": 0.86,
-        "changeFromYearAgo": 4.69,
+        "changeFromPrev": 0.83,
+        "changeFromYearAgo": 5.09,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -33206,7 +33214,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2652,
+        "count": 2653,
         "start": "2016-01-04"
       },
       "points": [
@@ -43817,6 +43825,10 @@
         {
           "t": "2026-11-11",
           "value": 158.88
+        },
+        {
+          "t": "2026-11-12",
+          "value": 159.71
         }
       ]
     },
@@ -43889,7 +43901,7 @@
         }
       },
       "releaseSchedule": "取引時間中は常時更新。日次終値を翌営業日にかけてFRED経由で取得・反映。",
-      "nextRelease": "2026-11-16",
+      "nextRelease": "2026-11-17",
       "nextReleaseKind": "official",
       "source": {
         "provider": "FRED（セントルイス連邦準備銀行）",
@@ -43898,12 +43910,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-11-13",
-          "value": 61142.35,
+          "t": "2026-11-16",
+          "value": 59662.02,
           "provisional": false
         },
-        "changeFromPrev": 322.99,
-        "changeFromYearAgo": 9860.52,
+        "changeFromPrev": -1480.33,
+        "changeFromYearAgo": 9285.49,
         "min": {
           "t": "2016-06-24",
           "value": 14952.02
@@ -43912,7 +43924,7 @@
           "t": "2026-06-25",
           "value": 72366.34
         },
-        "count": 2654,
+        "count": 2655,
         "start": "2016-01-04"
       },
       "points": [
@@ -54531,6 +54543,10 @@
         {
           "t": "2026-11-13",
           "value": 61142.35
+        },
+        {
+          "t": "2026-11-16",
+          "value": 59662.02
         }
       ]
     },
@@ -69596,7 +69612,7 @@
         }
       },
       "releaseSchedule": "内閣府が対象月の翌々月上旬ごろ8:50に公表。",
-      "nextRelease": "2026-11-16",
+      "nextRelease": "2026-11-17",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
