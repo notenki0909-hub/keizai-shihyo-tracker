@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T23:12:31.579Z",
+  "generatedAt": "2026-11-17T09:21:38.195Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 34,
@@ -174,7 +174,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-11-16T23:12:31.583Z",
+    "generatedAt": "2026-11-17T09:21:38.199Z",
     "stats": {
       "total": 34,
       "improving": 14,
@@ -398,8 +398,8 @@
         "name": "第3次産業活動指数（季節調整値）",
         "category": "景気",
         "period": {
-          "from": "2026-07",
-          "to": "2026-08"
+          "from": "2026-08",
+          "to": "2026-09"
         }
       }
     ],
@@ -454,8 +454,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-11-11",
-          "to": "2026-11-12"
+          "from": "2026-11-12",
+          "to": "2026-11-13"
         }
       },
       {
@@ -606,12 +606,6 @@
         "id": "nt_ratio",
         "name": "NT倍率（日経平均÷TOPIX）",
         "category": "為替・市場",
-        "period": null
-      },
-      {
-        "id": "tertiary_industry_activity",
-        "name": "第3次産業活動指数（季節調整値）",
-        "category": "景気",
         "period": null
       },
       {
@@ -1138,6 +1132,26 @@
         },
         "detail": "直近（2026-07〜2026-09）の傾向が、その前（2026-04〜2026-06）から改善方向に転じました（転換点を通過）。",
         "text": "景気ウォッチャー調査（現状判断DI・全国）は、直近（2026-07〜2026-09）の傾向が、その前（2026-04〜2026-06）から改善方向に転じました（転換点を通過）。"
+      },
+      {
+        "id": "tertiary_industry_activity",
+        "name": "第3次産業活動指数（季節調整値）",
+        "category": "景気",
+        "favorable": false,
+        "flipped": true,
+        "proximity": 100,
+        "period": {
+          "recent": {
+            "from": "2026-07",
+            "to": "2026-09"
+          },
+          "prior": {
+            "from": "2026-04",
+            "to": "2026-06"
+          }
+        },
+        "detail": "直近（2026-07〜2026-09）の傾向が、その前（2026-04〜2026-06）から悪化方向に転じました（転換点を通過）。",
+        "text": "第3次産業活動指数（季節調整値）は、直近（2026-07〜2026-09）の傾向が、その前（2026-04〜2026-06）から悪化方向に転じました（転換点を通過）。"
       },
       {
         "id": "machinery_orders_mom",
@@ -6617,7 +6631,7 @@
         }
       },
       "releaseSchedule": "内閣府が対象月の翌々月上旬ごろ8:50に公表。",
-      "nextRelease": "2026-11-17",
+      "nextRelease": "2026-11-18",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -33202,7 +33216,7 @@
         }
       },
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-11-17",
+      "nextRelease": "2026-11-18",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -33211,12 +33225,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-11-12",
-          "value": 159.71,
+          "t": "2026-11-13",
+          "value": 159.85,
           "provisional": false
         },
-        "changeFromPrev": 0.83,
-        "changeFromYearAgo": 5.09,
+        "changeFromPrev": 0.14,
+        "changeFromYearAgo": 5.13,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -33225,7 +33239,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2653,
+        "count": 2654,
         "start": "2016-01-04"
       },
       "points": [
@@ -43840,6 +43854,10 @@
         {
           "t": "2026-11-12",
           "value": 159.71
+        },
+        {
+          "t": "2026-11-13",
+          "value": 159.85
         }
       ]
     },
@@ -61350,7 +61368,7 @@
         }
       },
       "releaseSchedule": "経済産業省が対象月の翌々月中旬ごろに公表。",
-      "nextRelease": "2026-11-16",
+      "nextRelease": "2026-12-15",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -61359,12 +61377,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-08",
-          "value": 106.8,
+          "t": "2026-09",
+          "value": 105.7,
           "provisional": true
         },
-        "changeFromPrev": -0.1,
-        "changeFromYearAgo": 1.7,
+        "changeFromPrev": -0.5,
+        "changeFromYearAgo": 0.6,
         "min": {
           "t": "2020-05",
           "value": 87.1
@@ -61373,7 +61391,7 @@
           "t": "2019-09",
           "value": 107.6
         },
-        "count": 224,
+        "count": 225,
         "start": "2008-01"
       },
       "points": [
@@ -62271,7 +62289,11 @@
         },
         {
           "t": "2026-08",
-          "value": 106.8,
+          "value": 106.2
+        },
+        {
+          "t": "2026-09",
+          "value": 105.7,
           "provisional": true
         }
       ]
@@ -69627,7 +69649,7 @@
         }
       },
       "releaseSchedule": "内閣府が対象月の翌々月上旬ごろ8:50に公表。",
-      "nextRelease": "2026-11-17",
+      "nextRelease": "2026-11-18",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
