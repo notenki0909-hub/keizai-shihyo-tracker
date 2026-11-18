@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T16:24:58.216Z",
+  "generatedAt": "2026-11-18T08:41:12.485Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 34,
@@ -174,7 +174,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-11-17T16:24:58.220Z",
+    "generatedAt": "2026-11-18T08:41:12.490Z",
     "stats": {
       "total": 34,
       "improving": 14,
@@ -454,8 +454,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-11-12",
-          "to": "2026-11-13"
+          "from": "2026-11-13",
+          "to": "2026-11-16"
         }
       },
       {
@@ -6631,7 +6631,7 @@
         }
       },
       "releaseSchedule": "内閣府が対象月の翌々月上旬ごろ8:50に公表。",
-      "nextRelease": "2026-11-18",
+      "nextRelease": "2026-11-19",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -33216,7 +33216,7 @@
         }
       },
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-11-18",
+      "nextRelease": "2026-11-19",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -33225,12 +33225,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-11-13",
-          "value": 159.85,
+          "t": "2026-11-16",
+          "value": 159.53,
           "provisional": false
         },
-        "changeFromPrev": 0.14,
-        "changeFromYearAgo": 5.13,
+        "changeFromPrev": -0.32,
+        "changeFromYearAgo": 4.85,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -33239,7 +33239,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2654,
+        "count": 2655,
         "start": "2016-01-04"
       },
       "points": [
@@ -43858,6 +43858,10 @@
         {
           "t": "2026-11-13",
           "value": 159.85
+        },
+        {
+          "t": "2026-11-16",
+          "value": 159.53
         }
       ]
     },
@@ -69653,7 +69657,7 @@
         }
       },
       "releaseSchedule": "内閣府が対象月の翌々月上旬ごろ8:50に公表。",
-      "nextRelease": "2026-11-18",
+      "nextRelease": "2026-11-19",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
