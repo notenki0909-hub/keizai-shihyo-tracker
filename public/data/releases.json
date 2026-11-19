@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-17T09:21:38.240Z",
+ "generatedAt": "2026-11-19T08:56:25.743Z",
  "retentionDays": 365,
  "releases": {
   "ppi_yoy": [
@@ -42,6 +42,13 @@
     "value": 1069779,
     "kind": "detected",
     "prev": 1016877
+   },
+   {
+    "date": "2026-11-19",
+    "t": "2026-09",
+    "value": 1066157,
+    "kind": "detected",
+    "prev": 1069779
    }
   ],
   "cpi_core_yoy": [
@@ -278,6 +285,13 @@
     "value": 5.2,
     "kind": "detected",
     "prev": -3.68
+   },
+   {
+    "date": "2026-11-19",
+    "t": "2026-09",
+    "value": -0.34,
+    "kind": "detected",
+    "prev": 5.2
    }
   ],
   "tertiary_industry_activity": [
