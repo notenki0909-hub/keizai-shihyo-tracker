@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T16:00:35.538Z",
+  "generatedAt": "2026-11-20T08:43:19.843Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 34,
@@ -174,7 +174,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-11-19T16:00:35.544Z",
+    "generatedAt": "2026-11-20T08:43:19.848Z",
     "stats": {
       "total": 34,
       "improving": 13,
@@ -409,8 +409,8 @@
         "name": "コアCPI（生鮮食品除く総合）",
         "category": "物価",
         "period": {
-          "from": "2026-08",
-          "to": "2026-09"
+          "from": "2026-09",
+          "to": "2026-10"
         }
       },
       {
@@ -454,8 +454,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-11-16",
-          "to": "2026-11-17"
+          "from": "2026-11-17",
+          "to": "2026-11-18"
         }
       },
       {
@@ -481,8 +481,8 @@
         "name": "消費者物価指数（総合・前年同月比）",
         "category": "物価",
         "period": {
-          "from": "2026-08",
-          "to": "2026-09"
+          "from": "2026-09",
+          "to": "2026-10"
         }
       },
       {
@@ -490,8 +490,8 @@
         "name": "コアコアCPI（生鮮食品及びエネルギーを除く総合）",
         "category": "物価",
         "period": {
-          "from": "2026-08",
-          "to": "2026-09"
+          "from": "2026-09",
+          "to": "2026-10"
         }
       }
     ],
@@ -9991,7 +9991,7 @@
         }
       },
       "releaseSchedule": "総務省統計局が対象月の翌月中旬〜下旬に8:30発表（東京都区部の速報は対象月内に先行公表）。",
-      "nextRelease": "2026-11-20",
+      "nextRelease": "2026-12-21",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -10000,11 +10000,11 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09",
-          "value": 2.1,
+          "t": "2026-10",
+          "value": 2.2,
           "provisional": false
         },
-        "changeFromPrev": 0.4,
+        "changeFromPrev": 0.1,
         "changeFromYearAgo": -0.8,
         "min": {
           "t": "2009-08",
@@ -10014,7 +10014,7 @@
           "t": "1974-10",
           "value": 24.7
         },
-        "count": 669,
+        "count": 670,
         "start": "1971-01"
       },
       "points": [
@@ -12693,6 +12693,10 @@
         {
           "t": "2026-09",
           "value": 2.1
+        },
+        {
+          "t": "2026-10",
+          "value": 2.2
         }
       ]
     },
@@ -33229,7 +33233,7 @@
         }
       },
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-11-20",
+      "nextRelease": "2026-11-23",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -33238,12 +33242,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-11-17",
-          "value": 159.34,
+          "t": "2026-11-18",
+          "value": 159.35,
           "provisional": false
         },
-        "changeFromPrev": -0.19,
-        "changeFromYearAgo": 4.66,
+        "changeFromPrev": 0.01,
+        "changeFromYearAgo": 4.35,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -33252,7 +33256,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2656,
+        "count": 2657,
         "start": "2016-01-04"
       },
       "points": [
@@ -43879,6 +43883,10 @@
         {
           "t": "2026-11-17",
           "value": 159.34
+        },
+        {
+          "t": "2026-11-18",
+          "value": 159.35
         }
       ]
     },
@@ -66900,7 +66908,7 @@
         }
       },
       "releaseSchedule": "総務省統計局が対象月の翌月中旬〜下旬に8:30発表（東京都区部の速報は対象月内に先行公表）。",
-      "nextRelease": "2026-11-20",
+      "nextRelease": "2026-12-21",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -66909,12 +66917,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09",
-          "value": 2.1,
+          "t": "2026-10",
+          "value": 2.3,
           "provisional": false
         },
         "changeFromPrev": 0.2,
-        "changeFromYearAgo": -0.8,
+        "changeFromYearAgo": -0.7,
         "min": {
           "t": "2009-10",
           "value": -2.5
@@ -66923,7 +66931,7 @@
           "t": "1974-02",
           "value": 24.9
         },
-        "count": 669,
+        "count": 670,
         "start": "1971-01"
       },
       "points": [
@@ -69602,6 +69610,10 @@
         {
           "t": "2026-09",
           "value": 2.1
+        },
+        {
+          "t": "2026-10",
+          "value": 2.3
         }
       ]
     },
@@ -70832,7 +70844,7 @@
         }
       },
       "releaseSchedule": "総務省統計局が対象月の翌月中旬〜下旬に8:30発表（コアCPI・総合CPIと同時）。",
-      "nextRelease": "2026-11-20",
+      "nextRelease": "2026-12-21",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "統計ダッシュボード（e-Stat）",
@@ -70841,12 +70853,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-09",
-          "value": 2.4,
+          "t": "2026-10",
+          "value": 2.2,
           "provisional": false
         },
-        "changeFromPrev": 0.5,
-        "changeFromYearAgo": -0.6,
+        "changeFromPrev": -0.2,
+        "changeFromYearAgo": -0.9,
         "min": {
           "t": "2010-05",
           "value": -1.7
@@ -70855,7 +70867,7 @@
           "t": "1974-10",
           "value": 23.9
         },
-        "count": 669,
+        "count": 670,
         "start": "1971-01"
       },
       "points": [
@@ -73534,6 +73546,10 @@
         {
           "t": "2026-09",
           "value": 2.4
+        },
+        {
+          "t": "2026-10",
+          "value": 2.2
         }
       ]
     }
