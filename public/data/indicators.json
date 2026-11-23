@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T08:24:41.136Z",
+  "generatedAt": "2026-11-23T18:41:48.510Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 34,
@@ -174,7 +174,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-11-21T08:24:41.142Z",
+    "generatedAt": "2026-11-23T18:41:48.516Z",
     "stats": {
       "total": 34,
       "improving": 12,
@@ -33242,7 +33242,7 @@
         }
       },
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-11-23",
+      "nextRelease": "2026-11-24",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -64506,7 +64506,7 @@
         }
       },
       "releaseSchedule": "財務省が対象月の翌月中旬〜下旬（17〜22日ごろ）8:50に速報を公表。",
-      "nextRelease": "2026-11-23",
+      "nextRelease": "2026-11-24",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "財務省 貿易統計",
