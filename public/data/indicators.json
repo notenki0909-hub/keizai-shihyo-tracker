@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T17:33:31.130Z",
+  "generatedAt": "2026-11-26T09:42:24.670Z",
   "source": "統計ダッシュボード（e-Stat） https://dashboard.e-stat.go.jp/",
   "note": "各系列は毎回全期間を再取得しています（速報値の改定を反映）。",
   "indicatorCount": 34,
@@ -174,7 +174,7 @@
     }
   },
   "econSummary": {
-    "generatedAt": "2026-11-25T17:33:31.135Z",
+    "generatedAt": "2026-11-26T09:42:24.675Z",
     "stats": {
       "total": 34,
       "improving": 12,
@@ -454,8 +454,8 @@
         "name": "ドル円レート",
         "category": "為替・市場",
         "period": {
-          "from": "2026-11-19",
-          "to": "2026-11-20"
+          "from": "2026-11-20",
+          "to": "2026-11-24"
         }
       },
       {
@@ -2119,7 +2119,7 @@
         "latest": {
           "t": "2026-09",
           "value": 119.5,
-          "provisional": true
+          "provisional": false
         },
         "changeFromPrev": 0.7,
         "changeFromYearAgo": 4.3,
@@ -4137,8 +4137,7 @@
         },
         {
           "t": "2026-09",
-          "value": 119.5,
-          "provisional": true
+          "value": 119.5
         }
       ]
     },
@@ -33253,7 +33252,7 @@
         }
       },
       "releaseSchedule": "日本銀行が毎営業日、17時時点の実勢レートを翌営業日にかけて公表・更新。",
-      "nextRelease": "2026-11-26",
+      "nextRelease": "2026-11-27",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "日本銀行 時系列統計データ検索サイト",
@@ -33262,12 +33261,12 @@
       },
       "summary": {
         "latest": {
-          "t": "2026-11-20",
-          "value": 159.2,
+          "t": "2026-11-24",
+          "value": 159.35,
           "provisional": false
         },
-        "changeFromPrev": -0.5,
-        "changeFromYearAgo": 1.74,
+        "changeFromPrev": 0.15,
+        "changeFromYearAgo": 2.61,
         "min": {
           "t": "2016-08-18",
           "value": 100.03
@@ -33276,7 +33275,7 @@
           "t": "2026-07-28",
           "value": 163.79
         },
-        "count": 2659,
+        "count": 2660,
         "start": "2016-01-04"
       },
       "points": [
@@ -43915,6 +43914,10 @@
         {
           "t": "2026-11-20",
           "value": 159.2
+        },
+        {
+          "t": "2026-11-24",
+          "value": 159.35
         }
       ]
     },
@@ -64541,7 +64544,7 @@
         }
       },
       "releaseSchedule": "財務省が対象月の翌月中旬〜下旬（17〜22日ごろ）8:50に速報を公表。",
-      "nextRelease": "2026-11-26",
+      "nextRelease": "2026-11-27",
       "nextReleaseKind": "estimate",
       "source": {
         "provider": "財務省 貿易統計",
